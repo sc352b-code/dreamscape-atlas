@@ -1,0 +1,30 @@
+{
+  "id": "world-reference-dreamer-001",
+  "title": "A World Made From Your Dreams",
+  "seed": 384686265,
+  "territories": [
+    {
+      "id": "territory-hearth-01",
+      "archetype": "hearth",
+      "name": "Hearthlands",
+      "subtitle": "Where belonging, memory and inner warmth gather",
+      "strength": 0.8,
+      "palette": {"core":"#d78b5a","glow":"#ffc98f","shadow":"#291836","mist":"#9b6b8f"},
+      "atmosphere": {"mist":0.58,"embers":0.42,"stars":0.55},
+      "terrain": "rolling-hills",
+      "motionPreset": "warm-breathing",
+      "evidence": ["d2","d3","d1"],
+      "places": [{"id":"place-house-01","name":"The Amber House","kind":"dwelling","significance":0.91,"evidence":["d1","d2","d3"]}],
+      "symbols": [
+        {"id":"symbol-fox-1","name":"Fox","recurrence":2,"significance":0.71,"evidence":["d1","d2"]},
+        {"id":"symbol-afraid-2","name":"Afraid","recurrence":1,"significance":0.53,"evidence":["d1"]},
+        {"id":"symbol-beside-3","name":"Beside","recurrence":1,"significance":0.53,"evidence":["d1"]},
+        {"id":"symbol-burned-4","name":"Burned","recurrence":1,"significance":0.53,"evidence":["d3"]},
+        {"id":"symbol-chair-5","name":"Chair","recurrence":1,"significance":0.53,"evidence":["d2"]},
+        {"id":"symbol-chimney-6","name":"Chimney","recurrence":1,"significance":0.53,"evidence":["d3"]}
+      ]
+    }
+  ],
+  "links": [],
+  "provenance": {"corpusId":"reference-dreamer-001","engineVersion":"0.1.0","generatedAt":"2026-09-05T11:12:46.920Z"}
+}

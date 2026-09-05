@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dreamscape Corpus",
+  "type": "object",
+  "required": ["corpusId", "dreams"],
+  "properties": {
+    "corpusId": {"type": "string"},
+    "dreams": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "date", "title", "text"],
+        "properties": {
+          "id": {"type": "string"},
+          "date": {"type": "string"},
+          "title": {"type": "string"},
+          "text": {"type": "string"},
+          "tags": {"type": "array", "items": {"type": "string"}},
+          "emotion": {"type": "array", "items": {"type": "string"}},
+          "numinous": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}

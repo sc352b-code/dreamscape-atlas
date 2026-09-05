@@ -1,0 +1,14 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Dreamscape World Model",
+  "type": "object",
+  "required": ["id", "title", "seed", "territories", "provenance"],
+  "properties": {
+    "id": {"type": "string"},
+    "title": {"type": "string"},
+    "seed": {"type": "integer"},
+    "territories": {"type": "array"},
+    "links": {"type": "array"},
+    "provenance": {"type": "object"}
+  }
+}

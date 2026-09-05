@@ -1,0 +1,32 @@
+{
+  "corpusId": "reference-dreamer-001",
+  "dreams": [
+    {
+      "id": "d1",
+      "date": "2026-05-14",
+      "title": "The warm house beyond the hill",
+      "text": "I crossed a dark field toward an old house with amber windows. A fox waited beside the hearth and did not seem afraid of me.",
+      "tags": ["house", "hearth", "fox", "field", "amber"],
+      "emotion": ["longing", "safety"],
+      "numinous": true
+    },
+    {
+      "id": "d2",
+      "date": "2026-06-02",
+      "title": "Kitchen of my grandmother",
+      "text": "A kitchen opened into a huge night sky. There was bread on the table and a small red fox beneath the chair.",
+      "tags": ["kitchen", "home", "bread", "fox", "stars"],
+      "emotion": ["tenderness", "wonder"],
+      "numinous": true
+    },
+    {
+      "id": "d3",
+      "date": "2026-07-21",
+      "title": "Fire on the hill",
+      "text": "I climbed toward a stone cottage. Smoke rose from the chimney although nobody was there. Inside, a fire burned without fuel.",
+      "tags": ["cottage", "fire", "hill", "smoke", "home"],
+      "emotion": ["curiosity", "belonging"],
+      "numinous": false
+    }
+  ]
+}

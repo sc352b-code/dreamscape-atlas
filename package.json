@@ -1,0 +1,11 @@
+{
+  "name": "dreamscape-atlas",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "node server.js",
+    "test": "node --test tests/*.test.js",
+    "world:build": "node engine/cli.js corpora/reference-corpus.json worlds/generated-world.json"
+  }
+}

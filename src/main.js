@@ -1,4 +1,3 @@
-import "./styles.css";
 import { buildWorld } from "../engine/buildWorld.js";
 
 const corpus = await fetch("/corpora/reference-corpus.json").then(r => r.json());

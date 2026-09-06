@@ -1,453 +1,57 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js";
 
-const app = document.querySelector("#app");
-const worldAssetUrl = "/assets/world-equirectangular.png";
-const hearthAssetUrl = "/assets/hearthlands-flatmap.png";
-
-app.innerHTML = `
-<main class="atlas" data-state="orbit" data-layer="places">
-  <canvas id="starscape" class="starscape" aria-hidden="true"></canvas>
-  <div class="cosmos">
-    <div class="nebula n1"></div>
-    <div class="nebula n2"></div>
-    <div class="nebula n3"></div>
-    <div class="nebula n4"></div>
-    <div class="planetary p1"></div>
-    <div class="planetary p2"></div>
-    <div class="dust dust-a"></div>
-    <div class="dust dust-b"></div>
-  </div>
-
-  <header class="topbar glass-lite">
-    <div class="brand"><span class="sigil">✦</span><div><b>DREAMSCAPE</b><small>DREAM ATLAS</small></div></div>
-    <nav class="mainnav" aria-label="Primary"><a class="active">World</a><a>Journal</a><a>Insights</a><a>Collections</a></nav>
-    <div class="stats"><span>✶ 213 dreams</span><span>☾ 17 places</span></div>
-  </header>
-
-  <aside class="left-poem glass-lite">
-    <p>A world<br>shaped by your<br>dreams.</p>
-    <small>Explore<br>remember<br>belong</small>
-  </aside>
-
-  <div class="globe-stage" aria-label="Interactive Dream Atlas globe">
-    <canvas id="globe"></canvas>
-    <div class="territory-labels" aria-hidden="false"></div>
-    <div class="orbit-help">Drag to rotate · click the glowing Hearthlands · scroll to move closer</div>
-    <div class="bottom-quote">“The same world, again and again,<br>but always new.”</div>
-  </div>
-
-  <aside class="focus-panel glass" aria-live="polite">
-    <button class="close-focus" aria-label="Close territory">×</button>
-    <p class="roman">I · THE DOMESTIC HEART</p>
-    <h1>The Hearthlands</h1>
-    <p class="subtitle">Where belonging keeps changing shape</p>
-    <div class="rule"></div>
-    <p class="body">A warm, memory-rich territory shaped by recurring dream evidence. Houses, gardens, lanes, fields and symbolic presences gather here and form a living map of inner life.</p>
-    <div class="focus-meta"><span><b>213</b> dreams here</span><span><b>5</b> mapped places</span><span><b>37</b> symbols</span></div>
-    <div class="theme-pills"><span>Home</span><span>Family</span><span>Belonging</span><span>Fox</span><span>Warm Light</span></div>
-    <button class="enter">Travel into The Hearthlands <span>→</span></button>
-  </aside>
-
-  <div class="descent-copy" aria-hidden="true"><span>TRAVELLING INTO</span><b>THE HEARTHLANDS</b></div>
-
-  <section class="flatmap-scene" aria-label="The Hearthlands flatmap">
-    <img class="flatmap-art" src="${hearthAssetUrl}" alt="A richly illustrated map of The Hearthlands" />
-    <div class="flatmap-wash"></div>
-    <div class="glint g1"></div><div class="glint g2"></div><div class="glint g3"></div><div class="glint g4"></div><div class="glint g5"></div><div class="glint g6"></div>
-
-    <header class="hearth-bar glass-lite">
-      <button class="return-world">← Return to the world</button>
-      <div class="hearth-heading"><b>The Hearthlands</b><small>213 dreams</small></div>
-      <div class="layer-switch" role="group" aria-label="Map layer">
-        <button data-show="places" class="active">Places</button><button data-show="symbols">Symbols</button>
-      </div>
-    </header>
-
-    <button class="map-marker place family" data-place="Family Home"><i></i><span>Family Home</span></button>
-    <button class="map-marker place childhood" data-place="Cambridge Road Childhood House"><i></i><span>Cambridge Road Childhood House</span></button>
-    <button class="map-marker place present" data-place="Current / Present House"><i></i><span>Current / Present House</span></button>
-    <button class="map-marker place many" data-place="The Large Many-Roomed House"><i></i><span>The Large Many-Roomed House</span></button>
-    <button class="map-marker place unfamiliar" data-place="The Unfamiliar House"><i></i><span>The Unfamiliar House</span></button>
-    <button class="map-marker symbol fox" data-place="Fox"><i></i><span>Fox</span></button>
-
-    <div class="arrival-whisper"><span>THE HEARTHLANDS</span><b>The world becomes more detailed as you enter it.</b></div>
-  </section>
-
-  <aside class="place-sheet glass" aria-live="polite">
-    <button class="close-place" aria-label="Close place">×</button>
-    <p class="roman">THE HEARTHLANDS</p>
-    <h2>Family Home</h2>
-    <p>This is a named place carried forward from the v57 Atlas. The full evidence-led reading remains separate from the map layer.</p>
-  </aside>
-
-  <div class="vignette"></div>
-</main>`;
-
-const root = document.querySelector(".atlas");
-const canvas = document.querySelector("#globe");
-const labelLayer = document.querySelector(".territory-labels");
-const focusPanel = document.querySelector(".focus-panel");
-const flatmap = document.querySelector(".flatmap-scene");
-const flatmapArt = document.querySelector(".flatmap-art");
-const placeSheet = document.querySelector(".place-sheet");
-const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
-// ---- Starscape -----------------------------------------------------------
-const starsCanvas = document.querySelector("#starscape");
-const sctx = starsCanvas.getContext("2d");
-let stars = [];
-let motes = [];
-let shooting = [];
-
-function initStars(){
-  const w = innerWidth, h = innerHeight;
-  const dpr = Math.min(devicePixelRatio || 1, 2);
-  starsCanvas.width = w * dpr;
-  starsCanvas.height = h * dpr;
-  starsCanvas.style.width = w + 'px';
-  starsCanvas.style.height = h + 'px';
-  sctx.setTransform(dpr,0,0,dpr,0,0);
-  const starCount = Math.max(260, Math.min(720, Math.round((w*h)/4200)));
-  const moteCount = Math.max(24, Math.min(70, Math.round((w*h)/30000)));
-  stars = Array.from({length: starCount}, () => ({
-    x: Math.random()*w,
-    y: Math.random()*h,
-    r: Math.random()*1.6 + 0.18,
-    a: Math.random()*0.6 + 0.12,
-    phase: Math.random()*Math.PI*2,
-    speed: Math.random()*0.0017 + 0.00025
-  }));
-  motes = Array.from({length: moteCount}, () => ({
-    x: Math.random()*w,
-    y: Math.random()*h,
-    r: Math.random()*22 + 8,
-    a: Math.random()*0.035 + 0.012,
-    dx: (Math.random()-.5)*0.02,
-    dy: (Math.random()-.5)*0.02
-  }));
-  shooting = [];
+async function imageFromChunks(paths){
+  const parts=await Promise.all(paths.map(async p=>{const r=await fetch(p,{cache:"force-cache"});if(!r.ok)throw new Error(`Missing asset ${p}`);return (await r.text()).trim()}));
+  const raw=atob(parts.join(""));const bytes=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)bytes[i]=raw.charCodeAt(i);
+  return URL.createObjectURL(new Blob([bytes],{type:"image/avif"}));
 }
 
-function maybeShoot(time){
-  if (reduced) return;
-  if (Math.random() < 0.004) {
-    shooting.push({ x: Math.random()*innerWidth*0.8 + innerWidth*0.1, y: Math.random()*innerHeight*0.35, life: 0, max: 700+Math.random()*500, len: 90+Math.random()*80 });
-  }
-  shooting = shooting.filter(s => s.life < s.max);
-  for (const s of shooting) s.life += 16;
-}
+const [cosmosAsset,worldAsset,hearthAsset]=await Promise.all([
+  imageFromChunks(["/assets/generated/cosmic-00.b64","/assets/generated/cosmic-01.b64","/assets/generated/cosmic-02.b64","/assets/generated/cosmic-03.b64"]),
+  imageFromChunks(["/assets/generated/world-live-00.b64","/assets/generated/world-live-01.b64","/assets/generated/world-live-02.b64"]),
+  imageFromChunks(["/assets/generated/hearth-live-00.b64","/assets/generated/hearth-live-01.b64","/assets/generated/hearth-live-02.b64"])
+]);
 
-function drawStars(time=0){
-  const w = innerWidth, h = innerHeight;
-  sctx.clearRect(0,0,w,h);
-
-  for (const m of motes) {
-    m.x += m.dx; m.y += m.dy;
-    if (m.x < -40) m.x = w+40; if (m.x > w+40) m.x = -40;
-    if (m.y < -40) m.y = h+40; if (m.y > h+40) m.y = -40;
-    const grad = sctx.createRadialGradient(m.x,m.y,0,m.x,m.y,m.r);
-    grad.addColorStop(0, `rgba(150,190,255,${m.a})`);
-    grad.addColorStop(1, 'rgba(150,190,255,0)');
-    sctx.fillStyle = grad;
-    sctx.beginPath(); sctx.arc(m.x,m.y,m.r,0,Math.PI*2); sctx.fill();
-  }
-
-  for(const s of stars){
-    const tw = 0.72 + Math.sin(time*s.speed + s.phase) * 0.42;
-    sctx.beginPath();
-    sctx.arc(s.x, s.y, Math.max(0.1, s.r * tw), 0, Math.PI*2);
-    sctx.fillStyle = `rgba(255,245,222,${(s.a*tw).toFixed(3)})`;
-    sctx.fill();
-    if (s.r > 1.18 && tw > 0.88) {
-      sctx.strokeStyle = `rgba(255,218,160,${(s.a*0.42).toFixed(3)})`;
-      sctx.lineWidth = 0.6;
-      sctx.beginPath(); sctx.moveTo(s.x - 5, s.y); sctx.lineTo(s.x + 5, s.y); sctx.stroke();
-      sctx.beginPath(); sctx.moveTo(s.x, s.y - 5); sctx.lineTo(s.x, s.y + 5); sctx.stroke();
-    }
-  }
-
-  maybeShoot(time);
-  for (const s of shooting) {
-    const p = s.life / s.max;
-    const x = s.x + p * 180;
-    const y = s.y + p * 95;
-    const g = sctx.createLinearGradient(x,y,x-s.len,y-s.len*0.45);
-    g.addColorStop(0,'rgba(255,245,220,.92)');
-    g.addColorStop(1,'rgba(255,245,220,0)');
-    sctx.strokeStyle = g;
-    sctx.lineWidth = 1.7;
-    sctx.beginPath(); sctx.moveTo(x,y); sctx.lineTo(x-s.len,y-s.len*0.45); sctx.stroke();
-  }
-}
-
-// ---- Real 3D globe -------------------------------------------------------
-const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true, powerPreference: "high-performance" });
-renderer.setPixelRatio(Math.min(devicePixelRatio || 1, 2));
-renderer.outputColorSpace = THREE.SRGBColorSpace;
-
-const scene = new THREE.Scene();
-const camera = new THREE.PerspectiveCamera(34, 1, 0.1, 100);
-camera.position.set(0, 0, 3.2);
-
-const globeGroup = new THREE.Group();
-scene.add(globeGroup);
-
-const textureLoader = new THREE.TextureLoader();
-const worldTexture = textureLoader.load(worldAssetUrl, () => root.classList.add("ready"));
-worldTexture.colorSpace = THREE.SRGBColorSpace;
-worldTexture.anisotropy = renderer.capabilities.getMaxAnisotropy();
-worldTexture.wrapS = THREE.RepeatWrapping;
-
-const globe = new THREE.Mesh(
-  new THREE.SphereGeometry(1, 180, 140),
-  new THREE.MeshStandardMaterial({ map: worldTexture, roughness: 0.96, metalness: 0.01 })
-);
-globeGroup.add(globe);
-
-const cloudCanvas = document.createElement('canvas');
-cloudCanvas.width = 1024; cloudCanvas.height = 512;
-const cctx = cloudCanvas.getContext('2d');
-for(let i=0;i<26;i++){
-  const x=Math.random()*1024,y=Math.random()*512,r=60+Math.random()*120;
-  const g=cctx.createRadialGradient(x,y,0,x,y,r);
-  g.addColorStop(0,'rgba(255,255,255,0.20)'); g.addColorStop(1,'rgba(255,255,255,0)');
-  cctx.fillStyle=g; cctx.beginPath(); cctx.arc(x,y,r,0,Math.PI*2); cctx.fill();
-}
-const cloudTexture = new THREE.CanvasTexture(cloudCanvas);
-cloudTexture.wrapS = THREE.RepeatWrapping;
-cloudTexture.wrapT = THREE.RepeatWrapping;
-const clouds = new THREE.Mesh(
-  new THREE.SphereGeometry(1.015, 120, 90),
-  new THREE.MeshStandardMaterial({ map: cloudTexture, transparent: true, opacity: 0.18, depthWrite: false })
-);
-globeGroup.add(clouds);
-
-scene.add(new THREE.HemisphereLight(0xcfe0ff, 0x23131b, 2.6));
-const sun = new THREE.DirectionalLight(0xffdfbd, 2.8); sun.position.set(-3.8, 2.5, 4.8); scene.add(sun);
-const fill = new THREE.DirectionalLight(0x92a8ff, 1.1); fill.position.set(3.2, -1.3, 2.8); scene.add(fill);
-
-const atmosphere = new THREE.Mesh(
-  new THREE.SphereGeometry(1.055, 140, 110),
-  new THREE.ShaderMaterial({
-    side: THREE.BackSide,
-    transparent: true,
-    blending: THREE.AdditiveBlending,
-    depthWrite: false,
-    uniforms: { glowColor: { value: new THREE.Color(0x85c1ff) }, rimColor: { value: new THREE.Color(0xb18fff) }, intensity: { value: 0.54 } },
-    vertexShader: `varying vec3 vNormal; varying vec3 vWorldPosition; void main(){ vNormal=normalize(normalMatrix*normal); vec4 worldPosition=modelMatrix*vec4(position,1.0); vWorldPosition=worldPosition.xyz; gl_Position=projectionMatrix*viewMatrix*worldPosition;}`,
-    fragmentShader: `uniform vec3 glowColor; uniform vec3 rimColor; uniform float intensity; varying vec3 vNormal; varying vec3 vWorldPosition; void main(){ vec3 viewDir=normalize(cameraPosition-vWorldPosition); float fresnel=pow(1.0-max(dot(vNormal,viewDir),0.0),3.0); vec3 c=mix(glowColor,rimColor,clamp(fresnel*.7,0.0,1.0)); gl_FragColor=vec4(c,fresnel*intensity);}`
-  })
-);
-globeGroup.add(atmosphere);
-
-const raycaster = new THREE.Raycaster();
-const ndc = new THREE.Vector2();
-
-const territories = [
-  { id: "hearthlands", name: "The Hearthlands", lat: 1, lon: -90, interactive: true },
-  { id: "roadlands", name: "The Roadlands", lat: 4, lon: -140 },
-  { id: "institutional", name: "Institutional Quarter", lat: 37, lon: -70 },
-  { id: "littoral", name: "Littoral Coast", lat: -30, lon: -82 },
-  { id: "river", name: "River Country", lat: -1, lon: -35 }
+const territories=[
+  {id:"hearthlands",name:"The Hearthlands",lat:25,lon:0,interactive:true,cues:["homes","gardens","warm light","family","belonging"]},
+  {id:"roadlands",name:"The Roadlands",lat:15,lon:36,cues:["roads","journeys","movement","crossings"]},
+  {id:"institutional",name:"Institutional Quarter",lat:58,lon:68,cues:["formal buildings","systems","authority","public space"]},
+  {id:"littoral",name:"Littoral Coast",lat:-29,lon:119,cues:["coast","islands","shorelines","sea"]},
+  {id:"river",name:"River Country",lat:15,lon:-79,cues:["rivers","bridges","waterways","flow"]}
+];
+const places=[
+  {name:"Family Home",x:12,y:58,kind:"place"},{name:"Cambridge Road Childhood House",x:29,y:47,kind:"place"},{name:"Current / Present House",x:45,y:61,kind:"place"},{name:"The Large Many-Roomed House",x:62,y:19,kind:"place"},{name:"The Unfamiliar House",x:83,y:45,kind:"place"},{name:"Fox",x:8,y:78,kind:"symbol"}
 ];
 
-function coordinateToVector(lat, lon, radius = 1.032) {
-  const u = 0.5 + lon / 360;
-  const v = 0.5 - lat / 180;
-  const theta = u * Math.PI * 2;
-  const phi = v * Math.PI;
-  return new THREE.Vector3(-Math.cos(theta) * Math.sin(phi) * radius, Math.cos(phi) * radius, Math.sin(theta) * Math.sin(phi) * radius);
-}
+const app=document.querySelector("#app");
+app.innerHTML=`<main class="atlas" data-state="orbit" data-layer="places">
+<div class="cosmic-art"><img src="${cosmosAsset}" alt=""></div><canvas id="starscape" class="starscape"></canvas><div class="cosmic-veil"></div>
+<header class="topbar"><div class="brand"><span class="sigil">✦</span><div><b>DREAMSCAPE</b><small>DREAM ATLAS</small></div></div><nav class="mainnav"><a class="active">World</a><a>Journal</a><a>Insights</a><a>Collections</a></nav><div class="stats"><span>✶ 213 dreams</span><span>☾ 5 mapped places</span></div></header>
+<aside class="left-poem"><p>A world<br>shaped by your<br>dreams.</p><small>Explore<br>remember<br>belong</small></aside>
+<div class="globe-stage"><canvas id="globe"></canvas><div class="territory-labels"></div><div class="orbit-help">Drag to rotate · select the glowing Hearthlands</div><div class="bottom-quote">“The same world, again and again,<br>but always new.”</div></div>
+<aside class="focus-panel"><button class="close-focus">×</button><p class="roman">I · THE DOMESTIC HEART</p><h1>The Hearthlands</h1><p class="subtitle">Where belonging keeps changing shape</p><div class="rule"></div><p class="body">A warm domestic territory formed from recurring homes, gardens, family settings, firelight, memory and belonging across the dream corpus.</p><div class="focus-meta"><span><b>213</b>dreams here</span><span><b>5</b>mapped places</span><span><b>37</b>recurring symbols</span></div><div class="theme-pills"><span>Home</span><span>Family</span><span>Gardens</span><span>Warm light</span><span>Fox</span></div><button class="enter">Travel into The Hearthlands <span>→</span></button></aside>
+<div class="descent-copy"><span>TRAVELLING INTO</span><b>THE HEARTHLANDS</b></div>
+<section class="flatmap-scene"><div class="flatmap-world"><img class="flatmap-art" src="${hearthAsset}" alt="The Hearthlands"><div class="flatmap-wash"></div><div class="flatmap-markers"></div></div><header class="hearth-bar"><button class="return-world">← Return to the world</button><div class="hearth-heading"><b>The Hearthlands</b><small>213 dreams</small></div><div class="layer-switch"><button data-show="places" class="active">Places</button><button data-show="symbols">Symbols</button></div></header><div class="arrival-whisper"><span>THE HEARTHLANDS</span><b>Homes, gardens, paths and warm lights gather into one remembered landscape.</b></div></section>
+<aside class="place-sheet"><button class="close-place">×</button><p class="roman">THE HEARTHLANDS</p><h2>Family Home</h2><p>A named recurring place from the Hearthlands corpus. Its source-dream evidence remains a separate reading layer.</p></aside><div class="vignette"></div></main>`;
 
-const markerGroup = new THREE.Group(); globeGroup.add(markerGroup);
-const labels = [];
-territories.forEach(t => {
-  const marker = new THREE.Mesh(
-    new THREE.SphereGeometry(t.interactive ? 0.024 : 0.015, 24, 20),
-    new THREE.MeshBasicMaterial({ color: t.interactive ? 0xffc579 : 0xe6d4af })
-  );
-  marker.position.copy(coordinateToVector(t.lat, t.lon));
-  marker.userData.territory = t;
-  markerGroup.add(marker);
-
-  let glow = null;
-  if (t.interactive) {
-    glow = new THREE.Mesh(
-      new THREE.SphereGeometry(0.055, 24, 20),
-      new THREE.MeshBasicMaterial({ color: 0xffc579, transparent: true, opacity: 0.23, blending: THREE.AdditiveBlending, depthWrite: false })
-    );
-    glow.position.copy(marker.position);
-    glow.userData.territory = t;
-    markerGroup.add(glow);
-  }
-
-  const button = document.createElement("button");
-  button.className = `territory-label ${t.interactive ? "primary" : ""}`;
-  button.innerHTML = `<i></i><span>${t.name}</span>`;
-  button.setAttribute("aria-label", t.interactive ? `Explore ${t.name}` : t.name);
-  if (t.interactive) button.addEventListener("click", focusHearthlands);
-  else button.disabled = true;
-  labelLayer.appendChild(button);
-  labels.push({ t, marker, glow, button });
-});
-
-let state = "orbit";
-let rotX = -0.05;
-let rotY = 0;
-let velX = 0;
-let velY = 0;
-let dragging = false;
-let dragStart = { x: 0, y: 0 };
-let pointerStart = { x: 0, y: 0 };
-let orbitDistance = 3.1;
-let last = performance.now();
-let descentStart = 0;
-let descentDuration = reduced ? 200 : 4700;
-let descentFromDistance = orbitDistance;
-let descentFromRot = { x: rotX, y: rotY };
-let lastInteractionAt = 0;
-let currentDescentX = 50;
-let currentDescentY = 50;
-
-function resize() {
-  const w = innerWidth, h = innerHeight;
-  renderer.setSize(w, h, false);
-  camera.aspect = w / h;
-  camera.updateProjectionMatrix();
-  initStars();
-}
-addEventListener("resize", resize);
-resize();
-
-canvas.addEventListener("pointerdown", e => {
-  if (state !== "orbit") return;
-  dragging = true;
-  lastInteractionAt = performance.now();
-  dragStart = { x: e.clientX, y: e.clientY };
-  pointerStart = { x: e.clientX, y: e.clientY };
-  canvas.setPointerCapture(e.pointerId);
-  root.classList.add("dragging");
-});
-canvas.addEventListener("pointermove", e => {
-  if (!dragging || state !== "orbit") return;
-  const dx = e.clientX - dragStart.x;
-  const dy = e.clientY - dragStart.y;
-  const sx = 0.0043;
-  rotY += dx * sx;
-  rotX += dy * sx;
-  rotX = THREE.MathUtils.clamp(rotX, -0.65, 0.65);
-  velY = dx * 0.001;
-  velX = dy * 0.001;
-  dragStart = { x: e.clientX, y: e.clientY };
-  lastInteractionAt = performance.now();
-});
-function releaseDrag(e){
-  if (dragging && Math.hypot(e.clientX - pointerStart.x, e.clientY - pointerStart.y) < 7 && state === 'orbit') {
-    const rect = canvas.getBoundingClientRect();
-    ndc.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
-    ndc.y = -((e.clientY - rect.top) / rect.height) * 2 + 1;
-    raycaster.setFromCamera(ndc, camera);
-    const intersects = raycaster.intersectObjects(markerGroup.children, false);
-    const hit = intersects.find(x => x.object.userData.territory?.interactive);
-    if (hit) focusHearthlands();
-  }
-  dragging = false; root.classList.remove("dragging"); lastInteractionAt = performance.now();
-}
-canvas.addEventListener("pointerup", releaseDrag);
-canvas.addEventListener("pointercancel", e => { dragging = false; root.classList.remove('dragging'); });
-canvas.addEventListener("wheel", e => {
-  if (state !== "orbit") return;
-  e.preventDefault();
-  orbitDistance = THREE.MathUtils.clamp(orbitDistance + e.deltaY * 0.00135, 2.15, 4.05);
-  lastInteractionAt = performance.now();
-}, { passive: false });
-
-function focusHearthlands() {
-  if (state !== "orbit") return;
-  state = "focus";
-  root.dataset.state = "focus";
-  focusPanel.querySelector(".enter").focus({ preventScroll: true });
-}
-function closeFocus() { if (state === 'focus') { state = 'orbit'; root.dataset.state = 'orbit'; } }
-document.querySelector(".close-focus").addEventListener("click", closeFocus);
-document.querySelector(".enter").addEventListener("click", beginDescent);
-document.querySelector(".return-world").addEventListener("click", () => {
-  state = "orbit"; root.dataset.state = "orbit"; orbitDistance = 3.1; rotX = -0.05; rotY = 0; camera.position.set(0,0,orbitDistance); camera.fov=34; camera.updateProjectionMatrix(); flatmap.style.clipPath='circle(0% at 50% 50%)'; flatmap.style.opacity='0'; flatmapArt.style.opacity='0.95'; placeSheet.classList.remove('open');
-});
-
-function beginDescent() {
-  const hearthLabel = labels.find(x => x.t.id === "hearthlands")?.button.getBoundingClientRect();
-  if (hearthLabel) {
-    currentDescentX = ((hearthLabel.left + hearthLabel.width/2) / innerWidth) * 100;
-    currentDescentY = ((hearthLabel.top + hearthLabel.height/2) / innerHeight) * 100;
-  }
-  state = 'descent'; root.dataset.state = 'descent'; descentStart = performance.now(); descentFromDistance = camera.position.z; descentFromRot = { x: rotX, y: rotY }; placeSheet.classList.remove('open'); root.style.setProperty('--focus-x', currentDescentX.toFixed(2)+'%'); root.style.setProperty('--focus-y', currentDescentY.toFixed(2)+'%');
-}
-
-function smoothstep(t){ return t*t*(3-2*t); }
-function easeInOutCubic(t){ return t < .5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2; }
-function updateDescent(now) {
-  const raw = Math.min(1, (now - descentStart) / descentDuration);
-  const p = easeInOutCubic(raw);
-  rotX = THREE.MathUtils.lerp(descentFromRot.x, -0.03, smoothstep(Math.min(1, raw * 1.02)));
-  rotY = THREE.MathUtils.lerp(descentFromRot.y, 0, smoothstep(Math.min(1, raw * 1.08)));
-  camera.position.z = THREE.MathUtils.lerp(descentFromDistance, 0.98, p);
-  camera.fov = THREE.MathUtils.lerp(34, 58, smoothstep(raw)); camera.updateProjectionMatrix();
-  const reveal = raw < 0.38 ? 0 : Math.pow((raw - 0.38) / 0.62, 1.02);
-  flatmap.style.clipPath = `circle(${(reveal*150).toFixed(2)}% at ${currentDescentX.toFixed(2)}% ${currentDescentY.toFixed(2)}%)`;
-  flatmap.style.opacity = `${Math.min(1, reveal * 1.1)}`;
-  flatmapArt.style.transform = `scale(${(1.15 - reveal*0.11).toFixed(3)})`;
-  flatmapArt.style.opacity = `${0.8 + reveal * 0.2}`;
-  root.style.setProperty('--descent', raw.toFixed(3));
-  if (raw >= 1) { state = 'hearth'; root.dataset.state = 'hearth'; flatmap.style.clipPath='circle(150% at 50% 50%)'; flatmap.style.opacity='1'; flatmapArt.style.transform='scale(1.04)'; camera.fov=34; camera.updateProjectionMatrix(); }
-}
-
-function updateLabels(now) {
-  const cameraDir = camera.position.clone().normalize();
-  labels.forEach(({ t, marker, glow, button }) => {
-    const world = marker.getWorldPosition(new THREE.Vector3());
-    const normal = world.clone().normalize();
-    const front = normal.dot(cameraDir) > (t.interactive ? 0.03 : 0.12);
-    const projected = world.project(camera);
-    const x = (projected.x * 0.5 + 0.5) * innerWidth;
-    const y = (-projected.y * 0.5 + 0.5) * innerHeight;
-    button.style.transform = `translate(${x}px, ${y}px) translate(-50%, -50%)`;
-    button.style.opacity = front && state !== 'hearth' ? '1' : '0';
-    button.style.pointerEvents = front && state === 'orbit' && !button.disabled ? 'auto' : 'none';
-    if (glow) {
-      glow.material.opacity = front ? (0.20 + (Math.sin(now*0.003)+1)*0.08) : 0.0;
-      marker.material.color.set(front ? 0xffcc7f : 0xc9b597);
-    }
-  });
-}
-
-function animate(now) {
-  const dt = Math.min(0.05, (now - last) / 1000); last = now; drawStars(now);
-  if (state === 'orbit') {
-    if (!dragging) {
-      rotX += velX; rotY += velY; velX *= 0.93; velY *= 0.93;
-      const autoRotateAllowed = now - lastInteractionAt > 1500;
-      if (autoRotateAllowed && Math.abs(velX)+Math.abs(velY) < 0.0017) rotY += dt * 0.06;
-    }
-    rotX = THREE.MathUtils.clamp(rotX, -0.65, 0.65);
-    camera.position.z += (orbitDistance - camera.position.z) * Math.min(1, dt * 5.5);
-  } else if (state === 'focus') {
-    rotX += (-0.03 - rotX) * Math.min(1, dt * 2.2);
-    rotY += (0 - rotY) * Math.min(1, dt * 2.2);
-    camera.position.z += (2.55 - camera.position.z) * Math.min(1, dt * 3.1);
-  } else if (state === 'descent') { updateDescent(now); }
-  globeGroup.rotation.set(rotX, rotY, 0);
-  clouds.rotation.y += 0.00055;
-  atmosphere.material.uniforms.intensity.value = state === 'descent' ? 0.66 : 0.54;
-  renderer.render(scene, camera);
-  updateLabels(now);
-  requestAnimationFrame(animate);
-}
-requestAnimationFrame(animate);
-
-// ---- Hearthlands exploration --------------------------------------------
-addEventListener('pointermove', e => { if (state !== 'hearth' || reduced) return; const x = e.clientX/innerWidth - 0.5; const y = e.clientY/innerHeight - 0.5; flatmapArt.style.transform = `scale(1.04) translate(${(-x*14).toFixed(1)}px, ${(-y*9).toFixed(1)}px)`; });
-const layerButtons = [...document.querySelectorAll('.layer-switch button')];
-layerButtons.forEach(btn => btn.addEventListener('click', ()=>{ root.dataset.layer = btn.dataset.show; layerButtons.forEach(b=>b.classList.toggle('active', b===btn)); }));
-document.querySelectorAll('.map-marker').forEach(marker => marker.addEventListener('click', ()=>{ const title = marker.dataset.place; placeSheet.querySelector('h2').textContent = title; placeSheet.querySelector('p:last-of-type').textContent = title === 'Fox' ? 'A recurring symbolic presence. The full source-dream evidence and reading belong to the evidence layer rather than the painted map itself.' : 'A named place carried forward from the v57 Atlas. The map locates it spatially; the evidence-led reading remains a separate layer.'; placeSheet.classList.add('open'); }));
-document.querySelector('.close-place').addEventListener('click', ()=> placeSheet.classList.remove('open'));
+const root=document.querySelector(".atlas"),canvas=document.querySelector("#globe"),labels=document.querySelector(".territory-labels"),flatmap=document.querySelector(".flatmap-scene"),mapWorld=document.querySelector(".flatmap-world"),markerLayer=document.querySelector(".flatmap-markers"),placeSheet=document.querySelector(".place-sheet");
+const renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true,powerPreference:"high-performance"});renderer.setPixelRatio(Math.min(devicePixelRatio||1,2));renderer.outputColorSpace=THREE.SRGBColorSpace;
+const scene=new THREE.Scene(),camera=new THREE.PerspectiveCamera(34,1,.1,100);camera.position.z=3.05;const group=new THREE.Group();scene.add(group);
+const tex=new THREE.TextureLoader().load(worldAsset);tex.colorSpace=THREE.SRGBColorSpace;tex.wrapS=THREE.RepeatWrapping;tex.anisotropy=renderer.capabilities.getMaxAnisotropy();
+const globe=new THREE.Mesh(new THREE.SphereGeometry(1,180,140),new THREE.MeshStandardMaterial({map:tex,roughness:.96,metalness:.01}));group.add(globe);
+scene.add(new THREE.HemisphereLight(0xd8e4ff,0x1b1020,2.5));const sun=new THREE.DirectionalLight(0xffdfbd,2.65);sun.position.set(-3.8,2.6,4.8);scene.add(sun);const fill=new THREE.DirectionalLight(0x8fa7ff,.8);fill.position.set(3,-1,2.5);scene.add(fill);
+// Intentionally no RingGeometry and no atmosphere shell.
+function vec(lat,lon,r=1.025){const phi=(90-lat)*Math.PI/180,theta=(lon+180)*Math.PI/180;return new THREE.Vector3(-r*Math.sin(phi)*Math.cos(theta),r*Math.cos(phi),r*Math.sin(phi)*Math.sin(theta))}
+const markerItems=[];for(const t of territories){const p=vec(t.lat,t.lon);const dot=new THREE.Mesh(new THREE.SphereGeometry(t.interactive?.028:.016,18,18),new THREE.MeshBasicMaterial({color:t.interactive?0xffb45e:0xf1d8a7}));dot.position.copy(p);group.add(dot);let hit=null;if(t.interactive){hit=new THREE.Mesh(new THREE.SphereGeometry(.09,16,16),new THREE.MeshBasicMaterial({transparent:true,opacity:0}));hit.position.copy(p);group.add(hit)}const el=document.createElement("button");el.className=`territory-label ${t.interactive?"primary":""}`;el.innerHTML=`<i></i><span>${t.name}</span>`;el.title=t.cues.join(" · ");if(t.interactive)el.onclick=()=>focus();labels.appendChild(el);markerItems.push({t,dot,hit,el})}
+let state="orbit",rx=-.08,ry=-Math.PI/2,zoom=3.05,drag=false,sx=0,sy=0,px=0,py=0,vx=0,vy=0,descentStart=0;const ray=new THREE.Raycaster(),mouse=new THREE.Vector2();
+function worldPos(item){return item.dot.getWorldPosition(new THREE.Vector3())}function screen(p){const q=p.clone().project(camera);return{x:(q.x*.5+.5)*innerWidth,y:(-q.y*.5+.5)*innerHeight}}function visible(p){return p.clone().normalize().dot(camera.position.clone().sub(p).normalize())>.03}
+function updateLabels(now){for(const m of markerItems){const p=worldPos(m),s=screen(p),show=visible(p)&&state!=="hearth";m.el.style.left=`${s.x}px`;m.el.style.top=`${s.y}px`;m.el.style.opacity=show?1:0;m.el.style.pointerEvents=show&&state==="orbit"&&m.t.interactive?"auto":"none";if(m.t.interactive)m.dot.scale.setScalar(.88+Math.sin(now*.004)*.16)}}
+function focus(){if(state!=="orbit")return;state="focus";root.dataset.state="focus"}
+function descend(){if(state!=="focus")return;state="descent";root.dataset.state="descent";descentStart=performance.now()}
+function back(){state="orbit";root.dataset.state="orbit";rx=-.08;ry=-Math.PI/2;zoom=3.05;camera.position.z=zoom;camera.fov=34;camera.updateProjectionMatrix();flatmap.style.opacity=0;flatmap.style.clipPath="circle(0% at 50% 50%)";placeSheet.classList.remove("open")}
+document.querySelector(".enter").onclick=descend;document.querySelector(".close-focus").onclick=()=>{state="orbit";root.dataset.state="orbit"};document.querySelector(".return-world").onclick=back;document.querySelector(".close-place").onclick=()=>placeSheet.classList.remove("open");
+canvas.onpointerdown=e=>{if(state!=="orbit")return;drag=true;sx=px=e.clientX;sy=py=e.clientY;canvas.setPointerCapture(e.pointerId);root.classList.add("dragging")};canvas.onpointermove=e=>{if(!drag)return;const dx=e.clientX-sx,dy=e.clientY-sy;ry+=dx*.0042;rx=THREE.MathUtils.clamp(rx+dy*.0042,-.68,.68);vx=dy*.001;vy=dx*.001;sx=e.clientX;sy=e.clientY};canvas.onpointerup=e=>{if(!drag)return;drag=false;root.classList.remove("dragging");if(Math.hypot(e.clientX-px,e.clientY-py)>8)return;const r=canvas.getBoundingClientRect();mouse.x=((e.clientX-r.left)/r.width)*2-1;mouse.y=-((e.clientY-r.top)/r.height)*2+1;ray.setFromCamera(mouse,camera);const h=markerItems.find(m=>m.t.id==="hearthlands");if(ray.intersectObjects([h.hit,h.dot]).length)focus()};canvas.onwheel=e=>{if(state!=="orbit")return;e.preventDefault();zoom=THREE.MathUtils.clamp(zoom+e.deltaY*.0013,2.15,4.05)};
+for(const p of places){const b=document.createElement("button");b.className=`map-marker ${p.kind}`;b.style.left=`${p.x}%`;b.style.top=`${p.y}%`;b.innerHTML=`<i></i><span>${p.name}</span>`;b.onclick=()=>{placeSheet.querySelector("h2").textContent=p.name;placeSheet.classList.add("open")};markerLayer.appendChild(b)}document.querySelectorAll(".layer-switch button").forEach(b=>b.onclick=()=>{root.dataset.layer=b.dataset.show;document.querySelectorAll(".layer-switch button").forEach(x=>x.classList.toggle("active",x===b))});
+const starCanvas=document.querySelector("#starscape"),ctx=starCanvas.getContext("2d");let stars=[];function resize(){renderer.setSize(innerWidth,innerHeight,false);camera.aspect=innerWidth/innerHeight;camera.updateProjectionMatrix();const d=Math.min(devicePixelRatio||1,2);starCanvas.width=innerWidth*d;starCanvas.height=innerHeight*d;ctx.setTransform(d,0,0,d,0,0);stars=Array.from({length:Math.min(650,Math.max(260,Math.round(innerWidth*innerHeight/4200)))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,r:.2+Math.random()*1.5,a:.15+Math.random()*.65,p:Math.random()*6.28}))}addEventListener("resize",resize);resize();
+function drawStars(t){ctx.clearRect(0,0,innerWidth,innerHeight);for(const s of stars){const q=.72+Math.sin(t*.001+s.p)*.28;ctx.fillStyle=`rgba(255,244,218,${s.a*q})`;ctx.beginPath();ctx.arc(s.x,s.y,Math.max(.1,s.r*q),0,Math.PI*2);ctx.fill()}}
+function animate(now){drawStars(now);if(state==="orbit"){if(!drag){rx+=vx;ry+=vy;vx*=.93;vy*=.93;ry+=.00045}camera.position.z+=(zoom-camera.position.z)*.08}else if(state==="focus"){rx+=(-.08-rx)*.08;ry+=(-Math.PI/2-ry)*.08;camera.position.z+=(2.5-camera.position.z)*.09}else if(state==="descent"){const p=Math.min(1,(now-descentStart)/3600),e=p<.5?4*p*p*p:1-Math.pow(-2*p+2,3)/2;rx+=(-.08-rx)*.12;ry+=(-Math.PI/2-ry)*.12;camera.position.z=THREE.MathUtils.lerp(2.5,1.02,e);camera.fov=THREE.MathUtils.lerp(34,54,e);camera.updateProjectionMatrix();const reveal=Math.max(0,(p-.32)/.68);flatmap.style.opacity=Math.min(1,reveal*1.2);flatmap.style.clipPath=`circle(${reveal*150}% at 50% 50%)`;if(p>=1){state="hearth";root.dataset.state="hearth";flatmap.style.opacity=1;flatmap.style.clipPath="circle(150% at 50% 50%)"}}group.rotation.set(rx,ry,0);renderer.render(scene,camera);updateLabels(now);requestAnimationFrame(animate)}requestAnimationFrame(animate);

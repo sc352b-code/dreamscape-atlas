@@ -1,0 +1,1 @@
+if(window.CanvasRenderingContext2D&&!CanvasRenderingContext2D.prototype.lineTn){CanvasRenderingContext2D.prototype.lineTn=CanvasRenderingContext2D.prototype.lineTo;}

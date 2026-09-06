@@ -100,11 +100,6 @@ function waitForAtlas() {
     lfo.type = 'sine'; lfo.frequency.value = .055; lfoGain.gain.value = 115;
     lfo.connect(lfoGain); lfoGain.connect(bed.frequency); lfo.start();
 
-    const breathe = ctx.createOscillator();
-    const breatheGain = ctx.createGain();
-    breathe.type = 'sine'; breathe.frequency.value = .028; breatheGain.gain.value = .0045;
-    breathe.connect(breatheGain); breatheGain.connect(master.gain); breathe.start();
-
     audio = { ctx, master };
     return audio;
   }

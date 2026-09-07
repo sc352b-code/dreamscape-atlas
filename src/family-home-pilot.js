@@ -47,12 +47,23 @@ async function waitForAtlas(manifest){
     img.decoding='async';
     img.loading='eager';
     img.src=`/assets/family-home-pilot/${asset.expectedAsset}`;
-    img.style.left=`${p.x}%`;
-    img.style.top=`${p.y}%`;
-    if(asset.approxDimensions){
-      img.style.width=`${asset.approxDimensions.width}px`;
-      img.style.height=`${asset.approxDimensions.height}px`;
+
+    if(asset.tileRect){
+      img.style.left=`${asset.tileRect.leftPct}%`;
+      img.style.top=`${asset.tileRect.topPct}%`;
+      img.style.width=`${asset.tileRect.widthPct}%`;
+      img.style.height=`${asset.tileRect.heightPct}%`;
+      img.style.translate='0 0';
+      img.style.objectFit='contain';
+    }else{
+      img.style.left=`${p.x}%`;
+      img.style.top=`${p.y}%`;
+      if(asset.approxDimensions){
+        img.style.width=`${asset.approxDimensions.width}px`;
+        img.style.height=`${asset.approxDimensions.height}px`;
+      }
     }
+
     img.addEventListener('load',()=>{
       img.dataset.ready='true';
       const hit=hotspotLayer.querySelector(`[data-symbol="${CSS.escape(symbol.id)}"]`);
@@ -65,13 +76,16 @@ async function waitForAtlas(manifest){
     });
     artLayer.appendChild(img);
 
+    const hotspot=asset.hotspot??{xPct:p.x,yPct:p.y,widthPx:52,heightPx:52};
     const hit=document.createElement('button');
     hit.type='button';
     hit.className=`painted-symbol-hotspot painted-symbol-hotspot--${symbol.zoom}`;
     hit.dataset.symbol=symbol.id;
     hit.dataset.zoom=symbol.zoom;
-    hit.style.left=`${p.x}%`;
-    hit.style.top=`${p.y}%`;
+    hit.style.left=`${hotspot.xPct}%`;
+    hit.style.top=`${hotspot.yPct}%`;
+    hit.style.width=`${hotspot.widthPx??52}px`;
+    hit.style.height=`${hotspot.heightPx??52}px`;
     hit.setAttribute('aria-label',`${symbol.name}, painted into Family Home`);
     hit.disabled=true;
     hit.addEventListener('pointerenter',()=>previewSymbol(root,symbol,hit));

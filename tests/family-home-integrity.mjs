@@ -14,7 +14,11 @@ const data=await importSource('src/family-home-pilot-data.js');
 const readings=await importSource('src/v57-family-home-readings.js');
 const manifest=JSON.parse(read('assets/family-home-pilot/manifest.json'));
 const pilotSource=read('src/family-home-pilot.js');
+const approachSource=read('src/family-home-approach.js');
+const approachCss=read('src/family-home-approach.css');
 const indexSource=read('index.html');
+const audioSource=read('src/cosmos-ambience.js');
+const polishSource=read('src/atlas-polish.css');
 
 const expectedIds=['house','mum','water','garden','cat','dog','window','bed','light','sea','fish','egg','octopus'];
 assert(data.FAMILY_HOME_SYMBOLS.length===13,`Expected 13 Family Home symbols, got ${data.FAMILY_HOME_SYMBOLS.length}`);
@@ -50,6 +54,15 @@ assert(manifest.symbols.length===13,'Asset manifest must contain exactly 13 symb
 assert(JSON.stringify(manifest.symbols.map(s=>s.id))===JSON.stringify(expectedIds),'Asset manifest IDs do not match Family Home pilot IDs');
 pass('13-symbol asset manifest matches the data model');
 
+assert(manifest.placeScene?.background==='hearthlands-flatmap.png','Family Home place scene must preserve the canonical Hearthlands painting');
+assert(manifest.placeScene?.octopusAsset==='family-home-octopus-tile.webp','Family Home Octopus place-scene asset is not registered');
+assert(fs.existsSync(path.join(root,'assets/family-home-pilot',manifest.placeScene.octopusAsset)),'Family Home Octopus place-scene asset is missing');
+assert(approachCss.includes('hearthlands-flatmap.png'),'Family Home approach is not using the canonical Hearthlands painting');
+assert(approachSource.includes('/assets/family-home-pilot/family-home-octopus-tile.webp'),'Family Home approach is not loading the approved painterly Octopus');
+assert(approachSource.includes('data-family-symbol="octopus"')||approachSource.includes('data-family-symbol="octopus"'),'Family Home approach has no Octopus scene hotspot');
+assert(approachSource.includes('.painted-symbol-hotspot[data-symbol="octopus"]')&&approachSource.includes('readerBridge.click()'),'Octopus place-scene hotspot is not bridged to the existing v57 symbol reader');
+pass('canonical Family Home place scene and approved Octopus-to-reader interaction are mounted');
+
 assert(/hit\.disabled=true/.test(pilotSource),'Pilot must create hotspots disabled');
 assert(/img\.addEventListener\('load'[\s\S]*hit\.disabled=false/.test(pilotSource),'Pilot may enable a hotspot only after its painted asset loads');
 assert(/img\.addEventListener\('error'[\s\S]*hit\.disabled=true/.test(pilotSource),'Pilot must keep/return hotspot disabled when painted asset is absent');
@@ -60,6 +73,15 @@ assert(!indexSource.includes('/src/hearthlands-symbols.js'),'Legacy hearthlands-
 assert(!indexSource.includes('/src/hearthlands-symbols.css'),'Legacy hearthlands-symbols.css glyph overlay is still loaded');
 assert(!pilotSource.includes('corpus-symbol-glyph'),'Pilot source still contains corpus glyph markup');
 pass('legacy glyph-overlay system is not loaded by the pilot');
+
+assert(indexSource.includes('/src/atlas-polish.css'),'Planet visual-polish layer is not loaded');
+assert(polishSource.includes('.globe-stage canvas')&&polishSource.includes('contrast(1.055)'),'Planet visual-polish layer does not sharpen globe presentation');
+pass('planet presentation polish is mounted without replacing corpus-derived world art');
+
+assert(audioSource.includes('playBowlStrike')&&audioSource.includes('const partials = ['),'Cosmic ambience is not using the resonant bowl synthesis');
+assert(audioSource.includes('9800 + Math.random() * 5600'),'Cosmic bowl strikes are not irregular/spacious');
+assert(!audioSource.includes('createBufferSource'),'Cosmic ambience must not reintroduce broadband noise');
+pass('cosmic ambience uses irregular resonant bowl strikes with no broadband noise');
 
 const authored=['house','water','mum','cat','dog'];
 for(const id of authored)assert(readings.getV57Reading(id)?.profile,`${id} authored v57 profile is not mounted`);

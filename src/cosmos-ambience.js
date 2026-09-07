@@ -60,7 +60,7 @@ function waitForAtlas() {
   const toggle = document.createElement('button');
   toggle.className = 'cosmic-sound-toggle';
   toggle.type = 'button';
-  toggle.innerHTML = '<i></i><span class="label">Cosmic tones</span><span class="state">ready</span>';
+  toggle.innerHTML = '<i></i><span class="label">Cosmic bowl</span><span class="state">ready</span>';
   toggle.setAttribute('aria-label', 'Toggle ambient cosmic tones');
   toggle.setAttribute('aria-pressed', 'false');
   document.body.appendChild(toggle);
@@ -77,83 +77,100 @@ function waitForAtlas() {
     const ctx = new AC({ latencyHint: 'interactive' });
 
     const compressor = ctx.createDynamicsCompressor();
-    compressor.threshold.value = -30;
-    compressor.knee.value = 20;
-    compressor.ratio.value = 2.4;
-    compressor.attack.value = .08;
-    compressor.release.value = .8;
+    compressor.threshold.value = -28;
+    compressor.knee.value = 24;
+    compressor.ratio.value = 2.1;
+    compressor.attack.value = .12;
+    compressor.release.value = 1.35;
     compressor.connect(ctx.destination);
 
     const master = ctx.createGain();
     master.gain.value = 0;
     master.connect(compressor);
 
-    // A nearly subliminal harmonic bed keeps the space alive without broadband noise.
+    // A very quiet harmonic floor: tonal only, never broadband noise.
     const bed = ctx.createGain();
-    bed.gain.value = .18;
+    bed.gain.value = .16;
     bed.connect(master);
-    [55, 82.5, 110].forEach((frequency,index) => {
+    [55, 82.41].forEach((frequency,index) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
       osc.type = 'sine';
       osc.frequency.value = frequency;
-      gain.gain.value = [.016,.011,.007][index];
+      gain.gain.value = index === 0 ? .012 : .006;
       osc.connect(gain); gain.connect(bed); osc.start();
     });
 
-    // A dedicated tone bus carries the alternating low/high celestial notes.
-    const toneBus = ctx.createGain();
-    toneBus.gain.value = .7;
-    toneBus.connect(master);
+    // Bowl bus with a small feedback delay to make the resonance feel spatial rather than melodic.
+    const bowlBus = ctx.createGain();
+    bowlBus.gain.value = .82;
+    bowlBus.connect(master);
+    const delay = ctx.createDelay(1.5);
+    delay.delayTime.value = .43;
+    const feedback = ctx.createGain();
+    feedback.gain.value = .24;
+    const wet = ctx.createGain();
+    wet.gain.value = .22;
+    bowlBus.connect(delay);
+    delay.connect(feedback); feedback.connect(delay);
+    delay.connect(wet); wet.connect(master);
 
-    function playCelestialNote(frequency, panValue = 0) {
+    function playBowlStrike() {
       if (!wanted || document.hidden || ctx.state !== 'running') return;
       const now = ctx.currentTime;
-      const noteGain = ctx.createGain();
-      noteGain.gain.setValueAtTime(.0001, now);
-      noteGain.gain.exponentialRampToValueAtTime(.055, now + .12);
-      noteGain.gain.exponentialRampToValueAtTime(.0001, now + 2.8);
-
-      const fundamental = ctx.createOscillator();
-      fundamental.type = 'sine';
-      fundamental.frequency.value = frequency;
-
-      const shimmer = ctx.createOscillator();
-      shimmer.type = 'sine';
-      shimmer.frequency.value = frequency * 2.01;
-      const shimmerGain = ctx.createGain();
-      shimmerGain.gain.value = .12;
-
-      const pan = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null;
-      if (pan) {
-        pan.pan.value = panValue;
-        fundamental.connect(noteGain);
-        shimmer.connect(shimmerGain); shimmerGain.connect(noteGain);
-        noteGain.connect(pan); pan.connect(toneBus);
-      } else {
-        fundamental.connect(noteGain);
-        shimmer.connect(shimmerGain); shimmerGain.connect(noteGain);
-        noteGain.connect(toneBus);
+      const base = 146.83 * Math.pow(2, ((Math.random() * 5) - 2.5) / 1200);
+      const partials = [
+        { ratio:1, gain:.052, decay:8.8 },
+        { ratio:2.01, gain:.021, decay:7.3 },
+        { ratio:2.72, gain:.011, decay:6.2 },
+        { ratio:3.93, gain:.0065, decay:5.1 },
+        { ratio:5.18, gain:.0032, decay:4.2 },
+      ];
+      const panNode = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null;
+      if (panNode) {
+        panNode.pan.value = (Math.random() - .5) * .14;
+        panNode.connect(bowlBus);
       }
 
-      fundamental.start(now); shimmer.start(now);
-      fundamental.stop(now + 3.05); shimmer.stop(now + 3.05);
+      for (const partial of partials) {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = 'sine';
+        osc.frequency.value = base * partial.ratio;
+        osc.detune.value = (Math.random() - .5) * 3.5;
+        gain.gain.setValueAtTime(.0001, now);
+        gain.gain.exponentialRampToValueAtTime(partial.gain, now + .035 + Math.random() * .025);
+        gain.gain.exponentialRampToValueAtTime(.0001, now + partial.decay);
+        osc.connect(gain);
+        gain.connect(panNode || bowlBus);
+        osc.start(now);
+        osc.stop(now + partial.decay + .18);
+      }
+
+      // A barely-there high halo arrives after the strike, like light lingering around the bowl.
+      const halo = ctx.createOscillator();
+      const haloGain = ctx.createGain();
+      halo.type = 'sine';
+      halo.frequency.value = base * 6.07;
+      haloGain.gain.setValueAtTime(.0001, now + .16);
+      haloGain.gain.exponentialRampToValueAtTime(.0026, now + .65);
+      haloGain.gain.exponentialRampToValueAtTime(.0001, now + 5.6);
+      halo.connect(haloGain); haloGain.connect(panNode || bowlBus);
+      halo.start(now + .16); halo.stop(now + 5.8);
     }
 
-    // Alternates between a lower G3-like tone and a higher D4-like tone.
-    // The spacing is intentionally slow enough to feel atmospheric rather than rhythmic.
-    const notes = [196.0, 293.66];
-    let noteIndex = 0;
-    const playNext = () => {
-      if (wanted && !document.hidden && ctx.state === 'running') {
-        playCelestialNote(notes[noteIndex], noteIndex === 0 ? -.12 : .12);
-        noteIndex = 1 - noteIndex;
-      }
-    };
-    playNext();
-    const noteTimer = setInterval(playNext, 3600);
+    let bowlTimer = null;
+    function scheduleBowl(first = false) {
+      clearTimeout(bowlTimer);
+      const wait = first ? 420 : 9800 + Math.random() * 5600;
+      bowlTimer = setTimeout(() => {
+        playBowlStrike();
+        scheduleBowl(false);
+      }, wait);
+    }
+    scheduleBowl(true);
 
-    audio = { ctx, master, toneBus, noteTimer };
+    audio = { ctx, master, bowlBus, scheduleBowl, get bowlTimer(){ return bowlTimer; } };
     return audio;
   }
 
@@ -167,7 +184,7 @@ function waitForAtlas() {
     if (!audio) return;
     const now = audio.ctx.currentTime;
     audio.master.gain.cancelScheduledValues(now);
-    audio.master.gain.setTargetAtTime(on ? .31 : 0, now, fast ? .12 : on ? .7 : .2);
+    audio.master.gain.setTargetAtTime(on ? .34 : 0, now, fast ? .1 : on ? .85 : .22);
   }
 
   async function startFromGesture() {

@@ -1,0 +1,65 @@
+name: Package Dreamscape handover
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [family-home-pilot]
+    paths:
+      - 'handover/**'
+      - '.github/workflows/package-handover.yml'
+
+jobs:
+  package:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Build complete transfer folder
+        shell: bash
+        run: |
+          set -euo pipefail
+          ROOT=/tmp/Dreamscape_Family_Home_Handover
+          mkdir -p "$ROOT/repository_snapshot" "$ROOT/git_metadata"
+
+          # Exact checked-out branch snapshot, including binaries, but excluding .git internals.
+          git archive HEAD | tar -x -C "$ROOT/repository_snapshot"
+
+          # Duplicate handover docs at the package root for immediate reading.
+          cp -R handover "$ROOT/handover"
+
+          git rev-parse HEAD > "$ROOT/git_metadata/PACKAGED_HEAD_SHA.txt"
+          git rev-parse main > "$ROOT/git_metadata/MAIN_SHA.txt" || true
+          git show -s --format=fuller HEAD > "$ROOT/git_metadata/HEAD_COMMIT.txt"
+          git log --graph --decorate --oneline --all -n 100 > "$ROOT/git_metadata/GIT_LOG.txt"
+          git branch -a -vv > "$ROOT/git_metadata/BRANCHES.txt"
+          git status --short --branch > "$ROOT/git_metadata/GIT_STATUS.txt"
+          git diff --binary main...HEAD > "$ROOT/git_metadata/MAIN_TO_PILOT.patch" || true
+          git diff --stat main...HEAD > "$ROOT/git_metadata/MAIN_TO_PILOT_STAT.txt" || true
+
+          cat > "$ROOT/OPEN_ME_FIRST.txt" <<'EOF'
+          DREAMSCAPE FAMILY HOME PILOT HANDOVER
+
+          Start with:
+          handover/README_HANDOVER.md
+          handover/NEXT_THREAD_INSTRUCTIONS.md
+          handover/TRANSFER_PROMPT.md
+
+          repository_snapshot/ contains the complete branch source and binary assets at the packaged commit.
+          git_metadata/ contains the exact branch/commit/diff information.
+
+          IMPORTANT: production main must remain untouched until the Family Home pilot is visually and interactively validated.
+          EOF
+
+          echo "Packaged files:"
+          find "$ROOT" -maxdepth 3 -type f | sort
+
+      - name: Upload complete handover artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: Dreamscape_Family_Home_Handover
+          path: /tmp/Dreamscape_Family_Home_Handover
+          if-no-files-found: error
+          retention-days: 30

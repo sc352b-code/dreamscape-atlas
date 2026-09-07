@@ -1,0 +1,25 @@
+name: Family Home integrity
+
+on:
+  push:
+    branches: [family-home-pilot]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/family-home-*'
+      - 'assets/family-home-pilot/**'
+      - 'index.html'
+      - 'tests/family-home-integrity.mjs'
+      - '.github/workflows/family-home-integrity.yml'
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Run Family Home pilot integrity suite
+        run: node tests/family-home-integrity.mjs

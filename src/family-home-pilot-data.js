@@ -1,17 +1,17 @@
 const FAMILY_HOME_SYMBOLS = [
-  { id:'house', name:'House / Home', hearthlandsDreams:109, familyHomeDreams:2, zoom:'territory' },
-  { id:'mum', name:'Mum', hearthlandsDreams:35, familyHomeDreams:2, zoom:'territory' },
-  { id:'water', name:'Water', hearthlandsDreams:30, familyHomeDreams:1, zoom:'territory' },
-  { id:'garden', name:'Garden', hearthlandsDreams:25, familyHomeDreams:1, zoom:'territory' },
-  { id:'cat', name:'Cat', hearthlandsDreams:23, familyHomeDreams:1, zoom:'territory' },
-  { id:'dog', name:'Dog', hearthlandsDreams:15, familyHomeDreams:1, zoom:'place' },
-  { id:'window', name:'Window', hearthlandsDreams:12, familyHomeDreams:1, zoom:'place' },
-  { id:'bed', name:'Bed', hearthlandsDreams:11, familyHomeDreams:1, zoom:'place' },
-  { id:'light', name:'Light', hearthlandsDreams:7, familyHomeDreams:1, zoom:'place' },
-  { id:'sea', name:'Sea', hearthlandsDreams:6, familyHomeDreams:1, zoom:'close' },
-  { id:'fish', name:'Fish', hearthlandsDreams:3, familyHomeDreams:1, zoom:'close' },
-  { id:'egg', name:'Egg', hearthlandsDreams:2, familyHomeDreams:1, zoom:'close' },
-  { id:'octopus', name:'Octopus', hearthlandsDreams:1, familyHomeDreams:1, zoom:'close' },
+  { id:'house', name:'House / Home', hearthlandsDreams:109, familyHomeDreams:2, zoom:'territory', tarotArt:'house-symbol-tarot.webp', places:{'Cambridge Road Childhood House':3,'Family Home':2,'Current / Present House':31,'The Large Many-Roomed House':6,'The Unfamiliar House':5,'The Haunted 17-Bedroom Mansion':1} },
+  { id:'mum', name:'Mum', hearthlandsDreams:35, familyHomeDreams:2, zoom:'territory', tarotArt:'mum-symbol-tarot.webp', places:{'Cambridge Road Childhood House':2,'Family Home':2,'Current / Present House':4,'The Large Many-Roomed House':1,'The Unfamiliar House':2} },
+  { id:'water', name:'Water', hearthlandsDreams:30, familyHomeDreams:1, zoom:'territory', tarotArt:'water-symbol-tarot.webp', places:{'Family Home':1,'Current / Present House':6,'The Large Many-Roomed House':1,'The Unfamiliar House':1} },
+  { id:'garden', name:'Garden', hearthlandsDreams:25, familyHomeDreams:1, zoom:'territory', tarotArt:'garden-symbol-tarot.webp', places:{'Cambridge Road Childhood House':2,'Family Home':1,'Current / Present House':8} },
+  { id:'cat', name:'Cat', hearthlandsDreams:23, familyHomeDreams:1, zoom:'territory', tarotArt:'cat-symbol-tarot.webp', places:{'Cambridge Road Childhood House':1,'Family Home':1,'Current / Present House':12,'The Large Many-Roomed House':2} },
+  { id:'dog', name:'Dog', hearthlandsDreams:15, familyHomeDreams:1, zoom:'place', tarotArt:'dog-symbol-tarot.webp', places:{'Family Home':1,'Current / Present House':2,'The Large Many-Roomed House':2} },
+  { id:'window', name:'Window', hearthlandsDreams:12, familyHomeDreams:1, zoom:'place', tarotArt:'window-symbol-tarot.webp', places:{'Family Home':1,'Current / Present House':3,'The Large Many-Roomed House':2,'The Unfamiliar House':2,'The Haunted 17-Bedroom Mansion':1} },
+  { id:'bed', name:'Bed', hearthlandsDreams:11, familyHomeDreams:1, zoom:'place', tarotArt:'bed-symbol-tarot.webp', places:{'Family Home':1,'Current / Present House':2,'The Large Many-Roomed House':2} },
+  { id:'light', name:'Light', hearthlandsDreams:7, familyHomeDreams:1, zoom:'place', tarotArt:'light-symbol-tarot.webp', places:{'Family Home':1,'Current / Present House':2} },
+  { id:'sea', name:'Sea', hearthlandsDreams:6, familyHomeDreams:1, zoom:'close', tarotArt:'sea-symbol-tarot.webp', places:{'Family Home':1,'Current / Present House':1} },
+  { id:'fish', name:'Fish', hearthlandsDreams:3, familyHomeDreams:1, zoom:'close', tarotArt:'fish-symbol-tarot.webp', places:{'Family Home':1,'Current / Present House':1} },
+  { id:'egg', name:'Egg', hearthlandsDreams:2, familyHomeDreams:1, zoom:'close', tarotArt:'egg-symbol-tarot.webp', places:{'Family Home':1,'Current / Present House':1} },
+  { id:'octopus', name:'Octopus', hearthlandsDreams:1, familyHomeDreams:1, zoom:'close', tarotArt:'octopus-symbol-tarot.webp', places:{'Family Home':1,'Current / Present House':1} },
 ];
 
 const FAMILY_HOME_ZONE = {
@@ -37,4 +37,8 @@ const FAMILY_HOME_LAYOUT = {
   octopus:{x:40.5,y:42.2},
 };
 
-export { FAMILY_HOME_SYMBOLS, FAMILY_HOME_ZONE, FAMILY_HOME_LAYOUT };
+const ZOOM_ORDER=['territory','place','close'];
+const visibleAtZoom=(symbol,currentZoom)=>ZOOM_ORDER.indexOf(symbol.zoom)<=ZOOM_ORDER.indexOf(currentZoom);
+const FAMILY_HOME_BY_ID=Object.fromEntries(FAMILY_HOME_SYMBOLS.map(symbol=>[symbol.id,symbol]));
+
+export { FAMILY_HOME_SYMBOLS, FAMILY_HOME_BY_ID, FAMILY_HOME_ZONE, FAMILY_HOME_LAYOUT, ZOOM_ORDER, visibleAtZoom };

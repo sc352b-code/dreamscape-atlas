@@ -89,7 +89,7 @@ function waitForAtlas() {
     master.connect(compressor);
 
     const breath = ctx.createGain();
-    breath.gain.value = .88;
+    breath.gain.value = .86;
     breath.connect(master);
 
     const bed = ctx.createBiquadFilter();
@@ -129,11 +129,13 @@ function waitForAtlas() {
     lfo.type = 'sine'; lfo.frequency.value = .045; lfoGain.gain.value = 120;
     lfo.connect(lfoGain); lfoGain.connect(bed.frequency); lfo.start();
 
+    // Slow amplitude breathing: perceptible, but deliberately below the threshold of a beat.
+    // 0.08 Hz is a 12.5-second cycle. The gain moves roughly from .70 to 1.02.
     const breathLfo = ctx.createOscillator();
     const breathDepth = ctx.createGain();
     breathLfo.type = 'sine';
-    breathLfo.frequency.value = .05;
-    breathDepth.gain.value = .12;
+    breathLfo.frequency.value = .08;
+    breathDepth.gain.value = .16;
     breathLfo.connect(breathDepth);
     breathDepth.connect(breath.gain);
     breathLfo.start();

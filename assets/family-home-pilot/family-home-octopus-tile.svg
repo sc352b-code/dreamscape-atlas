@@ -1,0 +1,59 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 334 226" role="img" aria-label="Painted octopus inhabiting the Family Home stream">
+  <defs>
+    <radialGradient id="body" cx="42%" cy="30%" r="74%">
+      <stop offset="0" stop-color="#b98ad2" stop-opacity=".95"/>
+      <stop offset=".42" stop-color="#865bb2" stop-opacity=".92"/>
+      <stop offset="1" stop-color="#4d3f83" stop-opacity=".78"/>
+    </radialGradient>
+    <linearGradient id="tentacle" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#a873c6" stop-opacity=".88"/>
+      <stop offset=".58" stop-color="#6d4b9d" stop-opacity=".82"/>
+      <stop offset="1" stop-color="#45518b" stop-opacity=".46"/>
+    </linearGradient>
+    <linearGradient id="waterGlow" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#60d0d1" stop-opacity="0"/>
+      <stop offset=".5" stop-color="#86e1dc" stop-opacity=".22"/>
+      <stop offset="1" stop-color="#60d0d1" stop-opacity="0"/>
+    </linearGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="1.15"/>
+    </filter>
+    <filter id="shadow" x="-40%" y="-40%" width="180%" height="180%">
+      <feGaussianBlur stdDeviation="3.5"/>
+    </filter>
+  </defs>
+
+  <!-- Submerged shadow and ripples make the creature belong to the water rather than sit on top of it. -->
+  <ellipse cx="160" cy="124" rx="54" ry="19" fill="#26365e" opacity=".23" filter="url(#shadow)"/>
+  <path d="M94 126 C126 114 198 113 229 127" fill="none" stroke="url(#waterGlow)" stroke-width="3" opacity=".8"/>
+  <path d="M105 137 C139 128 194 129 217 140" fill="none" stroke="#86dad4" stroke-width="1.5" opacity=".18"/>
+  <path d="M119 110 C143 104 181 103 207 112" fill="none" stroke="#9ce9de" stroke-width="1" opacity=".15"/>
+
+  <!-- Eight irregular tentacles, with different curves and partial transparency to suggest submersion. -->
+  <g fill="none" stroke="url(#tentacle)" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M154 121 C132 130 119 149 96 150 C82 151 79 143 88 137" stroke-width="8.5" opacity=".83"/>
+    <path d="M158 123 C145 144 143 164 124 171 C111 176 104 167 112 159" stroke-width="7.5" opacity=".77"/>
+    <path d="M164 124 C160 149 169 166 156 178 C146 187 136 181 142 171" stroke-width="7.2" opacity=".74"/>
+    <path d="M170 123 C183 143 182 164 197 170 C211 176 219 165 210 158" stroke-width="7.7" opacity=".76"/>
+    <path d="M175 120 C196 129 209 150 232 148 C247 147 249 137 239 133" stroke-width="8.3" opacity=".82"/>
+    <path d="M176 114 C197 112 211 119 229 111 C241 106 241 97 232 96" stroke-width="7" opacity=".68"/>
+    <path d="M151 115 C132 112 120 117 104 110 C94 106 92 99 99 95" stroke-width="6.8" opacity=".67"/>
+    <path d="M165 119 C168 139 158 151 164 162" stroke-width="6.5" opacity=".62"/>
+  </g>
+
+  <!-- Soft body, slightly flattened at the waterline. -->
+  <ellipse cx="164" cy="104" rx="27" ry="31" fill="url(#body)" opacity=".93" filter="url(#soft)"/>
+  <ellipse cx="164" cy="116" rx="31" ry="9" fill="#5a5795" opacity=".35"/>
+  <path d="M143 111 C154 117 176 118 186 110" fill="none" stroke="#9bded6" stroke-width="1.4" opacity=".25"/>
+
+  <!-- Small naturalistic eyes, deliberately subdued. -->
+  <ellipse cx="154" cy="100" rx="3.3" ry="4.2" fill="#17182d" opacity=".88"/>
+  <ellipse cx="174" cy="100" rx="3.3" ry="4.2" fill="#17182d" opacity=".88"/>
+  <circle cx="153.2" cy="98.7" r=".9" fill="#f8dfb7" opacity=".8"/>
+  <circle cx="173.2" cy="98.7" r=".9" fill="#f8dfb7" opacity=".8"/>
+
+  <!-- Painterly highlights and water occlusion. -->
+  <path d="M148 87 C155 80 168 79 176 84" fill="none" stroke="#d4afe2" stroke-width="2.4" opacity=".42" stroke-linecap="round"/>
+  <path d="M131 122 C150 127 181 127 199 121" fill="none" stroke="#5abec7" stroke-width="4.5" opacity=".32"/>
+  <path d="M124 128 C149 134 184 134 207 127" fill="none" stroke="#285f84" stroke-width="6" opacity=".18"/>
+</svg>

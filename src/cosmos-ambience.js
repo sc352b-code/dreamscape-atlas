@@ -60,8 +60,8 @@ function waitForAtlas() {
   const toggle = document.createElement('button');
   toggle.className = 'cosmic-sound-toggle';
   toggle.type = 'button';
-  toggle.innerHTML = '<i></i><span class="label">Cosmic hum</span><span class="state">ready</span>';
-  toggle.setAttribute('aria-label', 'Toggle ambient cosmic hum');
+  toggle.innerHTML = '<i></i><span class="label">Cosmic tones</span><span class="state">ready</span>';
+  toggle.setAttribute('aria-label', 'Toggle ambient cosmic tones');
   toggle.setAttribute('aria-pressed', 'false');
   document.body.appendChild(toggle);
 
@@ -77,70 +77,83 @@ function waitForAtlas() {
     const ctx = new AC({ latencyHint: 'interactive' });
 
     const compressor = ctx.createDynamicsCompressor();
-    compressor.threshold.value = -28;
-    compressor.knee.value = 18;
-    compressor.ratio.value = 3;
+    compressor.threshold.value = -30;
+    compressor.knee.value = 20;
+    compressor.ratio.value = 2.4;
     compressor.attack.value = .08;
-    compressor.release.value = .7;
+    compressor.release.value = .8;
     compressor.connect(ctx.destination);
 
     const master = ctx.createGain();
     master.gain.value = 0;
     master.connect(compressor);
 
-    const breath = ctx.createGain();
-    breath.gain.value = .86;
-    breath.connect(master);
-
-    const bed = ctx.createBiquadFilter();
-    bed.type = 'lowpass';
-    bed.frequency.value = 1050;
-    bed.Q.value = .55;
-    bed.connect(breath);
-
-    const voices = [55, 82.5, 110, 165, 220, 432];
-    const levels = [.025,.019,.014,.010,.007,.0045];
-    voices.forEach((frequency,index) => {
+    // A nearly subliminal harmonic bed keeps the space alive without broadband noise.
+    const bed = ctx.createGain();
+    bed.gain.value = .18;
+    bed.connect(master);
+    [55, 82.5, 110].forEach((frequency,index) => {
       const osc = ctx.createOscillator();
       const gain = ctx.createGain();
-      const pan = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null;
-      osc.type = index < 4 ? 'sine' : 'triangle';
+      osc.type = 'sine';
       osc.frequency.value = frequency;
-      osc.detune.value = index % 2 ? -3 : 3;
-      gain.gain.value = levels[index];
-      osc.connect(gain);
-      if (pan) { gain.connect(pan); pan.pan.value = -0.35 + index * .14; pan.connect(bed); }
-      else gain.connect(bed);
-      osc.start();
+      gain.gain.value = [.016,.011,.007][index];
+      osc.connect(gain); gain.connect(bed); osc.start();
     });
 
-    const buffer = ctx.createBuffer(1, ctx.sampleRate * 2, ctx.sampleRate);
-    const channel = buffer.getChannelData(0);
-    for (let i = 0; i < channel.length; i += 1) channel[i] = (Math.random() * 2 - 1) * .25;
-    const noise = ctx.createBufferSource();
-    noise.buffer = buffer; noise.loop = true;
-    const noiseFilter = ctx.createBiquadFilter();
-    noiseFilter.type = 'bandpass'; noiseFilter.frequency.value = 1450; noiseFilter.Q.value = .28;
-    const noiseGain = ctx.createGain(); noiseGain.gain.value = .006;
-    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(breath); noise.start();
+    // A dedicated tone bus carries the alternating low/high celestial notes.
+    const toneBus = ctx.createGain();
+    toneBus.gain.value = .7;
+    toneBus.connect(master);
 
-    const lfo = ctx.createOscillator();
-    const lfoGain = ctx.createGain();
-    lfo.type = 'sine'; lfo.frequency.value = .045; lfoGain.gain.value = 120;
-    lfo.connect(lfoGain); lfoGain.connect(bed.frequency); lfo.start();
+    function playCelestialNote(frequency, panValue = 0) {
+      if (!wanted || document.hidden || ctx.state !== 'running') return;
+      const now = ctx.currentTime;
+      const noteGain = ctx.createGain();
+      noteGain.gain.setValueAtTime(.0001, now);
+      noteGain.gain.exponentialRampToValueAtTime(.055, now + .12);
+      noteGain.gain.exponentialRampToValueAtTime(.0001, now + 2.8);
 
-    // Slow amplitude breathing: perceptible, but deliberately below the threshold of a beat.
-    // 0.08 Hz is a 12.5-second cycle. The gain moves roughly from .70 to 1.02.
-    const breathLfo = ctx.createOscillator();
-    const breathDepth = ctx.createGain();
-    breathLfo.type = 'sine';
-    breathLfo.frequency.value = .08;
-    breathDepth.gain.value = .16;
-    breathLfo.connect(breathDepth);
-    breathDepth.connect(breath.gain);
-    breathLfo.start();
+      const fundamental = ctx.createOscillator();
+      fundamental.type = 'sine';
+      fundamental.frequency.value = frequency;
 
-    audio = { ctx, master, breath };
+      const shimmer = ctx.createOscillator();
+      shimmer.type = 'sine';
+      shimmer.frequency.value = frequency * 2.01;
+      const shimmerGain = ctx.createGain();
+      shimmerGain.gain.value = .12;
+
+      const pan = typeof ctx.createStereoPanner === 'function' ? ctx.createStereoPanner() : null;
+      if (pan) {
+        pan.pan.value = panValue;
+        fundamental.connect(noteGain);
+        shimmer.connect(shimmerGain); shimmerGain.connect(noteGain);
+        noteGain.connect(pan); pan.connect(toneBus);
+      } else {
+        fundamental.connect(noteGain);
+        shimmer.connect(shimmerGain); shimmerGain.connect(noteGain);
+        noteGain.connect(toneBus);
+      }
+
+      fundamental.start(now); shimmer.start(now);
+      fundamental.stop(now + 3.05); shimmer.stop(now + 3.05);
+    }
+
+    // Alternates between a lower G3-like tone and a higher D4-like tone.
+    // The spacing is intentionally slow enough to feel atmospheric rather than rhythmic.
+    const notes = [196.0, 293.66];
+    let noteIndex = 0;
+    const playNext = () => {
+      if (wanted && !document.hidden && ctx.state === 'running') {
+        playCelestialNote(notes[noteIndex], noteIndex === 0 ? -.12 : .12);
+        noteIndex = 1 - noteIndex;
+      }
+    };
+    playNext();
+    const noteTimer = setInterval(playNext, 3600);
+
+    audio = { ctx, master, toneBus, noteTimer };
     return audio;
   }
 
@@ -154,7 +167,7 @@ function waitForAtlas() {
     if (!audio) return;
     const now = audio.ctx.currentTime;
     audio.master.gain.cancelScheduledValues(now);
-    audio.master.gain.setTargetAtTime(on ? .34 : 0, now, fast ? .12 : on ? .8 : .22);
+    audio.master.gain.setTargetAtTime(on ? .31 : 0, now, fast ? .12 : on ? .7 : .2);
   }
 
   async function startFromGesture() {

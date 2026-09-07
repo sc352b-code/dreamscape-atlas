@@ -88,11 +88,15 @@ function waitForAtlas() {
     master.gain.value = 0;
     master.connect(compressor);
 
+    const breath = ctx.createGain();
+    breath.gain.value = .88;
+    breath.connect(master);
+
     const bed = ctx.createBiquadFilter();
     bed.type = 'lowpass';
     bed.frequency.value = 1050;
     bed.Q.value = .55;
-    bed.connect(master);
+    bed.connect(breath);
 
     const voices = [55, 82.5, 110, 165, 220, 432];
     const levels = [.025,.019,.014,.010,.007,.0045];
@@ -118,14 +122,23 @@ function waitForAtlas() {
     const noiseFilter = ctx.createBiquadFilter();
     noiseFilter.type = 'bandpass'; noiseFilter.frequency.value = 1450; noiseFilter.Q.value = .28;
     const noiseGain = ctx.createGain(); noiseGain.gain.value = .006;
-    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(master); noise.start();
+    noise.connect(noiseFilter); noiseFilter.connect(noiseGain); noiseGain.connect(breath); noise.start();
 
     const lfo = ctx.createOscillator();
     const lfoGain = ctx.createGain();
     lfo.type = 'sine'; lfo.frequency.value = .045; lfoGain.gain.value = 120;
     lfo.connect(lfoGain); lfoGain.connect(bed.frequency); lfo.start();
 
-    audio = { ctx, master };
+    const breathLfo = ctx.createOscillator();
+    const breathDepth = ctx.createGain();
+    breathLfo.type = 'sine';
+    breathLfo.frequency.value = .05;
+    breathDepth.gain.value = .12;
+    breathLfo.connect(breathDepth);
+    breathDepth.connect(breath.gain);
+    breathLfo.start();
+
+    audio = { ctx, master, breath };
     return audio;
   }
 

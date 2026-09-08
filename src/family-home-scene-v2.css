@@ -1,0 +1,39 @@
+/* Thread 2 correction: Family Home is a dedicated painterly place scene, not a map crop. */
+.family-home-approach{background:#050812}
+.family-home-approach::before{
+  inset:0;
+  background-image:url('/assets/family-home-pilot/family-home-octopus-tile.webp');
+  background-repeat:no-repeat;
+  background-size:cover;
+  background-position:50% 18%;
+  filter:saturate(1.03) contrast(1.04) brightness(.96);
+  transform:scale(1.015);
+  transition:transform 1.35s cubic-bezier(.18,.72,.18,1),background-position 1.35s cubic-bezier(.18,.72,.18,1),filter .8s ease;
+}
+.atlas[data-family-home-focus="close"] .family-home-approach::before{
+  background-size:155% auto;
+  background-position:57% 84%;
+  transform:scale(1.03);
+  filter:saturate(1.04) contrast(1.05) brightness(.98);
+}
+.family-home-octopus-art{display:none!important}
+.family-home-approach::after{
+  background:linear-gradient(180deg,rgba(3,5,14,.08),transparent 42%,rgba(2,4,11,.16) 72%,rgba(2,3,9,.32));
+}
+.family-home-scene-hotspot--octopus{left:55.5%;top:82%;width:clamp(82px,9vw,126px);height:clamp(68px,7vw,102px)}
+.atlas[data-family-home-focus="place"] .family-home-scene-hotspot--octopus{pointer-events:none!important}
+.atlas[data-family-home-focus="close"] .family-home-approach[data-octopus-ready="true"] .family-home-scene-hotspot--octopus{pointer-events:auto!important;cursor:pointer}
+.family-home-approach-title{background:rgba(5,7,18,.28);border-color:rgba(241,208,163,.15)}
+@media(max-width:800px){
+  .family-home-approach::before{background-size:auto 116%;background-position:48% 14%}
+  .atlas[data-family-home-focus="close"] .family-home-approach::before{background-size:auto 170%;background-position:59% 84%}
+  .family-home-scene-hotspot--octopus{left:57%;top:81%}
+}
+@media(prefers-reduced-motion:reduce){.family-home-approach::before{transition:none!important}}
+
+/* Planet presentation correction: keep the whole sphere in frame and emphasise texture detail. */
+.atlas[data-state="orbit"] .globe-stage canvas{transform:scale(.93)!important;filter:saturate(1.12) contrast(1.10) brightness(1.035)}
+.atlas[data-state="focus"] .globe-stage canvas{transform:scale(.98)!important;filter:saturate(1.12) contrast(1.11) brightness(1.04)}
+.territory-label{background:rgba(5,6,17,.28);border-color:rgba(239,198,128,.15);box-shadow:none}
+.territory-label.primary{background:rgba(13,9,25,.45)}
+@media(max-width:800px){.atlas[data-state="orbit"] .globe-stage canvas{transform:scale(.9)!important}}

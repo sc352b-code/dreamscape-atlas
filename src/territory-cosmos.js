@@ -1,15 +1,22 @@
 import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js";
 
 const WORLDS=[
-  {id:'littoral',name:'Littoral Coast',cue:'Tides · islands · shorelines',position:[-2.7,1.25,-.45],radius:.49,spin:.105,tilt:-.13,tint:0xbbeeff,offset:.13},
-  {id:'roadlands',name:'The Roadlands',cue:'Journeys · crossings · movement',position:[2.55,.82,-.85],radius:.52,spin:.076,tilt:.16,tint:0xffd19b,offset:.42},
-  {id:'hearthlands',name:'The Hearthlands',cue:'Home · gardens · belonging',live:true,position:[-.18,-.02,.22],radius:.78,spin:.088,tilt:-.08,tint:0xffebc2,offset:.02,hearth:true},
-  {id:'institutional',name:'Institutional Quarter',cue:'Structure · authority · public space',position:[-1.72,-1.58,-1.0],radius:.44,spin:.061,tilt:.11,tint:0xdbe1ff,offset:.63},
-  {id:'river',name:'River Country',cue:'Waterways · bridges · flow',position:[2.18,-1.46,-.58],radius:.55,spin:.112,tilt:-.18,tint:0xbcebdc,offset:.81},
+  {id:'littoral',name:'Littoral Coast',cue:'Tides · islands · shorelines',position:[-2.7,1.25,-.45],radius:.49,spin:.105,tilt:-.13,tint:0xbbeeff,offset:.13,dreams:null},
+  {id:'roadlands',name:'The Roadlands',cue:'Journeys · crossings · movement',position:[2.55,.82,-.85],radius:.52,spin:.076,tilt:.16,tint:0xffd19b,offset:.42,dreams:null},
+  {id:'hearthlands',name:'The Hearthlands',cue:'Home · gardens · belonging',live:true,position:[-.18,-.02,.22],radius:.78,spin:.088,tilt:-.08,tint:0xffebc2,offset:.02,hearth:true,dreams:213},
+  {id:'institutional',name:'Institutional Quarter',cue:'Structure · authority · public space',position:[-1.72,-1.58,-1.0],radius:.44,spin:.061,tilt:.11,tint:0xdbe1ff,offset:.63,dreams:null},
+  {id:'river',name:'River Country',cue:'Waterways · bridges · flow',position:[2.18,-1.46,-.58],radius:.55,spin:.112,tilt:-.18,tint:0xbcebdc,offset:.81,dreams:null},
 ];
 
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
 const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
+
+// When authoritative per-territory dream counts are mounted, radius becomes corpus-driven.
+// Unknown counts retain the current design radius rather than inventing evidence.
+function radiusFor(world){
+  if(!Number.isFinite(world.dreams))return world.radius;
+  return clamp(.38+Math.sqrt(world.dreams)/34,.42,.82);
+}
 
 function mountTerritoryCosmos(){
   const root=document.querySelector('.atlas');
@@ -33,8 +40,15 @@ function mountTerritoryCosmos(){
         <span class="territory-world__cue">${world.cue}</span>
       </button>`).join('')}
     <div class="territory-cosmos__status" aria-live="polite"></div>
-    <div class="territory-cosmos__hint">Select a world · Hearthlands is mapped first</div>`;
+    <div class="territory-cosmos__hint">Select a world · Hearthlands is mapped first</div>
+    <div class="territory-cosmos__blackout" aria-hidden="true"></div>`;
   root.appendChild(section);
+
+  const returnButton=document.querySelector('.return-world');
+  if(returnButton){
+    returnButton.textContent='← Back to Dream Atlas';
+    returnButton.setAttribute('aria-label','Return to the territory worlds');
+  }
 
   const canvas=section.querySelector('.territory-cosmos__gl');
   const renderer=new THREE.WebGLRenderer({canvas,alpha:true,antialias:true,powerPreference:'high-performance'});
@@ -53,7 +67,7 @@ function mountTerritoryCosmos(){
 
   const loader=new THREE.TextureLoader();
   const sourceWorld='/assets/world-equirectangular-hd.webp';
-  const sourceHearth='/assets/hearthlands-flatmap.png';
+  const sourceHearth='/assets/hearthlands-globe-4k.webp';
   const planetGeometry=new THREE.SphereGeometry(1,128,96);
   const atmosphereGeometry=new THREE.SphereGeometry(1.045,96,72);
   const rendered=new Map();
@@ -64,6 +78,7 @@ function mountTerritoryCosmos(){
   let lastFrame=performance.now();
   let didFocus=false;
   let didDescent=false;
+  let didBlackout=false;
   let didReveal=false;
 
   function configureTexture(texture,world){
@@ -81,35 +96,36 @@ function mountTerritoryCosmos(){
   for(const world of WORLDS){
     const texture=configureTexture(loader.load(world.hearth?sourceHearth:sourceWorld),world);
     const tint=new THREE.Color(world.tint);
+    const radius=radiusFor(world);
     const material=new THREE.MeshStandardMaterial({
       map:texture,
-      color:tint.clone().lerp(new THREE.Color(0xffffff),.63),
+      color:tint.clone().lerp(new THREE.Color(0xffffff),world.hearth?.82:.63),
       emissive:tint,
       emissiveMap:texture,
-      emissiveIntensity:world.hearth?.12:.075,
-      roughness:.92,
+      emissiveIntensity:world.hearth?.09:.075,
+      roughness:.94,
       metalness:0,
       transparent:true,
       opacity:1,
     });
     const group=new THREE.Group();
     const mesh=new THREE.Mesh(planetGeometry,material);
-    mesh.scale.setScalar(world.radius);
+    mesh.scale.setScalar(radius);
     mesh.rotation.x=world.tilt;
     group.add(mesh);
 
     const atmosphereMaterial=new THREE.MeshBasicMaterial({
-      color:tint,transparent:true,opacity:world.hearth?.12:.075,
+      color:tint,transparent:true,opacity:world.hearth?.085:.075,
       side:THREE.BackSide,blending:THREE.AdditiveBlending,depthWrite:false,
     });
     const atmosphere=new THREE.Mesh(atmosphereGeometry,atmosphereMaterial);
-    atmosphere.scale.setScalar(world.radius);
+    atmosphere.scale.setScalar(radius);
     group.add(atmosphere);
 
     const base=new THREE.Vector3(...world.position);
     group.position.copy(base);
     scene.add(group);
-    rendered.set(world.id,{world,group,mesh,material,atmosphereMaterial,base,phase:Math.random()*Math.PI*2});
+    rendered.set(world.id,{world,radius,group,mesh,material,atmosphereMaterial,base,phase:Math.random()*Math.PI*2});
   }
 
   const status=section.querySelector('.territory-cosmos__status');
@@ -123,7 +139,7 @@ function mountTerritoryCosmos(){
 
   function projectWorld(item){
     const center=item.group.position.clone().project(camera);
-    const edge=item.group.position.clone().add(new THREE.Vector3(item.world.radius,0,0)).project(camera);
+    const edge=item.group.position.clone().add(new THREE.Vector3(item.radius,0,0)).project(camera);
     const x=(center.x*.5+.5)*innerWidth;
     const y=(-center.y*.5+.5)*innerHeight;
     const radiusPx=Math.max(42,Math.abs(edge.x-center.x)*.5*innerWidth);
@@ -141,7 +157,8 @@ function mountTerritoryCosmos(){
     if(entering)return;
     entering=true;
     enterStarted=performance.now();
-    didFocus=false;didDescent=false;didReveal=false;
+    didFocus=false;didDescent=false;didBlackout=false;didReveal=false;
+    window.__dreamscapeFastTerritoryEntry=true;
     section.classList.add('is-entering');
     button.classList.add('is-selected');
   }
@@ -165,15 +182,18 @@ function mountTerritoryCosmos(){
   });
 
   function resetCosmos(){
-    entering=false;enterStarted=0;didFocus=false;didDescent=false;didReveal=false;hovered=null;
-    section.classList.remove('is-entering','map-reveal');
+    entering=false;enterStarted=0;didFocus=false;didDescent=false;didBlackout=false;didReveal=false;hovered=null;
+    window.__dreamscapeFastTerritoryEntry=false;
+    section.classList.remove('is-entering','is-blackout','map-reveal');
     section.querySelectorAll('.territory-world').forEach(item=>item.classList.remove('is-selected','is-preview-selected'));
     camera.position.copy(initialCamera);camera.lookAt(0,0,0);
     for(const item of rendered.values()){
       item.group.position.copy(item.base);item.group.scale.setScalar(1);
-      item.material.opacity=1;item.atmosphereMaterial.opacity=item.world.hearth?.12:.075;
+      item.material.opacity=1;item.atmosphereMaterial.opacity=item.world.hearth?.085:.075;
     }
   }
+
+  returnButton?.addEventListener('click',()=>setTimeout(resetCosmos,0));
 
   const observer=new MutationObserver(()=>{
     if(root.dataset.state==='orbit'&&entering)resetCosmos();
@@ -213,35 +233,43 @@ function mountTerritoryCosmos(){
         const targetScale=hover?1.055:1;
         group.scale.x+=(targetScale-group.scale.x)*Math.min(1,dt*5);
         group.scale.y=group.scale.z=group.scale.x;
-        material.emissiveIntensity+=( (hover?(world.hearth?.18:.14):(world.hearth?.12:.075))-material.emissiveIntensity)*Math.min(1,dt*4);
-        atmosphereMaterial.opacity+=( (hover?(world.hearth?.18:.13):(world.hearth?.12:.075))-atmosphereMaterial.opacity)*Math.min(1,dt*4);
+        material.emissiveIntensity+=( (hover?(world.hearth?.14:.14):(world.hearth?.09:.075))-material.emissiveIntensity)*Math.min(1,dt*4);
+        atmosphereMaterial.opacity+=( (hover?(world.hearth?.13:.13):(world.hearth?.085:.075))-atmosphereMaterial.opacity)*Math.min(1,dt*4);
       }
     }else{
       const hearth=rendered.get('hearthlands');
       const elapsed=now-enterStarted;
-      const t=clamp(elapsed/3400,0,1);
+      const t=clamp(elapsed/2050,0,1);
       const p=ease(t);
       const target=hearth.group.position.clone();
-      const desired=new THREE.Vector3(target.x*.18,target.y*.18,THREE.MathUtils.lerp(7.55,2.22,p));
-      camera.position.lerp(desired,Math.min(1,dt*2.7));
+      const desired=new THREE.Vector3(target.x*.11,target.y*.11,THREE.MathUtils.lerp(7.55,1.72,p));
+      camera.position.lerp(desired,Math.min(1,dt*4.2));
       camera.lookAt(target);
-      hearth.mesh.rotation.y+=dt*.115;
-      hearth.group.scale.setScalar(1+1.38*p);
+      hearth.mesh.rotation.y+=dt*.14;
+      hearth.group.scale.setScalar(1+1.78*p);
+      if(p>.62){
+        const fade=clamp((p-.62)/.38,0,1);
+        hearth.material.opacity=1-fade*.72;
+        hearth.atmosphereMaterial.opacity=.085*(1-fade);
+      }
       for(const [id,item] of rendered){
         if(id==='hearthlands')continue;
         item.mesh.rotation.y+=dt*item.world.spin*.55;
         item.material.opacity=1-p;
-        item.atmosphereMaterial.opacity=(item.world.hearth?.12:.075)*(1-p);
+        item.atmosphereMaterial.opacity=.075*(1-p);
       }
-      if(elapsed>720&&!didFocus){
+      if(elapsed>260&&!didFocus){
         didFocus=true;
         document.querySelector('.territory-label.primary')?.click();
       }
-      if(elapsed>1450&&!didDescent){
+      if(elapsed>620&&!didDescent){
         didDescent=true;
         document.querySelector('.focus-panel .enter')?.click();
       }
-      if(elapsed>3250&&!didReveal){
+      if(elapsed>1050&&!didBlackout){
+        didBlackout=true;section.classList.add('is-blackout');
+      }
+      if(elapsed>2350&&!didReveal){
         didReveal=true;section.classList.add('map-reveal');
       }
     }
@@ -255,7 +283,7 @@ function mountTerritoryCosmos(){
   window.dreamscapeTerritoryWorlds={
     enterHearthlands:()=>enterHearthlands(section.querySelector('[data-world="hearthlands"]')),
     reset:resetCosmos,
-    worlds:WORLDS.map(({id,name,cue,live})=>({id,name,cue,live:!!live}))
+    worlds:WORLDS.map(({id,name,cue,live,dreams})=>({id,name,cue,live:!!live,dreams}))
   };
   return true;
 }

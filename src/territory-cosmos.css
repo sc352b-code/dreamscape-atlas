@@ -13,7 +13,7 @@
 .territory-cosmos{
   position:fixed;inset:0;z-index:36;overflow:hidden;
   font-family:Georgia,'Times New Roman',serif;
-  opacity:1;transition:opacity .48s ease,visibility .48s ease;
+  opacity:1;transition:opacity .42s ease,visibility .42s ease;
 }
 .atlas[data-state="hearth"] .territory-cosmos{opacity:0;visibility:hidden;pointer-events:none}
 .territory-cosmos::before{
@@ -24,14 +24,14 @@
     radial-gradient(circle at 83% 69%,rgba(37,117,151,.045),transparent 21%);
 }
 .territory-cosmos__gl{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
-.territory-cosmos__tunnel-vignette{position:absolute;inset:-18%;z-index:3;pointer-events:none;opacity:0;transform:scale(1.18);background:radial-gradient(circle at 50% 50%,transparent 0 13%,rgba(119,155,255,.025) 27%,rgba(96,72,181,.12) 54%,rgba(7,11,35,.52) 78%,rgba(1,2,9,.84) 100%);mix-blend-mode:screen;transition:opacity .34s ease,transform 1.8s cubic-bezier(.16,.8,.22,1)}
-.territory-cosmos.is-entering .territory-cosmos__tunnel-vignette{opacity:.72;transform:scale(.92);animation:cosmicTunnelPulse 1.35s ease-in-out infinite alternate}
+.territory-cosmos__tunnel-vignette{position:absolute;inset:-18%;z-index:3;pointer-events:none;opacity:0;transform:scale(1.18);background:radial-gradient(circle at 50% 50%,transparent 0 13%,rgba(119,155,255,.025) 27%,rgba(96,72,181,.12) 54%,rgba(7,11,35,.52) 78%,rgba(1,2,9,.84) 100%);mix-blend-mode:screen;transition:opacity .22s ease,transform .9s cubic-bezier(.16,.8,.22,1)}
+.territory-cosmos.is-entering .territory-cosmos__tunnel-vignette{opacity:.72;transform:scale(.9);animation:cosmicTunnelPulse .62s ease-in-out infinite alternate}
 .territory-cosmos.is-blackout .territory-cosmos__tunnel-vignette{opacity:.12}
 .territory-cosmos.map-reveal .territory-cosmos__tunnel-vignette{opacity:0}
-.territory-cosmos__blackout{position:absolute;inset:0;z-index:30;background:#010207;opacity:0;pointer-events:none;transition:opacity .24s ease}
+.territory-cosmos__blackout{position:absolute;inset:0;z-index:30;background:#010207;opacity:0;pointer-events:none;transition:opacity .18s ease}
 .territory-cosmos.is-blackout .territory-cosmos__blackout{opacity:1}
 .territory-cosmos.map-reveal .territory-cosmos__blackout{opacity:0}
-@keyframes cosmicTunnelPulse{from{filter:brightness(.88) saturate(.92)}to{filter:brightness(1.08) saturate(1.08)}}
+@keyframes cosmicTunnelPulse{from{filter:brightness(.9) saturate(.96)}to{filter:brightness(1.12) saturate(1.12)}}
 
 .territory-cosmos__heading{position:absolute;top:7.5%;left:50%;transform:translateX(-50%);text-align:center;z-index:5;pointer-events:none;width:min(720px,72vw);transition:opacity .45s ease,transform .6s ease}
 .territory-cosmos__heading small{display:block;font:500 9px/1.2 system-ui,sans-serif;letter-spacing:.31em;text-transform:uppercase;color:rgba(222,213,230,.55);margin-bottom:9px}
@@ -71,13 +71,22 @@
 .territory-cosmos.is-entering .territory-cosmos__hint{opacity:0}
 .territory-cosmos.map-reveal{opacity:0;pointer-events:none}
 
-/* This is the real way out of a territory map: back to the multi-world cosmos, not the retired single globe. */
+/* Existing flat-map return plus a second fixed escape route that cannot be hidden by the map art. */
 .atlas.territory-worlds-mode .return-world{
   color:#f1ddbf!important;background:rgba(4,7,18,.72)!important;border:1px solid rgba(240,207,160,.24)!important;
   border-radius:999px!important;padding:10px 14px!important;box-shadow:0 8px 26px rgba(0,0,0,.28)!important;
   backdrop-filter:blur(12px);letter-spacing:.04em!important;
 }
 .atlas.territory-worlds-mode .return-world:hover{background:rgba(20,18,34,.82)!important;border-color:rgba(240,207,160,.4)!important}
+.territory-cosmos-return{
+  position:fixed;left:24px;top:82px;z-index:95;display:none;align-items:center;gap:8px;
+  padding:10px 15px;border-radius:999px;border:1px solid rgba(240,207,160,.3);
+  background:rgba(4,7,18,.78);color:#f3dfc2;backdrop-filter:blur(13px);
+  box-shadow:0 10px 32px rgba(0,0,0,.34);font:600 10px/1 system-ui,sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+}
+.atlas[data-state="hearth"] .territory-cosmos-return{display:flex}
+.territory-cosmos-return:hover,.territory-cosmos-return:focus-visible{background:rgba(20,18,34,.88);border-color:rgba(240,207,160,.5);outline:none}
 
 @media(max-width:800px){
   .territory-cosmos__heading{top:6.5%;width:88vw}.territory-cosmos__heading h1{font-size:27px}.territory-cosmos__heading p{font-size:11px}
@@ -85,6 +94,7 @@
   .territory-world__name{font-size:10px;letter-spacing:.065em}.territory-world__cue{font-size:6.5px;letter-spacing:.07em;white-space:normal}
   .territory-cosmos__hint{bottom:2.4%;font-size:7px;padding:7px 10px;letter-spacing:.11em}
   .atlas.territory-worlds-mode .return-world{padding:8px 11px!important;font-size:9px!important}
+  .territory-cosmos-return{left:10px;top:64px;padding:9px 11px;font-size:8px}
 }
 
 @media(prefers-reduced-motion:reduce){

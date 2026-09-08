@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 from pathlib import Path
-from PIL import Image, ImageEnhance, ImageFilter, ImageOps, ImageStat, ImageDraw
+from PIL import Image, ImageEnhance, ImageFilter, ImageStat, ImageDraw
 
 ROOT=Path(__file__).resolve().parents[1]
 SRC=ROOT/'assets'/'hearthlands-flatmap.png'
@@ -12,88 +12,90 @@ src=ImageEnhance.Color(src).enhance(1.045)
 src=ImageEnhance.Contrast(src).enhance(1.04)
 src=src.filter(ImageFilter.UnsharpMask(radius=.65,percent=120,threshold=2))
 
-# Hearthlands globe v3: one coherent planetary surface, never a tiled copy of the map.
-# The canonical flatmap appears once as the visual DNA of the inhabited continent. The
-# remaining sphere is ocean, broad painterly terrain and a few unique, non-repeated edge
-# fragments so rotation reveals a world rather than duplicated houses/gardens.
+# Hearthlands globe v4: one large coherent inhabited world surface.
+# The canonical Hearthlands flatmap is composited exactly once. It is never tiled,
+# mirrored or repeated elsewhere on the planet. Surrounding terrain is painted from
+# broad palette washes rather than copied houses/gardens, so rotation reveals one world.
 stat=ImageStat.Stat(src.resize((64,64),Image.Resampling.BILINEAR))
 avg=tuple(round(v) for v in stat.mean[:3])
 
-# Deep teal/indigo ocean field with large, soft celestial washes. These are deliberately
-# broad enough to read as planetary colour variation rather than texture noise.
-base=Image.new('RGB',(W,H),(13,38,55))
-washes=Image.new('RGBA',(W,H),(0,0,0,0))
-draw=ImageDraw.Draw(washes,'RGBA')
-draw.ellipse((160,-180,2200,1320),fill=(34,91,85,78))
-draw.ellipse((1860,260,4300,2130),fill=(34,58,98,72))
-draw.ellipse((760,900,3350,2400),fill=(71,52,90,42))
-washes=washes.filter(ImageFilter.GaussianBlur(240))
-base=Image.alpha_composite(base.convert('RGBA'),washes).convert('RGB')
+# Deep teal/indigo planetary ocean.
+base=Image.new('RGB',(W,H),(12,34,52))
+ocean=Image.new('RGBA',(W,H),(0,0,0,0))
+od=ImageDraw.Draw(ocean,'RGBA')
+od.ellipse((-300,-260,2200,1420),fill=(30,85,91,66))
+od.ellipse((1800,120,4550,2140),fill=(35,53,98,68))
+od.ellipse((650,1050,3450,2420),fill=(71,48,88,38))
+ocean=ocean.filter(ImageFilter.GaussianBlur(250))
+base=Image.alpha_composite(base.convert('RGBA'),ocean).convert('RGB')
 
-# Build one main Hearthlands continent. The whole source painting is used exactly once,
-# scaled down so houses/gardens become settlement-scale details when seen from orbit.
-continent_w=1680
-continent_h=round(continent_w*src.height/src.width)
-continent=src.resize((continent_w,continent_h),Image.Resampling.LANCZOS)
-continent=ImageEnhance.Color(continent).enhance(1.025)
-continent=continent.filter(ImageFilter.UnsharpMask(radius=.55,percent=105,threshold=2))
-
-mask=Image.new('L',(continent_w,continent_h),0)
-md=ImageDraw.Draw(mask)
-# Irregular coast, intentionally inset from the source rectangle so it never reads as a
-# rectangular photograph pasted onto the sphere.
+# One broad continent underlay gives the sphere a convincing land/sea balance before
+# the authored painting is laid into its inhabited heart. This underlay contains no
+# copied scene imagery: only large painterly palette fields clipped to an irregular coast.
+land_mask=Image.new('L',(W,H),0)
+md=ImageDraw.Draw(land_mask)
 coast=[
-    (96,338),(142,188),(286,88),(514,46),(748,78),(944,42),(1194,112),
-    (1450,182),(1588,320),(1640,508),(1578,696),(1438,804),(1218,858),
-    (1018,824),(812,884),(596,828),(392,802),(224,706),(118,558)
+    (470,930),(540,590),(710,350),(980,205),(1320,250),(1580,155),
+    (1930,245),(2210,185),(2580,300),(2900,270),(3260,510),(3480,830),
+    (3425,1160),(3260,1430),(2960,1610),(2580,1690),(2260,1810),
+    (1870,1730),(1540,1815),(1200,1700),(880,1580),(620,1320)
 ]
 md.polygon(coast,fill=255)
-# Soften only the coastline itself; the actual painted interior remains sharp.
-mask=mask.filter(ImageFilter.GaussianBlur(18))
+land_mask=land_mask.filter(ImageFilter.GaussianBlur(24))
 
-continent_x=1110
-continent_y=555
-base.paste(continent,(continent_x,continent_y),mask)
+land=Image.new('RGBA',(W,H),(88,87,60,0))
+ld=ImageDraw.Draw(land,'RGBA')
+ld.rectangle((0,0,W,H),fill=(75,82,60,255))
+ld.ellipse((520,250,2100,1450),fill=(80,115,68,235))
+ld.ellipse((1500,180,3300,1350),fill=(93,82,72,225))
+ld.ellipse((900,880,2800,1950),fill=(118,76,84,215))
+ld.ellipse((2180,700,3600,1800),fill=(66,103,95,210))
+land=land.filter(ImageFilter.GaussianBlur(180))
+base=Image.composite(land.convert('RGB'),base,land_mask)
 
-# Three small satellite islands use unique source crops exactly once each. None contains
-# the central Family Home, preventing the repeated-house effect while keeping the same
-# authored palette and brush language around the rest of the planet.
-unique_crops=[
-    (0,0,440,300,620,1020,360),
-    (1190,0,1672,330,3020,760,330),
-    (1100,590,1672,941,3260,1330,390),
+# The canonical painting appears once, large enough to read as the inhabited central
+# landscape but still zoomed out enough that individual houses do not become continents.
+continent_w=2350
+continent_h=round(continent_w*src.height/src.width)
+continent=src.resize((continent_w,continent_h),Image.Resampling.LANCZOS)
+continent=ImageEnhance.Color(continent).enhance(1.02)
+continent=continent.filter(ImageFilter.UnsharpMask(radius=.55,percent=108,threshold=2))
+
+scene_mask=Image.new('L',(continent_w,continent_h),0)
+sd=ImageDraw.Draw(scene_mask)
+scene_coast=[
+    (45,660),(90,365),(260,170),(520,85),(790,135),(1035,55),
+    (1330,140),(1590,70),(1900,180),(2160,330),(2305,590),(2280,850),
+    (2150,1080),(1900,1225),(1600,1285),(1350,1260),(1090,1320),
+    (830,1265),(580,1230),(330,1090),(150,900)
 ]
-for left,top,right,bottom,x,y,width in unique_crops:
-    crop=src.crop((left,top,right,bottom))
-    height=round(width*crop.height/crop.width)
-    island=crop.resize((width,height),Image.Resampling.LANCZOS)
-    imask=Image.new('L',(width,height),0)
-    idraw=ImageDraw.Draw(imask)
-    idraw.ellipse((16,10,width-16,height-10),fill=245)
-    imask=imask.filter(ImageFilter.GaussianBlur(15))
-    base.paste(island,(x,y),imask)
+sd.polygon(scene_coast,fill=255)
+scene_mask=scene_mask.filter(ImageFilter.GaussianBlur(28))
+continent_x=850
+continent_y=360
+base.paste(continent,(continent_x,continent_y),scene_mask)
 
-# Planet-scale warm inhabited glow: broad, low-opacity light only over the main landmass.
+# A restrained warm inhabited glow helps the world read at small on-screen sizes.
 glow=Image.new('RGBA',(W,H),(0,0,0,0))
 gd=ImageDraw.Draw(glow,'RGBA')
-gd.ellipse((continent_x+180,continent_y+170,continent_x+continent_w-120,continent_y+continent_h-70),fill=(255,177,105,24))
-glow=glow.filter(ImageFilter.GaussianBlur(110))
+gd.ellipse((920,470,3230,1710),fill=(255,169,104,22))
+glow=glow.filter(ImageFilter.GaussianBlur(125))
 base=Image.alpha_composite(base.convert('RGBA'),glow).convert('RGB')
 
-# Polar dusk and a restrained clarity pass. No global blur and no repeated image tiles.
+# Polar dusk and clarity. No global blur/noise and no repeated scene fragments.
 polar=Image.new('RGBA',(W,H),(0,0,0,0))
 pd=ImageDraw.Draw(polar,'RGBA')
-pd.rectangle((0,0,W,310),fill=(20,22,56,42))
-pd.rectangle((0,H-300,W,H),fill=(18,20,48,46))
+pd.rectangle((0,0,W,260),fill=(20,22,56,38))
+pd.rectangle((0,H-260,W,H),fill=(18,20,48,42))
 polar=polar.filter(ImageFilter.GaussianBlur(90))
 base=Image.alpha_composite(base.convert('RGBA'),polar).convert('RGB')
-base=ImageEnhance.Color(base).enhance(1.045)
+base=ImageEnhance.Color(base).enhance(1.05)
 base=ImageEnhance.Contrast(base).enhance(1.045)
-base=base.filter(ImageFilter.UnsharpMask(radius=.58,percent=110,threshold=2))
+base=base.filter(ImageFilter.UnsharpMask(radius=.58,percent=112,threshold=2))
 
-# Exact equirectangular seam. Because both edges are ocean, this adjustment is visually
-# quiet and does not duplicate any Hearthlands scene content.
-band=48
+# Exact equirectangular seam. Both edges remain ocean, so no Hearthlands scene content
+# is duplicated across the join.
+band=56
 left=base.crop((0,0,band,H))
 right=base.crop((W-band,0,W,H))
 seam=Image.blend(left,right,.5)

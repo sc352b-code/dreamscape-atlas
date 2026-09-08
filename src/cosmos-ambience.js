@@ -43,29 +43,30 @@ function waitForAtlas(){
     // they are used here as an aesthetic tuning system, not as a medical/healing claim.
     const MEDITATION_FREQS=[108,216,432,528,639,741,852,963];
 
-    // Permanent low singing-bowl body: tonal only, no broadband noise.
+    // Permanent low singing-bowl body: tonal only, no broadband noise. Modulation has been
+    // slowed so the same sound breathes more gradually rather than pulsing quickly.
     const bed=ctx.createGain();bed.gain.value=.62;bed.connect(master);
     const bedFreqs=[54,108,216,432];
     bedFreqs.forEach((frequency,index)=>{
       const osc=ctx.createOscillator();const gain=ctx.createGain();
       osc.type='sine';osc.frequency.value=frequency;gain.gain.value=[.024,.014,.007,.0024][index];
       const lfo=ctx.createOscillator();const lfoGain=ctx.createGain();
-      lfo.frequency.value=.009+index*.004;lfoGain.gain.value=[.0048,.0036,.0022,.0009][index];
+      lfo.frequency.value=.006+index*.0025;lfoGain.gain.value=[.0048,.0036,.0022,.0009][index];
       lfo.connect(lfoGain);lfoGain.connect(gain.gain);lfo.start();
       osc.connect(gain);gain.connect(bed);osc.start();
     });
 
-    // Permanent high shimmer using exact members of the same tuning set.
+    // Permanent high shimmer using exact members of the same tuning set, also drifting more slowly.
     const resonance=ctx.createGain();resonance.gain.value=.27;resonance.connect(master);
     [432,528,639].forEach((frequency,index)=>{
       const osc=ctx.createOscillator();const gain=ctx.createGain();const drift=ctx.createOscillator();const driftGain=ctx.createGain();
       osc.type='sine';osc.frequency.value=frequency;gain.gain.value=[.0046,.0025,.0013][index];
-      drift.frequency.value=.006+index*.003;driftGain.gain.value=.45+index*.16;drift.connect(driftGain);driftGain.connect(osc.detune);drift.start();
+      drift.frequency.value=.004+index*.002;driftGain.gain.value=.45+index*.16;drift.connect(driftGain);driftGain.connect(osc.detune);drift.start();
       osc.connect(gain);gain.connect(resonance);osc.start();
     });
 
     const bowlBus=ctx.createGain();bowlBus.gain.value=.86;bowlBus.connect(master);
-    const delay=ctx.createDelay(2.5);delay.delayTime.value=.79;const feedback=ctx.createGain();feedback.gain.value=.25;const wet=ctx.createGain();wet.gain.value=.28;bowlBus.connect(delay);delay.connect(feedback);feedback.connect(delay);delay.connect(wet);wet.connect(master);
+    const delay=ctx.createDelay(2.5);delay.delayTime.value=.92;const feedback=ctx.createGain();feedback.gain.value=.27;const wet=ctx.createGain();wet.gain.value=.28;bowlBus.connect(delay);delay.connect(feedback);feedback.connect(delay);delay.connect(wet);wet.connect(master);
 
     function tone(frequency,gainValue,attack,decay,destination=bowlBus,delayStart=0){
       const now=ctx.currentTime+delayStart;const osc=ctx.createOscillator();const gain=ctx.createGain();
@@ -76,28 +77,28 @@ function waitForAtlas(){
 
     function bowlBloom(strength=.8){
       if(!wanted||document.hidden||ctx.state!=='running')return;
-      [[108,.043,17],[216,.018,14.8],[432,.0095,12.8],[528,.0048,10.4]].forEach(([frequency,gainValue,decay],index)=>tone(frequency,gainValue*strength,.48+index*.07,decay));
-      tone(741,.0026*strength,.62,8.8,bowlBus,.92);
+      [[108,.043,19.5],[216,.018,17.2],[432,.0095,15.2],[528,.0048,12.8]].forEach(([frequency,gainValue,decay],index)=>tone(frequency,gainValue*strength,.62+index*.08,decay));
+      tone(741,.0026*strength,.78,10.6,bowlBus,1.08);
     }
 
     function starTwinkle(frequency=null,strength=.72){
       if(!wanted||document.hidden||ctx.state!=='running')return;
       const pool=[528,639,741,852,963];
       const chosen=frequency||pool[Math.floor(Math.random()*pool.length)];
-      tone(chosen,.0035*strength,.09,4.1);
-      tone(chosen*2,.0011*strength,.17,2.7,bowlBus,.12);
+      tone(chosen,.0035*strength,.13,4.8);
+      tone(chosen*2,.0011*strength,.22,3.2,bowlBus,.16);
     }
 
     let bloomTimer=null;let twinkleTimer=null;
-    function scheduleBloom(first=false){clearTimeout(bloomTimer);bloomTimer=setTimeout(()=>{bowlBloom(.76+Math.random()*.2);scheduleBloom(false)},first?450:5600+Math.random()*2600)}
-    function scheduleTwinkle(first=false){clearTimeout(twinkleTimer);twinkleTimer=setTimeout(()=>{starTwinkle(null,.64+Math.random()*.22);scheduleTwinkle(false)},first?900:2200+Math.random()*2600)}
+    function scheduleBloom(first=false){clearTimeout(bloomTimer);bloomTimer=setTimeout(()=>{bowlBloom(.76+Math.random()*.2);scheduleBloom(false)},first?650:7600+Math.random()*3300)}
+    function scheduleTwinkle(first=false){clearTimeout(twinkleTimer);twinkleTimer=setTimeout(()=>{starTwinkle(null,.64+Math.random()*.22);scheduleTwinkle(false)},first?1300:3300+Math.random()*3200)}
     scheduleBloom(true);scheduleTwinkle(true);
 
     function tunnelBloom(){
       bowlBloom(.98);
       starTwinkle(852,.92);
-      setTimeout(()=>starTwinkle(963,.76),420);
-      setTimeout(()=>starTwinkle(741,.64),880);
+      setTimeout(()=>starTwinkle(963,.76),520);
+      setTimeout(()=>starTwinkle(741,.64),1100);
     }
 
     audio={ctx,master,scheduleBloom,scheduleTwinkle,bowlBloom,starTwinkle,tunnelBloom,MEDITATION_FREQS};return audio;

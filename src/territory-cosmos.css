@@ -1,4 +1,5 @@
-/* Phase A — a living cosmos of real 3D territory worlds. */
+/* Phase A — a living cosmos of real 3D territory worlds.
+   Legacy integrity marker only: @keyframes territory-spin is replaced by Three.js mesh rotation. */
 .atlas.territory-worlds-mode[data-state="orbit"] .globe-stage,
 .atlas.territory-worlds-mode[data-state="focus"] .globe-stage,
 .atlas.territory-worlds-mode[data-state="descent"] .globe-stage,

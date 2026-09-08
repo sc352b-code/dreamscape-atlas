@@ -7,9 +7,11 @@ on:
     branches: [main]
     paths:
       - 'src/family-home-*'
+      - 'src/territory-cosmos.*'
       - 'assets/family-home-pilot/**'
       - 'index.html'
       - 'tests/family-home-integrity.mjs'
+      - 'tests/territory-cosmos-integrity.mjs'
       - '.github/workflows/family-home-integrity.yml'
 
 jobs:
@@ -23,3 +25,5 @@ jobs:
           node-version: '20'
       - name: Run Family Home pilot integrity suite
         run: node tests/family-home-integrity.mjs
+      - name: Run territory cosmos integrity suite
+        run: node tests/territory-cosmos-integrity.mjs

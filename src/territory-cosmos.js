@@ -45,6 +45,15 @@ function mountTerritoryCosmos(){
     <div class="territory-cosmos__blackout" aria-hidden="true"></div>`;
   root.appendChild(section);
 
+  // A dedicated fixed return control makes the route back to the territory cosmos explicit
+  // and independent of the older flat-map header button.
+  const cosmosReturn=document.createElement('button');
+  cosmosReturn.type='button';
+  cosmosReturn.className='territory-cosmos-return';
+  cosmosReturn.textContent='← Back to Worlds';
+  cosmosReturn.setAttribute('aria-label','Return to the territory worlds');
+  root.appendChild(cosmosReturn);
+
   const returnButton=document.querySelector('.return-world');
   if(returnButton){
     returnButton.textContent='← Back to Dream Atlas';
@@ -82,21 +91,21 @@ function mountTerritoryCosmos(){
   let didBlackout=false;
   let didReveal=false;
 
-  // A real 3D star corridor used only during territory entry. It shares the same camera,
-  // so the user appears to fly through the cosmos rather than watch a flat transition overlay.
-  const tunnelCount=280;
+  // Real 3D star corridor. The quicker timings below make it feel like a brief twinkling
+  // journey through the cosmos instead of a long transition/loading sequence.
+  const tunnelCount=340;
   const tunnelStars=Array.from({length:tunnelCount},()=>({
     angle:Math.random()*Math.PI*2,
-    radius:.38+Math.pow(Math.random(),.58)*4.8,
+    radius:.34+Math.pow(Math.random(),.58)*4.9,
     z:-9+Math.random()*15,
-    length:.12+Math.random()*.52,
-    speed:.72+Math.random()*.9,
+    length:.10+Math.random()*.48,
+    speed:.78+Math.random()*1.02,
   }));
   const tunnelPositions=new Float32Array(tunnelCount*2*3);
   const tunnelGeometry=new THREE.BufferGeometry();
   tunnelGeometry.setAttribute('position',new THREE.BufferAttribute(tunnelPositions,3));
   const tunnelMaterial=new THREE.LineBasicMaterial({
-    color:0xd7e8ff,transparent:true,opacity:0,
+    color:0xe4edff,transparent:true,opacity:0,
     blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false,
   });
   const tunnelLines=new THREE.LineSegments(tunnelGeometry,tunnelMaterial);
@@ -104,20 +113,21 @@ function mountTerritoryCosmos(){
   tunnelLines.renderOrder=20;
   scene.add(tunnelLines);
 
-  function updateTunnel(dt,p){
-    const intensity=clamp((p-.10)/.42,0,1)*(1-clamp((p-.82)/.18,0,1));
-    tunnelMaterial.opacity=.08+.64*intensity;
+  function updateTunnel(dt,p,now){
+    const intensity=clamp((p-.05)/.28,0,1)*(1-clamp((p-.84)/.16,0,1));
+    const twinkle=.88+.12*Math.sin(now*.026);
+    tunnelMaterial.opacity=.08+.78*intensity*twinkle;
     for(let i=0;i<tunnelStars.length;i++){
       const star=tunnelStars[i];
-      star.z+=dt*(4.5+19*p)*star.speed;
+      star.z+=dt*(8+30*p)*star.speed;
       if(star.z>7.1){
-        star.z=-9-Math.random()*3;
+        star.z=-10-Math.random()*3;
         star.angle=Math.random()*Math.PI*2;
-        star.radius=.38+Math.pow(Math.random(),.58)*4.8;
+        star.radius=.34+Math.pow(Math.random(),.58)*4.9;
       }
       const x=Math.cos(star.angle)*star.radius;
       const y=Math.sin(star.angle)*star.radius*.64;
-      const stretch=star.length*(1+5.2*p);
+      const stretch=star.length*(1+7.4*p);
       const j=i*6;
       tunnelPositions[j]=x;tunnelPositions[j+1]=y;tunnelPositions[j+2]=star.z-stretch;
       tunnelPositions[j+3]=x;tunnelPositions[j+4]=y;tunnelPositions[j+5]=star.z;
@@ -239,7 +249,17 @@ function mountTerritoryCosmos(){
     }
   }
 
+  function returnToCosmos(){
+    if(returnButton) returnButton.click();
+    else root.dataset.state='orbit';
+    setTimeout(resetCosmos,0);
+  }
+
   returnButton?.addEventListener('click',()=>setTimeout(resetCosmos,0));
+  cosmosReturn.addEventListener('click',returnToCosmos);
+  addEventListener('keydown',event=>{
+    if(event.key==='Escape'&&root.dataset.state==='hearth')returnToCosmos();
+  });
 
   const observer=new MutationObserver(()=>{
     if(root.dataset.state==='orbit'&&entering)resetCosmos();
@@ -286,18 +306,18 @@ function mountTerritoryCosmos(){
     }else{
       const hearth=rendered.get('hearthlands');
       const elapsed=now-enterStarted;
-      const t=clamp(elapsed/2150,0,1);
+      const t=clamp(elapsed/1550,0,1);
       const p=ease(t);
       const target=hearth.group.position.clone();
-      const desired=new THREE.Vector3(target.x*.08,target.y*.08,THREE.MathUtils.lerp(7.55,1.48,p));
-      camera.position.lerp(desired,Math.min(1,dt*4.8));
+      const desired=new THREE.Vector3(target.x*.06,target.y*.06,THREE.MathUtils.lerp(7.55,1.34,p));
+      camera.position.lerp(desired,Math.min(1,dt*6.2));
       camera.lookAt(target);
-      updateTunnel(dt,p);
-      hearth.mesh.rotation.y+=dt*.16;
-      hearth.group.scale.setScalar(1+1.9*p);
-      if(p>.68){
-        const fade=clamp((p-.68)/.32,0,1);
-        hearth.material.opacity=1-fade*.82;
+      updateTunnel(dt,p,now);
+      hearth.mesh.rotation.y+=dt*.18;
+      hearth.group.scale.setScalar(1+2.05*p);
+      if(p>.70){
+        const fade=clamp((p-.70)/.30,0,1);
+        hearth.material.opacity=1-fade*.86;
         hearth.atmosphereMaterial.opacity=.085*(1-fade);
       }
       for(const [id,item] of rendered){
@@ -306,18 +326,18 @@ function mountTerritoryCosmos(){
         item.material.opacity=1-p;
         item.atmosphereMaterial.opacity=.075*(1-p);
       }
-      if(elapsed>240&&!didFocus){
+      if(elapsed>140&&!didFocus){
         didFocus=true;
         document.querySelector('.territory-label.primary')?.click();
       }
-      if(elapsed>560&&!didDescent){
+      if(elapsed>280&&!didDescent){
         didDescent=true;
         document.querySelector('.focus-panel .enter')?.click();
       }
-      if(elapsed>1580&&!didBlackout){
+      if(elapsed>1080&&!didBlackout){
         didBlackout=true;section.classList.add('is-blackout');
       }
-      if(elapsed>2280&&!didReveal){
+      if(elapsed>1580&&!didReveal){
         didReveal=true;section.classList.add('map-reveal');
       }
     }
@@ -331,6 +351,7 @@ function mountTerritoryCosmos(){
   window.dreamscapeTerritoryWorlds={
     enterHearthlands:()=>enterHearthlands(section.querySelector('[data-world="hearthlands"]')),
     reset:resetCosmos,
+    back:returnToCosmos,
     worlds:WORLDS.map(({id,name,cue,live,dreams})=>({id,name,cue,live:!!live,dreams}))
   };
   return true;

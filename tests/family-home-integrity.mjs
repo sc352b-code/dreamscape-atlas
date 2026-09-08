@@ -18,6 +18,8 @@ const indexSource=read('index.html');
 const audioSource=read('src/cosmos-ambience.js');
 const polishSource=read('src/atlas-polish.css');
 const preludeSource=read('src/buildpass-prelude.js');
+const territorySource=read('src/territory-cosmos.js');
+const territoryCss=read('src/territory-cosmos.css');
 
 const expectedIds=['house','mum','water','garden','cat','dog','window','bed','light','sea','fish','egg','octopus'];
 assert(data.FAMILY_HOME_SYMBOLS.length===13,`Expected 13 Family Home symbols, got ${data.FAMILY_HOME_SYMBOLS.length}`);
@@ -57,6 +59,13 @@ assert(indexSource.includes('/src/family-home-route-fix.js')&&indexSource.includ
 assert(approachSource.includes('.painted-symbol-hotspot[data-symbol="octopus"]')&&approachSource.includes('readerBridge.click()'),'Octopus scene hotspot is not bridged to the existing v57 symbol reader');
 pass('literal Family Home map sector, stable place entry and Octopus-to-reader bridge are mounted');
 
+assert(indexSource.includes('/src/territory-cosmos.css')&&indexSource.includes('/src/territory-cosmos.js'),'Phase A territory worlds selector is not loaded');
+for(const id of ['hearthlands','littoral','roadlands','institutional','river'])assert(territorySource.includes(`id:'${id}'`),`Territory selector is missing ${id}`);
+assert(territorySource.includes("if(id==='hearthlands')")&&territorySource.includes(".focus-panel .enter"),'Hearthlands world does not bridge into the existing territory descent');
+assert(territoryCss.includes('.territory-world[data-world="hearthlands"]')&&territoryCss.includes('@keyframes territory-spin'),'Territory worlds are not styled as distinct rotating spheres');
+assert(territoryCss.includes('.atlas.territory-worlds-mode[data-state="orbit"] .globe-stage'),'Old single-globe stage is not hidden from the Phase A entry state');
+pass('Phase A presents five rotating territory worlds and bridges Hearthlands into the working flatmap flow');
+
 assert(/hit\.disabled=true/.test(pilotSource),'Pilot must create hotspots disabled');
 assert(/img\.addEventListener\('load'[\s\S]*hit\.disabled=false/.test(pilotSource),'Pilot may enable a hotspot only after its painted asset loads');
 assert(/img\.addEventListener\('error'[\s\S]*hit\.disabled=true/.test(pilotSource),'Pilot must keep/return hotspot disabled when painted asset is absent');
@@ -73,7 +82,7 @@ assert(polishSource.includes('.globe-stage canvas'),'Planet visual-polish layer 
 assert(fs.existsSync(path.join(root,'assets/world-equirectangular-hd.webp')),'Persistent 4K world texture is missing');
 assert(preludeSource.includes("/assets/world-equirectangular-hd.webp")&&preludeSource.includes('/assets/world-equirectangular.png'),'Globe prelude does not prefer the persisted HD texture with canonical fallback');
 assert(sceneV2Css.includes('transform:scale(.93)'),'Orbit globe is not framed to remain fully visible');
-pass('planet presentation uses a persisted 4096x2048 source and full-sphere framing');
+pass('legacy single-planet renderer remains available as a fallback beneath the new selector');
 
 assert(audioSource.includes('bowlBloom')&&audioSource.includes('bedFreqs')&&audioSource.includes('const resonance=ctx.createGain()'),'Cosmic ambience is not using continuous meditation bed plus bowl resonance');
 assert(audioSource.includes('7600+Math.random()*4200'),'Bowl blooms are not frequent enough to overlap into continuous ambience');

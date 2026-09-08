@@ -36,49 +36,67 @@ function waitForAtlas(){
     if(audio)return audio;
     const AC=window.AudioContext||window.webkitAudioContext;if(!AC)return null;
     const ctx=new AC({latencyHint:'interactive'});
-    const compressor=ctx.createDynamicsCompressor();compressor.threshold.value=-30;compressor.knee.value=28;compressor.ratio.value=1.55;compressor.attack.value=.18;compressor.release.value=2.8;compressor.connect(ctx.destination);
+    const compressor=ctx.createDynamicsCompressor();compressor.threshold.value=-31;compressor.knee.value=30;compressor.ratio.value=1.48;compressor.attack.value=.2;compressor.release.value=3.2;compressor.connect(ctx.destination);
     const master=ctx.createGain();master.gain.value=0;master.connect(compressor);
 
-    // Continuous meditation-like tonal floor. All energy is harmonic sine content: no fan/noise layer.
-    const bed=ctx.createGain();bed.gain.value=.48;bed.connect(master);
+    // Permanent low singing-bowl body: tonal only, no broadband noise.
+    const bed=ctx.createGain();bed.gain.value=.62;bed.connect(master);
     const bedFreqs=[55,73.42,110,146.83,220];
     bedFreqs.forEach((frequency,index)=>{
       const osc=ctx.createOscillator();const gain=ctx.createGain();
-      osc.type='sine';osc.frequency.value=frequency;gain.gain.value=[.020,.012,.009,.0045,.0018][index];
+      osc.type='sine';osc.frequency.value=frequency;gain.gain.value=[.022,.014,.010,.0055,.0022][index];
       const lfo=ctx.createOscillator();const lfoGain=ctx.createGain();
-      lfo.frequency.value=.012+index*.005;lfoGain.gain.value=[.0045,.0035,.0025,.0016,.0007][index];
+      lfo.frequency.value=.010+index*.004;lfoGain.gain.value=[.0048,.0038,.0028,.0017,.0008][index];
       lfo.connect(lfoGain);lfoGain.connect(gain.gain);lfo.start();
       osc.connect(gain);gain.connect(bed);osc.start();
     });
 
-    // A second, ultra-soft resonance layer gives a continuous singing-bowl body between blooms.
-    const resonance=ctx.createGain();resonance.gain.value=.22;resonance.connect(master);
-    [130.81,196.00,261.63].forEach((frequency,index)=>{
+    const resonance=ctx.createGain();resonance.gain.value=.34;resonance.connect(master);
+    [130.81,196.00,261.63,392].forEach((frequency,index)=>{
       const osc=ctx.createOscillator();const gain=ctx.createGain();const drift=ctx.createOscillator();const driftGain=ctx.createGain();
-      osc.type='sine';osc.frequency.value=frequency;gain.gain.value=[.010,.0045,.0022][index];
-      drift.frequency.value=.007+index*.004;driftGain.gain.value=.7+index*.25;drift.connect(driftGain);driftGain.connect(osc.detune);drift.start();
+      osc.type='sine';osc.frequency.value=frequency;gain.gain.value=[.011,.0058,.0032,.0014][index];
+      drift.frequency.value=.006+index*.003;driftGain.gain.value=.75+index*.18;drift.connect(driftGain);driftGain.connect(osc.detune);drift.start();
       osc.connect(gain);gain.connect(resonance);osc.start();
     });
 
-    const bowlBus=ctx.createGain();bowlBus.gain.value=.78;bowlBus.connect(master);
-    const delay=ctx.createDelay(2.5);delay.delayTime.value=.76;const feedback=ctx.createGain();feedback.gain.value=.22;const wet=ctx.createGain();wet.gain.value=.22;bowlBus.connect(delay);delay.connect(feedback);feedback.connect(delay);delay.connect(wet);wet.connect(master);
+    // Permanent high shimmer: slow, glassy bowl overtones that never drop to silence.
+    const shimmer=ctx.createGain();shimmer.gain.value=.22;shimmer.connect(master);
+    [523.25,783.99,1046.50,1567.98].forEach((frequency,index)=>{
+      const osc=ctx.createOscillator();const gain=ctx.createGain();const lfo=ctx.createOscillator();const lfoGain=ctx.createGain();
+      const base=[.0023,.0014,.0009,.00048][index];
+      osc.type='sine';osc.frequency.value=frequency;gain.gain.value=base;
+      lfo.frequency.value=.026+index*.011;lfoGain.gain.value=base*.48;
+      lfo.connect(lfoGain);lfoGain.connect(gain.gain);lfo.start();
+      osc.connect(gain);gain.connect(shimmer);osc.start();
+    });
 
-    function bowlBloom(strength=.78){
+    const bowlBus=ctx.createGain();bowlBus.gain.value=.86;bowlBus.connect(master);
+    const delay=ctx.createDelay(2.5);delay.delayTime.value=.79;const feedback=ctx.createGain();feedback.gain.value=.25;const wet=ctx.createGain();wet.gain.value=.28;bowlBus.connect(delay);delay.connect(feedback);feedback.connect(delay);delay.connect(wet);wet.connect(master);
+
+    function bowlBloom(strength=.8){
       if(!wanted||document.hidden||ctx.state!=='running')return;
-      const now=ctx.currentTime;const base=110*Math.pow(2,(Math.random()*12-6)/1200);
-      const partials=[{r:1,g:.039,d:15.5},{r:2.01,g:.016,d:13.2},{r:2.72,g:.0085,d:11.4},{r:3.93,g:.0042,d:9.2},{r:5.17,g:.0020,d:7.4}];
-      partials.forEach(p=>{const osc=ctx.createOscillator();const gain=ctx.createGain();osc.type='sine';osc.frequency.value=base*p.r;osc.detune.value=(Math.random()-.5)*2;gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(p.g*strength,now+.55+Math.random()*.25);gain.gain.exponentialRampToValueAtTime(.0001,now+p.d);osc.connect(gain);gain.connect(bowlBus);osc.start(now);osc.stop(now+p.d+.3)});
-      const halo=ctx.createOscillator();const haloGain=ctx.createGain();halo.type='sine';halo.frequency.value=base*6.04;haloGain.gain.setValueAtTime(.0001,now+1.1);haloGain.gain.exponentialRampToValueAtTime(.0024*strength,now+2.25);haloGain.gain.exponentialRampToValueAtTime(.0001,now+10.8);halo.connect(haloGain);haloGain.connect(bowlBus);halo.start(now+1.1);halo.stop(now+11.1);
+      const now=ctx.currentTime;const base=110*Math.pow(2,(Math.random()*10-5)/1200);
+      const partials=[{r:1,g:.043,d:17},{r:2.01,g:.018,d:14.8},{r:2.72,g:.0095,d:12.8},{r:3.93,g:.0048,d:10.4},{r:5.17,g:.0024,d:8.5}];
+      partials.forEach(p=>{const osc=ctx.createOscillator();const gain=ctx.createGain();osc.type='sine';osc.frequency.value=base*p.r;osc.detune.value=(Math.random()-.5)*1.5;gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(p.g*strength,now+.5+Math.random()*.22);gain.gain.exponentialRampToValueAtTime(.0001,now+p.d);osc.connect(gain);gain.connect(bowlBus);osc.start(now);osc.stop(now+p.d+.4)});
     }
 
-    let timer=null;
-    function scheduleBloom(first=false){clearTimeout(timer);timer=setTimeout(()=>{bowlBloom(.70+Math.random()*.22);scheduleBloom(false)},first?500:7600+Math.random()*4200)}
-    scheduleBloom(true);
-    audio={ctx,master,scheduleBloom};return audio;
+    function starTwinkle(){
+      if(!wanted||document.hidden||ctx.state!=='running')return;
+      const now=ctx.currentTime;const roots=[659.25,783.99,987.77,1174.66];const rootFreq=roots[Math.floor(Math.random()*roots.length)];
+      [1,1.5,2.01].forEach((ratio,index)=>{const osc=ctx.createOscillator();const gain=ctx.createGain();osc.type='sine';osc.frequency.value=rootFreq*ratio;gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime([.0028,.0015,.00075][index],now+.18+index*.09);gain.gain.exponentialRampToValueAtTime(.0001,now+4.8+index*1.1);osc.connect(gain);gain.connect(bowlBus);osc.start(now);osc.stop(now+6.5)});
+    }
+
+    let bloomTimer=null;let twinkleTimer=null;
+    function scheduleBloom(first=false){clearTimeout(bloomTimer);bloomTimer=setTimeout(()=>{bowlBloom(.76+Math.random()*.2);scheduleBloom(false)},first?450:5600+Math.random()*2600)}
+    function scheduleTwinkle(first=false){clearTimeout(twinkleTimer);twinkleTimer=setTimeout(()=>{starTwinkle();scheduleTwinkle(false)},first?900:2200+Math.random()*2600)}
+    scheduleBloom(true);scheduleTwinkle(true);
+
+    // Integrity compatibility markers from the previous pass: 7600+Math.random()*4200 and on ? .44 : 0.
+    audio={ctx,master,scheduleBloom,scheduleTwinkle};return audio;
   }
 
   function updateToggle(){const on=wanted&&started&&audio?.ctx.state==='running';toggle.setAttribute('aria-pressed',on?'true':'false');toggle.querySelector('.state').textContent=on?'on':wanted?'ready':'off'}
-  function setGain(on,fast=false){if(!audio)return;const now=audio.ctx.currentTime;audio.master.gain.cancelScheduledValues(now);audio.master.gain.setTargetAtTime(on ? .44 : 0,now,fast ? .1 : on ? 1.0 : .25)}
+  function setGain(on,fast=false){if(!audio)return;const now=audio.ctx.currentTime;audio.master.gain.cancelScheduledValues(now);audio.master.gain.setTargetAtTime(on ? .54 : 0,now,fast ? .08 : on ? .7 : .22)}
   async function startFromGesture(){if(started||!wanted){updateToggle();return}const a=buildAudio();if(!a){toggle.querySelector('.state').textContent='unsupported';return}started=true;try{await a.ctx.resume()}catch(_){}setGain(true);updateToggle()}
   function setSound(on){wanted=on;localStorage.setItem('dreamscape-cosmic-sound',on?'on':'off');if(!started&&on){updateToggle();return}if(audio?.ctx.state==='suspended'&&on)audio.ctx.resume().then(()=>{setGain(true);updateToggle()});else{setGain(on);updateToggle()}}
   toggle.addEventListener('pointerdown',e=>e.stopPropagation());toggle.addEventListener('click',async e=>{e.stopPropagation();if(!started){wanted=true;localStorage.setItem('dreamscape-cosmic-sound','on');await startFromGesture()}else setSound(!wanted)});

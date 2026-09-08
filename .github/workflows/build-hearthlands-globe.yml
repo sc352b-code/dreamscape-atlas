@@ -1,0 +1,50 @@
+name: Build Hearthlands globe texture
+
+on:
+  push:
+    branches: [family-home-pilot]
+    paths:
+      - 'tools/build_hearthlands_globe_texture.py'
+      - 'assets/hearthlands-flatmap.png'
+      - '.github/workflows/build-hearthlands-globe.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: ${{ !contains(github.event.head_commit.message, '[hearth-globe]') }}
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: family-home-pilot
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check pillow
+      - name: Build seamless 4K Hearthlands texture
+        run: python tools/build_hearthlands_globe_texture.py
+      - name: Verify output
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          p='assets/hearthlands-globe-4k.webp'
+          im=Image.open(p)
+          assert im.size==(4096,2048),im.size
+          print('verified',p,im.size)
+          PY
+      - name: Commit generated texture
+        run: |
+          git config user.name 'dreamscape-build-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add assets/hearthlands-globe-4k.webp
+          if git diff --cached --quiet; then
+            echo 'Hearthlands globe texture already current'
+          else
+            git commit -m 'Build seamless Hearthlands globe texture [hearth-globe]'
+            git push origin HEAD:family-home-pilot
+          fi

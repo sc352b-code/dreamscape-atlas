@@ -43,14 +43,19 @@ pass('territory/place/close semantic zoom exposes the intended records');
 
 assert(manifest.symbols.length===13,'Asset manifest must contain exactly 13 symbols');
 assert(JSON.stringify(manifest.symbols.map(s=>s.id))===JSON.stringify(expectedIds),'Asset manifest IDs do not match Family Home pilot IDs');
-assert(manifest.placeScene?.octopusAsset==='family-home-octopus-tile.webp','Approved Family Home painterly asset is not registered');
-assert(fs.existsSync(path.join(root,'assets/family-home-pilot',manifest.placeScene.octopusAsset)),'Approved Family Home painterly asset is missing');
-assert(sceneV2Css.includes("family-home-octopus-tile.webp"),'Dedicated Family Home scene does not use the approved painterly asset');
-assert(sceneV2Css.includes('data-family-home-focus="close"')||sceneV2Css.includes('[data-family-home-focus="close"]'),'Dedicated Family Home scene has no close semantic framing');
-assert(routeFixSource.includes("root.dataset.familyHomeFocus='place'")&&routeFixSource.includes("[data-place=\"Family Home\"]"),'Family Home marker does not route directly into the dedicated place scene');
+assert(manifest.placeScene?.background==='hearthlands-flatmap.png','Family Home place scene must be anchored to the canonical Hearthlands flatmap');
+assert(manifest.placeScene?.octopusAsset==='family-home-octopus-tile.webp','Approved Family Home Octopus asset is not registered');
+assert(fs.existsSync(path.join(root,'assets/family-home-pilot',manifest.placeScene.octopusAsset)),'Approved Family Home Octopus asset is missing');
+assert(sceneV2Css.includes("background-image:url('/assets/hearthlands-flatmap.png')"),'Family Home place scene is not using the literal Hearthlands painting');
+assert(!sceneV2Css.includes("background-image:url('/assets/family-home-pilot/family-home-octopus-tile.webp')"),'Octopus asset must not be used as the entire place background');
+assert(approachSource.includes('/assets/family-home-pilot/family-home-octopus-tile.webp'),'Family Home close view is not loading the approved Octopus environmental art');
+assert(sceneV2Css.includes('data-family-home-focus="close"')||sceneV2Css.includes('[data-family-home-focus="close"]'),'Family Home scene has no close semantic framing');
+assert(routeFixSource.includes("root.dataset.familyHomeFocus='place'")&&routeFixSource.includes("[data-place=\"Family Home\"]"),'Family Home marker does not route directly into the place scene');
+assert(approachSource.includes("if(!root.dataset.familyHomeFocus)setFocus('place')"),'Family Home marker click is not constrained to the place step');
+assert(!approachSource.includes("root.dataset.familyHomeFocus==='place'?'close':'place'"),'Family Home marker click still double-advances from place to close');
 assert(indexSource.includes('/src/family-home-route-fix.js')&&indexSource.includes('/src/family-home-scene-v2.css'),'Corrected Family Home route/scene files are not loaded');
 assert(approachSource.includes('.painted-symbol-hotspot[data-symbol="octopus"]')&&approachSource.includes('readerBridge.click()'),'Octopus scene hotspot is not bridged to the existing v57 symbol reader');
-pass('dedicated Family Home place scene, direct route and Octopus-to-reader bridge are mounted');
+pass('literal Family Home map sector, stable place entry and Octopus-to-reader bridge are mounted');
 
 assert(/hit\.disabled=true/.test(pilotSource),'Pilot must create hotspots disabled');
 assert(/img\.addEventListener\('load'[\s\S]*hit\.disabled=false/.test(pilotSource),'Pilot may enable a hotspot only after its painted asset loads');
@@ -65,14 +70,16 @@ pass('legacy glyph-overlay system is not loaded by the pilot');
 
 assert(indexSource.includes('/src/atlas-polish.css'),'Planet visual-polish layer is not loaded');
 assert(polishSource.includes('.globe-stage canvas'),'Planet visual-polish layer does not target globe presentation');
-assert(preludeSource.includes('canvas.width=4096')&&preludeSource.includes('canvas.height=2048')&&preludeSource.includes('world-equirectangular.png'),'Authored world texture is not promoted to a 4K runtime texture');
+assert(fs.existsSync(path.join(root,'assets/world-equirectangular-hd.webp')),'Persistent 4K world texture is missing');
+assert(preludeSource.includes("/assets/world-equirectangular-hd.webp")&&preludeSource.includes('/assets/world-equirectangular.png'),'Globe prelude does not prefer the persisted HD texture with canonical fallback');
 assert(sceneV2Css.includes('transform:scale(.93)'),'Orbit globe is not framed to remain fully visible');
-pass('planet presentation uses 4K runtime promotion and full-sphere framing');
+pass('planet presentation uses a persisted 4096x2048 source and full-sphere framing');
 
-assert(audioSource.includes('bowlBloom')&&audioSource.includes('bedFreqs'),'Cosmic ambience is not using continuous meditation bed plus bowl resonance');
-assert(audioSource.includes('15500+Math.random()*9000'),'Bowl blooms are not irregular/spacious');
+assert(audioSource.includes('bowlBloom')&&audioSource.includes('bedFreqs')&&audioSource.includes('const resonance=ctx.createGain()'),'Cosmic ambience is not using continuous meditation bed plus bowl resonance');
+assert(audioSource.includes('7600+Math.random()*4200'),'Bowl blooms are not frequent enough to overlap into continuous ambience');
+assert(audioSource.includes('on ? .44 : 0'),'Meditative ambience master level is not raised to the requested audible level');
 assert(!audioSource.includes('createBufferSource'),'Cosmic ambience must not reintroduce broadband noise');
-pass('cosmic ambience uses a sustained tonal meditation bed with irregular resonant bowl blooms and no broadband noise');
+pass('cosmic ambience is louder, more continuous and remains tonal/noise-free');
 
 const authored=['house','water','mum','cat','dog'];
 for(const id of authored)assert(readings.getV57Reading(id)?.profile,`${id} authored v57 profile is not mounted`);

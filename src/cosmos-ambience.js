@@ -39,7 +39,6 @@ function waitForAtlas(){
     const compressor=ctx.createDynamicsCompressor();compressor.threshold.value=-31;compressor.knee.value=26;compressor.ratio.value=1.7;compressor.attack.value=.15;compressor.release.value=2.2;compressor.connect(ctx.destination);
     const master=ctx.createGain();master.gain.value=0;master.connect(compressor);
 
-    // Continuous tonal meditation bed: no noise, no rhythm, no melody.
     const bed=ctx.createGain();bed.gain.value=.34;bed.connect(master);
     const bedFreqs=[55,82.41,110,164.81];
     bedFreqs.forEach((frequency,index)=>{
@@ -67,7 +66,7 @@ function waitForAtlas(){
   }
 
   function updateToggle(){const on=wanted&&started&&audio?.ctx.state==='running';toggle.setAttribute('aria-pressed',on?'true':'false');toggle.querySelector('.state').textContent=on?'on':wanted?'ready':'off'}
-  function setGain(on,fast=false){if(!audio)return;const now=audio.ctx.currentTime;audio.master.gain.cancelScheduledValues(now);audio.master.gain.setTargetAtTime(on?.30:0,now,fast?.1:on?1.2:.25)}
+  function setGain(on,fast=false){if(!audio)return;const now=audio.ctx.currentTime;audio.master.gain.cancelScheduledValues(now);audio.master.gain.setTargetAtTime(on ? .30 : 0,now,fast ? .1 : on ? 1.2 : .25)}
   async function startFromGesture(){if(started||!wanted){updateToggle();return}const a=buildAudio();if(!a){toggle.querySelector('.state').textContent='unsupported';return}started=true;try{await a.ctx.resume()}catch(_){}setGain(true);updateToggle()}
   function setSound(on){wanted=on;localStorage.setItem('dreamscape-cosmic-sound',on?'on':'off');if(!started&&on){updateToggle();return}if(audio?.ctx.state==='suspended'&&on)audio.ctx.resume().then(()=>{setGain(true);updateToggle()});else{setGain(on);updateToggle()}}
   toggle.addEventListener('pointerdown',e=>e.stopPropagation());toggle.addEventListener('click',async e=>{e.stopPropagation();if(!started){wanted=true;localStorage.setItem('dreamscape-cosmic-sound','on');await startFromGesture()}else setSound(!wanted)});

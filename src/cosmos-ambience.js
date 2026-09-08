@@ -57,7 +57,6 @@ function waitForAtlas(){
       const now=ctx.currentTime;const base=110*Math.pow(2,(Math.random()*14-7)/1200);
       const partials=[{r:1,g:.035,d:12.5},{r:2.01,g:.014,d:10.8},{r:2.72,g:.0075,d:9.4},{r:3.93,g:.0038,d:7.6},{r:5.17,g:.0018,d:6.2}];
       partials.forEach(p=>{const osc=ctx.createOscillator();const gain=ctx.createGain();osc.type='sine';osc.frequency.value=base*p.r;osc.detune.value=(Math.random()-.5)*2;gain.gain.setValueAtTime(.0001,now);gain.gain.exponentialRampToValueAtTime(p.g*strength,now+.38+Math.random()*.22);gain.gain.exponentialRampToValueAtTime(.0001,now+p.d);osc.connect(gain);gain.connect(bowlBus);osc.start(now);osc.stop(now+p.d+.2)});
-      // delayed upper halo — a soft meditation-bell shimmer rather than another note.
       const halo=ctx.createOscillator();const haloGain=ctx.createGain();halo.type='sine';halo.frequency.value=base*6.04;haloGain.gain.setValueAtTime(.0001,now+1.2);haloGain.gain.exponentialRampToValueAtTime(.0018*strength,now+2.1);haloGain.gain.exponentialRampToValueAtTime(.0001,now+8.8);halo.connect(haloGain);haloGain.connect(bowlBus);halo.start(now+1.2);halo.stop(now+9);
     }
 

@@ -85,10 +85,12 @@ assert(sceneV2Css.includes('transform:scale(.93)'),'Orbit globe is not framed to
 pass('legacy single-planet renderer remains available as a fallback beneath the new selector');
 
 assert(audioSource.includes('bowlBloom')&&audioSource.includes('bedFreqs')&&audioSource.includes('const resonance=ctx.createGain()'),'Cosmic ambience is not using continuous meditation bed plus bowl resonance');
-assert(audioSource.includes('7600+Math.random()*4200'),'Bowl blooms are not frequent enough to overlap into continuous ambience');
-assert(audioSource.includes('on ? .44 : 0'),'Meditative ambience master level is not raised to the requested audible level');
+for(const hz of ['432','528','639','741','852','963'])assert(audioSource.includes(hz),`Meditation tuning is missing ${hz} Hz`);
+assert(audioSource.includes('scheduleTwinkle')&&audioSource.includes('2200+Math.random()*2600'),'Celestial twinkles are not frequent/continuous enough');
+assert(audioSource.includes('on ? .52 : 0'),'Meditative ambience master level is not at the requested audible level');
+assert(audioSource.includes("dreamscape:cosmic-tunnel")&&audioSource.includes('tunnelBloom'),'Cosmic tunnel has no dedicated sound bloom');
 assert(!audioSource.includes('createBufferSource'),'Cosmic ambience must not reintroduce broadband noise');
-pass('cosmic ambience is louder, more continuous and remains tonal/noise-free');
+pass('cosmic ambience is continuous, exact-Hz tuned, audible and remains tonal/noise-free');
 
 const authored=['house','water','mum','cat','dog'];
 for(const id of authored)assert(readings.getV57Reading(id)?.profile,`${id} authored v57 profile is not mounted`);

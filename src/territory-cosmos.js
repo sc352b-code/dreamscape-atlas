@@ -11,8 +11,8 @@ const WORLDS=[
 const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
 const ease=t=>t<.5?4*t*t*t:1-Math.pow(-2*t+2,3)/2;
 
-// When authoritative per-territory dream counts are mounted, radius becomes corpus-driven.
-// Unknown counts retain the current design radius rather than inventing evidence.
+// Authoritative dream counts can drive apparent planet size without exaggerating differences.
+// Unknown counts retain the current design radius rather than inventing corpus evidence.
 function radiusFor(world){
   if(!Number.isFinite(world.dreams))return world.radius;
   return clamp(.38+Math.sqrt(world.dreams)/34,.42,.82);
@@ -28,6 +28,7 @@ function mountTerritoryCosmos(){
   section.setAttribute('aria-label','Choose a dream territory');
   section.innerHTML=`
     <canvas class="territory-cosmos__gl" aria-hidden="true"></canvas>
+    <div class="territory-cosmos__tunnel-vignette" aria-hidden="true"></div>
     <div class="territory-cosmos__heading">
       <small>Your living dream atlas</small>
       <h1>Dream Atlas</h1>
@@ -80,6 +81,49 @@ function mountTerritoryCosmos(){
   let didDescent=false;
   let didBlackout=false;
   let didReveal=false;
+
+  // A real 3D star corridor used only during territory entry. It shares the same camera,
+  // so the user appears to fly through the cosmos rather than watch a flat transition overlay.
+  const tunnelCount=280;
+  const tunnelStars=Array.from({length:tunnelCount},()=>({
+    angle:Math.random()*Math.PI*2,
+    radius:.38+Math.pow(Math.random(),.58)*4.8,
+    z:-9+Math.random()*15,
+    length:.12+Math.random()*.52,
+    speed:.72+Math.random()*.9,
+  }));
+  const tunnelPositions=new Float32Array(tunnelCount*2*3);
+  const tunnelGeometry=new THREE.BufferGeometry();
+  tunnelGeometry.setAttribute('position',new THREE.BufferAttribute(tunnelPositions,3));
+  const tunnelMaterial=new THREE.LineBasicMaterial({
+    color:0xd7e8ff,transparent:true,opacity:0,
+    blending:THREE.AdditiveBlending,depthWrite:false,depthTest:false,
+  });
+  const tunnelLines=new THREE.LineSegments(tunnelGeometry,tunnelMaterial);
+  tunnelLines.position.set(-.18,-.02,0);
+  tunnelLines.renderOrder=20;
+  scene.add(tunnelLines);
+
+  function updateTunnel(dt,p){
+    const intensity=clamp((p-.10)/.42,0,1)*(1-clamp((p-.82)/.18,0,1));
+    tunnelMaterial.opacity=.08+.64*intensity;
+    for(let i=0;i<tunnelStars.length;i++){
+      const star=tunnelStars[i];
+      star.z+=dt*(4.5+19*p)*star.speed;
+      if(star.z>7.1){
+        star.z=-9-Math.random()*3;
+        star.angle=Math.random()*Math.PI*2;
+        star.radius=.38+Math.pow(Math.random(),.58)*4.8;
+      }
+      const x=Math.cos(star.angle)*star.radius;
+      const y=Math.sin(star.angle)*star.radius*.64;
+      const stretch=star.length*(1+5.2*p);
+      const j=i*6;
+      tunnelPositions[j]=x;tunnelPositions[j+1]=y;tunnelPositions[j+2]=star.z-stretch;
+      tunnelPositions[j+3]=x;tunnelPositions[j+4]=y;tunnelPositions[j+5]=star.z;
+    }
+    tunnelGeometry.attributes.position.needsUpdate=true;
+  }
 
   function configureTexture(texture,world){
     texture.colorSpace=THREE.SRGBColorSpace;
@@ -159,6 +203,7 @@ function mountTerritoryCosmos(){
     enterStarted=performance.now();
     didFocus=false;didDescent=false;didBlackout=false;didReveal=false;
     window.__dreamscapeFastTerritoryEntry=true;
+    window.dispatchEvent(new CustomEvent('dreamscape:cosmic-tunnel',{detail:{territory:'hearthlands'}}));
     section.classList.add('is-entering');
     button.classList.add('is-selected');
   }
@@ -184,6 +229,7 @@ function mountTerritoryCosmos(){
   function resetCosmos(){
     entering=false;enterStarted=0;didFocus=false;didDescent=false;didBlackout=false;didReveal=false;hovered=null;
     window.__dreamscapeFastTerritoryEntry=false;
+    tunnelMaterial.opacity=0;
     section.classList.remove('is-entering','is-blackout','map-reveal');
     section.querySelectorAll('.territory-world').forEach(item=>item.classList.remove('is-selected','is-preview-selected'));
     camera.position.copy(initialCamera);camera.lookAt(0,0,0);
@@ -217,6 +263,7 @@ function mountTerritoryCosmos(){
     const time=now*.001;
 
     if(!entering){
+      tunnelMaterial.opacity=0;
       camera.position.x+=(pointer.x*.09-camera.position.x)*Math.min(1,dt*1.4);
       camera.position.y+=(-pointer.y*.055-camera.position.y)*Math.min(1,dt*1.4);
       camera.position.z+=(initialCamera.z-camera.position.z)*Math.min(1,dt*1.8);
@@ -239,17 +286,18 @@ function mountTerritoryCosmos(){
     }else{
       const hearth=rendered.get('hearthlands');
       const elapsed=now-enterStarted;
-      const t=clamp(elapsed/2050,0,1);
+      const t=clamp(elapsed/2150,0,1);
       const p=ease(t);
       const target=hearth.group.position.clone();
-      const desired=new THREE.Vector3(target.x*.11,target.y*.11,THREE.MathUtils.lerp(7.55,1.72,p));
-      camera.position.lerp(desired,Math.min(1,dt*4.2));
+      const desired=new THREE.Vector3(target.x*.08,target.y*.08,THREE.MathUtils.lerp(7.55,1.48,p));
+      camera.position.lerp(desired,Math.min(1,dt*4.8));
       camera.lookAt(target);
-      hearth.mesh.rotation.y+=dt*.14;
-      hearth.group.scale.setScalar(1+1.78*p);
-      if(p>.62){
-        const fade=clamp((p-.62)/.38,0,1);
-        hearth.material.opacity=1-fade*.72;
+      updateTunnel(dt,p);
+      hearth.mesh.rotation.y+=dt*.16;
+      hearth.group.scale.setScalar(1+1.9*p);
+      if(p>.68){
+        const fade=clamp((p-.68)/.32,0,1);
+        hearth.material.opacity=1-fade*.82;
         hearth.atmosphereMaterial.opacity=.085*(1-fade);
       }
       for(const [id,item] of rendered){
@@ -258,18 +306,18 @@ function mountTerritoryCosmos(){
         item.material.opacity=1-p;
         item.atmosphereMaterial.opacity=.075*(1-p);
       }
-      if(elapsed>260&&!didFocus){
+      if(elapsed>240&&!didFocus){
         didFocus=true;
         document.querySelector('.territory-label.primary')?.click();
       }
-      if(elapsed>620&&!didDescent){
+      if(elapsed>560&&!didDescent){
         didDescent=true;
         document.querySelector('.focus-panel .enter')?.click();
       }
-      if(elapsed>1050&&!didBlackout){
+      if(elapsed>1580&&!didBlackout){
         didBlackout=true;section.classList.add('is-blackout');
       }
-      if(elapsed>2350&&!didReveal){
+      if(elapsed>2280&&!didReveal){
         didReveal=true;section.classList.add('map-reveal');
       }
     }

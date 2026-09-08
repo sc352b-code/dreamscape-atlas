@@ -1,0 +1,94 @@
+/* Phase A — territory worlds in the cosmos.
+   The painted territory globes are presentation; the corpus IDs remain the navigation model. */
+.atlas.territory-worlds-mode[data-state="orbit"] .globe-stage,
+.atlas.territory-worlds-mode[data-state="focus"] .globe-stage,
+.atlas.territory-worlds-mode[data-state="descent"] .globe-stage,
+.atlas.territory-worlds-mode[data-state="orbit"] .focus-panel,
+.atlas.territory-worlds-mode[data-state="focus"] .focus-panel,
+.atlas.territory-worlds-mode[data-state="descent"] .focus-panel,
+.atlas.territory-worlds-mode[data-state="orbit"] .left-poem,
+.atlas.territory-worlds-mode[data-state="focus"] .left-poem,
+.atlas.territory-worlds-mode[data-state="descent"] .left-poem{opacity:0!important;pointer-events:none!important}
+
+.territory-cosmos{
+  position:fixed;inset:0;z-index:36;overflow:hidden;
+  font-family:Georgia,'Times New Roman',serif;
+  opacity:1;transition:opacity .85s ease,visibility .85s ease;
+}
+.atlas[data-state="hearth"] .territory-cosmos{opacity:0;visibility:hidden;pointer-events:none}
+.territory-cosmos::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(circle at 50% 48%,rgba(83,96,194,.09),transparent 31%),
+    radial-gradient(circle at 16% 29%,rgba(105,63,168,.09),transparent 24%),
+    radial-gradient(circle at 84% 67%,rgba(39,111,158,.07),transparent 26%);
+}
+.territory-cosmos__heading{position:absolute;top:8.2%;left:50%;transform:translateX(-50%);text-align:center;z-index:4;pointer-events:none;width:min(760px,76vw)}
+.territory-cosmos__heading small{display:block;font:500 10px/1.2 system-ui,sans-serif;letter-spacing:.34em;text-transform:uppercase;color:rgba(222,213,230,.64);margin-bottom:10px}
+.territory-cosmos__heading h1{margin:0;font-weight:400;font-size:clamp(30px,3.4vw,58px);letter-spacing:.14em;text-transform:uppercase;color:#f5e5c8;text-shadow:0 0 32px rgba(220,193,255,.18)}
+.territory-cosmos__heading p{margin:10px 0 0;font-size:14px;font-style:italic;color:rgba(221,211,226,.72);letter-spacing:.04em}
+
+.territory-world{
+  --size:clamp(145px,17vw,250px);--orbit:30s;--phase:0%;
+  position:absolute;width:var(--size);height:calc(var(--size) + 55px);padding:0;border:0;background:none;color:#f7e9d4;cursor:pointer;z-index:3;
+  transform:translate(-50%,-50%);transition:transform .9s cubic-bezier(.2,.75,.17,1),opacity .55s ease,filter .55s ease;
+}
+.territory-world:hover,.territory-world:focus-visible{z-index:7;outline:none;transform:translate(-50%,-50%) scale(1.075)}
+.territory-world:focus-visible .territory-world__sphere{box-shadow:0 0 0 2px rgba(255,231,190,.76),0 0 55px rgba(173,156,255,.42)}
+.territory-world[data-world="hearthlands"]{left:50%;top:49%;--size:clamp(205px,24vw,345px);--orbit:38s;z-index:5}
+.territory-world[data-world="littoral"]{left:18%;top:31%;--orbit:34s;--phase:18%}
+.territory-world[data-world="roadlands"]{left:82%;top:31%;--orbit:43s;--phase:48%}
+.territory-world[data-world="institutional"]{left:25%;top:75%;--orbit:48s;--phase:72%}
+.territory-world[data-world="river"]{left:76%;top:75%;--orbit:31s;--phase:33%}
+
+.territory-world__sphere{
+  position:relative;display:block;width:var(--size);height:var(--size);border-radius:50%;overflow:hidden;isolation:isolate;
+  box-shadow:inset -30px -20px 48px rgba(1,6,22,.58),inset 18px 9px 34px rgba(255,245,218,.13),0 0 25px rgba(109,144,255,.18),0 16px 38px rgba(0,0,0,.34);
+  border:1px solid rgba(220,229,255,.24);
+}
+.territory-world__sphere::before{
+  content:"";position:absolute;inset:-4%;border-radius:50%;z-index:3;pointer-events:none;
+  background:radial-gradient(circle at 31% 21%,rgba(255,255,255,.20),transparent 22%),radial-gradient(circle at 72% 76%,transparent 47%,rgba(1,5,20,.68) 78%,rgba(0,2,12,.94) 100%);
+  box-shadow:inset 0 0 20px rgba(196,220,255,.16);
+}
+.territory-world__sphere::after{content:"";position:absolute;inset:0;border-radius:50%;z-index:4;pointer-events:none;box-shadow:inset 0 0 18px rgba(168,215,255,.26)}
+.territory-world__texture{position:absolute;inset:-2%;z-index:1;background-repeat:repeat-x;background-size:auto 105%;background-position:var(--phase) center;animation:territory-spin var(--orbit) linear infinite;filter:saturate(1.08) contrast(1.055) brightness(.96);will-change:background-position}
+@keyframes territory-spin{from{background-position-x:var(--phase)}to{background-position-x:calc(var(--phase) + 200%)}}
+
+/* Each world begins with a genuinely different palette/framing. Dedicated painted territory assets will replace these shells. */
+.territory-world[data-world="hearthlands"] .territory-world__texture{background-image:linear-gradient(100deg,rgba(35,42,17,.04),rgba(255,173,111,.09)),url('/assets/hearthlands-flatmap.png');background-size:auto 112%;filter:saturate(1.14) contrast(1.07) brightness(.93)}
+.territory-world[data-world="littoral"] .territory-world__texture{background-image:linear-gradient(95deg,rgba(0,119,155,.12),rgba(57,206,215,.09)),url('/assets/world-equirectangular-hd.webp');background-size:auto 116%;filter:hue-rotate(24deg) saturate(1.36) contrast(1.08) brightness(1.02)}
+.territory-world[data-world="roadlands"] .territory-world__texture{background-image:linear-gradient(90deg,rgba(154,91,25,.14),rgba(242,188,88,.06)),url('/assets/world-equirectangular-hd.webp');background-size:auto 120%;filter:sepia(.22) saturate(1.22) contrast(1.11) brightness(.93)}
+.territory-world[data-world="institutional"] .territory-world__texture{background-image:linear-gradient(95deg,rgba(69,79,126,.13),rgba(207,212,228,.08)),url('/assets/world-equirectangular-hd.webp');background-size:auto 118%;filter:saturate(.72) hue-rotate(182deg) contrast(1.13) brightness(.95)}
+.territory-world[data-world="river"] .territory-world__texture{background-image:linear-gradient(95deg,rgba(12,115,101,.13),rgba(68,175,155,.06)),url('/assets/world-equirectangular-hd.webp');background-size:auto 124%;filter:hue-rotate(71deg) saturate(1.22) contrast(1.08) brightness(.94)}
+
+.territory-world__name{display:block;margin-top:12px;font-size:clamp(15px,1.3vw,21px);letter-spacing:.11em;text-transform:uppercase;text-shadow:0 2px 12px rgba(0,0,0,.9)}
+.territory-world__cue{display:block;margin-top:4px;font:500 9px/1.25 system-ui,sans-serif;letter-spacing:.16em;text-transform:uppercase;color:rgba(216,209,225,.62);white-space:nowrap}
+.territory-world[data-world="hearthlands"] .territory-world__name{color:#ffe5b8}
+.territory-world[data-world="littoral"] .territory-world__name{color:#bcecf4}
+.territory-world[data-world="roadlands"] .territory-world__name{color:#e8c894}
+.territory-world[data-world="institutional"] .territory-world__name{color:#d8ddf0}
+.territory-world[data-world="river"] .territory-world__name{color:#aee1d8}
+
+.territory-cosmos__hint{position:absolute;left:50%;bottom:4.8%;transform:translateX(-50%);z-index:6;padding:9px 18px;border-radius:999px;border:1px solid rgba(222,199,157,.2);background:rgba(5,8,23,.5);backdrop-filter:blur(12px);font:500 10px/1.2 system-ui,sans-serif;letter-spacing:.18em;text-transform:uppercase;color:rgba(237,219,190,.75);white-space:nowrap}
+.territory-cosmos__status{position:absolute;left:50%;bottom:10.3%;transform:translateX(-50%);z-index:7;opacity:0;transition:opacity .35s ease;font-size:13px;font-style:italic;color:rgba(242,224,199,.8);text-align:center;pointer-events:none}
+.territory-cosmos[data-message="true"] .territory-cosmos__status{opacity:1}
+
+.territory-cosmos.is-entering .territory-world:not(.is-selected){opacity:0;filter:blur(5px);pointer-events:none}
+.territory-cosmos.is-entering .territory-world.is-selected{z-index:20;pointer-events:none;transform:translate(-50%,-50%) scale(5.4)}
+.territory-cosmos.is-entering .territory-world.is-selected .territory-world__name,
+.territory-cosmos.is-entering .territory-world.is-selected .territory-world__cue{opacity:0}
+.territory-cosmos.is-entering .territory-cosmos__heading,.territory-cosmos.is-entering .territory-cosmos__hint{opacity:0;transition:opacity .35s ease}
+.territory-cosmos.map-reveal{opacity:0;pointer-events:none}
+
+@media(max-width:800px){
+  .territory-cosmos__heading{top:7%;width:90vw}.territory-cosmos__heading h1{font-size:27px}.territory-cosmos__heading p{font-size:12px}
+  .territory-world{--size:clamp(105px,29vw,145px);height:calc(var(--size) + 48px)}
+  .territory-world[data-world="hearthlands"]{left:50%;top:45%;--size:clamp(155px,43vw,205px)}
+  .territory-world[data-world="littoral"]{left:19%;top:27%}.territory-world[data-world="roadlands"]{left:81%;top:27%}
+  .territory-world[data-world="institutional"]{left:24%;top:70%}.territory-world[data-world="river"]{left:76%;top:70%}
+  .territory-world__name{font-size:11px;letter-spacing:.07em}.territory-world__cue{font-size:7px;letter-spacing:.09em}
+  .territory-cosmos__hint{bottom:2.6%;font-size:8px;padding:8px 12px}
+}
+
+@media(prefers-reduced-motion:reduce){.territory-world__texture{animation:none}.territory-cosmos.is-entering .territory-world.is-selected{transition-duration:.25s}}

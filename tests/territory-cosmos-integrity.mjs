@@ -3,6 +3,7 @@ import fs from 'node:fs';
 const js=fs.readFileSync('src/territory-cosmos.js','utf8');
 const css=fs.readFileSync('src/territory-cosmos.css','utf8');
 const index=fs.readFileSync('index.html','utf8');
+const generator=fs.readFileSync('tools/build_hearthlands_globe_texture.py','utf8');
 const assert=(condition,message)=>{if(!condition)throw new Error(message)};
 
 for(const id of ['hearthlands','littoral','roadlands','institutional','river'])assert(js.includes(`id:'${id}'`),`missing ${id}`);
@@ -13,10 +14,14 @@ assert(js.includes('mesh.rotation.y+=dt*world.spin'),'territory spheres are not 
 assert(js.includes('group.position.x=base.x+driftX')&&js.includes('group.position.y=base.y+driftY'),'territory worlds do not have independent orbital drift');
 assert(js.includes("/assets/hearthlands-globe-4k.webp"),'Hearthlands is not using the seamless territory globe texture');
 assert(fs.existsSync('assets/hearthlands-globe-4k.webp'),'generated Hearthlands globe texture is missing');
+assert(!generator.includes('GaussianBlur(18)'),'Hearthlands texture generator still contains the old large global blur');
+assert(generator.includes('tile_w=900')&&generator.includes('UnsharpMask'),'Hearthlands texture is not rebuilt from smaller sharp territory-scale imagery');
 assert(js.includes('function radiusFor(world)')&&js.includes('Math.sqrt(world.dreams)'),'territory radius is not ready to derive from dream counts');
 assert(js.includes('camera.position.lerp')&&js.includes("rendered.get('hearthlands')"),'Hearthlands entry does not use a real 3D camera approach');
-assert(js.includes('elapsed>620')&&js.includes('elapsed>2350'),'Hearthlands entry has not been shortened to the fast transition timing');
-assert(js.includes("section.classList.add('is-blackout')")&&css.includes('.territory-cosmos__blackout'),'fast entry does not pass through a black-cosmos bridge');
+assert(js.includes('new THREE.LineSegments')&&js.includes('updateTunnel(dt,p)'),'Hearthlands entry has no real 3D cosmic star corridor');
+assert(js.includes("dreamscape:cosmic-tunnel")&&css.includes('.territory-cosmos__tunnel-vignette'),'cosmic tunnel visual/audio event is not mounted');
+assert(js.includes('elapsed>560')&&js.includes('elapsed>2280'),'Hearthlands entry timing is not using the quicker tunnel handoff');
+assert(js.includes("section.classList.add('is-blackout')")&&css.includes('.territory-cosmos__blackout'),'entry does not retain a brief black-cosmos threshold');
 assert(js.includes("returnButton.textContent='← Back to Dream Atlas'")&&css.includes('.atlas.territory-worlds-mode .return-world'),'Hearthlands has no explicit return path to the territory cosmos');
 assert(js.includes("document.querySelector('.focus-panel .enter')?.click()"),'3D approach does not bridge into the existing Hearthlands descent');
 assert(css.includes('.territory-cosmos__gl'),'3D territory canvas is not styled');

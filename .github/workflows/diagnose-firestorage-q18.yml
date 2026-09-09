@@ -1,0 +1,27 @@
+name: Diagnose firestorage q18 share
+
+on:
+  push:
+    branches: [family-home-pilot]
+    paths:
+      - '.github/workflows/diagnose-firestorage-q18.yml'
+
+jobs:
+  diagnose:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Fetch share page
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p out
+          curl -L --max-time 20 --fail --silent --show-error 'https://firestorage.ai/ja/f/-suabnPyUpx5' -o out/share.html
+          wc -c out/share.html
+          sha256sum out/share.html
+          grep -Eo 'https?://[^"'"'"'<> ]+' out/share.html | head -100 || true
+      - uses: actions/upload-artifact@v4
+        with:
+          name: firestorage-q18-share-page
+          path: out/share.html
+          if-no-files-found: error
+          retention-days: 1

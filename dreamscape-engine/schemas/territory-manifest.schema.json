@@ -50,12 +50,46 @@
     "zoom": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["entry", "territory", "place", "close"],
+      "required": ["min", "max", "default", "stages", "pan", "controls", "preserveViewState"],
       "properties": {
-        "entry": {"type": "number", "minimum": 0},
-        "territory": {"type": "number", "minimum": 0},
-        "place": {"type": "number", "minimum": 0},
-        "close": {"type": "number", "minimum": 0}
+        "min": {"type": "number", "exclusiveMinimum": 0},
+        "max": {"type": "number", "exclusiveMinimum": 0},
+        "default": {"type": "number", "exclusiveMinimum": 0},
+        "stages": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["overview", "explore", "detail"],
+          "properties": {
+            "overview": {"type": "number", "exclusiveMinimum": 0},
+            "explore": {"type": "number", "exclusiveMinimum": 0},
+            "detail": {"type": "number", "exclusiveMinimum": 0}
+          }
+        },
+        "pan": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled", "clampToArtwork"],
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "clampToArtwork": {"type": "boolean"},
+            "overscroll": {"type": "number", "minimum": 0, "maximum": 0.25}
+          }
+        },
+        "controls": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["buttons", "wheel", "pinch", "doubleTap", "dragPan", "reset"],
+          "properties": {
+            "buttons": {"type": "boolean"},
+            "wheel": {"type": "boolean"},
+            "pinch": {"type": "boolean"},
+            "doubleTap": {"type": "boolean"},
+            "dragPan": {"type": "boolean"},
+            "reset": {"type": "boolean"}
+          }
+        },
+        "activationPolicy": {"enum": ["threshold", "progressive"]},
+        "preserveViewState": {"type": "boolean"}
       }
     },
     "places": {"type": "array", "items": {"$ref": "./place.schema.json"}},

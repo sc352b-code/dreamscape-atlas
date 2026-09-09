@@ -37,8 +37,7 @@ jobs:
               raise SystemExit('expected territory config block not found')
           b=s.index(marker)
           replacement='import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js";\nimport {WORLD_META as CORPUS_META,WORLDS,MOBILE_POSITIONS} from "./world-runtime-config.js";\n\n'
-          s=replacement+s[b:]
-          p.write_text(s)
+          p.write_text(replacement+s[b:])
           PY
       - name: Teach Family Home integrity test about config-driven territory data
         run: |
@@ -52,22 +51,7 @@ jobs:
           new="for(const id of ['hearthlands','littoral','roadlands','institutional','river'])assert(territoryConfigSource.includes(`id:'${id}'`),`Territory selector config is missing ${id}`);"
           if old not in s:
               raise SystemExit('expected territory selector assertion not found')
-          s=s.replace(old,new)
-          p.write_text(s)
-          PY
-      - name: Extend main integrity workflow for engine files
-        run: |
-          python - <<'PY'
-          from pathlib import Path
-          p=Path('.github/workflows/family-home-integrity.yml')
-          s=p.read_text()
-          if "      - 'src/world-runtime-config.js'" not in s:
-              s=s.replace("      - 'src/territory-cosmos.*'\n", "      - 'src/territory-cosmos.*'\n      - 'src/world-runtime-config.js'\n      - 'worlds/**'\n      - 'dreamscape-engine/**'\n")
-          if "      - 'tests/world-engine-v1-integrity.mjs'" not in s:
-              s=s.replace("      - 'tests/territory-cosmos-integrity.mjs'\n", "      - 'tests/territory-cosmos-integrity.mjs'\n      - 'tests/world-engine-v1-integrity.mjs'\n")
-          if 'Run Dreamscape World Engine v1 integrity suite' not in s:
-              s=s.replace("      - name: Validate five planet assets at full 360 degrees\n", "      - name: Run Dreamscape World Engine v1 integrity suite\n        run: node tests/world-engine-v1-integrity.mjs\n      - name: Validate five planet assets at full 360 degrees\n")
-          p.write_text(s)
+          p.write_text(s.replace(old,new))
           PY
       - name: Run full integrity suite
         run: |
@@ -79,7 +63,6 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          rm .github/workflows/refactor-world-engine-v1.yml
-          git add src/territory-cosmos.js tests/family-home-integrity.mjs .github/workflows/family-home-integrity.yml .github/workflows/refactor-world-engine-v1.yml
+          git add src/territory-cosmos.js tests/family-home-integrity.mjs
           git commit -m 'Refactor planetary atlas onto World Engine v1 config'
           git push origin HEAD:family-home-pilot

@@ -26,10 +26,29 @@
     "interactiveArtwork": true
   },
   "zoom": {
-    "entry": 1,
-    "territory": 1.35,
-    "place": 2,
-    "close": 3
+    "min": 1,
+    "max": 4,
+    "default": 1,
+    "stages": {
+      "overview": 1,
+      "explore": 1.6,
+      "detail": 2.6
+    },
+    "pan": {
+      "enabled": true,
+      "clampToArtwork": true,
+      "overscroll": 0.03
+    },
+    "controls": {
+      "buttons": true,
+      "wheel": true,
+      "pinch": true,
+      "doubleTap": true,
+      "dragPan": true,
+      "reset": true
+    },
+    "activationPolicy": "threshold",
+    "preserveViewState": true
   },
   "places": [
     {
@@ -41,7 +60,7 @@
         "x": 0.5,
         "y": 0.5,
         "hitRadius": 0.04,
-        "visibleFromZoom": 1.35,
+        "visibleFromZoom": 1.6,
         "artCue": "Painted directly into the scene."
       },
       "corpusEvidence": {
@@ -68,7 +87,7 @@
         "placements": [
           {"x": 0.7, "y": 0.4, "hitRadius": 0.025, "artCue": "Embedded subtly in the scene."}
         ],
-        "visibleFromZoom": 2
+        "visibleFromZoom": 2.6
       },
       "corpusEvidence": {
         "privacyClass": "private-derived",

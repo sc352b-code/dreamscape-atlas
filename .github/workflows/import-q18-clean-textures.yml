@@ -152,8 +152,8 @@ jobs:
         run: |
           set -euo pipefail
           python -m pip install --quiet pillow numpy
-          npm run test:territory-cosmos
-          npm run test:family-home
+          node tests/territory-cosmos-integrity.mjs
+          node tests/family-home-integrity.mjs
           python tools/validate_territory_planets.py
       - name: Commit cleaned textures and remove one-time importer
         shell: bash

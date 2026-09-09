@@ -1,0 +1,104 @@
+name: Import exact q18 territory textures
+
+on:
+  push:
+    branches: [family-home-pilot]
+    paths:
+      - '.github/workflows/import-q18-textures.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  import-q18:
+    if: github.actor != 'github-actions[bot]'
+    runs-on: ubuntu-latest
+    env:
+      SHARE_URL: https://firestorage.ai/ja/f/-suabnPyUpx5
+      ZIP_SHA256: 322bbce1af4ef598e05d28eeb6dd2d479ce4db7a31ae68815ed97110a46a3e76
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: family-home-pilot
+      - name: Resolve exact q18 bundle from temporary share
+        shell: bash
+        run: |
+          set -euo pipefail
+          mkdir -p /tmp/q18-resolve
+          curl -L --fail --silent --show-error "$SHARE_URL" -o /tmp/q18-resolve/first
+          FIRST_SHA="$(sha256sum /tmp/q18-resolve/first | awk '{print $1}')"
+          if [ "$FIRST_SHA" = "$ZIP_SHA256" ]; then
+            cp /tmp/q18-resolve/first /tmp/q18.zip
+            exit 0
+          fi
+          python - <<'PY'
+          import html, os, re, subprocess, urllib.parse
+          page='/tmp/q18-resolve/first'
+          expected=os.environ['ZIP_SHA256']
+          share=os.environ['SHARE_URL']
+          text=open(page,'rb').read().decode('utf-8','ignore')
+          candidates=[]
+          patterns=[
+              r'''(?:href|src)=["']([^"']+)["']''',
+              r'''["'](https?://[^"']+)["']''',
+              r'''["']([^"']*(?:download|file|archive|attachment)[^"']*)["']''',
+          ]
+          for pat in patterns:
+              for raw in re.findall(pat,text,re.I):
+                  raw=html.unescape(raw).replace('\\/','/')
+                  if raw.startswith(('data:','javascript:','#')): continue
+                  url=urllib.parse.urljoin(share,raw)
+                  if url not in candidates: candidates.append(url)
+          candidates.sort(key=lambda u: (0 if any(k in u.lower() for k in ('download','.zip','attachment')) else 1, len(u)))
+          print('candidate_count=',len(candidates))
+          for i,url in enumerate(candidates[:80]):
+              out=f'/tmp/q18-resolve/candidate-{i}'
+              try:
+                  subprocess.run(['curl','-L','--fail','--silent','--show-error',url,'-o',out],check=True,timeout=30)
+              except Exception:
+                  continue
+              got=subprocess.check_output(['sha256sum',out],text=True).split()[0]
+              if got==expected:
+                  print('MATCH',url)
+                  subprocess.run(['cp',out,'/tmp/q18.zip'],check=True)
+                  raise SystemExit(0)
+          print(text[:12000])
+          raise SystemExit('Could not resolve a matching q18 ZIP from share page')
+          PY
+      - name: Verify ZIP and extract five exact JPEGs
+        shell: bash
+        run: |
+          set -euo pipefail
+          echo "$ZIP_SHA256  /tmp/q18.zip" | sha256sum -c -
+          rm -rf /tmp/q18 && mkdir -p /tmp/q18
+          unzip -q /tmp/q18.zip -d /tmp/q18
+          test -f /tmp/q18/hearthlands.jpg
+          test -f /tmp/q18/roadlands.jpg
+          test -f /tmp/q18/littoral.jpg
+          test -f /tmp/q18/institutional.jpg
+          test -f /tmp/q18/river.jpg
+          echo '45df38c01f03a99f2b5bb7d88754011e33fba063ebb021d2b66bbf8411b8299c  /tmp/q18/hearthlands.jpg' | sha256sum -c -
+          echo 'a0288bd86c4c6f3ec844d3c078d6ab5dadbbc8d65a07b660bd10d02020b0eccd  /tmp/q18/roadlands.jpg' | sha256sum -c -
+          echo '33b9c65a3d77921e613c0230f4b2579dd6ecc5988eb07e7f03f9fcf0461d0cf3  /tmp/q18/littoral.jpg' | sha256sum -c -
+          echo '43d9bbc6a4c65676418abc3a21ad9a4facd2ba2e9d1c9333f27c6844fb02e8f3  /tmp/q18/institutional.jpg' | sha256sum -c -
+          echo '091ad36ab28c5f2548f45aa92674c3388a3c8f45f20b8b0b01c709fdc08e67a7  /tmp/q18/river.jpg' | sha256sum -c -
+          mkdir -p assets/territory-planets
+          cp /tmp/q18/hearthlands.jpg assets/territory-planets/hearthlands.jpg
+          cp /tmp/q18/roadlands.jpg assets/territory-planets/roadlands.jpg
+          cp /tmp/q18/littoral.jpg assets/territory-planets/littoral.jpg
+          cp /tmp/q18/institutional.jpg assets/territory-planets/institutional.jpg
+          cp /tmp/q18/river.jpg assets/territory-planets/river.jpg
+      - name: Commit exact JPEGs
+        shell: bash
+        run: |
+          set -euo pipefail
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/territory-planets/*.jpg
+          if git diff --cached --quiet; then
+            echo 'Exact q18 JPEGs already present.'
+            exit 0
+          fi
+          git commit -m 'Mount exact q18 territory texture JPEGs'
+          git push origin HEAD:family-home-pilot

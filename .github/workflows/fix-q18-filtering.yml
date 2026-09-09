@@ -1,0 +1,62 @@
+name: Fix q18 texture filtering
+
+on:
+  push:
+    branches: [family-home-pilot]
+    paths:
+      - '.github/workflows/fix-q18-filtering.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  fix-filtering:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: family-home-pilot
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Apply direct linear texture sampling
+        shell: bash
+        run: |
+          set -euo pipefail
+          python - <<'PY'
+          from pathlib import Path
+          p=Path('src/territory-cosmos.js')
+          s=p.read_text()
+          old="texture.minFilter=THREE.LinearMipmapLinearFilter;texture.magFilter=THREE.LinearFilter;texture.generateMipmaps=true;return texture;"
+          new="texture.minFilter=THREE.LinearFilter;texture.magFilter=THREE.LinearFilter;texture.generateMipmaps=false;return texture;"
+          if old not in s:
+              raise SystemExit('expected texture filtering baseline not found')
+          s=s.replace(old,new,1)
+          p.write_text(s)
+
+          t=Path('tests/territory-cosmos-integrity.mjs')
+          ts=t.read_text()
+          marker="assert.match(source,/texture\\.anisotropy=renderer\\.capabilities\\.getMaxAnisotropy\\(\\)/,'anisotropic filtering required');"
+          addition="\nassert.match(source,/texture\\.minFilter=THREE\\.LinearFilter/,'direct linear minification filter required to avoid mip LOD bands');\nassert.match(source,/texture\\.magFilter=THREE\\.LinearFilter/,'linear magnification filter required');\nassert.match(source,/texture\\.generateMipmaps=false/,'mipmaps must stay disabled for the current q18 planet textures');\nassert.doesNotMatch(source,/LinearMipmapLinearFilter/,'mipmap LOD filtering must not return');"
+          if marker not in ts:
+              raise SystemExit('integrity insertion marker not found')
+          ts=ts.replace(marker, marker+addition, 1)
+          t.write_text(ts)
+          PY
+      - name: Run integrity tests
+        shell: bash
+        run: |
+          set -euo pipefail
+          node tests/territory-cosmos-integrity.mjs
+          node tests/family-home-integrity.mjs
+      - name: Commit renderer fix and remove one-time workflow
+        shell: bash
+        run: |
+          set -euo pipefail
+          rm -f .github/workflows/fix-q18-filtering.yml
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add -A
+          git commit -m 'Remove mipmap blur bands from territory planets'
+          git push origin HEAD:family-home-pilot

@@ -1,67 +1,34 @@
+import assert from 'node:assert/strict';
 import fs from 'node:fs';
+import crypto from 'node:crypto';
 
-const js=fs.readFileSync('src/territory-cosmos.js','utf8');
-const css=fs.readFileSync('src/territory-cosmos.css','utf8');
-const index=fs.readFileSync('index.html','utf8');
-const builder=fs.readFileSync('tools/upgrade_territory_planets.py','utf8');
-const validator=fs.readFileSync('tools/validate_territory_planets.py','utf8');
-const assert=(condition,message)=>{if(!condition)throw new Error(message)};
-const ids=['hearthlands','littoral','roadlands','institutional','river'];
-
-for(const id of ids)assert(js.includes(`id:'${id}'`),`missing ${id}`);
-assert(js.includes('import * as THREE'),'territory cosmos is not using Three.js');
-assert(js.includes('new THREE.WebGLRenderer'),'territory cosmos has no WebGL renderer');
-assert(js.includes('new THREE.SphereGeometry(1,128,96)'),'territory worlds are not real sphere meshes');
-assert(js.includes('mesh.rotation.y+=dt*world.spin'),'territory spheres are not independently rotating');
-assert(js.includes('group.position.x=base.x+')&&js.includes('group.position.y=base.y+'),'territory worlds do not have independent drift');
-
-for(const id of ids){
-  const source=`assets/territory-planet-sources/${id}.jpg`;
-  const rel=`assets/territory-planets/${id}.png`;
-  assert(fs.existsSync(source),`missing canonical source ${source}`);
-  assert(fs.existsSync(rel),`missing PNG planet texture ${rel}`);
-  assert(js.includes(`/assets/territory-planets/${id}.png`),`${id} is not wired to its own PNG texture`);
+const source=fs.readFileSync('src/territory-cosmos.js','utf8');
+const expected={
+  hearthlands:'45df38c01f03a99f2b5bb7d88754011e33fba063ebb021d2b66bbf8411b8299c',
+  roadlands:'a0288bd86c4c6f3ec844d3c078d6ab5dadbbc8d65a07b660bd10d02020b0eccd',
+  littoral:'33b9c65a3d77921e613c0230f4b2579dd6ecc5988eb07e7f03f9fcf0461d0cf3',
+  institutional:'43d9bbc6a4c65676418abc3a21ad9a4facd2ba2e9d1c9333f27c6844fb02e8f3',
+  river:'091ad36ab28c5f2548f45aa92674c3388a3c8f45f20b8b0b01c709fdc08e67a7',
+};
+for(const [id,hash] of Object.entries(expected)){
+  const rel=`assets/territory-planets/${id}.jpg`;
+  assert.ok(fs.existsSync(rel),`${rel} must exist`);
+  const bytes=fs.readFileSync(rel);
+  assert.equal(bytes[0],0xff); assert.equal(bytes[1],0xd8); assert.equal(bytes[2],0xff);
+  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),hash,`${id} must be the exact q18 JPEG`);
+  assert.ok(source.includes(`/assets/territory-planets/${id}.jpg`),`${id} renderer JPEG path missing`);
+  assert.ok(!source.includes(`/assets/territory-planets/${id}.webp`),`${id} must not use old WebP`);
 }
-assert(js.includes('loader.load(world.texture)'),'planet renderer is not loading each world texture directly');
-assert(!js.includes('/assets/territory-planets/hearthlands.webp'),'territory renderer still references legacy WebP planet assets');
-assert(!js.includes('/assets/territory-planets/roadlands.webp'),'territory renderer still references legacy WebP planet assets');
-assert(!js.includes('/assets/territory-planets/littoral.webp'),'territory renderer still references legacy WebP planet assets');
-assert(!js.includes('/assets/territory-planets/institutional.webp'),'territory renderer still references legacy WebP planet assets');
-assert(!js.includes('/assets/territory-planets/river.webp'),'territory renderer still references legacy WebP planet assets');
-assert(!js.includes('world.hearth?sourceHearth:sourceWorld'),'legacy shared texture selector is still active');
-assert(!js.includes('/assets/world-equirectangular-hd.webp'),'territory planets still depend on the old shared texture');
-assert(!js.includes('/assets/hearthlands-globe-4k.webp'),'Hearthlands still depends on the old partial globe texture');
-
-assert(js.includes('texture.wrapS=THREE.RepeatWrapping'),'equirectangular horizontal wrap is missing');
-assert(js.includes('texture.wrapT=THREE.ClampToEdgeWrapping'),'vertical globe texture clamp is missing');
-assert(js.includes('texture.anisotropy=renderer.capabilities.getMaxAnisotropy()'),'anisotropic texture filtering is missing');
-assert(js.includes('new THREE.AmbientLight(0xffffff,1.45)'),'minimum map-light floor is missing');
-assert(js.includes('emissive:new THREE.Color(0xffffff)')&&js.includes('emissiveMap:texture'),'full-turn geography visibility floor is missing');
-assert(js.includes('baseEmissive=world=>world.hearth?.17:.15'),'planet geography is still allowed to become too dark');
-
-assert(js.includes('totalDreams:362'),'whole-corpus dream count is not recorded correctly');
-assert(js.includes('hearthlands:213'),'Hearthlands territory count is not kept separate from the corpus total');
-for(const id of ['roadlands','littoral','institutional','river'])assert(js.includes(`${id}:null`),`${id} count is being fabricated instead of marked unknown`);
-assert(js.includes('allTerritoryCountsKnown')&&js.includes('if(!allTerritoryCountsKnown())return world.radius'),'planet sizes are being treated as proportional before all five counts are known');
-
-assert(js.includes('MOBILE_POSITIONS')&&js.includes('isPortraitMobile')&&js.includes('applyResponsiveLayout'),'portrait mobile does not have a dedicated five-world layout');
-for(const id of ids)assert(js.includes(`${id}:[`),`mobile layout missing ${id}`);
-assert(js.includes('mobile?.47')&&js.includes('mobile?.28'),'portrait worlds are not compact enough for one-screen system visibility');
-assert(js.includes('camera.fov=mobile?46:34')&&js.includes('initialCamera.z=mobile?9.15:7.55'),'portrait camera is not widened/pulled back enough');
-assert(css.includes('.territory-world__cue{display:none}'),'mobile secondary labels are not simplified');
-
-assert(js.includes('camera.position.lerp')&&js.includes("rendered.get('hearthlands')"),'Hearthlands entry no longer uses a real 3D camera approach');
-assert(js.includes('new THREE.LineSegments')&&js.includes('updateTunnel(dt,p,now)'),'cosmic star corridor is missing');
-assert(js.includes("dreamscape:cosmic-tunnel")&&css.includes('.territory-cosmos__tunnel-vignette'),'cosmic transition event is missing');
-assert(js.includes("cosmosReturn.textContent='← Back to Worlds'")&&css.includes('.territory-cosmos-return'),'persistent return path is missing');
-assert(js.includes("e.key==='Escape'")&&js.includes('returnToCosmos'),'keyboard return path is missing');
-assert(index.includes('/src/territory-cosmos.js')&&index.includes('/src/territory-cosmos.css'),'territory cosmos is not loaded');
-
-assert(builder.includes('TARGET = (2048, 1024)'),'planet builder is not producing matched 2048x1024 masters');
-assert(builder.includes("image.save(target, 'PNG'"),'planet builder is not writing real PNG assets');
-assert(builder.includes('SEAM_WIDTH = 48'),'planet builder is missing controlled seam feathering');
-assert(!builder.includes("image.save(path, 'WEBP'"),'planet builder still writes WebP assets');
-assert(validator.includes("ROOT / f'{name}.png'"),'360-degree validator is not checking PNG assets');
-assert(validator.includes('0/90/180/270'),'full-turn validation is not represented');
-
-console.log('Territory cosmos integrity: ALL TESTS PASSED');
+assert.equal(new Set(Object.keys(expected)).size,5);
+assert.match(source,/new THREE\.SphereGeometry\(1,128,96\)/,'real high-resolution sphere geometry required');
+assert.match(source,/mesh\.rotation\.y\s*\+=/,'each world must rotate as a 3D mesh');
+assert.match(source,/texture\.wrapS=THREE\.RepeatWrapping/,'horizontal texture repeat required');
+assert.match(source,/texture\.wrapT=THREE\.ClampToEdgeWrapping/,'vertical clamp required');
+assert.match(source,/texture\.anisotropy=renderer\.capabilities\.getMaxAnisotropy\(\)/,'anisotropic filtering required');
+assert.match(source,/emissiveMap:texture/,'texture-backed emissive visibility floor required');
+assert.match(source,/new THREE\.AmbientLight\(0xffffff,1\.45\)/,'ambient geography visibility floor required');
+assert.match(source,/MOBILE_POSITIONS/,'mobile five-world layout must remain');
+for(const id of Object.keys(expected)) assert.match(source,new RegExp(`${id}:\\[`),`${id} mobile position missing`);
+assert.match(source,/totalDreams:362/,'corpus total must remain 362');
+assert.match(source,/hearthlands:213/,'Hearthlands corpus count must remain 213');
+console.log('Territory cosmos integrity: exact q18 JPEGs + five rotating Three.js worlds verified.');

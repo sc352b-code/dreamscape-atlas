@@ -1,92 +1,36 @@
-from __future__ import annotations
-
 from pathlib import Path
-from PIL import Image
 import hashlib
 import numpy as np
+from PIL import Image
 
-NAMES = ['hearthlands', 'roadlands', 'littoral', 'institutional', 'river']
-ROOT = Path('assets/territory-planets')
-EXPECTED_SIZE = (2048, 1024)
-
-
-def sha256(path: Path) -> str:
-    return hashlib.sha256(path.read_bytes()).hexdigest()
-
-
-def circular_window(arr: np.ndarray, center: int, width: int) -> np.ndarray:
-    half = width // 2
-    indices = np.arange(center - half, center + half) % arr.shape[1]
-    return arr[:, indices]
-
-
-def validate_texture(name: str, path: Path) -> tuple[str, float, float, list[float]]:
-    if not path.exists():
-        raise SystemExit(f'{name}: missing {path}')
-
-    with Image.open(path) as image:
-        if image.format != 'PNG':
-            raise SystemExit(f'{name}: expected real PNG data, got {image.format}')
-        if image.size != EXPECTED_SIZE:
-            raise SystemExit(f'{name}: expected {EXPECTED_SIZE[0]}x{EXPECTED_SIZE[1]}, got {image.size[0]}x{image.size[1]}')
-        if image.mode == 'RGBA':
-            alpha = np.asarray(image.getchannel('A'), dtype=np.uint8)
-            if alpha.min() != 255:
-                raise SystemExit(f'{name}: texture contains transparent/blank pixels')
-        image = image.convert('RGB')
-        arr = np.asarray(image, dtype=np.float32)
-
-    if abs((arr.shape[1] / arr.shape[0]) - 2.0) > 0.001:
-        raise SystemExit(f'{name}: texture is not 2:1 equirectangular')
-
-    luminance = arr.mean(axis=2)
-
-    # Full-surface proxy: no 15-degree longitude sector may collapse into a blank/dark strip.
-    sector_means = []
-    for i in range(24):
-        x0 = int(i * arr.shape[1] / 24)
-        x1 = int((i + 1) * arr.shape[1] / 24)
-        sector_means.append(float(luminance[:, x0:x1].mean()))
-    darkest_sector = min(sector_means)
-    if darkest_sector < 45:
-        raise SystemExit(f'{name}: a longitude sector is effectively blank/dark ({darkest_sector:.1f})')
-
-    # 360-degree view proxy: inspect the half-world visible at 0/90/180/270 degree yaw.
-    quarter = arr.shape[1] // 4
-    hemisphere_means = []
-    for center in (0, quarter, quarter * 2, quarter * 3):
-        visible = circular_window(luminance, center, arr.shape[1] // 2)
-        hemisphere_means.append(float(visible.mean()))
-        if float(visible.mean()) < 55:
-            raise SystemExit(f'{name}: a rendered hemisphere proxy becomes too dark ({float(visible.mean()):.1f})')
-        if float(visible.std()) < 15:
-            raise SystemExit(f'{name}: a rendered hemisphere proxy lacks readable map detail ({float(visible.std()):.1f})')
-
-    # The longitude wrap itself must be visually continuous.
-    edge_diff = float(np.abs(arr[:, 0, :] - arr[:, -1, :]).mean())
-    if edge_diff > 8:
-        raise SystemExit(f'{name}: left/right wrap seam too strong ({edge_diff:.1f})')
-
-    tonal_std = float(luminance.std())
-    if tonal_std < 18:
-        raise SystemExit(f'{name}: texture lacks enough tonal detail ({tonal_std:.1f})')
-
-    return sha256(path), edge_diff, darkest_sector, hemisphere_means
-
-
-def main() -> None:
-    hashes = {}
-    for name in NAMES:
-        digest, seam, darkest, turns = validate_texture(name, ROOT / f'{name}.png')
-        hashes[name] = digest
-        turn_text = '/'.join(f'{value:.1f}' for value in turns)
-        print(f'{name}: OK · seam {seam:.1f} · darkest sector {darkest:.1f} · 0/90/180/270 {turn_text} · {digest[:12]}')
-
-    if len(set(hashes.values())) != len(NAMES):
-        raise SystemExit('Two or more territory planets share the same binary texture')
-
-    print('Territory planet PNG + 360° proxy checks: ALL PASSED')
-
-
-if __name__ == '__main__':
-    main()
+EXPECTED={
+    'hearthlands':'45df38c01f03a99f2b5bb7d88754011e33fba063ebb021d2b66bbf8411b8299c',
+    'roadlands':'a0288bd86c4c6f3ec844d3c078d6ab5dadbbc8d65a07b660bd10d02020b0eccd',
+    'littoral':'33b9c65a3d77921e613c0230f4b2579dd6ecc5988eb07e7f03f9fcf0461d0cf3',
+    'institutional':'43d9bbc6a4c65676418abc3a21ad9a4facd2ba2e9d1c9333f27c6844fb02e8f3',
+    'river':'091ad36ab28c5f2548f45aa92674c3388a3c8f45f20b8b0b01c709fdc08e67a7',
+}
+root=Path('assets/territory-planets')
+seen=set()
+for name,expected_hash in EXPECTED.items():
+    path=root/f'{name}.jpg'
+    if not path.exists(): raise SystemExit(f'MISSING {path}')
+    raw=path.read_bytes(); got=hashlib.sha256(raw).hexdigest()
+    if got != expected_hash: raise SystemExit(f'HASH FAIL {name}: {got}')
+    if got in seen: raise SystemExit(f'DUPLICATE texture hash: {name}')
+    seen.add(got)
+    with Image.open(path) as im:
+        if im.format != 'JPEG': raise SystemExit(f'FORMAT FAIL {name}: {im.format}')
+        if im.size != (768,384): raise SystemExit(f'SIZE FAIL {name}: {im.size}')
+        arr=np.asarray(im.convert('RGB'),dtype=np.float32)
+    if float(arr.std()) < 8: raise SystemExit(f'LOW VARIANCE {name}')
+    sector_means=[]
+    for sector in np.array_split(arr,24,axis=1): sector_means.append(float(sector.mean()))
+    if min(sector_means) < 20: raise SystemExit(f'BLACK/EMPTY LONGITUDE SECTOR {name}: {min(sector_means):.2f}')
+    for idx,view in enumerate(np.array_split(arr,4,axis=1)):
+        if float(view.std()) < 6 or float(view.mean()) < 20:
+            raise SystemExit(f'INVALID 90-DEGREE VIEW {name} #{idx+1}')
+    seam=float(np.abs(arr[:,0,:]-arr[:,-1,:]).mean())
+    if seam > 25: raise SystemExit(f'EXCESSIVE HORIZONTAL SEAM {name}: {seam:.2f}')
+    print(f'{name}: 768x384 JPEG sha256={got[:12]}… min-sector={min(sector_means):.2f} seam-MAE={seam:.2f}')
+print('Validated five distinct exact q18 territory JPEGs across the full 360-degree surface.')

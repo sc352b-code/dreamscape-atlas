@@ -1,8 +1,13 @@
 from __future__ import annotations
 
 from pathlib import Path
-from PIL import Image, ImageEnhance, ImageFilter
+from PIL import Image, ImageEnhance, ImageFilter, ImageFile
 import numpy as np
+
+# The canonical JPEG transfers can lose only the terminal JPEG marker in transit.
+# Pillow is allowed to read that harmless tail truncation; the decoded pixels are
+# immediately rewritten into strict, validated PNG masters below.
+ImageFile.LOAD_TRUNCATED_IMAGES = True
 
 NAMES = ['hearthlands', 'roadlands', 'littoral', 'institutional', 'river']
 TARGET = (2048, 1024)
@@ -20,6 +25,9 @@ def open_source(name: str) -> Image.Image:
     w, h = image.size
     if abs((w / h) - 2.0) > 0.01:
         raise SystemExit(f'{name}: source must be 2:1 equirectangular, got {w}x{h}')
+    # Catch a genuinely broken transfer rather than silently accepting it.
+    if np.asarray(image, dtype=np.float32).std() < 12:
+        raise SystemExit(f'{name}: source transfer has insufficient image detail')
     return image
 
 

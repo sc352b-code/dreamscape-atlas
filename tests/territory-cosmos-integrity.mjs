@@ -25,6 +25,10 @@ assert.match(source,/mesh\.rotation\.y\s*\+=/,'each world must rotate as a 3D me
 assert.match(source,/texture\.wrapS=THREE\.RepeatWrapping/,'horizontal texture repeat required');
 assert.match(source,/texture\.wrapT=THREE\.ClampToEdgeWrapping/,'vertical clamp required');
 assert.match(source,/texture\.anisotropy=renderer\.capabilities\.getMaxAnisotropy\(\)/,'anisotropic filtering required');
+assert.match(source,/texture\.minFilter=THREE\.LinearFilter/,'direct linear minification filter required to avoid mip LOD bands');
+assert.match(source,/texture\.magFilter=THREE\.LinearFilter/,'linear magnification filter required');
+assert.match(source,/texture\.generateMipmaps=false/,'mipmaps must stay disabled for the current q18 planet textures');
+assert.doesNotMatch(source,/LinearMipmapLinearFilter/,'mipmap LOD filtering must not return');
 assert.match(source,/emissiveMap:texture/,'texture-backed emissive visibility floor required');
 assert.match(source,/new THREE\.AmbientLight\(0xffffff,1\.45\)/,'ambient geography visibility floor required');
 assert.match(source,/MOBILE_POSITIONS/,'mobile five-world layout must remain');

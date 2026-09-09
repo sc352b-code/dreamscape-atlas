@@ -85,7 +85,7 @@ function mountTerritoryCosmos(){
   }
 
   function configureTexture(texture,world){
-    texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=renderer.capabilities.getMaxAnisotropy();texture.wrapS=THREE.RepeatWrapping;texture.wrapT=THREE.ClampToEdgeWrapping;texture.offset.x=world.offset||0;texture.minFilter=THREE.LinearMipmapLinearFilter;texture.magFilter=THREE.LinearFilter;texture.generateMipmaps=true;return texture;
+    texture.colorSpace=THREE.SRGBColorSpace;texture.anisotropy=renderer.capabilities.getMaxAnisotropy();texture.wrapS=THREE.RepeatWrapping;texture.wrapT=THREE.ClampToEdgeWrapping;texture.offset.x=world.offset||0;texture.minFilter=THREE.LinearFilter;texture.magFilter=THREE.LinearFilter;texture.generateMipmaps=false;return texture;
   }
   const baseAtmosphere=world=>world.hearth?.082:.072,baseEmissive=world=>world.hearth?.17:.15;
   for(const world of WORLDS){

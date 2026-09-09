@@ -39,4 +39,40 @@ assert.ok(worldSchema.required.includes('territories'));
 assert.ok(sceneSchema.required.includes('planets'));
 assert.ok(fs.existsSync('dreamscape-engine/docs/engine-v1-overview.md'));
 assert.ok(fs.existsSync('dreamscape-engine/docs/privacy-boundaries.md'));
-console.log('Dreamscape World Engine v1 integrity: reference world, runtime config, privacy boundary and schemas are coherent.');
+
+// Territory Layer v1 contract
+const territorySchemaPath='dreamscape-engine/schemas/territory-manifest.schema.json';
+const placeSchemaPath='dreamscape-engine/schemas/place.schema.json';
+const symbolSchemaPath='dreamscape-engine/schemas/symbol.schema.json';
+const tarotSchemaPath='dreamscape-engine/schemas/tarot-card.schema.json';
+const territoryDocsPath='dreamscape-engine/docs/territory-layer-v1.md';
+const templatePath='dreamscape-engine/templates/territory-package.example.json';
+for(const p of [territorySchemaPath,placeSchemaPath,symbolSchemaPath,tarotSchemaPath,territoryDocsPath,templatePath]) assert.ok(fs.existsSync(p),`Missing Territory Layer v1 artifact: ${p}`);
+
+const territorySchema=JSON.parse(fs.readFileSync(territorySchemaPath,'utf8'));
+const placeSchema=JSON.parse(fs.readFileSync(placeSchemaPath,'utf8'));
+const symbolSchema=JSON.parse(fs.readFileSync(symbolSchemaPath,'utf8'));
+const tarotSchema=JSON.parse(fs.readFileSync(tarotSchemaPath,'utf8'));
+const template=JSON.parse(fs.readFileSync(templatePath,'utf8'));
+assert.equal(template.schemaVersion,'1.0.0');
+assert.ok(territorySchema.required.includes('provenance'));
+assert.ok(territorySchema.required.includes('flatMap'));
+assert.ok(territorySchema.required.includes('places'));
+assert.ok(territorySchema.required.includes('symbols'));
+assert.ok(placeSchema.required.includes('map'));
+assert.ok(placeSchema.required.includes('corpusEvidence'));
+assert.ok(placeSchema.required.includes('tarotCardRef'));
+assert.ok(symbolSchema.required.includes('map'));
+assert.ok(symbolSchema.required.includes('corpusEvidence'));
+assert.ok(symbolSchema.required.includes('tarotCardRef'));
+assert.ok(tarotSchema.required.includes('interpretation'));
+assert.ok(tarotSchema.required.includes('corpusGrounding'));
+assert.ok(tarotSchema.required.includes('relatedItems'));
+assert.equal(template.flatMap.labelsPolicy,'minimal');
+assert.equal(template.flatMap.interactiveArtwork,true);
+assert.equal(template.places[0].interaction.clickable,true);
+assert.equal(template.symbols[0].interaction.clickable,true);
+assert.equal(template.places[0].corpusEvidence.dreamCountStatus,'unknown');
+assert.equal(template.symbols[0].corpusEvidence.frequencyStatus,'unknown');
+
+console.log('Dreamscape World Engine v1 integrity: reference world, runtime config, privacy boundary, schemas and Territory Layer v1 contract are coherent.');

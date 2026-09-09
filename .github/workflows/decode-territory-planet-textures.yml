@@ -1,10 +1,12 @@
-name: Upgrade territory planet textures
+name: Build validated territory planet PNGs
 
 on:
   push:
     branches: [family-home-pilot]
     paths:
+      - 'assets/territory-planet-sources/**'
       - 'tools/upgrade_territory_planets.py'
+      - 'tools/validate_territory_planets.py'
       - '.github/workflows/decode-territory-planet-textures.yml'
   workflow_dispatch:
 
@@ -12,30 +14,51 @@ permissions:
   contents: write
 
 jobs:
-  upgrade:
+  build:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 12
     steps:
       - uses: actions/checkout@v4
         with:
           ref: family-home-pilot
+          fetch-depth: 0
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
       - name: Install imaging dependencies
         run: python -m pip install --quiet pillow numpy
-      - name: Upgrade all five planet textures to matched 1536x768 assets
+      - name: Build five 2048x1024 PNG globe masters
         run: python tools/upgrade_territory_planets.py
-      - name: Validate 360-degree coverage and seams
+      - name: Validate full-surface coverage, seams and 360-degree proxies
         run: python tools/validate_territory_planets.py
-      - name: Commit upgraded binary textures
+      - name: Point the Three.js renderer at validated PNG masters
+        run: |
+          python - <<'PY'
+          from pathlib import Path
+          import re
+          path=Path('src/territory-cosmos.js')
+          text=path.read_text()
+          updated=re.sub(r'(/assets/territory-planets/(?:hearthlands|roadlands|littoral|institutional|river))\.webp', r'\1.png', text)
+          if updated == text:
+              print('Renderer paths were already PNG or no legacy territory paths remained.')
+          else:
+              path.write_text(updated)
+              print('Updated territory renderer paths to PNG.')
+          PY
+      - name: Remove superseded WebP planet binaries and accidental text transfer
+        run: |
+          rm -f assets/territory-planets/*.webp
+          rm -f assets/territory-planet-sources/hearthlands.jpg.b64
+      - name: Run territory cosmos integrity against generated assets
+        run: node tests/territory-cosmos-integrity.mjs
+      - name: Commit validated PNG planet assets and renderer wiring
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git add assets/territory-planets/*.webp
+          git add -A assets/territory-planets assets/territory-planet-sources src/territory-cosmos.js tests/territory-cosmos-integrity.mjs
           if git diff --cached --quiet; then
-            echo 'Textures already upgraded.'
+            echo 'Validated PNG territory planets already current.'
           else
-            git commit -m 'Upgrade five territory planet textures to 1536'
+            git commit -m 'Build validated 2048 PNG territory planet textures [planet-png]'
             git push origin HEAD:family-home-pilot
           fi

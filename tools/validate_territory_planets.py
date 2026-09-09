@@ -4,33 +4,44 @@ import numpy as np
 from PIL import Image
 
 EXPECTED={
-    'hearthlands':'45df38c01f03a99f2b5bb7d88754011e33fba063ebb021d2b66bbf8411b8299c',
-    'roadlands':'a0288bd86c4c6f3ec844d3c078d6ab5dadbbc8d65a07b660bd10d02020b0eccd',
-    'littoral':'33b9c65a3d77921e613c0230f4b2579dd6ecc5988eb07e7f03f9fcf0461d0cf3',
-    'institutional':'43d9bbc6a4c65676418abc3a21ad9a4facd2ba2e9d1c9333f27c6844fb02e8f3',
-    'river':'091ad36ab28c5f2548f45aa92674c3388a3c8f45f20b8b0b01c709fdc08e67a7',
+    'hearthlands':'fe18c3e4b4eddd20a027f409e03f9249b27100c7e48c292973f2f12e57143cf3',
+    'roadlands':'bc8d6dd6fa0f1650d9915819580d92ecf7c7277e5b135733e052f50b977c3b29',
+    'littoral':'707e5d1eb41f65750cfd8baa1a890ff5f6a535177306a75cbfd52616528a3e85',
+    'institutional':'fb7b0ba4ef6e0ca0d5d24e19f1d2c3d5d5cace95a8c06cd9c199654727e10871',
+    'river':'dbab882b84c498577200cd90c7379a915a00ee1ffbe6afd61eba31077800e8b0',
 }
 root=Path('assets/territory-planets')
-seen=set()
-for name,expected_hash in EXPECTED.items():
-    path=root/f'{name}.jpg'
-    if not path.exists(): raise SystemExit(f'MISSING {path}')
+hashes=set()
+for name,expected in EXPECTED.items():
+    path=root/f'{name}-q18-clean.jpg'
     raw=path.read_bytes(); got=hashlib.sha256(raw).hexdigest()
-    if got != expected_hash: raise SystemExit(f'HASH FAIL {name}: {got}')
-    if got in seen: raise SystemExit(f'DUPLICATE texture hash: {name}')
-    seen.add(got)
+    if got != expected: raise SystemExit(f'HASH FAIL {name}: {got}')
+    if got in hashes: raise SystemExit(f'DUPLICATE HASH {name}')
+    hashes.add(got)
     with Image.open(path) as im:
         if im.format != 'JPEG': raise SystemExit(f'FORMAT FAIL {name}: {im.format}')
-        if im.size != (768,384): raise SystemExit(f'SIZE FAIL {name}: {im.size}')
+        if im.size != (2048,1024): raise SystemExit(f'SIZE FAIL {name}: {im.size}')
         arr=np.asarray(im.convert('RGB'),dtype=np.float32)
     if float(arr.std()) < 8: raise SystemExit(f'LOW VARIANCE {name}')
-    sector_means=[]
-    for sector in np.array_split(arr,24,axis=1): sector_means.append(float(sector.mean()))
-    if min(sector_means) < 20: raise SystemExit(f'BLACK/EMPTY LONGITUDE SECTOR {name}: {min(sector_means):.2f}')
-    for idx,view in enumerate(np.array_split(arr,4,axis=1)):
-        if float(view.std()) < 6 or float(view.mean()) < 20:
-            raise SystemExit(f'INVALID 90-DEGREE VIEW {name} #{idx+1}')
+    sectors=np.array_split(arr,24,axis=1)
+    if min(float(s.mean()) for s in sectors) < 20: raise SystemExit(f'BLACK/EMPTY LONGITUDE {name}')
+    quarters=np.array_split(arr,4,axis=1)
+    qdetail=[]
+    for q in quarters:
+        g=q.mean(axis=2)
+        gx=np.abs(np.diff(g,axis=1,prepend=g[:,:1]))
+        gy=np.abs(np.diff(g,axis=0,prepend=g[:1,:]))
+        qdetail.append(float((gx+gy).mean()))
+    if min(qdetail)/max(qdetail) < 0.62: raise SystemExit(f'BROAD DETAIL IMBALANCE {name}: {qdetail}')
+    g=arr.mean(axis=2)
+    gx=np.abs(np.diff(g,axis=1,prepend=g[:,:1])); gy=np.abs(np.diff(g,axis=0,prepend=g[:1,:]))
+    profile=(gx+gy).mean(axis=0)
+    r=max(3,len(profile)//72)
+    pad=np.r_[profile[-r:],profile,profile[:r]]
+    smooth=np.convolve(pad,np.ones(2*r+1)/(2*r+1),mode='same')[r:-r]
+    p10=float(np.percentile(smooth,10)); med=float(np.median(smooth))
+    if p10/med < 0.78: raise SystemExit(f'LONGITUDE SOFTNESS FAIL {name}: p10/median={p10/med:.3f}')
     seam=float(np.abs(arr[:,0,:]-arr[:,-1,:]).mean())
-    if seam > 25: raise SystemExit(f'EXCESSIVE HORIZONTAL SEAM {name}: {seam:.2f}')
-    print(f'{name}: 768x384 JPEG sha256={got[:12]}… min-sector={min(sector_means):.2f} seam-MAE={seam:.2f}')
-print('Validated five distinct exact q18 territory JPEGs across the full 360-degree surface.')
+    if seam > 20: raise SystemExit(f'SEAM FAIL {name}: {seam:.2f}')
+    print(f'{name}: 2048x1024 clean JPEG, quarter-detail-ratio={min(qdetail)/max(qdetail):.3f}, p10/median={p10/med:.3f}, seam={seam:.2f}')
+print('Validated five distinct cleaned q18 sphere-ready textures.')

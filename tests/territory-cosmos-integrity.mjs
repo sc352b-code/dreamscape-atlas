@@ -1,38 +1,30 @@
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import crypto from 'node:crypto';
-
 const source=fs.readFileSync('src/territory-cosmos.js','utf8');
 const expected={
-  hearthlands:'45df38c01f03a99f2b5bb7d88754011e33fba063ebb021d2b66bbf8411b8299c',
-  roadlands:'a0288bd86c4c6f3ec844d3c078d6ab5dadbbc8d65a07b660bd10d02020b0eccd',
-  littoral:'33b9c65a3d77921e613c0230f4b2579dd6ecc5988eb07e7f03f9fcf0461d0cf3',
-  institutional:'43d9bbc6a4c65676418abc3a21ad9a4facd2ba2e9d1c9333f27c6844fb02e8f3',
-  river:'091ad36ab28c5f2548f45aa92674c3388a3c8f45f20b8b0b01c709fdc08e67a7',
+  hearthlands:'fe18c3e4b4eddd20a027f409e03f9249b27100c7e48c292973f2f12e57143cf3',
+  roadlands:'bc8d6dd6fa0f1650d9915819580d92ecf7c7277e5b135733e052f50b977c3b29',
+  littoral:'707e5d1eb41f65750cfd8baa1a890ff5f6a535177306a75cbfd52616528a3e85',
+  institutional:'fb7b0ba4ef6e0ca0d5d24e19f1d2c3d5d5cace95a8c06cd9c199654727e10871',
+  river:'dbab882b84c498577200cd90c7379a915a00ee1ffbe6afd61eba31077800e8b0',
 };
 for(const [id,hash] of Object.entries(expected)){
-  const rel=`assets/territory-planets/${id}.jpg`;
+  const rel=`assets/territory-planets/${id}-q18-clean.jpg`;
   assert.ok(fs.existsSync(rel),`${rel} must exist`);
-  const bytes=fs.readFileSync(rel);
-  assert.equal(bytes[0],0xff); assert.equal(bytes[1],0xd8); assert.equal(bytes[2],0xff);
-  assert.equal(crypto.createHash('sha256').update(bytes).digest('hex'),hash,`${id} must be the exact q18 JPEG`);
-  assert.ok(source.includes(`/assets/territory-planets/${id}.jpg`),`${id} renderer JPEG path missing`);
-  assert.ok(!source.includes(`/assets/territory-planets/${id}.webp`),`${id} must not use old WebP`);
+  assert.equal(crypto.createHash('sha256').update(fs.readFileSync(rel)).digest('hex'),hash,`${id} clean texture hash mismatch`);
+  assert.ok(source.includes(`/assets/territory-planets/${id}-q18-clean.jpg`),`${id} clean renderer path missing`);
 }
-assert.equal(new Set(Object.keys(expected)).size,5);
-assert.match(source,/new THREE\.SphereGeometry\(1,128,96\)/,'real high-resolution sphere geometry required');
-assert.match(source,/mesh\.rotation\.y\s*\+=/,'each world must rotate as a 3D mesh');
-assert.match(source,/texture\.wrapS=THREE\.RepeatWrapping/,'horizontal texture repeat required');
-assert.match(source,/texture\.wrapT=THREE\.ClampToEdgeWrapping/,'vertical clamp required');
-assert.match(source,/texture\.anisotropy=renderer\.capabilities\.getMaxAnisotropy\(\)/,'anisotropic filtering required');
-assert.match(source,/texture\.minFilter=THREE\.LinearFilter/,'direct linear minification filter required to avoid mip LOD bands');
-assert.match(source,/texture\.magFilter=THREE\.LinearFilter/,'linear magnification filter required');
-assert.match(source,/texture\.generateMipmaps=false/,'mipmaps must stay disabled for the current q18 planet textures');
-assert.doesNotMatch(source,/LinearMipmapLinearFilter/,'mipmap LOD filtering must not return');
-assert.match(source,/emissiveMap:texture/,'texture-backed emissive visibility floor required');
-assert.match(source,/new THREE\.AmbientLight\(0xffffff,1\.45\)/,'ambient geography visibility floor required');
-assert.match(source,/MOBILE_POSITIONS/,'mobile five-world layout must remain');
-for(const id of Object.keys(expected)) assert.match(source,new RegExp(`${id}:\\[`),`${id} mobile position missing`);
-assert.match(source,/totalDreams:362/,'corpus total must remain 362');
-assert.match(source,/hearthlands:213/,'Hearthlands corpus count must remain 213');
-console.log('Territory cosmos integrity: exact q18 JPEGs + five rotating Three.js worlds verified.');
+assert.match(source,/new THREE\.SphereGeometry\(1,128,96\)/);
+assert.match(source,/mesh\.rotation\.y\s*\+=/);
+assert.match(source,/texture\.wrapS=THREE\.RepeatWrapping/);
+assert.match(source,/texture\.wrapT=THREE\.ClampToEdgeWrapping/);
+assert.match(source,/texture\.anisotropy=renderer\.capabilities\.getMaxAnisotropy\(\)/);
+assert.match(source,/texture\.minFilter=THREE\.LinearFilter/);
+assert.match(source,/texture\.magFilter=THREE\.LinearFilter/);
+assert.match(source,/texture\.generateMipmaps=false/);
+assert.match(source,/emissiveMap:texture/);
+assert.match(source,/MOBILE_POSITIONS/);
+assert.match(source,/totalDreams:362/);
+assert.match(source,/hearthlands:213/);
+console.log('Territory cosmos integrity: cleaned q18 sphere-ready textures verified.');

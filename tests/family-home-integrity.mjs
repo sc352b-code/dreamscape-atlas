@@ -19,6 +19,7 @@ const audioSource=read('src/cosmos-ambience.js');
 const polishSource=read('src/atlas-polish.css');
 const preludeSource=read('src/buildpass-prelude.js');
 const territorySource=read('src/territory-cosmos.js');
+const territoryConfigSource=read('src/world-runtime-config.js');
 const territoryCss=read('src/territory-cosmos.css');
 
 const expectedIds=['house','mum','water','garden','cat','dog','window','bed','light','sea','fish','egg','octopus'];
@@ -60,7 +61,7 @@ assert(approachSource.includes('.painted-symbol-hotspot[data-symbol="octopus"]')
 pass('literal Family Home map sector, stable place entry and Octopus-to-reader bridge are mounted');
 
 assert(indexSource.includes('/src/territory-cosmos.css')&&indexSource.includes('/src/territory-cosmos.js'),'Phase A territory worlds selector is not loaded');
-for(const id of ['hearthlands','littoral','roadlands','institutional','river'])assert(territorySource.includes(`id:'${id}'`),`Territory selector is missing ${id}`);
+for(const id of ['hearthlands','littoral','roadlands','institutional','river'])assert(territoryConfigSource.includes(`id:'${id}'`),`Territory selector config is missing ${id}`);
 assert(territorySource.includes("if(id==='hearthlands')")&&territorySource.includes(".focus-panel .enter"),'Hearthlands world does not bridge into the existing territory descent');
 assert(territoryCss.includes('.territory-world[data-world="hearthlands"]')&&territoryCss.includes('@keyframes territory-spin'),'Territory worlds are not styled as distinct rotating spheres');
 assert(territoryCss.includes('.atlas.territory-worlds-mode[data-state="orbit"] .globe-stage'),'Old single-globe stage is not hidden from the Phase A entry state');

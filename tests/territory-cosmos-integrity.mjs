@@ -3,6 +3,8 @@ import fs from 'node:fs';
 const js=fs.readFileSync('src/territory-cosmos.js','utf8');
 const css=fs.readFileSync('src/territory-cosmos.css','utf8');
 const index=fs.readFileSync('index.html','utf8');
+const builder=fs.readFileSync('tools/upgrade_territory_planets.py','utf8');
+const validator=fs.readFileSync('tools/validate_territory_planets.py','utf8');
 const assert=(condition,message)=>{if(!condition)throw new Error(message)};
 const ids=['hearthlands','littoral','roadlands','institutional','river'];
 
@@ -14,11 +16,18 @@ assert(js.includes('mesh.rotation.y+=dt*world.spin'),'territory spheres are not 
 assert(js.includes('group.position.x=base.x+')&&js.includes('group.position.y=base.y+'),'territory worlds do not have independent drift');
 
 for(const id of ids){
-  const rel=`assets/territory-planets/${id}.webp`;
-  assert(fs.existsSync(rel),`missing planet texture ${rel}`);
-  assert(js.includes(`/assets/territory-planets/${id}.webp`),`${id} is not wired to its own texture`);
+  const source=`assets/territory-planet-sources/${id}.jpg`;
+  const rel=`assets/territory-planets/${id}.png`;
+  assert(fs.existsSync(source),`missing canonical source ${source}`);
+  assert(fs.existsSync(rel),`missing PNG planet texture ${rel}`);
+  assert(js.includes(`/assets/territory-planets/${id}.png`),`${id} is not wired to its own PNG texture`);
 }
 assert(js.includes('loader.load(world.texture)'),'planet renderer is not loading each world texture directly');
+assert(!js.includes('/assets/territory-planets/hearthlands.webp'),'territory renderer still references legacy WebP planet assets');
+assert(!js.includes('/assets/territory-planets/roadlands.webp'),'territory renderer still references legacy WebP planet assets');
+assert(!js.includes('/assets/territory-planets/littoral.webp'),'territory renderer still references legacy WebP planet assets');
+assert(!js.includes('/assets/territory-planets/institutional.webp'),'territory renderer still references legacy WebP planet assets');
+assert(!js.includes('/assets/territory-planets/river.webp'),'territory renderer still references legacy WebP planet assets');
 assert(!js.includes('world.hearth?sourceHearth:sourceWorld'),'legacy shared texture selector is still active');
 assert(!js.includes('/assets/world-equirectangular-hd.webp'),'territory planets still depend on the old shared texture');
 assert(!js.includes('/assets/hearthlands-globe-4k.webp'),'Hearthlands still depends on the old partial globe texture');
@@ -48,6 +57,11 @@ assert(js.includes("cosmosReturn.textContent='← Back to Worlds'")&&css.include
 assert(js.includes("e.key==='Escape'")&&js.includes('returnToCosmos'),'keyboard return path is missing');
 assert(index.includes('/src/territory-cosmos.js')&&index.includes('/src/territory-cosmos.css'),'territory cosmos is not loaded');
 
-assert(fs.existsSync('tools/upgrade_territory_planets.py'),'matched-resolution planet upgrader is missing');
-assert(fs.existsSync('tools/validate_territory_planets.py'),'360-degree planet validator is missing');
+assert(builder.includes('TARGET = (2048, 1024)'),'planet builder is not producing matched 2048x1024 masters');
+assert(builder.includes("image.save(target, 'PNG'"),'planet builder is not writing real PNG assets');
+assert(builder.includes('SEAM_WIDTH = 48'),'planet builder is missing controlled seam feathering');
+assert(!builder.includes("image.save(path, 'WEBP'"),'planet builder still writes WebP assets');
+assert(validator.includes("ROOT / f'{name}.png'"),'360-degree validator is not checking PNG assets');
+assert(validator.includes('0/90/180/270'),'full-turn validation is not represented');
+
 console.log('Territory cosmos integrity: ALL TESTS PASSED');

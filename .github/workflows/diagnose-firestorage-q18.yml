@@ -10,18 +10,20 @@ jobs:
   diagnose:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch share page
+      - name: Fetch share page and client bundle
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p out
           curl -L --max-time 20 --fail --silent --show-error 'https://firestorage.ai/ja/f/-suabnPyUpx5' -o out/share.html
-          wc -c out/share.html
-          sha256sum out/share.html
-          grep -Eo 'https?://[^"'"'"'<> ]+' out/share.html | head -100 || true
+          curl -L --max-time 20 --fail --silent --show-error 'https://firestorage.ai/_next/static/chunks/app/(files)/ja/f/page-4d19ae0a4ce39d79.js' -o out/page.js
+          wc -c out/share.html out/page.js
+          sha256sum out/share.html out/page.js
+          grep -Eo '/api/[^"'"'"' ]+' out/page.js | sort -u | head -100 || true
+          grep -Eo 'https?://[^"'"'"'<> ]+' out/page.js | sort -u | head -100 || true
       - uses: actions/upload-artifact@v4
         with:
-          name: firestorage-q18-share-page
-          path: out/share.html
+          name: firestorage-q18-share-diagnostic
+          path: out/
           if-no-files-found: error
           retention-days: 1

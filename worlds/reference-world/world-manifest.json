@@ -1,7 +1,7 @@
 {
   "$schema": "../../dreamscape-engine/schemas/world-manifest.schema.json",
   "engineVersion": "1.0.0",
-  "worldId": "natalie-dreamscape",
+  "worldId": "dreamscape-reference-world",
   "title": "Dreamscape Atlas",
   "version": "planetary-v1",
   "status": "planetary_approved",

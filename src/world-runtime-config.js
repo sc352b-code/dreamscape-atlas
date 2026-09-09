@@ -1,10 +1,10 @@
 // Dreamscape World Engine v1 runtime adapter.
 // Public-safe scene data only. Raw corpus material never belongs in this module.
 export const WORLD_META={
-  worldId:'natalie-dreamscape',
+  worldId:'dreamscape-reference-world',
   title:'Dreamscape Atlas',
   engineVersion:'1.0.0',
-  manifest:'/worlds/natalie/world-manifest.json',
+  manifest:'/worlds/reference-world/world-manifest.json',
   totalDreams:362,
   territoryDreams:{hearthlands:213,roadlands:null,littoral:null,institutional:null,river:null},
   source:'v57 handover snapshot',

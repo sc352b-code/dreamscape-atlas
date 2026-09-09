@@ -44,7 +44,7 @@ The verified v57 result is:
 
 The 76 evidenced Hearthlands symbols are:
 
-Alex; Alice; Bag; Bed; Bench; Bicycle; Boat; Book; Box; Brother; Bus; Car; Carl Jung; Cat; Chair; Clock; Clothes; Computer; Cow; Dad; Dog; Door; Drink; Egg; Field; Fire; Fish; Food; Forest; Garden; George; Grandma; Grass; Gun; House / Home; Insect; Key; Knife; Lake; Light; Lily; Lion; Max; Mirror; Money; Mum; Natalie; Ocean; Octopus; Percy; Phone; Plane; Rain; River; Sea; Sheep; Shirt; Shoe; Sister; Sky; Snake; Snow; Stephen Coarse; Storm; Sun; Table; Teddy; Toy; Train; Tree; Water; Wayne; Weight; Wind; Window; Woods.
+Alex; Alice; Bag; Bed; Bench; Bicycle; Boat; Book; Box; Brother; Bus; Car; Carl Jung; Cat; Chair; Clock; Clothes; Computer; Cow; Dad; Dog; Door; Drink; Egg; Field; Fire; Fish; Food; Forest; Garden; George; Grandma; Grass; Gun; House / Home; Insect; Key; Knife; Lake; Light; Lily; Lion; Max; Mirror; Money; Mum; reference corpus; Ocean; Octopus; Percy; Phone; Plane; Rain; River; Sea; Sheep; Shirt; Shoe; Sister; Sky; Snake; Snow; Stephen Coarse; Storm; Sun; Table; Teddy; Toy; Train; Tree; Water; Wayne; Weight; Wind; Window; Woods.
 
 ## Full Hearthlands matrix result
 

@@ -4,7 +4,7 @@ import fs from 'node:fs';
 import {WORLD_META,WORLDS,MOBILE_POSITIONS} from '../src/world-runtime-config.js';
 
 const source=fs.readFileSync('src/territory-cosmos.js','utf8');
-const manifest=JSON.parse(fs.readFileSync('worlds/natalie/world-manifest.json','utf8'));
+const manifest=JSON.parse(fs.readFileSync('worlds/reference-world/world-manifest.json','utf8'));
 const manifestById=new Map(manifest.territories.map(item=>[item.id,item]));
 const ids=['hearthlands','roadlands','littoral','institutional','river'];
 

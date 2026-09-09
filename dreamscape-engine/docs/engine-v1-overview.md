@@ -16,7 +16,7 @@ Every feature should improve both the current reference world and the reusable e
 10. **Place/symbol layers** — places, symbols, readings, statistics and onward experiences use the same world model.
 
 ## Reference implementation
-`worlds/natalie/` is the first approved World Engine package. It is an engine output, not the engine itself.
+`worlds/reference-world/` is the first approved World Engine package. It is an engine output, not the engine itself.
 
 ## Architectural boundary
 Reusable machinery belongs under `dreamscape-engine/` and generic runtime modules. Corpus-specific public-safe configuration belongs under `worlds/<world-id>/`. Raw or identifying corpus material must never be copied into public runtime assets.

@@ -2,8 +2,8 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {WORLD_META,WORLDS,MOBILE_POSITIONS} from '../src/world-runtime-config.js';
 
-const world=JSON.parse(fs.readFileSync('worlds/natalie/world-manifest.json','utf8'));
-const scene=JSON.parse(fs.readFileSync('worlds/natalie/runtime-scene.json','utf8'));
+const world=JSON.parse(fs.readFileSync('worlds/reference-world/world-manifest.json','utf8'));
+const scene=JSON.parse(fs.readFileSync('worlds/reference-world/runtime-scene.json','utf8'));
 const worldSchema=JSON.parse(fs.readFileSync('dreamscape-engine/schemas/world-manifest.schema.json','utf8'));
 const sceneSchema=JSON.parse(fs.readFileSync('dreamscape-engine/schemas/runtime-scene.schema.json','utf8'));
 

@@ -10,29 +10,39 @@ jobs:
   diagnose:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch firestorage share client chunks
+      - name: Capture firestorage API responses
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p out
-          base='https://firestorage.ai'
-          curl -L --max-time 20 --fail --silent --show-error "$base/ja/f/-suabnPyUpx5" -o out/share.html
-          for f in \
-            '/_next/static/chunks/4899-d89df949f2dbd5af.js' \
-            '/_next/static/chunks/5841-1160578ba9bb4f3e.js' \
-            '/_next/static/chunks/8437-d65cc193dc908afa.js' \
-            '/_next/static/chunks/8500-f4d7bfbe7500f274.js' \
-            '/_next/static/chunks/webpack-276504efae57521f.js' \
-            '/_next/static/chunks/app/(files)/ja/f/page-4d19ae0a4ce39d79.js'; do
-              n="$(basename "$f")"
-              curl -L --max-time 20 --fail --silent --show-error "$base$f" -o "out/$n"
-          done
-          wc -c out/*
-          grep -R -Eo '/api/[^"'"'"' ]+' out | sort -u | head -200 || true
-          grep -R -Eo 'https?://[^"'"'"'<> ]+' out | sort -u | head -200 || true
+          api='https://api.firestorage.ai/dev/file'
+          share='-suabnPyUpx5'
+          curl -L --max-time 20 --fail --silent --show-error "$api/shares/$share/files?maxResults=1000" -o out/list.json
+          python -m json.tool out/list.json > out/list.pretty.json
+          python - <<'PY'
+          import json
+          d=json.load(open('out/list.json'))
+          print('keys', sorted(d.keys()))
+          for i,f in enumerate(d.get('files', [])):
+              print('FILE', i, f)
+          PY
+          python - <<'PY' > out/file-id.txt
+          import json
+          d=json.load(open('out/list.json'))
+          files=d.get('files',[])
+          if not files: raise SystemExit('no files')
+          f=next((x for x in files if x.get('fileName')=='territory-sources-q18.zip' or x.get('file_name')=='territory-sources-q18.zip'),files[0])
+          print(f.get('fileId') or f.get('file_id') or f.get('id') or '')
+          PY
+          file_id="$(cat out/file-id.txt)"
+          test -n "$file_id"
+          curl -L --max-time 20 --fail --silent --show-error -X POST "$api/shares/$share/files/$file_id/download" -o out/download.json
+          python -m json.tool out/download.json > out/download.pretty.json
+          cat out/list.pretty.json
+          cat out/download.pretty.json
       - uses: actions/upload-artifact@v4
         with:
-          name: firestorage-q18-share-diagnostic
+          name: firestorage-q18-api-diagnostic
           path: out/
           if-no-files-found: error
           retention-days: 1

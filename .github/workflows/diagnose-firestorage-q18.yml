@@ -10,17 +10,26 @@ jobs:
   diagnose:
     runs-on: ubuntu-latest
     steps:
-      - name: Fetch share page and client bundle
+      - name: Fetch firestorage share client chunks
         shell: bash
         run: |
           set -euo pipefail
           mkdir -p out
-          curl -L --max-time 20 --fail --silent --show-error 'https://firestorage.ai/ja/f/-suabnPyUpx5' -o out/share.html
-          curl -L --max-time 20 --fail --silent --show-error 'https://firestorage.ai/_next/static/chunks/app/(files)/ja/f/page-4d19ae0a4ce39d79.js' -o out/page.js
-          wc -c out/share.html out/page.js
-          sha256sum out/share.html out/page.js
-          grep -Eo '/api/[^"'"'"' ]+' out/page.js | sort -u | head -100 || true
-          grep -Eo 'https?://[^"'"'"'<> ]+' out/page.js | sort -u | head -100 || true
+          base='https://firestorage.ai'
+          curl -L --max-time 20 --fail --silent --show-error "$base/ja/f/-suabnPyUpx5" -o out/share.html
+          for f in \
+            '/_next/static/chunks/4899-d89df949f2dbd5af.js' \
+            '/_next/static/chunks/5841-1160578ba9bb4f3e.js' \
+            '/_next/static/chunks/8437-d65cc193dc908afa.js' \
+            '/_next/static/chunks/8500-f4d7bfbe7500f274.js' \
+            '/_next/static/chunks/webpack-276504efae57521f.js' \
+            '/_next/static/chunks/app/(files)/ja/f/page-4d19ae0a4ce39d79.js'; do
+              n="$(basename "$f")"
+              curl -L --max-time 20 --fail --silent --show-error "$base$f" -o "out/$n"
+          done
+          wc -c out/*
+          grep -R -Eo '/api/[^"'"'"' ]+' out | sort -u | head -200 || true
+          grep -R -Eo 'https?://[^"'"'"'<> ]+' out | sort -u | head -200 || true
       - uses: actions/upload-artifact@v4
         with:
           name: firestorage-q18-share-diagnostic

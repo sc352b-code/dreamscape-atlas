@@ -7,6 +7,7 @@ on:
     branches: [main]
     paths:
       - 'src/family-home-*'
+      - 'src/hearthlands-territory-v1.*'
       - 'src/territory-cosmos.*'
       - 'src/world-runtime-config.js'
       - 'worlds/**'
@@ -17,6 +18,7 @@ on:
       - 'tools/validate_territory_planets.py'
       - 'index.html'
       - 'tests/family-home-integrity.mjs'
+      - 'tests/hearthlands-territory-v1-integrity.mjs'
       - 'tests/territory-cosmos-integrity.mjs'
       - 'tests/world-engine-v1-integrity.mjs'
       - '.github/workflows/family-home-integrity.yml'
@@ -37,6 +39,8 @@ jobs:
         run: python -m pip install --quiet pillow numpy
       - name: Run Family Home pilot integrity suite
         run: node tests/family-home-integrity.mjs
+      - name: Run Hearthlands Territory Layer v1 integrity suite
+        run: node tests/hearthlands-territory-v1-integrity.mjs
       - name: Run territory cosmos integrity suite
         run: node tests/territory-cosmos-integrity.mjs
       - name: Run Dreamscape World Engine v1 integrity suite

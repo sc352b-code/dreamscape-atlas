@@ -35,7 +35,7 @@ jobs:
           import hashlib, os, re
           from pathlib import Path
           from urllib.parse import urljoin
-          from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeoutError
+          from playwright.sync_api import sync_playwright
 
           share=os.environ['SHARE_URL']
           expected=os.environ['EXPECTED_SHA256']
@@ -52,7 +52,6 @@ jobs:
               page=context.new_page()
               page.goto(share, wait_until='networkidle', timeout=90000)
               page.wait_for_timeout(2500)
-
               candidates=[]
               for selector in ['a','button']:
                   for el in page.locator(selector).all():
@@ -68,14 +67,11 @@ jobs:
                       except Exception:
                           pass
               candidates.sort(key=lambda row:row[0], reverse=True)
-
-              # Prefer a real browser download, which works for signed/JS-backed links.
               for _,el,text,href in candidates:
                   try:
                       with page.expect_download(timeout=12000) as info:
                           el.click(force=True, timeout=5000)
-                      download=info.value
-                      download.save_as(str(out))
+                      info.value.save_as(str(out))
                       if verified(out):
                           print('Verified download via UI:', text or href)
                           browser.close()
@@ -83,7 +79,6 @@ jobs:
                   except Exception:
                       pass
               else:
-                  # Try direct candidate/resource URLs if the page exposes a signed asset.
                   urls=[]
                   for _,_,_,href in candidates:
                       if href: urls.append(urljoin(share,href))
@@ -112,7 +107,6 @@ jobs:
                   else:
                       browser.close()
                       raise SystemExit('Could not resolve a verified firestorage download for the build package.')
-
           if not verified(out):
               raise SystemExit('Downloaded package SHA-256 did not match the locally verified build.')
           print('Package SHA-256 verified:', expected)
@@ -123,7 +117,7 @@ jobs:
           mkdir -p /tmp/hearthlands-v1-import
           unzip -q /tmp/hearthlands-territory-v1-build.zip -d /tmp/hearthlands-v1-import
           rsync -a /tmp/hearthlands-v1-import/ ./
-          rm -f .github/workflows/import-hearthlands-territory-v1.yml
+          git checkout HEAD -- .github/workflows/family-home-integrity.yml .github/workflows/import-hearthlands-territory-v1.yml
           node --check src/hearthlands-territory-v1.js
           node tests/hearthlands-territory-v1-integrity.mjs
           sha256sum worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png
@@ -131,6 +125,6 @@ jobs:
         run: |
           git config user.name 'dreamscape-engine-bot'
           git config user.email 'actions@users.noreply.github.com'
-          git add -A
+          git add index.html src/hearthlands-territory-v1.css src/hearthlands-territory-v1.js tests/hearthlands-territory-v1-integrity.mjs worlds/reference-world/territories/hearthlands
           git commit -m 'Implement Hearthlands Territory Layer v1'
           git push origin HEAD:family-home-pilot

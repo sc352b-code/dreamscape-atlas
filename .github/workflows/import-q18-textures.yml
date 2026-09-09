@@ -18,7 +18,7 @@ jobs:
     env:
       SHARE_ID: -suabnPyUpx5
       API_BASE: https://api.firestorage.ai/dev/file
-      ZIP_SHA256: 322bbce1af4ef598e05d28eeb6dd2d479ce4db7a31ae68815ed97110a46a3e76
+      ZIP_SHA256: d09def1168aad8a242e858fd3420b2a2524f8ad803cc870f204b2508dedcf479
     steps:
       - uses: actions/checkout@v4
         with:

@@ -1,0 +1,1102 @@
+{
+  "territoryId": "hearthlands",
+  "coverageVersion": "1.0.0",
+  "requirements": {
+    "canonicalPlaces": 6,
+    "spatialMotifs": 23,
+    "symbols": 76,
+    "visualRequirements": 105
+  },
+  "status": "runtime-mapped-artwork-coverage-requires-visual-audit",
+  "places": [
+    {
+      "id": "childhood-house",
+      "artworkRepresentation": "mapped-to-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomStage": "explore",
+      "tarotDestination": "tarot/place/childhood-house",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived"
+    },
+    {
+      "id": "family-home",
+      "artworkRepresentation": "mapped-to-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomStage": "explore",
+      "tarotDestination": "tarot/place/family-home",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived"
+    },
+    {
+      "id": "current-present-house",
+      "artworkRepresentation": "mapped-to-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomStage": "explore",
+      "tarotDestination": "tarot/place/current-present-house",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived"
+    },
+    {
+      "id": "large-many-roomed-house",
+      "artworkRepresentation": "mapped-to-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomStage": "explore",
+      "tarotDestination": "tarot/place/large-many-roomed-house",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived"
+    },
+    {
+      "id": "unfamiliar-house",
+      "artworkRepresentation": "mapped-to-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomStage": "explore",
+      "tarotDestination": "tarot/place/unfamiliar-house",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived"
+    },
+    {
+      "id": "haunted-17-bedroom-mansion",
+      "artworkRepresentation": "mapped-to-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomStage": "explore",
+      "tarotDestination": "tarot/place/haunted-17-bedroom-mansion",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived"
+    }
+  ],
+  "spatialMotifs": [
+    {
+      "id": "house",
+      "name": "house",
+      "dreamCount": 97,
+      "prominence": "Core",
+      "artTreatment": "The six canonical houses themselves; no separate generic icon.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "home",
+      "name": "home",
+      "dreamCount": 47,
+      "prominence": "Core",
+      "artTreatment": "Warm inhabited domestic cues distributed across the six anchors.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "door",
+      "name": "door",
+      "dreamCount": 40,
+      "prominence": "Core",
+      "artTreatment": "Distinctive doors painted on multiple houses, with one especially legible threshold at Current / Present House.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "street",
+      "name": "street",
+      "dreamCount": 31,
+      "prominence": "Core",
+      "artTreatment": "A curved inhabited street/lane network connecting west, centre and east domestic districts.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "school",
+      "name": "school",
+      "dreamCount": 31,
+      "prominence": "Core",
+      "artTreatment": "A small school-like building in the western-middle district, visually secondary to the six canonical houses.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "garden",
+      "name": "garden",
+      "dreamCount": 29,
+      "prominence": "Core",
+      "artTreatment": "Gardens/orchards woven around Cambridge Road, Family Home, Current / Present House and Many-Roomed House.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "city",
+      "name": "city",
+      "dreamCount": 28,
+      "prominence": "Core",
+      "artTreatment": "A distant low-rise city/town edge on the northern horizon, not a separate major destination.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "kitchen",
+      "name": "kitchen",
+      "dreamCount": 21,
+      "prominence": "Core",
+      "artTreatment": "Visible through a cutaway/windowed domestic vignette at Current / Present House.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "window",
+      "name": "window",
+      "dreamCount": 20,
+      "prominence": "Core",
+      "artTreatment": "Many readable windows across houses, including one highlighted unusual window at Haunted Mansion.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "bedroom",
+      "name": "bedroom",
+      "dreamCount": 15,
+      "prominence": "Major",
+      "artTreatment": "A subtle upstairs bedroom vignette in Family Home / Many-Roomed House.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "stairs",
+      "name": "stairs",
+      "dreamCount": 15,
+      "prominence": "Major",
+      "artTreatment": "Visible exterior/interior stair forms in Many-Roomed House and Current / Present House.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "bridge",
+      "name": "bridge",
+      "dreamCount": 15,
+      "prominence": "Major",
+      "artTreatment": "A graceful central bridge over the stream/river linking the two halves of the map.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "bathroom",
+      "name": "bathroom",
+      "dreamCount": 9,
+      "prominence": "Recurrent",
+      "artTreatment": "Small domestic interior cue at Family Home, not labelled.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "living-room",
+      "name": "living room",
+      "dreamCount": 9,
+      "prominence": "Recurrent",
+      "artTreatment": "Warm interior glimpse at Current / Present House.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "airport",
+      "name": "airport",
+      "dreamCount": 7,
+      "prominence": "Recurrent",
+      "artTreatment": "Tiny distant airfield/aircraft silhouette at far north-west edge, deliberately low dominance.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "apartment",
+      "name": "apartment",
+      "dreamCount": 6,
+      "prominence": "Recurrent",
+      "artTreatment": "Small apartment cluster in the lower-centre/right city fringe.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "hallway",
+      "name": "hallway",
+      "dreamCount": 5,
+      "prominence": "Recurrent",
+      "artTreatment": "Long lit passage visible within the Many-Roomed House.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "forest",
+      "name": "forest",
+      "dreamCount": 4,
+      "prominence": "Trace",
+      "artTreatment": "Dense eastern/south-eastern woodland margin.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "tunnel",
+      "name": "tunnel",
+      "dreamCount": 3,
+      "prominence": "Trace",
+      "artTreatment": "Small stone tunnel entering the wooded eastern hill.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "basement",
+      "name": "basement",
+      "dreamCount": 2,
+      "prominence": "Trace",
+      "artTreatment": "Cellar/basement opening beneath Current / Present House.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "garage",
+      "name": "garage",
+      "dreamCount": 1,
+      "prominence": "Trace",
+      "artTreatment": "Small garage beside Current / Present House.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "attic",
+      "name": "attic",
+      "dreamCount": 1,
+      "prominence": "Trace",
+      "artTreatment": "Lit attic window in Many-Roomed House.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    },
+    {
+      "id": "staircase",
+      "name": "staircase",
+      "dreamCount": 1,
+      "prominence": "Trace",
+      "artTreatment": "A more formal staircase at the Many-Roomed House, distinct from generic stairs.",
+      "artworkRepresentationStatus": "approved-composition-reference"
+    }
+  ],
+  "symbols": [
+    {
+      "id": "recurring-figure-01",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/recurring-figure-01",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-02",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/recurring-figure-02",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-03",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/recurring-figure-03",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-04",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/recurring-figure-04",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-05",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/recurring-figure-05",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-06",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/recurring-figure-06",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-07",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/recurring-figure-07",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-08",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/recurring-figure-08",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-09",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/recurring-figure-09",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-10",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/recurring-figure-10",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-11",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/recurring-figure-11",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-12",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/recurring-figure-12",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-13",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/recurring-figure-13",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-14",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/recurring-figure-14",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "recurring-figure-15",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/recurring-figure-15",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "bag",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/bag",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "bed",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/bed",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "bench",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/bench",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "book",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/book",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "box",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/box",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "chair",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/chair",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "clock",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/clock",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "clothes",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/clothes",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "computer",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/computer",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "door",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/door",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "drink",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/drink",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "egg",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/egg",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "food",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/food",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "house-home",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/house-home",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "key",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/key",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "light",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/light",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "mirror",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/mirror",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "money",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/money",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "phone",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/phone",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "shirt",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/shirt",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "shoe",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/shoe",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "table",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/table",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "teddy",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/teddy",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "toy",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/toy",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "weight",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/weight",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "window",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/window",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "bicycle",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/bicycle",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "boat",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/boat",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "bus",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/bus",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "car",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/car",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "plane",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/plane",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "train",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/train",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "cat",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/cat",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "cow",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/cow",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "dog",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/dog",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "fish",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/fish",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "insect",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/insect",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "lion",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/lion",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "octopus",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/octopus",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "sheep",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/sheep",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "snake",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/snake",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "field",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/field",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "fire",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/fire",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "forest",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/forest",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "garden",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/garden",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "grass",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/grass",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "lake",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/lake",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "ocean",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/ocean",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "rain",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/rain",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "river",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/river",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "sea",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/sea",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "sky",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/sky",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "snow",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/snow",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "storm",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/storm",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "sun",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/sun",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "tree",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.45,
+      "tarotDestination": "tarot/symbol/tree",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "water",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 1.35,
+      "tarotDestination": "tarot/symbol/water",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "wind",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/wind",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "woods",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/woods",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "gun",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.1,
+      "tarotDestination": "tarot/symbol/gun",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    },
+    {
+      "id": "knife",
+      "artworkRepresentation": "planned-coordinate-on-approved-base-art",
+      "mappedLocation": true,
+      "interactiveHotspot": true,
+      "semanticZoomThreshold": 2.75,
+      "tarotDestination": "tarot/symbol/knife",
+      "corpusEvidence": true,
+      "privacyClassification": "public-safe-derived",
+      "visualAuditVerified": false
+    }
+  ],
+  "approvalGate": {
+    "runtimeCoverageComplete": true,
+    "visualArtworkAuditComplete": false,
+    "note": "All required runtime records/hotspots are present. The approved base artwork still requires a manual visual audit to verify that every symbol is visibly painted at its mapped coordinate; no false visual-verification claim is made."
+  }
+}

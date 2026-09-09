@@ -8,6 +8,9 @@ on:
     paths:
       - 'src/family-home-*'
       - 'src/territory-cosmos.*'
+      - 'src/world-runtime-config.js'
+      - 'worlds/**'
+      - 'dreamscape-engine/**'
       - 'assets/family-home-pilot/**'
       - 'assets/territory-planets/**'
       - 'tools/upgrade_territory_planets.py'
@@ -15,6 +18,7 @@ on:
       - 'index.html'
       - 'tests/family-home-integrity.mjs'
       - 'tests/territory-cosmos-integrity.mjs'
+      - 'tests/world-engine-v1-integrity.mjs'
       - '.github/workflows/family-home-integrity.yml'
 
 jobs:
@@ -35,5 +39,7 @@ jobs:
         run: node tests/family-home-integrity.mjs
       - name: Run territory cosmos integrity suite
         run: node tests/territory-cosmos-integrity.mjs
+      - name: Run Dreamscape World Engine v1 integrity suite
+        run: node tests/world-engine-v1-integrity.mjs
       - name: Validate five planet assets at full 360 degrees
         run: python tools/validate_territory_planets.py

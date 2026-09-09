@@ -7,11 +7,11 @@ const CORPUS_META={
 };
 
 const WORLDS=[
-  {id:'littoral',name:'Littoral Coast',cue:'Tides · islands · shorelines',texture:'/assets/territory-planets/littoral-path2-test.png',position:[-2.55,1.18,-.42],radius:.50,spin:.105,tilt:-.13,tint:0xbbeeff,offset:.20,dreams:CORPUS_META.territoryDreams.littoral},
-  {id:'roadlands',name:'The Roadlands',cue:'Journeys · crossings · movement',texture:'/assets/territory-planets/roadlands-path2-test.png',position:[2.40,.82,-.72],radius:.52,spin:.076,tilt:.16,tint:0xffd19b,offset:.10,dreams:CORPUS_META.territoryDreams.roadlands},
-  {id:'hearthlands',name:'The Hearthlands',cue:'Home · gardens · belonging',texture:'/assets/territory-planets/hearthlands-path2-test.png',live:true,position:[-.12,-.02,.16],radius:.60,spin:.088,tilt:-.08,tint:0xffebc2,offset:.02,hearth:true,dreams:CORPUS_META.territoryDreams.hearthlands},
-  {id:'institutional',name:'Institutional Quarter',cue:'Structure · authority · public space',texture:'/assets/territory-planets/institutional-path2-test.png',position:[-1.68,-1.48,-.82],radius:.47,spin:.061,tilt:.11,tint:0xdbe1ff,offset:.08,dreams:CORPUS_META.territoryDreams.institutional},
-  {id:'river',name:'River Country',cue:'Waterways · bridges · flow',texture:'/assets/territory-planets/river-path2-test.png',position:[2.06,-1.38,-.50],radius:.52,spin:.112,tilt:-.18,tint:0xbcebdc,offset:.16,dreams:CORPUS_META.territoryDreams.river},
+  {id:'littoral',name:'Littoral Coast',cue:'Shorelines · tides · thresholds',texture:'/assets/territory-planets/littoral-final.png',position:[-2.55,1.18,-.42],radius:.50,spin:.105,tilt:-.13,tint:0xbbeeff,offset:.20,dreams:CORPUS_META.territoryDreams.littoral},
+  {id:'roadlands',name:'The Roadlands',cue:'Journeys · crossings · movement',texture:'/assets/territory-planets/roadlands-final.png',position:[2.40,.82,-.72],radius:.52,spin:.076,tilt:.16,tint:0xffd19b,offset:.10,dreams:CORPUS_META.territoryDreams.roadlands},
+  {id:'hearthlands',name:'The Hearthlands',cue:'Home · gardens · belonging',texture:'/assets/territory-planets/hearthlands-final.png',live:true,position:[-.12,-.02,.16],radius:.60,spin:.088,tilt:-.08,tint:0xffebc2,offset:.02,hearth:true,dreams:CORPUS_META.territoryDreams.hearthlands},
+  {id:'institutional',name:'Institutional Quarter',cue:'Structure · order · public life',texture:'/assets/territory-planets/institutional-final.png',position:[-1.68,-1.48,-.82],radius:.47,spin:.061,tilt:.11,tint:0xdbe1ff,offset:.08,dreams:CORPUS_META.territoryDreams.institutional},
+  {id:'river',name:'River Country',cue:'Waterways · bridges · flow',texture:'/assets/territory-planets/river-final.png',position:[2.06,-1.38,-.50],radius:.52,spin:.112,tilt:-.18,tint:0xbcebdc,offset:.16,dreams:CORPUS_META.territoryDreams.river},
 ];
 
 const MOBILE_POSITIONS={

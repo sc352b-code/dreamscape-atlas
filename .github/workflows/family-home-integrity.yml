@@ -9,6 +9,7 @@ on:
       - 'src/family-home-*'
       - 'src/territory-cosmos.*'
       - 'assets/family-home-pilot/**'
+      - 'assets/territory-planets/**'
       - 'index.html'
       - 'tests/family-home-integrity.mjs'
       - 'tests/territory-cosmos-integrity.mjs'

@@ -8,7 +8,7 @@ The flat map is artwork first: major places and corpus-derived symbols are paint
 
 ## Core experience
 
-Planet → cinematic approach → flat territory map → discover place/symbol → tarot detail → return to map.
+Planet → cinematic approach → flat territory map → zoom/pan and discover → place/symbol tarot detail → return to the exact map view.
 
 Each territory also exposes an About view explaining what the territory represents, how it was derived from the corpus, and what evidence supports it.
 
@@ -38,6 +38,7 @@ The first implementation will be Hearthlands.
 5. Labels must remain minimal, selective or absent. The scene should communicate primarily through art.
 6. Interactive hit areas are separate from painted labels: objects can be clickable without visible UI chrome.
 7. Specific place/symbol meaning belongs in tarot details, not as text pasted across the map.
+8. Artwork must be authored at sufficient native resolution/detail to support close exploration without obvious softness or pixelation at intended maximum zoom.
 
 ## Map coordinates
 
@@ -54,22 +55,77 @@ This keeps interaction independent of image pixel dimensions and responsive layo
 
 A territory is entered by selecting its planet. The runtime should preserve the existing celestial approach language, then transition from the spherical view into the approved flat-map scene. The transition implementation must be reusable across territories and configurable rather than territory-specific.
 
+The map opens at the manifest's `zoom.default` value and its default centered framing unless a preserved territory view exists for the current session.
+
+### Zoom and pan
+
+Zoom is a core exploration behavior, not merely image magnification. It must support both visual enlargement and semantic disclosure of interactive objects.
+
+The manifest defines:
+
+- `zoom.min`: farthest permitted view;
+- `zoom.max`: closest permitted view;
+- `zoom.default`: entry/reset view;
+- `zoom.stages.overview`: whole-territory reading;
+- `zoom.stages.explore`: major-place and intermediate-detail exploration;
+- `zoom.stages.detail`: close symbol and fine-detail exploration.
+
+The exact numerical values are territory-configurable. They must follow a sensible ascending relationship: `min <= default`, and overview < explore < detail <= max.
+
+Pan is enabled once the artwork is enlarged beyond the viewport. Dragging/touch movement pans the map. By default, pan is clamped to the artwork so users cannot lose the map in empty space. A small configured overscroll may be used for softness, but it should spring/clamp back into valid bounds.
+
+Supported controls should be configured in the territory manifest and may include:
+
+- subtle + / − buttons;
+- mouse wheel / trackpad zoom;
+- pinch zoom on touch devices;
+- double-click / double-tap zoom toward the interaction point;
+- drag-to-pan;
+- reset/recenter.
+
+Controls must be visually quiet and secondary to the artwork. The territory map must not look like GIS software or a conventional web map.
+
+Zoom should focus toward the pointer/touch focal point where practical rather than always scaling from the center. Panning should remain smooth and inertia, if used, must be restrained rather than game-like.
+
+### Semantic zoom activation
+
+Every interactive place or symbol may specify a `visibleFromZoom` threshold.
+
+Under the default `threshold` activation policy:
+
+- objects below their threshold remain visually present if painted into the artwork, but their interactive hotspot is inactive and no hover label is shown;
+- when the threshold is reached, the hotspot becomes active;
+- the underlying art itself must never abruptly pop in solely because a hotspot activates.
+
+This distinction is critical: semantic zoom changes **discoverability and interaction**, not the integrity of the painted scene.
+
+Suggested behavior by stage:
+
+- **overview**: appreciate the whole composition; only major territory-scale places or deliberately important anchors may be active;
+- **explore**: major places become selectable and more local details become discoverable;
+- **detail**: smaller places and dense symbol hotspots become active for Where's-Wally-style searching.
+
+A future `progressive` activation policy may support smoothly increasing affordance strength, but v1 must work fully with threshold activation.
+
 ### Hovering
 
 Desktop/pointer devices:
 
-- hovering an interactive place or symbol may create a subtle visual response such as glow, focus, or cursor change;
+- hovering an active interactive place or symbol may create a subtle visual response such as glow, focus, or cursor change;
 - a short name label may appear only when `hoverLabel` is enabled;
-- hover must not permanently clutter the artwork.
+- hover must not permanently clutter the artwork;
+- inactive hotspots below their semantic zoom threshold must not reveal themselves on hover.
 
 Touch devices:
 
 - no interaction may depend on hover;
-- first tap should open or focus the interactive object according to the runtime interaction policy.
+- first tap should open or focus an active interactive object according to the runtime interaction policy.
 
 ### Clicking / tapping
 
-Selecting a place or symbol opens its referenced tarot card. The clicked artwork remains conceptually anchored to the map; the user should not feel transported into an unrelated generic modal system.
+Selecting an active place or symbol opens its referenced tarot card. The clicked artwork remains conceptually anchored to the map; the user should not feel transported into an unrelated generic modal system.
+
+If an object is still below its semantic zoom threshold, clicking/tapping its painted location should continue normal map exploration rather than opening its tarot.
 
 ### Tarot details
 
@@ -95,29 +151,24 @@ The About view should explain:
 - major place/symbol patterns contributing to it;
 - known counts only when they are genuinely established and approved for display.
 
-### Back behavior
+### Back behavior and view-state preservation
 
 Back is hierarchical:
 
-1. tarot open → Back closes tarot and returns to the same map position/zoom;
-2. About open → Back closes About and returns to the same map position/zoom;
+1. tarot open → Back closes tarot and returns to the same map position and zoom;
+2. About open → Back closes About and returns to the same map position and zoom;
 3. map open → Back returns to the territory planet/cosmos state;
 4. Escape follows the same nearest-parent rule on keyboard-capable devices.
 
-Map pan/zoom state should be preserved when closing tarot/About details.
+When `zoom.preserveViewState` is true, opening and closing tarot/About must preserve zoom and pan exactly. The user should be able to inspect something, close it, and continue searching from the same patch of artwork.
 
-## Semantic zoom
+Reset/recenter returns to `zoom.default` and the territory's default framing. Leaving the territory for the cosmos may clear the transient view state unless the product later chooses to persist it across territory visits.
 
-The runtime should support progressive disclosure rather than showing every hotspot equally at all scales.
+## Semantic zoom and artwork completeness
 
-Suggested layers:
+Semantic zoom must never be used to conceal missing corpus-derived content. All approved, corpus-evidenced places and symbols assigned to a territory must be represented in the authored flat-map scene and registered in the territory package. Zoom thresholds only govern when they become interactively discoverable.
 
-- entry: overall territory composition;
-- territory: major places and only the most important symbols;
-- place: more place detail and symbol discoveries;
-- close: dense symbol/detail exploration.
-
-Exact thresholds live in the territory manifest.
+This is especially important for Hearthlands: the final artwork should function as a beautiful dense scene in which the complete approved Hearthlands place-and-symbol inventory is deliberately embedded, with enough native detail to reward close inspection.
 
 ## Corpus and privacy rules
 

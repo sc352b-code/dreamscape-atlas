@@ -118,3 +118,12 @@ assert(css.includes('.territory-hotspot--unregistered{display:none!important'));
 assert(css.includes('.territory-v1-controls'));
 
 console.log('Hearthlands registration integrity: 6 places + 61 non-person symbols are registered to the locked artwork; 15 identities remain private-profile-gated in the separate identity ledger.');
+
+const territoryCSS=fs.readFileSync('src/hearthlands-territory-v1.css','utf8');
+assert(territoryJS.includes("getBoundingClientRect().bottom"));
+assert(territoryJS.includes("'--hearthlands-safe-top'"));
+assert(territoryJS.includes('selectHotspot(button)'));
+assert(territoryJS.includes("classList.add('is-selected')"));
+assert(css.includes('.territory-hotspot--registered span::after'));
+assert(css.includes('.territory-hotspot--registered.is-selected'));
+assert(territoryCSS.includes('viewport safety'));

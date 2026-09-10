@@ -1,4 +1,3 @@
-
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 
@@ -53,10 +52,12 @@ assert.equal(coverage.approvalGate.visualArtworkAuditComplete,false);
 assert.equal(coverage.symbols.filter(x=>x.visualAuditVerified).length,0);
 
 assert.equal(asset.mime,'image/png');
-assert.equal(asset.width,1536);
-assert.equal(asset.height,1024);
+assert.equal(asset.width,6144);
+assert.equal(asset.height,4096);
+assert.equal(asset.aspectRatio,1.5);
 assert.match(asset.sha256,/^[0-9a-f]{64}$/);
 assert.equal(asset.file,'./hearthlands-flat-map.png');
+assert.match(asset.sourceTreatment,/composition-preserving/);
 assert.ok(fs.existsSync(`${base}/assets/hearthlands-flat-map.png`),'Missing approved Hearthlands flat-map PNG');
 
 const serialized=JSON.stringify(manifest);
@@ -66,4 +67,4 @@ assert.match(runtime,/wheel/);
 assert.match(runtime,/pointer/);
 assert.match(runtime,/enterDreamscapeFamilyHome/);
 
-console.log('Hearthlands Territory Layer v1 integrity: 6 places, 76 public-safe symbol records, semantic zoom/pan, tarot routing, privacy and Family Home bridge are coherent. Visual 105-item artwork audit remains explicitly unverified.');
+console.log('Hearthlands Territory Layer v1 integrity: 6 places, 76 public-safe symbol records, semantic zoom/pan, tarot routing, privacy, Family Home bridge and 6144x4096 technical master are coherent. Visual 105-item artwork audit remains explicitly unverified.');

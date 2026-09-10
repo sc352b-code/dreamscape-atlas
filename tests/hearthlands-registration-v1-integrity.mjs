@@ -1,5 +1,6 @@
 import fs from 'node:fs';
 import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
 
 const readJSON=path=>JSON.parse(fs.readFileSync(path,'utf8'));
 const ledger=readJSON('worlds/reference-world/territories/hearthlands/validation/image-location-ledger.json');
@@ -12,6 +13,10 @@ const css=fs.readFileSync('src/hearthlands-registration-v1.css','utf8');
 
 assert.equal(ledger.schemaVersion,'2.0.0');
 assert.equal(ledger.territoryId,'hearthlands');
+const lockedArtwork=fs.readFileSync('worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png');
+const lockedArtworkSha=createHash('sha256').update(lockedArtwork).digest('hex');
+assert.equal(lockedArtworkSha,'b7be292766f9bf0774c1fc358154adf522006ac9933b05a3a5469d29a8d917b3','mounted Hearthlands artwork must exactly match the locked final image');
+assert.equal(ledger.artworkBasis.lockedImageSha256,lockedArtworkSha,'registration ledger must target the mounted locked artwork');
 assert.equal(ledger.entries.length,67,'runtime registration ledger must cover 6 places + 61 public-safe non-person symbols; 15 private identities are validated separately');
 assert.equal(places.length,6);
 assert.equal(symbols.length,76);

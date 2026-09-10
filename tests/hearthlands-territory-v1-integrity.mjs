@@ -33,16 +33,22 @@ assert.deepEqual(new Set(manifest.places.map(x=>x.id)),new Set(expectedPlaces));
 for(const item of [...manifest.places,...manifest.symbols]){
   assert.ok(item.tarotCardRef in tarot,`Missing tarot: ${item.tarotCardRef}`);
   assert.equal(item.corpusEvidence.privacyClass,'public-safe-derived');
-  assert.ok(item.interaction.clickable);
+  if(item.id.startsWith('person-')){
+    assert.equal(item.semanticIdentity?.labelSource,'private-profile');
+    assert.equal(item.semanticIdentity?.labelResolvedInPublicRuntime,false);
+    assert.equal(item.interaction.clickable,false);
+    assert.equal(item.interaction.hoverable,false);
+  }else{
+    assert.ok(item.interaction.clickable);
+  }
 }
-for(const p of manifest.places){
-  assert.ok(p.map.x>=0&&p.map.x<=1&&p.map.y>=0&&p.map.y<=1);
-}
+for(const p of manifest.places) assert.ok(p.map.x>=0&&p.map.x<=1&&p.map.y>=0&&p.map.y<=1);
 for(const s of manifest.symbols){
   assert.ok(s.map.placements.length>=1);
   for(const p of s.map.placements) assert.ok(p.x>=0&&p.x<=1&&p.y>=0&&p.y<=1);
   for(const related of s.corpusEvidence.relatedPlaceIds??[]) assert.ok(expectedPlaces.includes(related),`Invalid place evidence ${related}`);
 }
+assert.equal(manifest.symbols.filter(x=>x.id.startsWith('person-')).length,15);
 assert.equal(coverage.requirements.canonicalPlaces,6);
 assert.equal(coverage.requirements.spatialMotifs,23);
 assert.equal(coverage.requirements.symbols,76);
@@ -61,10 +67,10 @@ assert.match(asset.sourceTreatment,/composition-preserving/);
 assert.ok(fs.existsSync(`${base}/assets/hearthlands-flat-map.png`),'Missing approved Hearthlands flat-map PNG');
 
 const serialized=JSON.stringify(manifest);
-for(const forbidden of ['Natalie','Alex','Alice','Stephen Coarse','Wayne','Carl Jung']) assert.ok(!serialized.includes(forbidden),`Private identifying label leaked: ${forbidden}`);
+for(const forbidden of ['Natalie','Alex','Alice','Stephen Coarse','Wayne','Carl Jung','Recurring Figure','recurring-figure-']) assert.ok(!serialized.includes(forbidden),`Private or false public label leaked: ${forbidden}`);
 assert.match(runtime,/territoryZoomStage/);
 assert.match(runtime,/wheel/);
 assert.match(runtime,/pointer/);
 assert.match(runtime,/enterDreamscapeFamilyHome/);
 
-console.log('Hearthlands Territory Layer v1 integrity: 6 places, 76 public-safe symbol records, semantic zoom/pan, tarot routing, privacy, Family Home bridge and 6144x4096 technical master are coherent. Visual 105-item artwork audit remains explicitly unverified.');
+console.log('Hearthlands Territory Layer v1 integrity: 6 places, 76 symbols, 15 privacy-gated person identities, semantic zoom/pan, tarot routing, Family Home bridge and 6144x4096 technical master are coherent.');

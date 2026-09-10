@@ -1,0 +1,23 @@
+name: Inspect Hearthlands cushion session v7
+
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-hearthlands-transfer-v7.yml'
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create cushion session
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request, json
+          base='https://api.firestorage.ai/dev/file'
+          share='xlFG0U8XX0Mc'
+          req=urllib.request.Request(base+'/shares/'+share+'/cushion-sessions',data=json.dumps({'password':None}).encode(),headers={'Content-Type':'application/json'},method='POST')
+          with urllib.request.urlopen(req) as r:
+              print('STATUS',r.status)
+              print(r.read().decode())
+          PY

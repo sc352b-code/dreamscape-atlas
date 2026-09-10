@@ -23,27 +23,20 @@ jobs:
       - name: Correct public person ontology without exposing private labels
         run: |
           python - <<'PY'
-          import json, pathlib, re
+          import json, pathlib
           base=pathlib.Path('worlds/reference-world/territories/hearthlands')
           mapping={f'recurring-figure-{i:02d}':f'person-{i:02d}' for i in range(1,16)}
 
           def rewrite_ref(value):
               if not isinstance(value,str): return value
-              for old,new in mapping.items():
-                  value=value.replace(old,new)
+              for old,new in mapping.items(): value=value.replace(old,new)
               return value
 
           def walk(obj):
-              if isinstance(obj,dict):
-                  out={}
-                  for k,v in obj.items():
-                      nk=rewrite_ref(k)
-                      out[nk]=walk(v)
-                  return out
+              if isinstance(obj,dict): return {rewrite_ref(k):walk(v) for k,v in obj.items()}
               if isinstance(obj,list): return [walk(v) for v in obj]
               return rewrite_ref(obj)
 
-          # symbols + manifest: keep technical IDs public, never a fake semantic label.
           for path in [base/'symbols.json',base/'territory-manifest.json']:
               data=walk(json.load(open(path)))
               symbols=data if isinstance(data,list) else data['symbols']
@@ -61,7 +54,6 @@ jobs:
                       s['interaction']['hoverLabel']=False
               open(path,'w').write(json.dumps(data,indent=2)+'\n')
 
-          # Tarot records stay as technical storage only and are not user-facing until resolved.
           p=base/'tarot/tarot-cards.json'
           cards=walk(json.load(open(p)))
           for key,card in cards.items():
@@ -71,7 +63,6 @@ jobs:
                   card['semanticIdentityStatus']='private-label-required'
           open(p,'w').write(json.dumps(cards,indent=2)+'\n')
 
-          # Registration ledger: pause people entirely; do not paint/register arbitrary humans.
           p=base/'validation/image-location-ledger.json'
           ledger=walk(json.load(open(p)))
           for e in ledger['entries']:
@@ -81,7 +72,6 @@ jobs:
                   e['paintedObject']=None; e['x']=None; e['y']=None; e['hitArea']=None; e['activeFromZoom']=None
                   e['auditConfidence']='paused'
                   e['correctionReason']='Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned.'
-          # summary retains total symbol count but moves all people out of art-correction bucket.
           people=sum(1 for e in ledger['entries'] if e.get('id','').startswith('person-'))
           ledger['summary']['personSymbolsAwaitingPrivateIdentity']=people
           ledger['summary']['symbolsNeedingArtCorrection']=sum(1 for e in ledger['entries'] if e.get('kind')=='symbol' and e.get('registrationStatus')=='needs-art-correction')
@@ -91,8 +81,12 @@ jobs:
           }
           open(p,'w').write(json.dumps(ledger,indent=2)+'\n')
 
-          # Guard against the bad ontology returning.
-          for path in [base/'symbols.json',base/'territory-manifest.json',base/'tarot/tarot-cards.json',base/'validation/image-location-ledger.json']:
+          p=base/'validation/artwork-coverage.json'
+          coverage=walk(json.load(open(p)))
+          open(p,'w').write(json.dumps(coverage,indent=2)+'\n')
+
+          checked=[base/'symbols.json',base/'territory-manifest.json',base/'tarot/tarot-cards.json',base/'validation/image-location-ledger.json',base/'validation/artwork-coverage.json']
+          for path in checked:
               text=path.read_text()
               assert 'Recurring Figure' not in text
               assert 'recurring-figure-' not in text
@@ -101,6 +95,6 @@ jobs:
           git config user.name 'dreamscape-engine-bot'
           git config user.email 'actions@users.noreply.github.com'
           git add worlds/reference-world/territories/hearthlands/
-          git commit -m 'Correct Hearthlands person identity boundary'
+          git commit -m 'Complete Hearthlands public person identity cleanup'
           git pull --rebase origin family-home-pilot
           git push origin HEAD:family-home-pilot

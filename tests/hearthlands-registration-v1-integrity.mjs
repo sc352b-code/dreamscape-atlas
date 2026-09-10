@@ -86,7 +86,8 @@ const publicText=[
   fs.readFileSync('worlds/reference-world/territories/hearthlands/territory-manifest.json','utf8'),
   fs.readFileSync('worlds/reference-world/territories/hearthlands/tarot/tarot-cards.json','utf8'),
   fs.readFileSync('worlds/reference-world/territories/hearthlands/validation/image-location-ledger.json','utf8'),
-  fs.readFileSync('worlds/reference-world/territories/hearthlands/validation/artwork-coverage.json','utf8'),\n  fs.readFileSync('worlds/reference-world/territories/hearthlands/validation/human-identity-registration.json','utf8')
+  fs.readFileSync('worlds/reference-world/territories/hearthlands/validation/artwork-coverage.json','utf8'),
+  fs.readFileSync('worlds/reference-world/territories/hearthlands/validation/human-identity-registration.json','utf8')
 ].join('\n');
 assert(!publicText.includes('Recurring Figure'));
 assert(!publicText.includes('recurring-figure-'));

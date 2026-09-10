@@ -1,0 +1,38 @@
+name: Inspect Hearthlands final download resolver v11
+
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-hearthlands-transfer-v11.yml'
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Resolve final download route
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request,urllib.parse,json,re
+          api='https://api.firestorage.ai/dev/file'
+          req=urllib.request.Request(api+'/shares/xlFG0U8XX0Mc/cushion-sessions',data=b'{"password":null}',headers={'Content-Type':'application/json'},method='POST')
+          cid=json.loads(urllib.request.urlopen(req).read().decode())['cushionId']
+          req=urllib.request.Request(api+'/cushions/'+cid+'/resolve',data=b'',method='POST')
+          resolved=json.loads(urllib.request.urlopen(req).read().decode())
+          print('RESOLVED',resolved)
+          fid=resolved['finalId']
+          page='https://firestorage.ai/ja/d/'+fid+'/'
+          html=urllib.request.urlopen(page).read().decode('utf-8','ignore')
+          print('FINAL_HTML',html)
+          scripts=re.findall(r'<script[^>]+src="([^"]+)"',html)
+          for src in scripts:
+              url=urllib.parse.urljoin('https://firestorage.ai',src)
+              try: js=urllib.request.urlopen(url).read().decode('utf-8','ignore')
+              except: continue
+              low=js.lower()
+              if any(tok in low for tok in ['finalid','/objects/','/download','downloads/','/files/']):
+                  print('\n===SCRIPT',url,'===')
+                  for tok in ['finalId','/objects/','/download','/files/','resolve']:
+                      i=low.find(tok.lower())
+                      if i>=0: print(js[max(0,i-5000):min(len(js),i+10000)])
+          PY

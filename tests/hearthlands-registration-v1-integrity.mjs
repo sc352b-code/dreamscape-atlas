@@ -106,7 +106,7 @@ assert(js.includes('__dreamscapePrivateIdentityMap'));
 assert(js.includes('private-label-required'));
 const territoryJS=fs.readFileSync('src/hearthlands-territory-v1.js','utf8');
 assert(territoryJS.includes('__dreamscapePrivateIdentityMap'));
-assert(territoryJS.includes('privateLabel||card.title'));
+assert(territoryJS.includes('providerLabel||mapLabel||card.title'));
 assert(js.includes('data-territory-action="zoom-in"'));
 assert(js.includes('data-territory-action="zoom-out"'));
 assert(css.includes('.territory-hotspot--unregistered{display:none!important'));

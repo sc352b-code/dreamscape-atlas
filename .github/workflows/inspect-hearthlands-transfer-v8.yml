@@ -1,0 +1,20 @@
+name: Inspect Hearthlands cushion flow v8
+
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-hearthlands-transfer-v8.yml'
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect cushion flow
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request
+          js=urllib.request.urlopen('https://firestorage.ai/_next/static/chunks/4899-d89df949f2dbd5af.js').read().decode('utf-8','ignore')
+          i=js.find('/cushion-sessions')
+          print(js[max(0,i-3500):min(len(js),i+8000)])
+          PY

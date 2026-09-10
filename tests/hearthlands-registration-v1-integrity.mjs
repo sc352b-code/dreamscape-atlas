@@ -2,7 +2,8 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 
 const readJSON=path=>JSON.parse(fs.readFileSync(path,'utf8'));
-const ledger=readJSON('worlds/reference-world/territories/hearthlands/validation/image-location-ledger.json');\nconst humanLedger=readJSON('worlds/reference-world/territories/hearthlands/validation/human-identity-registration.json');
+const ledger=readJSON('worlds/reference-world/territories/hearthlands/validation/image-location-ledger.json');
+const humanLedger=readJSON('worlds/reference-world/territories/hearthlands/validation/human-identity-registration.json');
 const places=readJSON('worlds/reference-world/territories/hearthlands/places.json');
 const symbols=readJSON('worlds/reference-world/territories/hearthlands/symbols.json');
 const index=fs.readFileSync('index.html','utf8');

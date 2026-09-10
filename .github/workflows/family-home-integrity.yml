@@ -21,7 +21,7 @@ on:
       - 'tests/family-home-integrity.mjs'
       - 'tests/hearthlands-territory-v1-integrity.mjs'
       - 'tests/hearthlands-registration-v1-integrity.mjs'
-      - 'tests/hearthlands-human-identity-registration-v1-integrity.mjs'
+      - 'tests/hearthlands-human-identity-registration-v1-integrity.mjs'\n      - 'tests/dreamscape-private-profile-integrity.mjs'\n      - 'src/dreamscape-private-profile.js'
       - 'tests/territory-cosmos-integrity.mjs'
       - 'tests/world-engine-v1-integrity.mjs'
       - '.github/workflows/family-home-integrity.yml'

@@ -7,11 +7,11 @@
     "interpretation": "Interpretive profile pending unless an authored v57 reading already exists. This card stays with the established corpus geography rather than inventing psychology.",
     "corpusGrounding": "3 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
     "relatedItems": [
-      "recurring-figure-03",
-      "recurring-figure-05",
-      "recurring-figure-10",
-      "recurring-figure-12",
-      "recurring-figure-13",
+      "person-03",
+      "person-05",
+      "person-10",
+      "person-12",
+      "person-13",
       "food",
       "house-home",
       "cat",
@@ -29,7 +29,7 @@
     "interpretation": "Interpretive profile pending unless an authored v57 reading already exists. This card stays with the established corpus geography rather than inventing psychology.",
     "corpusGrounding": "2 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
     "relatedItems": [
-      "recurring-figure-10",
+      "person-10",
       "bed",
       "egg",
       "house-home",
@@ -52,13 +52,13 @@
     "interpretation": "Interpretive profile pending unless an authored v57 reading already exists. This card stays with the established corpus geography rather than inventing psychology.",
     "corpusGrounding": "31 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
     "relatedItems": [
-      "recurring-figure-01",
-      "recurring-figure-03",
-      "recurring-figure-10",
-      "recurring-figure-11",
-      "recurring-figure-12",
-      "recurring-figure-13",
-      "recurring-figure-15",
+      "person-01",
+      "person-03",
+      "person-10",
+      "person-11",
+      "person-12",
+      "person-13",
+      "person-15",
       "bag",
       "bed",
       "box",
@@ -75,9 +75,9 @@
     "interpretation": "Interpretive profile pending unless an authored v57 reading already exists. This card stays with the established corpus geography rather than inventing psychology.",
     "corpusGrounding": "6 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
     "relatedItems": [
-      "recurring-figure-01",
-      "recurring-figure-11",
-      "recurring-figure-12",
+      "person-01",
+      "person-11",
+      "person-12",
       "bed",
       "book",
       "door",
@@ -98,12 +98,12 @@
     "interpretation": "Interpretive profile pending unless an authored v57 reading already exists. This card stays with the established corpus geography rather than inventing psychology.",
     "corpusGrounding": "5 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
     "relatedItems": [
-      "recurring-figure-01",
-      "recurring-figure-03",
-      "recurring-figure-05",
-      "recurring-figure-10",
-      "recurring-figure-11",
-      "recurring-figure-13",
+      "person-01",
+      "person-03",
+      "person-05",
+      "person-10",
+      "person-11",
+      "person-13",
       "bed",
       "door",
       "food",
@@ -127,170 +127,185 @@
     ],
     "deeperDestination": null
   },
-  "tarot/symbol/recurring-figure-01": {
-    "id": "tarot/symbol/recurring-figure-01",
+  "tarot/symbol/person-01": {
+    "id": "tarot/symbol/person-01",
     "type": "symbol",
-    "title": "Recurring Figure 01",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 34 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
     "relatedItems": [
       "current-present-house",
       "large-many-roomed-house",
       "unfamiliar-house"
-    ]
+    ],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-02": {
-    "id": "tarot/symbol/recurring-figure-02",
+  "tarot/symbol/person-02": {
+    "id": "tarot/symbol/person-02",
     "type": "symbol",
-    "title": "Recurring Figure 02",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 10 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
-    "relatedItems": []
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-03": {
-    "id": "tarot/symbol/recurring-figure-03",
+  "tarot/symbol/person-03": {
+    "id": "tarot/symbol/person-03",
     "type": "symbol",
-    "title": "Recurring Figure 03",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 28 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
     "relatedItems": [
       "childhood-house",
       "current-present-house",
       "unfamiliar-house"
-    ]
+    ],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-04": {
-    "id": "tarot/symbol/recurring-figure-04",
+  "tarot/symbol/person-04": {
+    "id": "tarot/symbol/person-04",
     "type": "symbol",
-    "title": "Recurring Figure 04",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
-    "relatedItems": []
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-05": {
-    "id": "tarot/symbol/recurring-figure-05",
+  "tarot/symbol/person-05": {
+    "id": "tarot/symbol/person-05",
     "type": "symbol",
-    "title": "Recurring Figure 05",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 18 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
     "relatedItems": [
       "childhood-house",
       "unfamiliar-house"
-    ]
+    ],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-06": {
-    "id": "tarot/symbol/recurring-figure-06",
+  "tarot/symbol/person-06": {
+    "id": "tarot/symbol/person-06",
     "type": "symbol",
-    "title": "Recurring Figure 06",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
-    "relatedItems": []
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-07": {
-    "id": "tarot/symbol/recurring-figure-07",
+  "tarot/symbol/person-07": {
+    "id": "tarot/symbol/person-07",
     "type": "symbol",
-    "title": "Recurring Figure 07",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
-    "relatedItems": []
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-08": {
-    "id": "tarot/symbol/recurring-figure-08",
+  "tarot/symbol/person-08": {
+    "id": "tarot/symbol/person-08",
     "type": "symbol",
-    "title": "Recurring Figure 08",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
-    "relatedItems": []
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-09": {
-    "id": "tarot/symbol/recurring-figure-09",
+  "tarot/symbol/person-09": {
+    "id": "tarot/symbol/person-09",
     "type": "symbol",
-    "title": "Recurring Figure 09",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
-    "relatedItems": []
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-10": {
-    "id": "tarot/symbol/recurring-figure-10",
+  "tarot/symbol/person-10": {
+    "id": "tarot/symbol/person-10",
     "type": "symbol",
-    "title": "Recurring Figure 10",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 53 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
     "relatedItems": [
       "childhood-house",
       "family-home",
       "current-present-house",
       "unfamiliar-house"
-    ]
+    ],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-11": {
-    "id": "tarot/symbol/recurring-figure-11",
+  "tarot/symbol/person-11": {
+    "id": "tarot/symbol/person-11",
     "type": "symbol",
-    "title": "Recurring Figure 11",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 59 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
     "relatedItems": [
       "current-present-house",
       "large-many-roomed-house",
       "unfamiliar-house"
-    ]
+    ],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-12": {
-    "id": "tarot/symbol/recurring-figure-12",
+  "tarot/symbol/person-12": {
+    "id": "tarot/symbol/person-12",
     "type": "symbol",
-    "title": "Recurring Figure 12",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 29 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
     "relatedItems": [
       "childhood-house",
       "current-present-house",
       "large-many-roomed-house"
-    ]
+    ],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-13": {
-    "id": "tarot/symbol/recurring-figure-13",
+  "tarot/symbol/person-13": {
+    "id": "tarot/symbol/person-13",
     "type": "symbol",
-    "title": "Recurring Figure 13",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 24 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
     "relatedItems": [
       "childhood-house",
       "current-present-house",
       "unfamiliar-house"
-    ]
+    ],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-14": {
-    "id": "tarot/symbol/recurring-figure-14",
+  "tarot/symbol/person-14": {
+    "id": "tarot/symbol/person-14",
     "type": "symbol",
-    "title": "Recurring Figure 14",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
-    "relatedItems": []
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
   },
-  "tarot/symbol/recurring-figure-15": {
-    "id": "tarot/symbol/recurring-figure-15",
+  "tarot/symbol/person-15": {
+    "id": "tarot/symbol/person-15",
     "type": "symbol",
-    "title": "Recurring Figure 15",
+    "title": "Private semantic label required",
     "image": null,
-    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
     "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
     "relatedItems": [
       "current-present-house"
-    ]
+    ],
+    "semanticIdentityStatus": "private-label-required"
   },
   "tarot/symbol/bag": {
     "id": "tarot/symbol/bag",

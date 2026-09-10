@@ -1,7 +1,7 @@
 [
   {
-    "id": "recurring-figure-01",
-    "name": "Recurring Figure 01",
+    "id": "person-01",
+    "name": "person-01",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -18,7 +18,7 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 34 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-01"
+        "private:v57/hearthlands/symbol/person-01"
       ],
       "frequency": 34,
       "frequencyStatus": "known",
@@ -29,16 +29,22 @@
         "unfamiliar-house"
       ]
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-01",
+    "tarotCardRef": "tarot/symbol/person-01",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
-      "hoverLabel": true
+      "hoverable": false,
+      "clickable": false,
+      "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-02",
-    "name": "Recurring Figure 02",
+    "id": "person-02",
+    "name": "person-02",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -55,23 +61,29 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 10 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-02"
+        "private:v57/hearthlands/symbol/person-02"
       ],
       "frequency": 10,
       "frequencyStatus": "known",
       "associationStatus": "territory-specific",
       "relatedPlaceIds": []
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-02",
+    "tarotCardRef": "tarot/symbol/person-02",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
-      "hoverLabel": true
+      "hoverable": false,
+      "clickable": false,
+      "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-03",
-    "name": "Recurring Figure 03",
+    "id": "person-03",
+    "name": "person-03",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -88,7 +100,7 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 28 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-03"
+        "private:v57/hearthlands/symbol/person-03"
       ],
       "frequency": 28,
       "frequencyStatus": "known",
@@ -99,16 +111,22 @@
         "unfamiliar-house"
       ]
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-03",
+    "tarotCardRef": "tarot/symbol/person-03",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
-      "hoverLabel": true
+      "hoverable": false,
+      "clickable": false,
+      "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-04",
-    "name": "Recurring Figure 04",
+    "id": "person-04",
+    "name": "person-04",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -125,23 +143,29 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-04"
+        "private:v57/hearthlands/symbol/person-04"
       ],
       "frequency": 2,
       "frequencyStatus": "known",
       "associationStatus": "territory-specific",
       "relatedPlaceIds": []
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-04",
+    "tarotCardRef": "tarot/symbol/person-04",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
+      "hoverable": false,
+      "clickable": false,
       "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-05",
-    "name": "Recurring Figure 05",
+    "id": "person-05",
+    "name": "person-05",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -158,7 +182,7 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 18 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-05"
+        "private:v57/hearthlands/symbol/person-05"
       ],
       "frequency": 18,
       "frequencyStatus": "known",
@@ -168,16 +192,22 @@
         "unfamiliar-house"
       ]
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-05",
+    "tarotCardRef": "tarot/symbol/person-05",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
-      "hoverLabel": true
+      "hoverable": false,
+      "clickable": false,
+      "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-06",
-    "name": "Recurring Figure 06",
+    "id": "person-06",
+    "name": "person-06",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -194,23 +224,29 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-06"
+        "private:v57/hearthlands/symbol/person-06"
       ],
       "frequency": 3,
       "frequencyStatus": "known",
       "associationStatus": "territory-specific",
       "relatedPlaceIds": []
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-06",
+    "tarotCardRef": "tarot/symbol/person-06",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
+      "hoverable": false,
+      "clickable": false,
       "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-07",
-    "name": "Recurring Figure 07",
+    "id": "person-07",
+    "name": "person-07",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -227,23 +263,29 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-07"
+        "private:v57/hearthlands/symbol/person-07"
       ],
       "frequency": 5,
       "frequencyStatus": "known",
       "associationStatus": "territory-specific",
       "relatedPlaceIds": []
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-07",
+    "tarotCardRef": "tarot/symbol/person-07",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
+      "hoverable": false,
+      "clickable": false,
       "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-08",
-    "name": "Recurring Figure 08",
+    "id": "person-08",
+    "name": "person-08",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -260,23 +302,29 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-08"
+        "private:v57/hearthlands/symbol/person-08"
       ],
       "frequency": 5,
       "frequencyStatus": "known",
       "associationStatus": "territory-specific",
       "relatedPlaceIds": []
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-08",
+    "tarotCardRef": "tarot/symbol/person-08",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
+      "hoverable": false,
+      "clickable": false,
       "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-09",
-    "name": "Recurring Figure 09",
+    "id": "person-09",
+    "name": "person-09",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -293,23 +341,29 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-09"
+        "private:v57/hearthlands/symbol/person-09"
       ],
       "frequency": 3,
       "frequencyStatus": "known",
       "associationStatus": "territory-specific",
       "relatedPlaceIds": []
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-09",
+    "tarotCardRef": "tarot/symbol/person-09",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
+      "hoverable": false,
+      "clickable": false,
       "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-10",
-    "name": "Recurring Figure 10",
+    "id": "person-10",
+    "name": "person-10",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -326,7 +380,7 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 53 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-10"
+        "private:v57/hearthlands/symbol/person-10"
       ],
       "frequency": 53,
       "frequencyStatus": "known",
@@ -338,16 +392,22 @@
         "unfamiliar-house"
       ]
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-10",
+    "tarotCardRef": "tarot/symbol/person-10",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
-      "hoverLabel": true
+      "hoverable": false,
+      "clickable": false,
+      "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-11",
-    "name": "Recurring Figure 11",
+    "id": "person-11",
+    "name": "person-11",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -364,7 +424,7 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 59 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-11"
+        "private:v57/hearthlands/symbol/person-11"
       ],
       "frequency": 59,
       "frequencyStatus": "known",
@@ -375,16 +435,22 @@
         "unfamiliar-house"
       ]
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-11",
+    "tarotCardRef": "tarot/symbol/person-11",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
-      "hoverLabel": true
+      "hoverable": false,
+      "clickable": false,
+      "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-12",
-    "name": "Recurring Figure 12",
+    "id": "person-12",
+    "name": "person-12",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -401,7 +467,7 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 29 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-12"
+        "private:v57/hearthlands/symbol/person-12"
       ],
       "frequency": 29,
       "frequencyStatus": "known",
@@ -412,16 +478,22 @@
         "large-many-roomed-house"
       ]
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-12",
+    "tarotCardRef": "tarot/symbol/person-12",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
-      "hoverLabel": true
+      "hoverable": false,
+      "clickable": false,
+      "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-13",
-    "name": "Recurring Figure 13",
+    "id": "person-13",
+    "name": "person-13",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -438,7 +510,7 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 24 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-13"
+        "private:v57/hearthlands/symbol/person-13"
       ],
       "frequency": 24,
       "frequencyStatus": "known",
@@ -449,16 +521,22 @@
         "unfamiliar-house"
       ]
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-13",
+    "tarotCardRef": "tarot/symbol/person-13",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
-      "hoverLabel": true
+      "hoverable": false,
+      "clickable": false,
+      "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-14",
-    "name": "Recurring Figure 14",
+    "id": "person-14",
+    "name": "person-14",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -475,23 +553,29 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-14"
+        "private:v57/hearthlands/symbol/person-14"
       ],
       "frequency": 3,
       "frequencyStatus": "known",
       "associationStatus": "territory-specific",
       "relatedPlaceIds": []
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-14",
+    "tarotCardRef": "tarot/symbol/person-14",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
+      "hoverable": false,
+      "clickable": false,
       "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {
-    "id": "recurring-figure-15",
-    "name": "Recurring Figure 15",
+    "id": "person-15",
+    "name": "person-15",
     "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
     "map": {
       "placements": [
@@ -508,7 +592,7 @@
       "privacyClass": "public-safe-derived",
       "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
       "evidenceRefs": [
-        "private:v57/hearthlands/symbol/recurring-figure-15"
+        "private:v57/hearthlands/symbol/person-15"
       ],
       "frequency": 3,
       "frequencyStatus": "known",
@@ -517,11 +601,17 @@
         "current-present-house"
       ]
     },
-    "tarotCardRef": "tarot/symbol/recurring-figure-15",
+    "tarotCardRef": "tarot/symbol/person-15",
     "interaction": {
-      "hoverable": true,
-      "clickable": true,
+      "hoverable": false,
+      "clickable": false,
       "hoverLabel": false
+    },
+    "semanticIdentity": {
+      "kind": "person",
+      "labelSource": "private-profile",
+      "labelResolvedInPublicRuntime": false,
+      "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
     }
   },
   {

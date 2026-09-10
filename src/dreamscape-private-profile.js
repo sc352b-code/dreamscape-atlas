@@ -5,7 +5,7 @@ function sanitiseProfile(input){
   const labels=source.semanticLabels&&typeof source.semanticLabels==='object'?source.semanticLabels:{};
   const semanticLabels={};
   for(const [id,label] of Object.entries(labels)){
-    if(/^person-\\d{2}$/.test(id)&&typeof label==='string'&&label.trim()) semanticLabels[id]=label.trim();
+    if(/^person-\d{2}$/.test(id)&&typeof label==='string'&&label.trim()) semanticLabels[id]=label.trim();
   }
   return {
     schemaVersion:'1.0.0',
@@ -27,32 +27,66 @@ function persist(){
   try{sessionStorage.setItem(STORAGE_KEY,JSON.stringify(current));}catch{}
 }
 
-function notify(){
-  window.dispatchEvent(new CustomEvent('dreamscape-private-profile-change',{detail:{profileId:current.profileId,resolvedIds:Object.keys(current.semanticLabels)}}));
+function notify(source='runtime'){
+  window.dispatchEvent(new CustomEvent('dreamscape-private-profile-change',{
+    detail:{profileId:current.profileId,resolvedIds:Object.keys(current.semanticLabels),source}
+  }));
+}
+
+function applyProfile(profile,source='runtime'){
+  current=sanitiseProfile(profile);
+  persist();
+  notify(source);
+  return api.getProfile();
 }
 
 const api={
   getProfile:()=>structuredClone(current),
   getSemanticLabel:id=>current.semanticLabels[id]||null,
-  setProfile(profile){
-    current=sanitiseProfile(profile);
-    persist();
-    notify();
-    return api.getProfile();
-  },
+  setProfile(profile){return applyProfile(profile,'manual');},
   setSemanticLabels(labels,profileId=current.profileId){
-    current=sanitiseProfile({profileId,semanticLabels:labels});
-    persist();
-    notify();
-    return api.getProfile();
+    return applyProfile({profileId,semanticLabels:labels},'manual');
   },
   clear(){
     current=sanitiseProfile(null);
     try{sessionStorage.removeItem(STORAGE_KEY);}catch{}
-    notify();
+    notify('clear');
+  },
+  async hydrateFromProvider(provider=window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__){
+    if(!provider||typeof provider.loadProfile!=='function') return api.getProfile();
+    const profile=await provider.loadProfile();
+    if(profile) applyProfile(profile,'provider');
+    if(typeof provider.subscribe==='function'){
+      provider.subscribe(next=>{if(next) applyProfile(next,'provider-subscription');});
+    }
+    return api.getProfile();
   }
 };
 
 window.DreamscapePrivateProfile=api;
 window.__dreamscapePrivateProfile=api;
-notify();
+
+async function loadLocalPreviewProvider(){
+  if(!['localhost','127.0.0.1','::1'].includes(location.hostname)) return null;
+  try{
+    const response=await fetch('/__private/profile',{cache:'no-store'});
+    if(!response.ok) return null;
+    const profile=await response.json();
+    return {loadProfile:async()=>profile};
+  }catch{return null;}
+}
+
+(async()=>{
+  const external=window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__;
+  if(external){
+    await api.hydrateFromProvider(external);
+    return;
+  }
+  const local=await loadLocalPreviewProvider();
+  if(local){
+    window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__=local;
+    await api.hydrateFromProvider(local);
+    return;
+  }
+  notify('session');
+})();

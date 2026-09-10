@@ -60,3 +60,42 @@
 @media (prefers-reduced-motion:reduce){
   .territory-hotspot--registered.active::after{animation:none;opacity:.32}
 }
+
+
+/* Precise hover anchoring: the hitbox can remain generous, but the visible cue
+   and label are always tied to its registered centre point. */
+.territory-hotspot--registered span{
+  left:50%!important;
+  top:50%!important;
+  bottom:auto!important;
+  transform:translate(-50%,calc(-100% - 15px))!important;
+}
+.territory-hotspot--registered span::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:100%;
+  width:1px;
+  height:12px;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg,rgba(255,230,178,.72),rgba(255,230,178,.08));
+  box-shadow:0 0 5px rgba(255,214,136,.25);
+}
+.territory-hotspot--registered:hover span,
+.territory-hotspot--registered:focus-visible span,
+.territory-hotspot--registered.is-selected span{
+  opacity:1!important;
+  transform:translate(-50%,calc(-100% - 12px))!important;
+}
+.territory-hotspot--registered.is-selected::before{
+  border-color:rgba(255,235,190,.88)!important;
+  background:rgba(255,224,160,.10)!important;
+  box-shadow:0 0 0 2px rgba(33,31,28,.22),0 0 30px rgba(255,206,113,.38)!important;
+}
+.territory-hotspot--registered.is-selected::after{
+  opacity:1!important;
+  animation:none!important;
+  width:6px!important;
+  height:6px!important;
+  box-shadow:0 0 9px rgba(255,239,202,.9),0 0 26px rgba(255,198,92,.48)!important;
+}

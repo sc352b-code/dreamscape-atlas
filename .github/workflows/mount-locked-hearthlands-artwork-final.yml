@@ -1,0 +1,62 @@
+name: Mount locked Hearthlands artwork final
+
+on:
+  push:
+    paths:
+      - '.github/workflows/mount-locked-hearthlands-artwork-final.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  mount:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: family-home-pilot
+      - name: Resolve, download and verify locked artwork
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request, urllib.parse, json, re, hashlib, pathlib
+          base='https://api.firestorage.ai/dev/file'
+          share='xlFG0U8XX0Mc'
+          file_id='01a08d1efbb57114aeebb7131d5db146'
+          expected='b7be292766f9bf0774c1fc358154adf522006ac9933b05a3a5469d29a8d917b3'
+
+          req=urllib.request.Request(base+'/shares/'+share+'/cushion-sessions',
+              data=json.dumps({'password':None}).encode(),
+              headers={'Content-Type':'application/json'},method='POST')
+          cushion=json.loads(urllib.request.urlopen(req).read().decode())['cushionId']
+          go='https://firestorage.ai/ja/go/'+cushion+'/'
+          response=urllib.request.urlopen(go)
+          final_url=response.geturl()
+          print('resolved page',final_url)
+          path=urllib.parse.urlparse(final_url).path
+          m=re.search(r'/(?:ja|en)?/?f/([0-9A-Za-z]{16})/([0-9A-Za-z]{6})/?$',path)
+          if not m:
+              raise SystemExit('Could not resolve Firestorage object path: '+path)
+          public_id,subdir=m.groups()
+          endpoint='/objects/'+public_id+'/'+subdir
+          print('resolved object',endpoint)
+
+          dreq=urllib.request.Request(base+endpoint+'/files/'+file_id+'/download',data=b'',method='POST')
+          signed=json.loads(urllib.request.urlopen(dreq).read().decode())['downloadUrl']
+          data=urllib.request.urlopen(signed).read()
+          actual=hashlib.sha256(data).hexdigest()
+          print('bytes',len(data),'sha256',actual)
+          if actual != expected:
+              raise SystemExit('SHA mismatch: '+actual)
+          pathlib.Path('/tmp/hearthlands-flat-map.png').write_bytes(data)
+          PY
+      - name: Replace branch asset
+        shell: bash
+        run: |
+          cp /tmp/hearthlands-flat-map.png worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png
+          test "$(sha256sum worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png | awk '{print $1}')" = "b7be292766f9bf0774c1fc358154adf522006ac9933b05a3a5469d29a8d917b3"
+          git config user.name "dreamscape-build"
+          git config user.email "dreamscape-build@users.noreply.github.com"
+          git add worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png
+          git commit -m "Mount locked final Hearthlands artwork"
+          git push origin HEAD:family-home-pilot

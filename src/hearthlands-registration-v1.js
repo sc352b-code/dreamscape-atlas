@@ -88,10 +88,13 @@ function waitForTerritory(payload){
     for(const entry of identityRegistration.entries){
       const button=markers.querySelector(`.territory-hotspot[data-kind="symbol"][data-id="${entry.id}"]`);
       if(!button) continue;
+      const provider=window.DreamscapePrivateProfile||window.__dreamscapePrivateProfile;
+      const providerLabel=provider?.getSemanticLabel?.(entry.id)||null;
       const privateRecord=map[entry.id];
-      const label=typeof privateRecord==='string'
+      const mapLabel=typeof privateRecord==='string'
         ? privateRecord
         : privateRecord?.label||privateRecord?.semanticLabel||null;
+      const label=providerLabel||mapLabel;
       if(!label){
         suppress(button,'private-label-required');
         pending.push(entry.id);
@@ -147,6 +150,7 @@ function waitForTerritory(payload){
     identityRegistrationVersion:identityRegistration.schemaVersion
   };
   window.resolveHearthlandsPrivateIdentities=resolvePrivateIdentities;
+  window.addEventListener('dreamscape-private-profile-change',()=>resolvePrivateIdentities(window.__dreamscapePrivateIdentityMap||{}));
   resolvePrivateIdentities(window.__dreamscapePrivateIdentityMap||{});
 }
 

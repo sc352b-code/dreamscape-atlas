@@ -197,7 +197,7 @@ async function boot(){
     if(!card) return;
     about.classList.remove('open');
     reader.querySelector('.territory-v1-kicker').textContent=`HEARTHLANDS · ${type.toUpperCase()}`;
-    reader.querySelector('h2').textContent=card.title;
+    const privateRecord=type==='symbol'?window.__dreamscapePrivateIdentityMap?.[item.id]:null;\n    const privateLabel=typeof privateRecord==='string'?privateRecord:(privateRecord?.label||privateRecord?.semanticLabel||null);\n    reader.querySelector('h2').textContent=privateLabel||card.title;
     reader.querySelector('.territory-v1-grounding').textContent=card.corpusGrounding;
     reader.querySelector('.territory-v1-interpretation').textContent=card.interpretation;
     const related=reader.querySelector('.territory-v1-related');

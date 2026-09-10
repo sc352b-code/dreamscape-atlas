@@ -1,81 +1,95 @@
 {
-  "schemaVersion": "1.0.0",
+  "schemaVersion": "2.0.0",
   "territoryId": "hearthlands",
   "artworkBasis": {
     "asset": "hearthlands-flat-map.png",
+    "lockedImageSha256": "b7be292766f9bf0774c1fc358154adf522006ac9933b05a3a5469d29a8d917b3",
     "pixelDimensions": [
       1536,
       1024
     ],
-    "auditMethod": "direct visual registration against the approved painting",
-    "principle": "No hotspot may be active unless a reviewer can point to the exact painted subject it represents."
+    "auditMethod": "final preservation audit against the locked Hearthlands artwork",
+    "principle": "No hotspot may be active unless the exact painted subject is defensibly registered."
   },
   "summary": {
     "totalPlaces": 6,
-    "registeredPlaces": 2,
-    "placesNeedingArtCorrection": 4,
+    "registeredPlaces": 6,
+    "placesNeedingArtCorrection": 0,
     "totalSymbols": 76,
-    "registeredSymbols": 31,
-    "symbolsNeedingArtCorrection": 30,
-    "personSymbolsAwaitingPrivateIdentity": 15
+    "registeredNonPersonSymbols": 61,
+    "nonPersonSymbolsNeedingArtCorrection": 0,
+    "personSymbolsPrivateProfileGated": 15
   },
   "entries": [
     {
       "kind": "place",
       "id": "childhood-house",
       "label": "Childhood House",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "West stone cottage with exposed blue bed, toy truck, bicycle and garden.",
+      "x": 0.195312,
+      "y": 0.439453,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.110677,
+        "height": 0.146484
+      },
+      "activeFromZoom": 1,
+      "hoverLabel": "Childhood House",
       "tarotCardRef": "tarot/place/childhood-house",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "place",
       "id": "family-home",
       "label": "Family Home",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Warm central-left gabled house with green door and flower garden behind the communal table.",
+      "x": 0.423177,
+      "y": 0.532227,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.120443,
+        "height": 0.151367
+      },
+      "activeFromZoom": 1,
+      "hoverLabel": "Family Home",
       "tarotCardRef": "tarot/place/family-home",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "place",
       "id": "current-present-house",
       "label": "Current / Present House",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Lower-right white cottage with dark slate roof, lit windows and dense flower border.",
+      "x": 0.660807,
+      "y": 0.751953,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.117188,
+        "height": 0.131836
+      },
+      "activeFromZoom": 1,
+      "hoverLabel": "Current / Present House",
       "tarotCardRef": "tarot/place/current-present-house",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "place",
       "id": "large-many-roomed-house",
       "label": "The Large Many-Roomed House",
       "registrationStatus": "registered",
-      "paintedObject": "Large multi-wing manor at the upper centre is visually unambiguous.",
-      "x": 0.535,
-      "y": 0.145,
+      "paintedObject": "Large multi-wing manor across the upper centre terrace.",
+      "x": 0.546875,
+      "y": 0.131836,
       "hitArea": {
         "shape": "rect",
-        "width": 0.18,
-        "height": 0.12
+        "width": 0.195312,
+        "height": 0.12207
       },
-      "activeFromZoom": 1.0,
+      "activeFromZoom": 1,
+      "hoverLabel": "The Large Many-Roomed House",
       "tarotCardRef": "tarot/place/large-many-roomed-house",
       "auditConfidence": "high"
     },
@@ -83,285 +97,89 @@
       "kind": "place",
       "id": "unfamiliar-house",
       "label": "The Unfamiliar House",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Distinctive elevated timber/treehouse dwelling in the upper-right woodland.",
+      "x": 0.921224,
+      "y": 0.297852,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.094401,
+        "height": 0.15625
+      },
+      "activeFromZoom": 1,
+      "hoverLabel": "The Unfamiliar House",
       "tarotCardRef": "tarot/place/unfamiliar-house",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "place",
       "id": "haunted-17-bedroom-mansion",
       "label": "The Haunted 17-Bedroom Mansion",
       "registrationStatus": "registered",
-      "paintedObject": "Dark illuminated mansion on the upper-right ridge is visually unambiguous.",
-      "x": 0.907,
-      "y": 0.072,
+      "paintedObject": "Dark illuminated mansion on the far upper-right ridge beneath the storm sky.",
+      "x": 0.921224,
+      "y": 0.068359,
       "hitArea": {
         "shape": "rect",
-        "width": 0.105,
-        "height": 0.105
+        "width": 0.117188,
+        "height": 0.117188
       },
-      "activeFromZoom": 1.0,
+      "activeFromZoom": 1,
+      "hoverLabel": "The Haunted 17-Bedroom Mansion",
       "tarotCardRef": "tarot/place/haunted-17-bedroom-mansion",
       "auditConfidence": "high"
     },
     {
       "kind": "symbol",
-      "id": "person-01",
-      "label": "person-01",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-01",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-02",
-      "label": "person-02",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-02",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-03",
-      "label": "person-03",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-03",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-04",
-      "label": "person-04",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-04",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-05",
-      "label": "person-05",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-05",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-06",
-      "label": "person-06",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-06",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-07",
-      "label": "person-07",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-07",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-08",
-      "label": "person-08",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-08",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-09",
-      "label": "person-09",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-09",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-10",
-      "label": "person-10",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-10",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-11",
-      "label": "person-11",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-11",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-12",
-      "label": "person-12",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-12",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-13",
-      "label": "person-13",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-13",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-14",
-      "label": "person-14",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-14",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
-      "id": "person-15",
-      "label": "person-15",
-      "registrationStatus": "identity-resolution-required",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
-      "tarotCardRef": "tarot/symbol/person-15",
-      "auditConfidence": "paused",
-      "correctionReason": "Person artwork/registration is paused until the private corpus-supported semantic identity is deliberately represented; arbitrary human figures must not be assigned."
-    },
-    {
-      "kind": "symbol",
       "id": "bag",
       "label": "Bag",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Dark backpack on the lower-centre dock beside the fisherman.",
+      "x": 0.455729,
+      "y": 0.804688,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.019531,
+        "height": 0.03418
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Bag",
       "tarotCardRef": "tarot/symbol/bag",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "bed",
       "label": "Bed",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Blue bed clearly visible through the west cottage opening.",
+      "x": 0.177083,
+      "y": 0.445312,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.033854,
+        "height": 0.035156
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Bed",
       "tarotCardRef": "tarot/symbol/bed",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "bench",
       "label": "Bench",
       "registrationStatus": "registered",
-      "paintedObject": "Garden bench beside the lower central homes.",
-      "x": 0.345,
-      "y": 0.575,
+      "paintedObject": "Wooden bench beside the grey tabby in the central-left garden.",
+      "x": 0.333333,
+      "y": 0.625,
       "hitArea": {
         "shape": "rect",
-        "width": 0.055,
-        "height": 0.04
+        "width": 0.059896,
+        "height": 0.037109
       },
-      "activeFromZoom": 1.65,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Bench",
       "tarotCardRef": "tarot/symbol/bench",
       "auditConfidence": "high"
     },
@@ -369,72 +187,89 @@
       "kind": "symbol",
       "id": "book",
       "label": "Book",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Open/stacked book on the upper-right wooden desk/work surface.",
+      "x": 0.952474,
+      "y": 0.470703,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.035807,
+        "height": 0.029297
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Book",
       "tarotCardRef": "tarot/symbol/book",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "box",
       "label": "Box",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Brown storage box/chest near the central-left bench and table garden.",
+      "x": 0.356771,
+      "y": 0.657227,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.026042,
+        "height": 0.03418
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Box",
       "tarotCardRef": "tarot/symbol/box",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "chair",
       "label": "Chair",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Dining chair at the central outdoor table.",
+      "x": 0.449219,
+      "y": 0.646484,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.028646,
+        "height": 0.066406
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Chair",
       "tarotCardRef": "tarot/symbol/chair",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "clock",
       "label": "Clock",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Large round clock on the central house facade.",
+      "x": 0.439453,
+      "y": 0.522461,
+      "hitArea": {
+        "shape": "ellipse",
+        "width": 0.022786,
+        "height": 0.03418
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Clock",
       "tarotCardRef": "tarot/symbol/clock",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "clothes",
       "label": "Clothes",
       "registrationStatus": "registered",
-      "paintedObject": "Clothes line in lower-right garden.",
-      "x": 0.62,
-      "y": 0.655,
+      "paintedObject": "Laundry hanging on the line beside the west cottage.",
+      "x": 0.251953,
+      "y": 0.46582,
       "hitArea": {
         "shape": "rect",
-        "width": 0.07,
-        "height": 0.055
+        "width": 0.045573,
+        "height": 0.053711
       },
-      "activeFromZoom": 1.7,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Clothes",
       "tarotCardRef": "tarot/symbol/clothes",
       "auditConfidence": "high"
     },
@@ -442,30 +277,35 @@
       "kind": "symbol",
       "id": "computer",
       "label": "Computer",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Open laptop on the lower-right treehouse desk",
+      "x": 0.971,
+      "y": 0.479,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.055,
+        "height": 0.055
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Computer",
       "tarotCardRef": "tarot/symbol/computer",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "door",
       "label": "Door",
       "registrationStatus": "registered",
-      "paintedObject": "Clearly painted front door on lower central house.",
-      "x": 0.43,
-      "y": 0.565,
+      "paintedObject": "Green front door of the central house.",
+      "x": 0.440104,
+      "y": 0.56543,
       "hitArea": {
         "shape": "rect",
-        "width": 0.028,
-        "height": 0.06
+        "width": 0.02474,
+        "height": 0.060547
       },
-      "activeFromZoom": 1.6,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Door",
       "tarotCardRef": "tarot/symbol/door",
       "auditConfidence": "high"
     },
@@ -473,58 +313,71 @@
       "kind": "symbol",
       "id": "drink",
       "label": "Drink",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Cups and drinking vessels on the central table.",
+      "x": 0.473307,
+      "y": 0.62207,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.052083,
+        "height": 0.03418
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Drink",
       "tarotCardRef": "tarot/symbol/drink",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "egg",
       "label": "Egg",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Basket/crate of pale eggs beside the greenhouse gardener.",
+      "x": 0.585286,
+      "y": 0.666016,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.02474,
+        "height": 0.03125
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Egg",
       "tarotCardRef": "tarot/symbol/egg",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "food",
       "label": "Food",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Multiple plates and dishes of food on the central outdoor table.",
+      "x": 0.477214,
+      "y": 0.633789,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.117188,
+        "height": 0.063477
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Food",
       "tarotCardRef": "tarot/symbol/food",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "house-home",
       "label": "House / Home",
       "registrationStatus": "registered",
-      "paintedObject": "Clearly legible lower central domestic house cluster.",
-      "x": 0.402,
-      "y": 0.555,
+      "paintedObject": "Central domestic house cluster, with the green-doored house as the clearest symbol anchor.",
+      "x": 0.438802,
+      "y": 0.542969,
       "hitArea": {
         "shape": "rect",
-        "width": 0.145,
-        "height": 0.135
+        "width": 0.110677,
+        "height": 0.146484
       },
-      "activeFromZoom": 1.25,
+      "activeFromZoom": 1,
+      "hoverLabel": "House / Home",
       "tarotCardRef": "tarot/symbol/house-home",
       "auditConfidence": "high"
     },
@@ -532,30 +385,35 @@
       "kind": "symbol",
       "id": "key",
       "label": "Key",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Large unmistakable brass key lying in the lower-left flower bed.",
+      "x": 0.126953,
+      "y": 0.863281,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.061849,
+        "height": 0.043945
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Key",
       "tarotCardRef": "tarot/symbol/key",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "light",
       "label": "Light",
       "registrationStatus": "registered",
-      "paintedObject": "Warm illuminated window/light on lower central house.",
-      "x": 0.425,
-      "y": 0.535,
+      "paintedObject": "Warm glowing windows/lamps on the central house.",
+      "x": 0.421875,
+      "y": 0.537109,
       "hitArea": {
-        "shape": "ellipse",
-        "width": 0.03,
-        "height": 0.04
+        "shape": "rect",
+        "width": 0.065104,
+        "height": 0.078125
       },
-      "activeFromZoom": 1.7,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Light",
       "tarotCardRef": "tarot/symbol/light",
       "auditConfidence": "high"
     },
@@ -563,86 +421,107 @@
       "kind": "symbol",
       "id": "mirror",
       "label": "Mirror",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Large oval framed mirror on the west cottage exterior wall.",
+      "x": 0.192708,
+      "y": 0.414062,
+      "hitArea": {
+        "shape": "ellipse",
+        "width": 0.032552,
+        "height": 0.073242
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Mirror",
       "tarotCardRef": "tarot/symbol/mirror",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "money",
       "label": "Money",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Visible coins/notes in the centre-left area of the central dining table",
+      "x": 0.456,
+      "y": 0.665,
+      "hitArea": {
+        "shape": "ellipse",
+        "width": 0.035,
+        "height": 0.028
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Money",
       "tarotCardRef": "tarot/symbol/money",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "phone",
       "label": "Phone",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Black smartphone on the left side of the central dining table",
+      "x": 0.421,
+      "y": 0.656,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.025,
+        "height": 0.035
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Phone",
       "tarotCardRef": "tarot/symbol/phone",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "shirt",
       "label": "Shirt",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "White shirt/garment hanging on the west cottage laundry line.",
+      "x": 0.255208,
+      "y": 0.462891,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.020833,
+        "height": 0.043945
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Shirt",
       "tarotCardRef": "tarot/symbol/shirt",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "shoe",
       "label": "Shoe",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Pair of dark shoes on the lower-centre dock.",
+      "x": 0.480469,
+      "y": 0.801758,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.029948,
+        "height": 0.023438
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Shoe",
       "tarotCardRef": "tarot/symbol/shoe",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "table",
       "label": "Table",
       "registrationStatus": "registered",
-      "paintedObject": "Round garden table with place settings.",
-      "x": 0.447,
-      "y": 0.616,
+      "paintedObject": "Central outdoor dining table.",
+      "x": 0.481771,
+      "y": 0.645508,
       "hitArea": {
-        "shape": "ellipse",
-        "width": 0.068,
-        "height": 0.06
+        "shape": "rect",
+        "width": 0.136719,
+        "height": 0.087891
       },
-      "activeFromZoom": 1.75,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Table",
       "tarotCardRef": "tarot/symbol/table",
       "auditConfidence": "high"
     },
@@ -650,58 +529,71 @@
       "kind": "symbol",
       "id": "teddy",
       "label": "Teddy",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Small golden teddy bear beside the central table garden.",
+      "x": 0.50651,
+      "y": 0.692383,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.022135,
+        "height": 0.037109
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Teddy",
       "tarotCardRef": "tarot/symbol/teddy",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "toy",
       "label": "Toy",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Red toy vehicle in front of the west cottage.",
+      "x": 0.192708,
+      "y": 0.478516,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.027344,
+        "height": 0.029297
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Toy",
       "tarotCardRef": "tarot/symbol/toy",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "weight",
       "label": "Weight",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Pair of colourful dumbbells/hand weights beside the teddy.",
+      "x": 0.46224,
+      "y": 0.700195,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.035156,
+        "height": 0.023438
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Weight",
       "tarotCardRef": "tarot/symbol/weight",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "window",
       "label": "Window",
       "registrationStatus": "registered",
-      "paintedObject": "Clearly legible window on lower central house.",
-      "x": 0.405,
-      "y": 0.535,
+      "paintedObject": "Distinct lit window on the central house facade.",
+      "x": 0.416667,
+      "y": 0.542969,
       "hitArea": {
         "shape": "rect",
-        "width": 0.026,
-        "height": 0.04
+        "width": 0.020833,
+        "height": 0.039062
       },
-      "activeFromZoom": 1.7,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Window",
       "tarotCardRef": "tarot/symbol/window",
       "auditConfidence": "high"
     },
@@ -710,15 +602,16 @@
       "id": "bicycle",
       "label": "Bicycle",
       "registrationStatus": "registered",
-      "paintedObject": "Pair of bicycles beside the willow/garden path.",
-      "x": 0.515,
-      "y": 0.815,
+      "paintedObject": "Bicycle beside the path just below the west cottage / central-left garden.",
+      "x": 0.269531,
+      "y": 0.681641,
       "hitArea": {
         "shape": "rect",
-        "width": 0.06,
-        "height": 0.055
+        "width": 0.046875,
+        "height": 0.053711
       },
-      "activeFromZoom": 1.7,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Bicycle",
       "tarotCardRef": "tarot/symbol/bicycle",
       "auditConfidence": "high"
     },
@@ -727,15 +620,16 @@
       "id": "boat",
       "label": "Boat",
       "registrationStatus": "registered",
-      "paintedObject": "Wooden rowboat in foreground water.",
-      "x": 0.49,
-      "y": 0.86,
+      "paintedObject": "Small wooden rowboat moored in the lower-centre water.",
+      "x": 0.516276,
+      "y": 0.84668,
       "hitArea": {
         "shape": "rect",
-        "width": 0.07,
-        "height": 0.055
+        "width": 0.057292,
+        "height": 0.029297
       },
-      "activeFromZoom": 1.7,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Boat",
       "tarotCardRef": "tarot/symbol/boat",
       "auditConfidence": "high"
     },
@@ -744,15 +638,16 @@
       "id": "bus",
       "label": "Bus",
       "registrationStatus": "registered",
-      "paintedObject": "Red bus on western village road.",
-      "x": 0.041,
-      "y": 0.414,
+      "paintedObject": "Red bus on the western village road.",
+      "x": 0.027344,
+      "y": 0.375,
       "hitArea": {
         "shape": "rect",
-        "width": 0.058,
-        "height": 0.06
+        "width": 0.042969,
+        "height": 0.046875
       },
-      "activeFromZoom": 1.55,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Bus",
       "tarotCardRef": "tarot/symbol/bus",
       "auditConfidence": "high"
     },
@@ -761,15 +656,16 @@
       "id": "car",
       "label": "Car",
       "registrationStatus": "registered",
-      "paintedObject": "Blue car outside western house.",
-      "x": 0.105,
-      "y": 0.43,
+      "paintedObject": "Green car on the lower-left tunnel road.",
+      "x": 0.041667,
+      "y": 0.719727,
       "hitArea": {
         "shape": "rect",
-        "width": 0.052,
-        "height": 0.044
+        "width": 0.036458,
+        "height": 0.037109
       },
-      "activeFromZoom": 1.55,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Car",
       "tarotCardRef": "tarot/symbol/car",
       "auditConfidence": "high"
     },
@@ -778,15 +674,16 @@
       "id": "plane",
       "label": "Plane",
       "registrationStatus": "registered",
-      "paintedObject": "Passenger plane at north-west airfield.",
-      "x": 0.082,
-      "y": 0.138,
+      "paintedObject": "Passenger plane on the upper-left airfield.",
+      "x": 0.10026,
+      "y": 0.142578,
       "hitArea": {
         "shape": "rect",
-        "width": 0.095,
-        "height": 0.065
+        "width": 0.08138,
+        "height": 0.039062
       },
       "activeFromZoom": 1.35,
+      "hoverLabel": "Plane",
       "tarotCardRef": "tarot/symbol/plane",
       "auditConfidence": "high"
     },
@@ -795,15 +692,16 @@
       "id": "train",
       "label": "Train",
       "registrationStatus": "registered",
-      "paintedObject": "Train crossing the western stone viaduct.",
-      "x": 0.143,
-      "y": 0.559,
+      "paintedObject": "Long red-and-cream train crossing the western viaduct.",
+      "x": 0.117188,
+      "y": 0.561523,
       "hitArea": {
         "shape": "rect",
-        "width": 0.205,
-        "height": 0.075
+        "width": 0.208333,
+        "height": 0.068359
       },
-      "activeFromZoom": 1.35,
+      "activeFromZoom": 1,
+      "hoverLabel": "Train",
       "tarotCardRef": "tarot/symbol/train",
       "auditConfidence": "high"
     },
@@ -811,30 +709,35 @@
       "kind": "symbol",
       "id": "cat",
       "label": "Cat",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Grey/silver tabby cat resting on the central-left garden bench.",
+      "x": 0.332031,
+      "y": 0.617188,
+      "hitArea": {
+        "shape": "ellipse",
+        "width": 0.035156,
+        "height": 0.03125
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Cat",
       "tarotCardRef": "tarot/symbol/cat",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "cow",
       "label": "Cow",
       "registrationStatus": "registered",
-      "paintedObject": "Brown cattle beside lower-right garden/cove.",
-      "x": 0.675,
-      "y": 0.809,
+      "paintedObject": "Brown-and-white cow grazing in the upper middle-right meadow",
+      "x": 0.647,
+      "y": 0.352,
       "hitArea": {
-        "shape": "ellipse",
-        "width": 0.05,
-        "height": 0.055
+        "shape": "rect",
+        "width": 0.058,
+        "height": 0.05
       },
-      "activeFromZoom": 1.8,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Cow",
       "tarotCardRef": "tarot/symbol/cow",
       "auditConfidence": "high"
     },
@@ -843,15 +746,16 @@
       "id": "dog",
       "label": "Dog",
       "registrationStatus": "registered",
-      "paintedObject": "Large pale dog on eastern path.",
-      "x": 0.9,
-      "y": 0.58,
+      "paintedObject": "Black-and-white springer spaniel (Max) beside the central dining area.",
+      "x": 0.470703,
+      "y": 0.686523,
       "hitArea": {
         "shape": "ellipse",
-        "width": 0.048,
-        "height": 0.06
+        "width": 0.033854,
+        "height": 0.056641
       },
-      "activeFromZoom": 1.65,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Dog",
       "tarotCardRef": "tarot/symbol/dog",
       "auditConfidence": "high"
     },
@@ -859,72 +763,89 @@
       "kind": "symbol",
       "id": "fish",
       "label": "Fish",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Multiple clearly painted fish in the lower central water.",
+      "x": 0.494792,
+      "y": 0.910156,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.097656,
+        "height": 0.053711
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Fish",
       "tarotCardRef": "tarot/symbol/fish",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "insect",
       "label": "Insect",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Large dragonfly over the lower central water; butterflies also appear in the lower-left flowers.",
+      "x": 0.442708,
+      "y": 0.911133,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.035807,
+        "height": 0.043945
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Insect",
       "tarotCardRef": "tarot/symbol/insect",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "lion",
       "label": "Lion",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Large pale lion statue/figure on the upper-centre-right garden terrace.",
+      "x": 0.657552,
+      "y": 0.200195,
+      "hitArea": {
+        "shape": "ellipse",
+        "width": 0.035807,
+        "height": 0.063477
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Lion",
       "tarotCardRef": "tarot/symbol/lion",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "octopus",
       "label": "Octopus",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Large red octopus on the lower-right coastal rocks.",
+      "x": 0.854167,
+      "y": 0.896484,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.078125,
+        "height": 0.092773
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Octopus",
       "tarotCardRef": "tarot/symbol/octopus",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "sheep",
       "label": "Sheep",
       "registrationStatus": "registered",
-      "paintedObject": "White sheep in eastern meadow.",
-      "x": 0.765,
-      "y": 0.435,
+      "paintedObject": "White sheep grazing in the upper-right woodland meadow.",
+      "x": 0.830078,
+      "y": 0.439453,
       "hitArea": {
-        "shape": "ellipse",
-        "width": 0.055,
-        "height": 0.055
+        "shape": "rect",
+        "width": 0.061849,
+        "height": 0.063477
       },
-      "activeFromZoom": 1.65,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Sheep",
       "tarotCardRef": "tarot/symbol/sheep",
       "auditConfidence": "high"
     },
@@ -932,30 +853,35 @@
       "kind": "symbol",
       "id": "snake",
       "label": "Snake",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Large snake on the right-side rocky slope above the sea cave.",
+      "x": 0.846354,
+      "y": 0.629883,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.071615,
+        "height": 0.053711
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Snake",
       "tarotCardRef": "tarot/symbol/snake",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "field",
       "label": "Field",
       "registrationStatus": "registered",
-      "paintedObject": "Cultivated fields below north-west airfield.",
-      "x": 0.165,
-      "y": 0.185,
+      "paintedObject": "Open cultivated field at the upper-left airfield/farm landscape.",
+      "x": 0.157552,
+      "y": 0.161133,
       "hitArea": {
         "shape": "rect",
-        "width": 0.205,
-        "height": 0.12
+        "width": 0.14974,
+        "height": 0.102539
       },
-      "activeFromZoom": 1.2,
+      "activeFromZoom": 1,
+      "hoverLabel": "Field",
       "tarotCardRef": "tarot/symbol/field",
       "auditConfidence": "high"
     },
@@ -964,15 +890,16 @@
       "id": "fire",
       "label": "Fire",
       "registrationStatus": "registered",
-      "paintedObject": "Foreground campfire on rocky beach.",
-      "x": 0.716,
-      "y": 0.863,
+      "paintedObject": "Beach campfire in the lower-right.",
+      "x": 0.734375,
+      "y": 0.873047,
       "hitArea": {
-        "shape": "ellipse",
-        "width": 0.055,
-        "height": 0.065
+        "shape": "rect",
+        "width": 0.039062,
+        "height": 0.058594
       },
-      "activeFromZoom": 1.65,
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Fire",
       "tarotCardRef": "tarot/symbol/fire",
       "auditConfidence": "high"
     },
@@ -981,15 +908,16 @@
       "id": "forest",
       "label": "Forest",
       "registrationStatus": "registered",
-      "paintedObject": "Dense upper-right forest.",
-      "x": 0.805,
-      "y": 0.18,
+      "paintedObject": "Dense conifer forest below the storm ridge at upper-right.",
+      "x": 0.810547,
+      "y": 0.170898,
       "hitArea": {
         "shape": "rect",
-        "width": 0.24,
-        "height": 0.22
+        "width": 0.136719,
+        "height": 0.166016
       },
-      "activeFromZoom": 1.2,
+      "activeFromZoom": 1,
+      "hoverLabel": "Forest",
       "tarotCardRef": "tarot/symbol/forest",
       "auditConfidence": "high"
     },
@@ -998,15 +926,16 @@
       "id": "garden",
       "label": "Garden",
       "registrationStatus": "registered",
-      "paintedObject": "Formal and cottage gardens across central domestic district.",
-      "x": 0.435,
-      "y": 0.405,
+      "paintedObject": "Dense flower and kitchen gardens around the central homes.",
+      "x": 0.488281,
+      "y": 0.59082,
       "hitArea": {
         "shape": "rect",
-        "width": 0.22,
-        "height": 0.19
+        "width": 0.214844,
+        "height": 0.214844
       },
-      "activeFromZoom": 1.25,
+      "activeFromZoom": 1,
+      "hoverLabel": "Garden",
       "tarotCardRef": "tarot/symbol/garden",
       "auditConfidence": "high"
     },
@@ -1015,15 +944,16 @@
       "id": "grass",
       "label": "Grass",
       "registrationStatus": "registered",
-      "paintedObject": "Open grassy eastern meadow.",
-      "x": 0.72,
-      "y": 0.405,
+      "paintedObject": "Open grassy meadow around the right-side deer/sheep area.",
+      "x": 0.791016,
+      "y": 0.380859,
       "hitArea": {
         "shape": "rect",
-        "width": 0.11,
-        "height": 0.085
+        "width": 0.15625,
+        "height": 0.117188
       },
-      "activeFromZoom": 1.5,
+      "activeFromZoom": 1,
+      "hoverLabel": "Grass",
       "tarotCardRef": "tarot/symbol/grass",
       "auditConfidence": "high"
     },
@@ -1032,15 +962,16 @@
       "id": "lake",
       "label": "Lake",
       "registrationStatus": "registered",
-      "paintedObject": "Mountain lake in upper middle distance.",
-      "x": 0.33,
-      "y": 0.165,
+      "paintedObject": "Broad inland lake in the upper-left/centre distance.",
+      "x": 0.279948,
+      "y": 0.172852,
       "hitArea": {
-        "shape": "ellipse",
-        "width": 0.165,
-        "height": 0.115
+        "shape": "rect",
+        "width": 0.195312,
+        "height": 0.102539
       },
-      "activeFromZoom": 1.25,
+      "activeFromZoom": 1,
+      "hoverLabel": "Lake",
       "tarotCardRef": "tarot/symbol/lake",
       "auditConfidence": "high"
     },
@@ -1049,15 +980,16 @@
       "id": "ocean",
       "label": "Ocean",
       "registrationStatus": "registered",
-      "paintedObject": "Open coastal water in lower-right cove.",
-      "x": 0.88,
-      "y": 0.86,
+      "paintedObject": "Open coastal water in the lower-right around the lighthouse and octopus.",
+      "x": 0.859375,
+      "y": 0.845703,
       "hitArea": {
         "shape": "rect",
-        "width": 0.23,
-        "height": 0.21
+        "width": 0.214844,
+        "height": 0.244141
       },
-      "activeFromZoom": 1.25,
+      "activeFromZoom": 1,
+      "hoverLabel": "Ocean",
       "tarotCardRef": "tarot/symbol/ocean",
       "auditConfidence": "high"
     },
@@ -1065,30 +997,35 @@
       "kind": "symbol",
       "id": "rain",
       "label": "Rain",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Visible rain streaks in the upper-right storm sector.",
+      "x": 0.836589,
+      "y": 0.073242,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.195312,
+        "height": 0.12207
+      },
+      "activeFromZoom": 1,
+      "hoverLabel": "Rain",
       "tarotCardRef": "tarot/symbol/rain",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "river",
       "label": "River",
       "registrationStatus": "registered",
-      "paintedObject": "Main cascading river through centre-right.",
-      "x": 0.605,
-      "y": 0.535,
+      "paintedObject": "Main river channel descending through the centre-right valley.",
+      "x": 0.660807,
+      "y": 0.415039,
       "hitArea": {
         "shape": "rect",
-        "width": 0.19,
-        "height": 0.27
+        "width": 0.097656,
+        "height": 0.292969
       },
-      "activeFromZoom": 1.3,
+      "activeFromZoom": 1,
+      "hoverLabel": "River",
       "tarotCardRef": "tarot/symbol/river",
       "auditConfidence": "high"
     },
@@ -1097,15 +1034,16 @@
       "id": "sea",
       "label": "Sea",
       "registrationStatus": "registered",
-      "paintedObject": "Coastal sea at lower-right edge.",
-      "x": 0.845,
-      "y": 0.855,
+      "paintedObject": "Coastal sea around the sailboat, lighthouse and rocks.",
+      "x": 0.833333,
+      "y": 0.824219,
       "hitArea": {
         "shape": "rect",
-        "width": 0.25,
-        "height": 0.22
+        "width": 0.234375,
+        "height": 0.253906
       },
-      "activeFromZoom": 1.25,
+      "activeFromZoom": 1,
+      "hoverLabel": "Sea",
       "tarotCardRef": "tarot/symbol/sea",
       "auditConfidence": "high"
     },
@@ -1114,15 +1052,16 @@
       "id": "sky",
       "label": "Sky",
       "registrationStatus": "registered",
-      "paintedObject": "Open sky band across top of painting.",
+      "paintedObject": "Expansive sky spanning sunset to storm across the top of the image.",
       "x": 0.5,
-      "y": 0.045,
+      "y": 0.043945,
       "hitArea": {
         "shape": "rect",
-        "width": 0.65,
-        "height": 0.09
+        "width": 0.94401,
+        "height": 0.087891
       },
-      "activeFromZoom": 1.0,
+      "activeFromZoom": 1,
+      "hoverLabel": "Sky",
       "tarotCardRef": "tarot/symbol/sky",
       "auditConfidence": "high"
     },
@@ -1131,15 +1070,16 @@
       "id": "snow",
       "label": "Snow",
       "registrationStatus": "registered",
-      "paintedObject": "Snow on high central mountains.",
-      "x": 0.455,
-      "y": 0.04,
+      "paintedObject": "Snow-covered mountain peaks along the upper horizon.",
+      "x": 0.429688,
+      "y": 0.053711,
       "hitArea": {
         "shape": "rect",
-        "width": 0.25,
-        "height": 0.1
+        "width": 0.247396,
+        "height": 0.083008
       },
-      "activeFromZoom": 1.3,
+      "activeFromZoom": 1,
+      "hoverLabel": "Snow",
       "tarotCardRef": "tarot/symbol/snow",
       "auditConfidence": "high"
     },
@@ -1147,30 +1087,35 @@
       "kind": "symbol",
       "id": "storm",
       "label": "Storm",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Dark thunderstorm with lightning over the upper-right ridge.",
+      "x": 0.843099,
+      "y": 0.073242,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.214844,
+        "height": 0.136719
+      },
+      "activeFromZoom": 1,
+      "hoverLabel": "Storm",
       "tarotCardRef": "tarot/symbol/storm",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "sun",
       "label": "Sun",
       "registrationStatus": "registered",
-      "paintedObject": "Large rising sun in upper-left sky.",
-      "x": 0.145,
-      "y": 0.035,
+      "paintedObject": "Large setting sun in the upper-left sky.",
+      "x": 0.14974,
+      "y": 0.029297,
       "hitArea": {
         "shape": "ellipse",
-        "width": 0.055,
-        "height": 0.065
+        "width": 0.029297,
+        "height": 0.043945
       },
-      "activeFromZoom": 1.0,
+      "activeFromZoom": 1,
+      "hoverLabel": "Sun",
       "tarotCardRef": "tarot/symbol/sun",
       "auditConfidence": "high"
     },
@@ -1179,15 +1124,16 @@
       "id": "tree",
       "label": "Tree",
       "registrationStatus": "registered",
-      "paintedObject": "Large central tree canopy/trunk.",
-      "x": 0.503,
-      "y": 0.397,
+      "paintedObject": "Large central tree supporting a small treehouse.",
+      "x": 0.524089,
+      "y": 0.395508,
       "hitArea": {
-        "shape": "ellipse",
-        "width": 0.085,
-        "height": 0.17
+        "shape": "rect",
+        "width": 0.094401,
+        "height": 0.185547
       },
-      "activeFromZoom": 1.3,
+      "activeFromZoom": 1,
+      "hoverLabel": "Tree",
       "tarotCardRef": "tarot/symbol/tree",
       "auditConfidence": "high"
     },
@@ -1196,15 +1142,16 @@
       "id": "water",
       "label": "Water",
       "registrationStatus": "registered",
-      "paintedObject": "Central river/watercourse.",
-      "x": 0.608,
-      "y": 0.535,
+      "paintedObject": "Interconnected waterways crossing the entire Hearthlands scene.",
+      "x": 0.553385,
+      "y": 0.605469,
       "hitArea": {
         "shape": "rect",
-        "width": 0.2,
-        "height": 0.285
+        "width": 0.455729,
+        "height": 0.634766
       },
-      "activeFromZoom": 1.3,
+      "activeFromZoom": 1,
+      "hoverLabel": "Water",
       "tarotCardRef": "tarot/symbol/water",
       "auditConfidence": "high"
     },
@@ -1212,30 +1159,35 @@
       "kind": "symbol",
       "id": "wind",
       "label": "Wind",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Wind is visually represented by airborne leaves and storm movement in the upper-right sky.",
+      "x": 0.872396,
+      "y": 0.102539,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.14974,
+        "height": 0.126953
+      },
+      "activeFromZoom": 1.35,
+      "hoverLabel": "Wind",
       "tarotCardRef": "tarot/symbol/wind",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "woods",
       "label": "Woods",
       "registrationStatus": "registered",
-      "paintedObject": "Eastern wooded area around treehouse and ridge.",
-      "x": 0.875,
-      "y": 0.35,
+      "paintedObject": "Wooded right-side territory surrounding the treehouse and storm ridge.",
+      "x": 0.85612,
+      "y": 0.302734,
       "hitArea": {
         "shape": "rect",
-        "width": 0.17,
-        "height": 0.26
+        "width": 0.195312,
+        "height": 0.322266
       },
-      "activeFromZoom": 1.3,
+      "activeFromZoom": 1,
+      "hoverLabel": "Woods",
       "tarotCardRef": "tarot/symbol/woods",
       "auditConfidence": "high"
     },
@@ -1243,33 +1195,37 @@
       "kind": "symbol",
       "id": "gun",
       "label": "Gun",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Long rifle clearly resting diagonally beside the upper-right woodland workbench/campsite.",
+      "x": 0.885417,
+      "y": 0.588867,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.087891,
+        "height": 0.041016
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Gun",
       "tarotCardRef": "tarot/symbol/gun",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     },
     {
       "kind": "symbol",
       "id": "knife",
       "label": "Knife",
-      "registrationStatus": "needs-art-correction",
-      "paintedObject": null,
-      "x": null,
-      "y": null,
-      "hitArea": null,
-      "activeFromZoom": null,
+      "registrationStatus": "registered",
+      "paintedObject": "Table knife beside the place settings on the central dining table",
+      "x": 0.494,
+      "y": 0.65,
+      "hitArea": {
+        "shape": "rect",
+        "width": 0.032,
+        "height": 0.02
+      },
+      "activeFromZoom": 2.25,
+      "hoverLabel": "Knife",
       "tarotCardRef": "tarot/symbol/knife",
-      "auditConfidence": "not-registered",
-      "correctionReason": "No uniquely identifiable painted subject could be defensibly matched in the current approved image."
+      "auditConfidence": "high"
     }
-  ],
-  "principles": {
-    "personIdentity": "Semantic person labels come from the private corpus/profile layer. Public technical IDs are storage identifiers only.",
-    "artwork": "No arbitrary painted human may stand in for a person symbol whose semantic identity has not been intentionally resolved."
-  }
+  ]
 }

@@ -1,0 +1,85 @@
+name: Import Hearthlands 6K technical master
+
+on:
+  push:
+    branches: [family-home-pilot]
+    paths:
+      - '.github/workflows/import-hearthlands-6k.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  import:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: family-home-pilot
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install browser downloader
+        run: |
+          python -m pip install --quiet playwright
+          python -m playwright install --with-deps chromium
+      - name: Download verified 6K master
+        env:
+          SHARE_URL: https://firestorage.ai/ja/f/VBBq8NNRiKeO
+          EXPECTED_SHA256: bb1a52fb68d21dec8401bea4c8aa2a9efb4c188968464d18315a67cb871a6f29
+          EXPECTED_NAME: hearthlands-flat-map-6144x4096.png
+        run: |
+          python - <<'PY'
+          import hashlib, os
+          from pathlib import Path
+          from playwright.sync_api import sync_playwright
+          share=os.environ['SHARE_URL']; expected=os.environ['EXPECTED_SHA256']; expected_name=os.environ['EXPECTED_NAME']
+          out=Path('/tmp/hearthlands-flat-map.png')
+          def verified(path):
+              return path.exists() and hashlib.sha256(path.read_bytes()).hexdigest()==expected
+          with sync_playwright() as p:
+              browser=p.chromium.launch(headless=True)
+              context=browser.new_context(accept_downloads=True)
+              page=context.new_page(); page.goto(share,wait_until='networkidle',timeout=90000); page.wait_for_timeout(2500)
+              candidates=[]
+              for selector in ['a','button']:
+                  for el in page.locator(selector).all():
+                      try:
+                          text=(el.inner_text(timeout=1000) or '').strip(); href=el.get_attribute('href') or ''
+                          hay=(text+' '+href).lower(); score=0
+                          if expected_name.lower() in hay: score+=10
+                          if '.png' in hay: score+=5
+                          if 'download' in hay or 'ダウンロード' in hay: score+=5
+                          if score: candidates.append((score,el,text,href))
+                      except Exception: pass
+              candidates.sort(key=lambda row:row[0],reverse=True)
+              for _,el,text,href in candidates:
+                  try:
+                      with page.expect_download(timeout=15000) as info: el.click(force=True,timeout=5000)
+                      info.value.save_as(str(out))
+                      if verified(out):
+                          print('Verified download:',text or href); break
+                  except Exception: pass
+              browser.close()
+          if not verified(out): raise SystemExit('6K master download or SHA verification failed')
+          print('SHA-256 verified:',expected)
+          PY
+      - name: Replace flat-map raster only
+        run: |
+          cp /tmp/hearthlands-flat-map.png worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png
+          python - <<'PY'
+          import json,hashlib
+          p='worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.asset.json'
+          data=json.load(open(p))
+          data['pixelDimensions']=[6144,4096]
+          data['sha256']='bb1a52fb68d21dec8401bea4c8aa2a9efb4c188968464d18315a67cb871a6f29'
+          data['sourceTreatment']='composition-preserving 4x Lanczos upscale with restrained unsharp mask; no new corpus subject claims introduced'
+          open(p,'w').write(json.dumps(data,indent=2)+'\n')
+          PY
+          git config user.name 'dreamscape-engine-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.asset.json
+          git commit -m 'Mount Hearthlands 6K technical master'
+          git push origin HEAD:family-home-pilot

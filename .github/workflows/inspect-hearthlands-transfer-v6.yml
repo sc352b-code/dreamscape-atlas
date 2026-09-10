@@ -1,0 +1,22 @@
+name: Inspect Hearthlands transfer file API v6
+
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-hearthlands-transfer-v6.yml'
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Query transfer API
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request
+          base='https://api.firestorage.ai/dev/file'
+          share='xlFG0U8XX0Mc'
+          u=base+'/shares/'+share+'/files?maxResults=1000'
+          data=urllib.request.urlopen(u).read().decode()
+          print(data)
+          PY

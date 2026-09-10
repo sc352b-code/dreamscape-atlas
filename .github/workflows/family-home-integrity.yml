@@ -21,7 +21,9 @@ on:
       - 'tests/family-home-integrity.mjs'
       - 'tests/hearthlands-territory-v1-integrity.mjs'
       - 'tests/hearthlands-registration-v1-integrity.mjs'
-      - 'tests/hearthlands-human-identity-registration-v1-integrity.mjs'\n      - 'tests/dreamscape-private-profile-integrity.mjs'\n      - 'src/dreamscape-private-profile.js'
+      - 'tests/hearthlands-human-identity-registration-v1-integrity.mjs'
+      - 'tests/dreamscape-private-profile-integrity.mjs'
+      - 'src/dreamscape-private-profile.js'
       - 'tests/territory-cosmos-integrity.mjs'
       - 'tests/world-engine-v1-integrity.mjs'
       - '.github/workflows/family-home-integrity.yml'
@@ -48,6 +50,8 @@ jobs:
         run: node tests/hearthlands-registration-v1-integrity.mjs
       - name: Run Hearthlands human-identity registration integrity suite
         run: node tests/hearthlands-human-identity-registration-v1-integrity.mjs
+      - name: Run private Dreamscape profile integrity suite
+        run: node tests/dreamscape-private-profile-integrity.mjs
       - name: Run territory cosmos integrity suite
         run: node tests/territory-cosmos-integrity.mjs
       - name: Run Dreamscape World Engine v1 integrity suite

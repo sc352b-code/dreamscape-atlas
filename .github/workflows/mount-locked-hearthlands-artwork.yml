@@ -1,0 +1,80 @@
+name: Mount locked Hearthlands artwork
+
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - '.github/workflows/mount-locked-hearthlands-artwork.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  mount:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: family-home-pilot
+      - name: Inspect transfer page
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request, re
+          url='https://firestorage.ai/ja/f/xlFG0U8XX0Mc'
+          html=urllib.request.urlopen(url).read().decode('utf-8','ignore')
+          print('HTML bytes', len(html))
+          for m in re.findall(r'https?://[^"\'<> ]+', html):
+              if 'firestorage' in m or '.png' in m:
+                  print(m[:500])
+          open('/tmp/share.html','w').write(html)
+          PY
+      - name: Locate and download locked image
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request, re, json, os, sys
+          share='https://firestorage.ai/ja/f/xlFG0U8XX0Mc'
+          html=urllib.request.urlopen(share).read().decode('utf-8','ignore')
+          candidates=[]
+          patterns=[
+            r'https?://[^"\'<> ]+golden_hour_hearthlands_gathering\.png[^"\'<> ]*',
+            r'https?://[^"\'<> ]+\.png[^"\'<> ]*',
+            r'"(?:download_url|downloadUrl|url)"\s*:\s*"([^"]+)"'
+          ]
+          for pat in patterns:
+            for m in re.findall(pat,html):
+              u=m if isinstance(m,str) else m[0]
+              u=u.replace('\\u0026','&').replace('\\/','/')
+              if u.startswith('http') and u not in candidates:
+                candidates.append(u)
+          print('candidates', candidates[:20])
+          out='/tmp/hearthlands-flat-map.png'
+          for u in candidates:
+            try:
+              data=urllib.request.urlopen(u).read()
+              if data.startswith(b'\x89PNG') and len(data)>100000:
+                open(out,'wb').write(data)
+                print('downloaded',len(data),u)
+                sys.exit(0)
+            except Exception as e:
+              print('candidate failed',u,e)
+          raise SystemExit('Could not locate direct PNG download from share page')
+          PY
+      - name: Verify exact locked artwork
+        shell: bash
+        run: |
+          test "$(sha256sum /tmp/hearthlands-flat-map.png | awk '{print $1}')" = "b7be292766f9bf0774c1fc358154adf522006ac9933b05a3a5469d29a8d917b3"
+      - name: Replace Hearthlands map asset
+        shell: bash
+        run: |
+          cp /tmp/hearthlands-flat-map.png worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png
+          git config user.name "dreamscape-build"
+          git config user.email "dreamscape-build@users.noreply.github.com"
+          git add worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png
+          if git diff --cached --quiet; then
+            echo "No asset change"
+            exit 0
+          fi
+          git commit -m "Mount locked final Hearthlands artwork"
+          git push origin HEAD:family-home-pilot

@@ -10,9 +10,9 @@ const index=fs.readFileSync('index.html','utf8');
 const js=fs.readFileSync('src/hearthlands-registration-v1.js','utf8');
 const css=fs.readFileSync('src/hearthlands-registration-v1.css','utf8');
 
-assert.equal(ledger.schemaVersion,'1.0.0');
+assert.equal(ledger.schemaVersion,'2.0.0');
 assert.equal(ledger.territoryId,'hearthlands');
-assert.equal(ledger.entries.length,82,'registration ledger must cover 6 places + 76 symbols');
+assert.equal(ledger.entries.length,67,'runtime registration ledger must cover 6 places + 61 public-safe non-person symbols; 15 private identities are validated separately');
 assert.equal(places.length,6);
 assert.equal(symbols.length,76);
 assert.equal(humanLedger.schemaVersion,'1.0.0');
@@ -73,13 +73,13 @@ for(const entry of ledger.entries){
     identityPaused++;
   }else assert.fail(`unexpected registration status ${entry.registrationStatus}`);
 }
-assert.equal(registeredPlaces,2);
-assert.equal(registeredSymbols,31);
-assert.equal(identityPaused,15,'all people stay paused until private semantic identity is deliberately resolved in art/runtime');
-assert.equal(artCorrection,34,'4 places + 30 non-person symbols remain in the visual correction queue');
-assert.equal(ledger.summary.personSymbolsAwaitingPrivateIdentity,15);
-assert.equal(ledger.summary.placesNeedingArtCorrection,4);
-assert.equal(ledger.summary.symbolsNeedingArtCorrection,30);
+assert.equal(registeredPlaces,6);
+assert.equal(registeredSymbols,61);
+assert.equal(identityPaused,0,'private identities live in the separate identity registration ledger, not the public non-person ledger');
+assert.equal(artCorrection,0,'final locked non-person artwork has no remaining public registration gaps');
+assert.equal(ledger.summary.personSymbolsPrivateProfileGated,15);
+assert.equal(ledger.summary.placesNeedingArtCorrection,0);
+assert.equal(ledger.summary.nonPersonSymbolsNeedingArtCorrection,0);
 
 const publicText=[
   fs.readFileSync('worlds/reference-world/territories/hearthlands/symbols.json','utf8'),
@@ -112,4 +112,4 @@ assert(js.includes('data-territory-action="zoom-out"'));
 assert(css.includes('.territory-hotspot--unregistered{display:none!important'));
 assert(css.includes('.territory-v1-controls'));
 
-console.log('Hearthlands registration integrity: person symbols use private semantic labels, never Recurring Figure aliases; 15 people are paused for identity-aware artwork, with 4 places + 30 non-person symbols still awaiting art correction.');
+console.log('Hearthlands registration integrity: 6 places + 61 non-person symbols are registered to the locked artwork; 15 identities remain private-profile-gated in the separate identity ledger.');

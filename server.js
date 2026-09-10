@@ -17,20 +17,13 @@ http.createServer((req, res) => {
   const clean = decodeURIComponent((req.url || "/").split("?")[0]);
 
   if(clean==="/__private/profile"){
-    if(process.env.DREAMSCAPE_ALLOW_PRIVATE_PROFILE!=="1"||!isLoopback(req)){
+    if(process.env.DREAMSCAPE_PRIVATE_PREVIEW!=="1"||!isLoopback(req)){
       res.writeHead(404,{"Cache-Control":"no-store"}); res.end("Not found"); return;
     }
     fs.readFile(privateProfilePath,(err,data)=>{
       if(err){res.writeHead(404,{"Cache-Control":"no-store"});res.end("Not found");return;}
-      try{
-        const parsed=JSON.parse(data.toString("utf8"));
-        const labels=parsed&&typeof parsed.semanticLabels==="object"?parsed.semanticLabels:{};
-        const safe={schemaVersion:"1.0.0",profileId:typeof parsed.profileId==="string"?parsed.profileId:null,semanticLabels:labels};
-        res.writeHead(200,{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store, private"});
-        res.end(JSON.stringify(safe));
-      }catch{
-        res.writeHead(500,{"Cache-Control":"no-store"});res.end("Invalid private profile");
-      }
+      res.writeHead(200,{"Content-Type":"application/json; charset=utf-8","Cache-Control":"no-store, private"});
+      res.end(data);
     });
     return;
   }
@@ -43,7 +36,4 @@ http.createServer((req, res) => {
     res.writeHead(200, { "Content-Type": types[path.extname(target)] || "application/octet-stream", "Cache-Control":"no-store" });
     res.end(data);
   });
-}).listen(port, "0.0.0.0", () => {
-  const privateMode=process.env.DREAMSCAPE_ALLOW_PRIVATE_PROFILE==="1"?" private-profile=enabled":"";
-  console.log(`Dreamscape Atlas: http://localhost:${port}${privateMode}`);
-});
+}).listen(port, "0.0.0.0", () => console.log(`Dreamscape Atlas: http://localhost:${port}`));

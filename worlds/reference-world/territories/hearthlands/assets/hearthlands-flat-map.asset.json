@@ -1,13 +1,10 @@
 {
   "mime": "image/png",
-  "width": 1536,
-  "height": 1024,
+  "width": 6144,
+  "height": 4096,
   "aspectRatio": 1.5,
   "sha256": "bb1a52fb68d21dec8401bea4c8aa2a9efb4c188968464d18315a67cb871a6f29",
   "file": "./hearthlands-flat-map.png",
-  "pixelDimensions": [
-    6144,
-    4096
-  ],
+  "pixelDimensions": [6144,4096],
   "sourceTreatment": "composition-preserving 4x Lanczos upscale with restrained unsharp mask; no new corpus subject claims introduced"
 }

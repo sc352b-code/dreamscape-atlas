@@ -95,19 +95,32 @@ async function boot(){
   const view={
     scale:manifest.zoom.default,panX:0,panY:0,
     min:manifest.zoom.min,max:manifest.zoom.max,
-    stage:'overview',dragging:false,lastTap:0
+    stage:'overview',dragging:false,lastTap:0,
+    selectedHotspot:null
   };
   const pointers=new Map();
   let pinchStart=null;
 
   function fitWorld(){
-    const vw=innerWidth, vh=innerHeight, ratio=1.5;
-    let width=vw, height=width/ratio;
-    if(height<vh){height=vh;width=height*ratio;}
+    const vw=innerWidth;
+    const topbar=document.querySelector('.topbar');
+    const safeTop=Math.max(0,Math.ceil(topbar?.getBoundingClientRect().bottom||0)+8);
+    const safeBottom=8;
+    const availableHeight=Math.max(240,innerHeight-safeTop-safeBottom);
+    const ratio=1.5;
+
+    let width=Math.min(vw,availableHeight*ratio);
+    let height=width/ratio;
+    if(height>availableHeight){
+      height=availableHeight;
+      width=height*ratio;
+    }
+
     world.style.width=`${width}px`;
     world.style.height=`${height}px`;
     world.style.left=`${(vw-width)/2}px`;
-    world.style.top=`${(vh-height)/2}px`;
+    world.style.top=`${safeTop+(availableHeight-height)/2}px`;
+    scene.style.setProperty('--hearthlands-safe-top',`${safeTop}px`);
     clampPan();
     applyTransform();
   }
@@ -173,7 +186,7 @@ async function boot(){
     button.innerHTML=`<span>${escapeHTML(item.name)}</span>`;
     button.addEventListener('click',event=>{
       event.stopPropagation();
-      openTarot(item,type);
+      openTarot(item,type,button);
     });
     markers.appendChild(button);
     return button;
@@ -192,9 +205,16 @@ async function boot(){
     });
   }
 
-  function openTarot(item,type){
+  function selectHotspot(button){
+    view.selectedHotspot?.classList.remove('is-selected');
+    view.selectedHotspot=button||null;
+    view.selectedHotspot?.classList.add('is-selected');
+  }
+
+  function openTarot(item,type,button){
     const card=tarots[item.tarotCardRef];
     if(!card) return;
+    selectHotspot(button);
     about.classList.remove('open');
     reader.querySelector('.territory-v1-kicker').textContent=`HEARTHLANDS · ${type.toUpperCase()}`;
     const provider=window.DreamscapePrivateProfile||window.__dreamscapePrivateProfile;
@@ -214,7 +234,10 @@ async function boot(){
     reader.classList.add('open');
   }
 
-  function closeReader(){reader.classList.remove('open');}
+  function closeReader(){
+    reader.classList.remove('open');
+    selectHotspot(null);
+  }
   function closeAbout(){about.classList.remove('open');}
 
   reader.querySelector('.territory-v1-reader-close').addEventListener('click',closeReader);

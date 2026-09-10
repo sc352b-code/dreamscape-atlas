@@ -66,26 +66,10 @@ const api={
 window.DreamscapePrivateProfile=api;
 window.__dreamscapePrivateProfile=api;
 
-async function loadLocalPreviewProvider(){
-  if(!['localhost','127.0.0.1','::1'].includes(location.hostname)) return null;
-  try{
-    const response=await fetch('/__private/profile',{cache:'no-store'});
-    if(!response.ok) return null;
-    const profile=await response.json();
-    return {loadProfile:async()=>profile};
-  }catch{return null;}
-}
-
 (async()=>{
-  const external=window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__;
-  if(external){
-    await api.hydrateFromProvider(external);
-    return;
-  }
-  const local=await loadLocalPreviewProvider();
-  if(local){
-    window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__=local;
-    await api.hydrateFromProvider(local);
+  const provider=window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__;
+  if(provider){
+    await api.hydrateFromProvider(provider);
     return;
   }
   notify('session');

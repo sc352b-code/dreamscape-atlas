@@ -53,8 +53,9 @@ assert(index.includes('/src/hearthlands-registration-v1.js'));
 assert(js.includes("territory-hotspot--unregistered"));
 assert(js.includes("button.disabled=true"));
 assert(js.includes("entry.hitArea.width"));
+assert(js.includes('data-territory-action="zoom-in"'));
+assert(js.includes('data-territory-action="zoom-out"'));
 assert(css.includes('.territory-hotspot--unregistered{display:none!important'));
-assert(css.includes('data-territory-action="zoom-in"'));
-assert(css.includes('data-territory-action="zoom-out"'));
+assert(css.includes('.territory-v1-controls'));
 
 console.log('Hearthlands registration integrity: 2 places + 31 symbols precisely registered; 49 unresolved targets suppressed pending controlled artwork correction.');

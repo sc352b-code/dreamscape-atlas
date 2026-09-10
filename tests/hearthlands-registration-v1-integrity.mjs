@@ -2,7 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 
 const readJSON=path=>JSON.parse(fs.readFileSync(path,'utf8'));
-const ledger=readJSON('worlds/reference-world/territories/hearthlands/validation/image-location-ledger.json');
+const ledger=readJSON('worlds/reference-world/territories/hearthlands/validation/image-location-ledger.json');\nconst humanLedger=readJSON('worlds/reference-world/territories/hearthlands/validation/human-identity-registration.json');
 const places=readJSON('worlds/reference-world/territories/hearthlands/places.json');
 const symbols=readJSON('worlds/reference-world/territories/hearthlands/symbols.json');
 const index=fs.readFileSync('index.html','utf8');
@@ -14,6 +14,23 @@ assert.equal(ledger.territoryId,'hearthlands');
 assert.equal(ledger.entries.length,82,'registration ledger must cover 6 places + 76 symbols');
 assert.equal(places.length,6);
 assert.equal(symbols.length,76);
+assert.equal(humanLedger.schemaVersion,'1.0.0');
+assert.equal(humanLedger.territoryId,'hearthlands');
+assert.equal(humanLedger.entries.length,15,'identity registration must contain 13 humans plus Max and Percy');
+for(const entry of humanLedger.entries){
+  assert(entry.id.startsWith('person-'));
+  assert.equal(entry.registrationStatus,'registered-private-label-required');
+  assert.equal(entry.labelSource,'private-profile');
+  assert(Number.isFinite(entry.x)&&entry.x>=0&&entry.x<=1);
+  assert(Number.isFinite(entry.y)&&entry.y>=0&&entry.y<=1);
+  assert(entry.hitArea?.width>0&&entry.hitArea?.height>0);
+  assert(entry.activeFromZoom>0);
+  assert(entry.paintedObject);
+  assert.equal(entry.tarotCardRef,`tarot/symbol/${entry.id}`);
+}
+assert.equal(humanLedger.entries.filter(x=>x.entityType==='companion-animal').length,2);
+assert.equal(humanLedger.entries.filter(x=>x.entityType==='historical-public-person').length,1);
+assert.equal(humanLedger.entries.filter(x=>x.entityType==='human').length,12);
 
 const personSymbols=symbols.filter(x=>x.id.startsWith('person-'));
 assert.equal(personSymbols.length,15,'15 private person symbols must remain present as technical records');
@@ -68,16 +85,26 @@ const publicText=[
   fs.readFileSync('worlds/reference-world/territories/hearthlands/territory-manifest.json','utf8'),
   fs.readFileSync('worlds/reference-world/territories/hearthlands/tarot/tarot-cards.json','utf8'),
   fs.readFileSync('worlds/reference-world/territories/hearthlands/validation/image-location-ledger.json','utf8'),
-  fs.readFileSync('worlds/reference-world/territories/hearthlands/validation/artwork-coverage.json','utf8')
+  fs.readFileSync('worlds/reference-world/territories/hearthlands/validation/artwork-coverage.json','utf8'),\n  fs.readFileSync('worlds/reference-world/territories/hearthlands/validation/human-identity-registration.json','utf8')
 ].join('\n');
 assert(!publicText.includes('Recurring Figure'));
 assert(!publicText.includes('recurring-figure-'));
+for(const privateName of ['Alex','Alice','George','Grandma','Lily','Mum','Natalie','Percy','Stephen Coarse','Wayne']){
+  assert(!publicText.includes(privateName),`private semantic label leaked into public runtime: ${privateName}`);
+}
 
 assert(index.includes('/src/hearthlands-registration-v1.css'));
 assert(index.includes('/src/hearthlands-registration-v1.js'));
 assert(js.includes("territory-hotspot--unregistered"));
 assert(js.includes("button.disabled=true"));
 assert(js.includes("entry.hitArea.width"));
+assert(js.includes('IDENTITY_REGISTRATION_URL'));
+assert(js.includes('resolveHearthlandsPrivateIdentities'));
+assert(js.includes('__dreamscapePrivateIdentityMap'));
+assert(js.includes('private-label-required'));
+const territoryJS=fs.readFileSync('src/hearthlands-territory-v1.js','utf8');
+assert(territoryJS.includes('__dreamscapePrivateIdentityMap'));
+assert(territoryJS.includes('privateLabel||card.title'));
 assert(js.includes('data-territory-action="zoom-in"'));
 assert(js.includes('data-territory-action="zoom-out"'));
 assert(css.includes('.territory-hotspot--unregistered{display:none!important'));

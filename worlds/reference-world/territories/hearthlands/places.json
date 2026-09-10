@@ -1,0 +1,170 @@
+[
+  {
+    "id": "childhood-house",
+    "name": "Childhood House",
+    "summary": "A recurring childhood-home place in the Hearthlands.",
+    "type": "home",
+    "map": {
+      "x": 0.16,
+      "y": 0.62,
+      "hitRadius": 0.04,
+      "visibleFromZoom": 1.15,
+      "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+    },
+    "corpusEvidence": {
+      "privacyClass": "public-safe-derived",
+      "summary": "3 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+      "evidenceRefs": [
+        "private:v57/hearthlands/place/childhood-house"
+      ],
+      "dreamCount": 3,
+      "dreamCountStatus": "known"
+    },
+    "tarotCardRef": "tarot/place/childhood-house",
+    "interaction": {
+      "hoverable": true,
+      "clickable": true,
+      "hoverLabel": true
+    }
+  },
+  {
+    "id": "family-home",
+    "name": "Family Home",
+    "summary": "A recurring family-home place with an existing deeper place experience.",
+    "type": "home",
+    "map": {
+      "x": 0.31,
+      "y": 0.3,
+      "hitRadius": 0.04,
+      "visibleFromZoom": 1.15,
+      "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+    },
+    "corpusEvidence": {
+      "privacyClass": "public-safe-derived",
+      "summary": "2 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+      "evidenceRefs": [
+        "private:v57/hearthlands/place/family-home"
+      ],
+      "dreamCount": 2,
+      "dreamCountStatus": "known"
+    },
+    "tarotCardRef": "tarot/place/family-home",
+    "interaction": {
+      "hoverable": true,
+      "clickable": true,
+      "hoverLabel": true
+    }
+  },
+  {
+    "id": "current-present-house",
+    "name": "Current / Present House",
+    "summary": "The strongest recurring canonical Hearthlands home in the current v57 derivation.",
+    "type": "home",
+    "map": {
+      "x": 0.49,
+      "y": 0.61,
+      "hitRadius": 0.04,
+      "visibleFromZoom": 1.15,
+      "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+    },
+    "corpusEvidence": {
+      "privacyClass": "public-safe-derived",
+      "summary": "31 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+      "evidenceRefs": [
+        "private:v57/hearthlands/place/current-present-house"
+      ],
+      "dreamCount": 31,
+      "dreamCountStatus": "known"
+    },
+    "tarotCardRef": "tarot/place/current-present-house",
+    "interaction": {
+      "hoverable": true,
+      "clickable": true,
+      "hoverLabel": true
+    }
+  },
+  {
+    "id": "large-many-roomed-house",
+    "name": "The Large Many-Roomed House",
+    "summary": "A recurring expansive many-roomed house in the Hearthlands.",
+    "type": "home",
+    "map": {
+      "x": 0.66,
+      "y": 0.28,
+      "hitRadius": 0.04,
+      "visibleFromZoom": 1.15,
+      "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+    },
+    "corpusEvidence": {
+      "privacyClass": "public-safe-derived",
+      "summary": "6 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+      "evidenceRefs": [
+        "private:v57/hearthlands/place/large-many-roomed-house"
+      ],
+      "dreamCount": 6,
+      "dreamCountStatus": "known"
+    },
+    "tarotCardRef": "tarot/place/large-many-roomed-house",
+    "interaction": {
+      "hoverable": true,
+      "clickable": true,
+      "hoverLabel": true
+    }
+  },
+  {
+    "id": "unfamiliar-house",
+    "name": "The Unfamiliar House",
+    "summary": "A recurring unfamiliar domestic place in the Hearthlands.",
+    "type": "home",
+    "map": {
+      "x": 0.78,
+      "y": 0.61,
+      "hitRadius": 0.04,
+      "visibleFromZoom": 1.15,
+      "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+    },
+    "corpusEvidence": {
+      "privacyClass": "public-safe-derived",
+      "summary": "5 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+      "evidenceRefs": [
+        "private:v57/hearthlands/place/unfamiliar-house"
+      ],
+      "dreamCount": 5,
+      "dreamCountStatus": "known"
+    },
+    "tarotCardRef": "tarot/place/unfamiliar-house",
+    "interaction": {
+      "hoverable": true,
+      "clickable": true,
+      "hoverLabel": true
+    }
+  },
+  {
+    "id": "haunted-17-bedroom-mansion",
+    "name": "The Haunted 17-Bedroom Mansion",
+    "summary": "A rare one-dream mansion retained as part of the Hearthlands geography.",
+    "type": "home",
+    "map": {
+      "x": 0.89,
+      "y": 0.27,
+      "hitRadius": 0.032,
+      "visibleFromZoom": 1.15,
+      "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+    },
+    "corpusEvidence": {
+      "privacyClass": "public-safe-derived",
+      "summary": "1 source dream contribute to this canonical Hearthlands place in the current v57 derivation.",
+      "evidenceRefs": [
+        "private:v57/hearthlands/place/haunted-17-bedroom-mansion"
+      ],
+      "dreamCount": 1,
+      "dreamCountStatus": "known"
+    },
+    "tarotCardRef": "tarot/place/haunted-17-bedroom-mansion",
+    "interaction": {
+      "hoverable": true,
+      "clickable": true,
+      "hoverLabel": true
+    }
+  }
+]

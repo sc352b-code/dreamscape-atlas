@@ -1,0 +1,52 @@
+name: Build HD world texture
+
+on:
+  push:
+    branches: [family-home-pilot]
+    paths:
+      - '.github/workflows/build-world-hd.yml'
+      - 'assets/world-equirectangular.png'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: ${{ !contains(github.event.head_commit.message, '[world-hd]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: family-home-pilot
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install Pillow
+        run: python -m pip install --disable-pip-version-check pillow
+      - name: Build persistent 4K texture
+        run: |
+          python - <<'PY'
+          from PIL import Image, ImageFilter, ImageEnhance
+          source='assets/world-equirectangular.png'
+          target='assets/world-equirectangular-hd.webp'
+          im=Image.open(source).convert('RGB')
+          im=im.resize((4096,2048), Image.Resampling.LANCZOS)
+          im=im.filter(ImageFilter.GaussianBlur(radius=0.22))
+          im=im.filter(ImageFilter.UnsharpMask(radius=1.25, percent=165, threshold=2))
+          im=ImageEnhance.Contrast(im).enhance(1.025)
+          im=ImageEnhance.Color(im).enhance(1.025)
+          im.save(target,'WEBP',quality=95,method=6)
+          print('built',target,Image.open(target).size)
+          PY
+      - name: Commit texture to pilot branch
+        run: |
+          git config user.name 'dreamscape-build-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add assets/world-equirectangular-hd.webp
+          if git diff --cached --quiet; then
+            echo 'HD texture already current'
+          else
+            git commit -m 'Build persistent 4K world texture [world-hd]'
+            git push origin HEAD:family-home-pilot
+          fi

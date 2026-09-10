@@ -1,0 +1,101 @@
+/* Hearthlands image-registration pass: interaction is allowed only where the painting has a defensible subject. */
+.territory-hotspot--unregistered{display:none!important;pointer-events:none!important}
+.territory-hotspot--registered{width:var(--registered-hit-w)!important;height:var(--registered-hit-h)!important;border-radius:var(--registered-hit-radius)!important;background:transparent!important;padding:0!important;overflow:visible;box-shadow:none!important}
+.territory-hotspot--registered::before{content:"";position:absolute;inset:0;border-radius:inherit;border:1px solid transparent;transition:border-color .16s,background .16s,box-shadow .16s}
+.territory-hotspot--registered:hover::before,.territory-hotspot--registered:focus-visible::before{border-color:rgba(255,230,175,.68);background:rgba(255,224,160,.08);box-shadow:0 0 0 2px rgba(33,31,28,.18),0 0 24px rgba(255,206,113,.3)}
+.territory-hotspot--registered span{position:absolute;left:50%;bottom:calc(100% + 7px);transform:translateX(-50%) translateY(4px);width:max-content;max-width:220px;padding:7px 10px;border-radius:999px;border:1px solid rgba(244,211,156,.38);background:rgba(10,14,18,.82);color:#fff0d9;font:13px/1.1 Georgia,serif;text-shadow:0 1px 8px #000;box-shadow:0 8px 30px rgba(0,0,0,.28);opacity:0;pointer-events:none;transition:opacity .14s,transform .14s;white-space:nowrap}
+.territory-hotspot--registered:hover span,.territory-hotspot--registered:focus-visible span{opacity:1;transform:translateX(-50%) translateY(0)}
+.atlas.territory-v1 .hearth-bar .territory-v1-controls{position:fixed;right:22px;top:88px;z-index:44;display:grid!important;grid-template-columns:1fr!important;gap:7px;padding:7px;border:1px solid rgba(244,210,150,.32);border-radius:18px;background:rgba(8,13,20,.72);backdrop-filter:blur(14px);box-shadow:0 12px 44px rgba(0,0,0,.28)}
+.atlas.territory-v1 .hearth-bar .territory-v1-controls button{display:grid;place-items:center;min-width:42px;width:42px;height:42px;padding:0;border:1px solid rgba(245,216,167,.22)!important;border-radius:12px!important;background:rgba(255,255,255,.035)!important;color:#f6e3c3!important;font:22px/1 Georgia,serif!important;cursor:pointer;transition:background .15s,border-color .15s,transform .15s}
+.atlas.territory-v1 .hearth-bar .territory-v1-controls button[data-territory-action="about"]{width:auto;min-width:42px;height:auto;padding:9px 7px!important;font:10px/1.1 system-ui,sans-serif!important;letter-spacing:.08em;text-transform:uppercase;writing-mode:vertical-rl}
+.atlas.territory-v1 .hearth-bar .territory-v1-controls button:hover,.atlas.territory-v1 .hearth-bar .territory-v1-controls button:focus-visible{background:rgba(244,210,150,.14)!important;border-color:rgba(245,216,167,.55)!important;transform:translateY(-1px)}
+@media(max-width:800px){.atlas.territory-v1 .hearth-bar .territory-v1-controls{right:10px;top:68px}.atlas.territory-v1 .hearth-bar .territory-v1-controls button{width:38px;min-width:38px;height:38px}}
+
+
+/* Discoverability: registered painted subjects give a quiet, zoom-aware glint before hover.
+   Labels remain hover/focus only; private identities never receive this class until resolved. */
+.territory-hotspot--registered.active::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:50%;
+  width:5px;
+  height:5px;
+  transform:translate(-50%,-50%);
+  border-radius:50%;
+  pointer-events:none;
+  background:rgba(255,224,158,.34);
+  box-shadow:0 0 7px rgba(255,218,139,.42),0 0 16px rgba(255,204,104,.16);
+  opacity:.34;
+  animation:hearthlands-discovery-glint 5.6s ease-in-out infinite;
+}
+.territory-hotspot--place.territory-hotspot--registered.active::after{
+  width:7px;
+  height:7px;
+  opacity:.46;
+  box-shadow:0 0 8px rgba(255,225,164,.52),0 0 22px rgba(255,200,105,.22);
+}
+.atlas[data-territory-zoom-stage="explore"] .territory-hotspot--registered.active::after{
+  width:4px;
+  height:4px;
+  opacity:.42;
+}
+.atlas[data-territory-zoom-stage="detail"] .territory-hotspot--registered.active::after{
+  width:3px;
+  height:3px;
+  opacity:.5;
+  box-shadow:0 0 6px rgba(255,225,164,.52),0 0 12px rgba(255,200,105,.18);
+}
+.territory-hotspot--registered:hover::after,
+.territory-hotspot--registered:focus-visible::after{
+  opacity:.9!important;
+  animation:none;
+  box-shadow:0 0 8px rgba(255,235,190,.75),0 0 24px rgba(255,200,105,.36);
+}
+@keyframes hearthlands-discovery-glint{
+  0%,68%,100%{opacity:.18;transform:translate(-50%,-50%) scale(.78)}
+  76%{opacity:.58;transform:translate(-50%,-50%) scale(1.18)}
+  84%{opacity:.26;transform:translate(-50%,-50%) scale(.9)}
+}
+@media (prefers-reduced-motion:reduce){
+  .territory-hotspot--registered.active::after{animation:none;opacity:.32}
+}
+
+
+/* Precise hover anchoring: the hitbox can remain generous, but the visible cue
+   and label are always tied to its registered centre point. */
+.territory-hotspot--registered span{
+  left:50%!important;
+  top:50%!important;
+  bottom:auto!important;
+  transform:translate(-50%,calc(-100% - 15px))!important;
+}
+.territory-hotspot--registered span::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:100%;
+  width:1px;
+  height:12px;
+  transform:translateX(-50%);
+  background:linear-gradient(180deg,rgba(255,230,178,.72),rgba(255,230,178,.08));
+  box-shadow:0 0 5px rgba(255,214,136,.25);
+}
+.territory-hotspot--registered:hover span,
+.territory-hotspot--registered:focus-visible span,
+.territory-hotspot--registered.is-selected span{
+  opacity:1!important;
+  transform:translate(-50%,calc(-100% - 12px))!important;
+}
+.territory-hotspot--registered.is-selected::before{
+  border-color:rgba(255,235,190,.88)!important;
+  background:rgba(255,224,160,.10)!important;
+  box-shadow:0 0 0 2px rgba(33,31,28,.22),0 0 30px rgba(255,206,113,.38)!important;
+}
+.territory-hotspot--registered.is-selected::after{
+  opacity:1!important;
+  animation:none!important;
+  width:6px!important;
+  height:6px!important;
+  box-shadow:0 0 9px rgba(255,239,202,.9),0 0 26px rgba(255,198,92,.48)!important;
+}

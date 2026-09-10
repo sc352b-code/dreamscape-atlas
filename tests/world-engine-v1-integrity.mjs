@@ -1,0 +1,112 @@
+import assert from 'node:assert/strict';
+import fs from 'node:fs';
+import {WORLD_META,WORLDS,MOBILE_POSITIONS} from '../src/world-runtime-config.js';
+
+const world=JSON.parse(fs.readFileSync('worlds/reference-world/world-manifest.json','utf8'));
+const scene=JSON.parse(fs.readFileSync('worlds/reference-world/runtime-scene.json','utf8'));
+const worldSchema=JSON.parse(fs.readFileSync('dreamscape-engine/schemas/world-manifest.schema.json','utf8'));
+const sceneSchema=JSON.parse(fs.readFileSync('dreamscape-engine/schemas/runtime-scene.schema.json','utf8'));
+
+assert.equal(world.engineVersion,'1.0.0');
+assert.equal(scene.engineVersion,'1.0.0');
+assert.equal(WORLD_META.engineVersion,'1.0.0');
+assert.equal(world.worldId,scene.worldId);
+assert.equal(world.worldId,WORLD_META.worldId);
+assert.equal(world.privacy.rawCorpusPublic,false);
+assert.equal(world.privacy.identifiableSourceMaterialPublic,false);
+assert.equal(world.territories.length,5);
+assert.equal(scene.planets.length,5);
+assert.equal(WORLDS.length,5);
+assert.equal(new Set(world.territories.map(t=>t.id)).size,5);
+assert.equal(new Set(scene.planets.map(t=>t.id)).size,5);
+assert.deepEqual(new Set(WORLDS.map(t=>t.id)),new Set(world.territories.map(t=>t.id)));
+assert.deepEqual(new Set(Object.keys(MOBILE_POSITIONS)),new Set(world.territories.map(t=>t.id)));
+assert.equal(world.corpus.totalDreams,362);
+const hearth=world.territories.find(t=>t.id==='hearthlands');
+assert.equal(hearth.associationCount,213);
+assert.equal(hearth.flatMap.status,'pilot');
+assert.deepEqual(hearth.flatMap.keyPlaces,['family-home']);
+for(const territory of world.territories){
+  assert.equal(territory.approved,true);
+  assert.match(territory.planetTextureSha256,/^[0-9a-f]{64}$/);
+  if(territory.id!=='hearthlands') assert.equal(territory.associationCount,null);
+}
+assert.equal(scene.renderer.texture.wrapS,'RepeatWrapping');
+assert.equal(scene.renderer.texture.wrapT,'ClampToEdgeWrapping');
+assert.equal(scene.renderer.texture.generateMipmaps,false);
+assert.deepEqual(scene.renderer.sphereSegments,[128,96]);
+assert.ok(worldSchema.required.includes('territories'));
+assert.ok(sceneSchema.required.includes('planets'));
+assert.ok(fs.existsSync('dreamscape-engine/docs/engine-v1-overview.md'));
+assert.ok(fs.existsSync('dreamscape-engine/docs/privacy-boundaries.md'));
+
+// Territory Layer v1 contract
+const territorySchemaPath='dreamscape-engine/schemas/territory-manifest.schema.json';
+const placeSchemaPath='dreamscape-engine/schemas/place.schema.json';
+const symbolSchemaPath='dreamscape-engine/schemas/symbol.schema.json';
+const tarotSchemaPath='dreamscape-engine/schemas/tarot-card.schema.json';
+const territoryDocsPath='dreamscape-engine/docs/territory-layer-v1.md';
+const templatePath='dreamscape-engine/templates/territory-package.example.json';
+for(const p of [territorySchemaPath,placeSchemaPath,symbolSchemaPath,tarotSchemaPath,territoryDocsPath,templatePath]) assert.ok(fs.existsSync(p),`Missing Territory Layer v1 artifact: ${p}`);
+
+const territorySchema=JSON.parse(fs.readFileSync(territorySchemaPath,'utf8'));
+const placeSchema=JSON.parse(fs.readFileSync(placeSchemaPath,'utf8'));
+const symbolSchema=JSON.parse(fs.readFileSync(symbolSchemaPath,'utf8'));
+const tarotSchema=JSON.parse(fs.readFileSync(tarotSchemaPath,'utf8'));
+const template=JSON.parse(fs.readFileSync(templatePath,'utf8'));
+const territoryDocs=fs.readFileSync(territoryDocsPath,'utf8');
+assert.equal(template.schemaVersion,'1.0.0');
+assert.ok(territorySchema.required.includes('provenance'));
+assert.ok(territorySchema.required.includes('flatMap'));
+assert.ok(territorySchema.required.includes('zoom'));
+assert.ok(territorySchema.required.includes('places'));
+assert.ok(territorySchema.required.includes('symbols'));
+assert.ok(placeSchema.required.includes('map'));
+assert.ok(placeSchema.required.includes('corpusEvidence'));
+assert.ok(placeSchema.required.includes('tarotCardRef'));
+assert.ok(symbolSchema.required.includes('map'));
+assert.ok(symbolSchema.required.includes('corpusEvidence'));
+assert.ok(symbolSchema.required.includes('tarotCardRef'));
+assert.ok(tarotSchema.required.includes('interpretation'));
+assert.ok(tarotSchema.required.includes('corpusGrounding'));
+assert.ok(tarotSchema.required.includes('relatedItems'));
+assert.equal(template.flatMap.labelsPolicy,'minimal');
+assert.equal(template.flatMap.interactiveArtwork,true);
+assert.equal(template.places[0].interaction.clickable,true);
+assert.equal(template.symbols[0].interaction.clickable,true);
+assert.equal(template.places[0].corpusEvidence.dreamCountStatus,'unknown');
+assert.equal(template.symbols[0].corpusEvidence.frequencyStatus,'unknown');
+
+// Semantic zoom + pan contract
+assert.ok(territorySchema.properties.zoom.required.includes('min'));
+assert.ok(territorySchema.properties.zoom.required.includes('max'));
+assert.ok(territorySchema.properties.zoom.required.includes('default'));
+assert.ok(territorySchema.properties.zoom.required.includes('stages'));
+assert.ok(territorySchema.properties.zoom.required.includes('pan'));
+assert.ok(territorySchema.properties.zoom.required.includes('controls'));
+assert.ok(territorySchema.properties.zoom.required.includes('preserveViewState'));
+assert.equal(template.zoom.min,1);
+assert.ok(template.zoom.max>template.zoom.min);
+assert.ok(template.zoom.default>=template.zoom.min && template.zoom.default<=template.zoom.max);
+assert.ok(template.zoom.stages.overview<template.zoom.stages.explore);
+assert.ok(template.zoom.stages.explore<template.zoom.stages.detail);
+assert.ok(template.zoom.stages.detail<=template.zoom.max);
+assert.equal(template.zoom.pan.enabled,true);
+assert.equal(template.zoom.pan.clampToArtwork,true);
+assert.equal(template.zoom.controls.buttons,true);
+assert.equal(template.zoom.controls.wheel,true);
+assert.equal(template.zoom.controls.pinch,true);
+assert.equal(template.zoom.controls.doubleTap,true);
+assert.equal(template.zoom.controls.dragPan,true);
+assert.equal(template.zoom.controls.reset,true);
+assert.equal(template.zoom.activationPolicy,'threshold');
+assert.equal(template.zoom.preserveViewState,true);
+assert.equal(template.places[0].map.visibleFromZoom,template.zoom.stages.explore);
+assert.equal(template.symbols[0].map.visibleFromZoom,template.zoom.stages.detail);
+assert.match(territoryDocs,/semantic zoom changes \*\*discoverability and interaction\*\*/i);
+assert.match(territoryDocs,/complete approved Hearthlands place-and-symbol inventory/i);
+assert.match(territoryDocs,/mouse wheel \/ trackpad zoom/i);
+assert.match(territoryDocs,/pinch zoom/i);
+assert.match(territoryDocs,/reset\/recenter/i);
+
+console.log('Dreamscape World Engine v1 integrity: reference world, runtime config, privacy boundary, schemas, Territory Layer v1, and semantic zoom/pan contract are coherent.');

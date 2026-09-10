@@ -1,0 +1,66 @@
+
+/* Hearthlands Territory Layer v1 — artwork-first semantic pan/zoom runtime */
+.atlas.territory-v1:not([data-family-home-focus]) .flatmap-world{transform:none!important;touch-action:none;cursor:grab}
+.atlas.territory-v1:not([data-family-home-focus]) .flatmap-world:has(.territory-v1-map[data-dragging=true]){cursor:grabbing}
+.atlas.territory-v1:not([data-family-home-focus]) .family-home-painted-layer,
+.atlas.territory-v1:not([data-family-home-focus]) .family-home-hotspot-layer{display:none!important}
+.atlas.territory-v1 .painted-motifs,.atlas.territory-v1 .glint{display:none!important}
+.atlas.territory-v1 .flatmap-wash{z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(3,4,13,.08),transparent 17%,transparent 78%,rgba(3,4,13,.2))}
+.atlas.territory-v1 .territory-v1-map{position:absolute;inset:0;transform-origin:50% 50%;will-change:transform;touch-action:none}
+.atlas.territory-v1 .territory-v1-map .flatmap-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;filter:saturate(1.03) contrast(1.025);user-select:none;-webkit-user-drag:none;pointer-events:none}
+.atlas.territory-v1 .flatmap-markers{z-index:4;position:absolute;inset:0}
+.atlas.territory-v1 .map-marker{display:none!important}
+.atlas.territory-v1 .territory-hotspot{--hit-size:4%;position:absolute;width:var(--hit-size);aspect-ratio:1;translate:-50% -50%;border:0;border-radius:50%;padding:0;background:transparent;color:#fff4dc;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .22s,box-shadow .22s,background .22s;outline:none}
+.atlas.territory-v1 .territory-hotspot.active{opacity:1;pointer-events:auto}
+.atlas.territory-v1 .territory-hotspot.active:hover,
+.atlas.territory-v1 .territory-hotspot.active:focus-visible{background:radial-gradient(circle,rgba(255,224,159,.17) 0,rgba(255,205,120,.07) 35%,transparent 70%);box-shadow:0 0 26px rgba(255,206,126,.16)}
+.atlas.territory-v1 .territory-hotspot span{position:absolute;left:50%;top:calc(100% + 6px);translate:-50% 0;padding:5px 9px;border:1px solid rgba(239,205,148,.27);border-radius:999px;background:rgba(7,8,18,.74);backdrop-filter:blur(8px);color:#f8e8d0;font:12px Georgia,serif;white-space:nowrap;text-shadow:0 2px 8px #000;opacity:0;transform:translateY(4px);transition:.18s;pointer-events:none}
+.atlas.territory-v1 .territory-hotspot:hover span,
+.atlas.territory-v1 .territory-hotspot:focus-visible span{opacity:1;transform:none}
+.atlas.territory-v1 .territory-hotspot--place{--hit-size:7%}
+.atlas.territory-v1 .territory-hotspot--place.active:hover,
+.atlas.territory-v1 .territory-hotspot--place.active:focus-visible{box-shadow:0 0 34px rgba(255,211,137,.2)}
+.atlas.territory-v1 .hearth-bar{background:linear-gradient(180deg,rgba(8,8,20,.48),rgba(8,8,20,.22));border-color:rgba(240,204,145,.16)}
+.atlas.territory-v1 .territory-v1-controls{gap:2px;padding:3px}
+.atlas.territory-v1 .territory-v1-controls button{min-width:34px;height:34px;padding:0 10px;border-radius:999px;color:#eadac3}
+.atlas.territory-v1 .territory-v1-controls button:hover{background:rgba(230,184,113,.11)}
+.atlas.territory-v1 .arrival-whisper{pointer-events:none;transition:opacity .5s}
+.atlas.territory-v1[data-territory-zoom-stage=detail] .arrival-whisper{opacity:.12}
+.atlas.territory-v1 .place-sheet{display:none!important}
+.territory-v1-reader,.territory-v1-about{position:absolute;z-index:44;right:24px;top:78px;bottom:24px;width:min(420px,92vw);padding:50px 32px 28px;border:1px solid rgba(229,190,128,.28);border-radius:24px;background:linear-gradient(150deg,rgba(17,12,28,.96),rgba(8,11,21,.93));backdrop-filter:blur(22px);box-shadow:0 34px 110px rgba(0,0,0,.48);transform:translateX(calc(100% + 50px));opacity:0;pointer-events:none;transition:transform .52s cubic-bezier(.16,.78,.12,1),opacity .35s;overflow:auto}
+.territory-v1-reader.open,.territory-v1-about.open{transform:none;opacity:1;pointer-events:auto}
+.territory-v1-reader-close,.territory-v1-about-close{position:absolute;right:15px;top:15px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(230,190,128,.3);background:rgba(5,7,16,.58);color:#f0d4a9;font-size:22px;cursor:pointer}
+.territory-v1-kicker{margin:0;color:#dba77e;font:700 9px system-ui,sans-serif;letter-spacing:.26em}
+.territory-v1-reader h2,.territory-v1-about h2{font:400 38px/1.04 Georgia,serif;color:#fff0dc;margin:12px 0 16px}
+.territory-v1-grounding,.territory-v1-interpretation,.territory-v1-about p{font:15px/1.62 Georgia,serif;color:#d8ccd0}
+.territory-v1-divider{height:1px;margin:21px 0;background:linear-gradient(90deg,rgba(228,185,117,.7),transparent)}
+.territory-v1-related b,.territory-v1-about h3{font:400 15px Georgia,serif;color:#efcb99}
+.territory-v1-related p,.territory-v1-method{font-size:12px!important;color:#aa9cad!important}
+.territory-v1-deeper{width:100%;margin-top:20px;border:1px solid rgba(239,195,121,.55);border-radius:999px;padding:14px 17px;background:rgba(159,103,55,.16);color:#f4ddba;cursor:pointer}
+.territory-v1-deeper span{float:right}
+.territory-v1-about-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.territory-v1-about-stats span{padding:12px;border:1px solid rgba(226,186,125,.15);border-radius:14px;color:#a99bac;font:9px system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.territory-v1-about-stats b{display:block;margin-bottom:4px;color:#efcc97;font:400 25px Georgia,serif;text-transform:none;letter-spacing:0}
+.atlas.territory-v1[data-family-home-focus] .territory-v1-controls,
+.atlas.territory-v1[data-family-home-focus] .arrival-whisper{opacity:0;pointer-events:none}
+@media(max-width:800px){
+  .atlas.territory-v1 .territory-v1-controls button{min-width:30px;padding:0 7px}
+  .atlas.territory-v1 .territory-v1-controls button[data-territory-action=about]{max-width:68px}
+  .territory-v1-reader,.territory-v1-about{left:10px;right:10px;top:auto;bottom:10px;width:auto;max-height:72vh}
+  .territory-v1-reader h2,.territory-v1-about h2{font-size:31px}
+}
+
+
+/* Hearthlands viewport safety: the interactive painting is fitted entirely below
+   the persistent Dreamscape navigation rather than centred underneath it. */
+.atlas.territory-v1 .flatmap-scene{
+  background:
+    radial-gradient(circle at 50% 42%,rgba(91,70,46,.16),transparent 54%),
+    #0b1020;
+}
+.atlas.territory-v1 .flatmap-world{
+  overflow:visible;
+}
+.atlas.territory-v1 .territory-v1-map .flatmap-art{
+  object-fit:fill;
+}

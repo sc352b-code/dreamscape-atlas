@@ -1,9 +1,9 @@
 const HEARTHLANDS_SYMBOLS = [
-  "Alex","Alice","Bag","Bed","Bench","Bicycle","Boat","Book","Box","Brother","Bus","Car","Carl Jung","Cat","Chair","Clock","Clothes","Computer","Cow","Dad","Dog","Door","Drink","Egg","Field","Fire","Fish","Food","Forest","Garden","George","Grandma","Grass","Gun","House / Home","Insect","Key","Knife","Lake","Light","Lily","Lion","Max","Mirror","Money","Mum","Natalie","Ocean","Octopus","Percy","Phone","Plane","Rain","River","Sea","Sheep","Shirt","Shoe","Sister","Sky","Snake","Snow","Stephen Coarse","Storm","Sun","Table","Teddy","Toy","Train","Tree","Water","Wayne","Weight","Wind","Window","Woods"
+  "Alex","Alice","Bag","Bed","Bench","Bicycle","Boat","Book","Box","Brother","Bus","Car","Carl Jung","Cat","Chair","Clock","Clothes","Computer","Cow","Dad","Dog","Door","Drink","Egg","Field","Fire","Fish","Food","Forest","Garden","George","Grandma","Grass","Gun","House / Home","Insect","Key","Knife","Lake","Light","Lily","Lion","Max","Mirror","Money","Mum","reference corpus","Ocean","Octopus","Percy","Phone","Plane","Rain","River","Sea","Sheep","Shirt","Shoe","Sister","Sky","Snake","Snow","Stephen Coarse","Storm","Sun","Table","Teddy","Toy","Train","Tree","Water","Wayne","Weight","Wind","Window","Woods"
 ];
 
 const GROUPS = {
-  people: new Set(["Alex","Alice","Brother","Carl Jung","Dad","George","Grandma","Lily","Max","Mum","Natalie","Percy","Sister","Stephen Coarse","Wayne"]),
+  people: new Set(["Alex","Alice","Brother","Carl Jung","Dad","George","Grandma","Lily","Max","Mum","reference corpus","Percy","Sister","Stephen Coarse","Wayne"]),
   domestic: new Set(["Bag","Bed","Bench","Book","Box","Chair","Clock","Clothes","Computer","Door","Drink","Egg","Food","House / Home","Key","Light","Mirror","Money","Phone","Shirt","Shoe","Table","Teddy","Toy","Weight","Window"]),
   transport: new Set(["Bicycle","Boat","Bus","Car","Plane","Train"]),
   animals: new Set(["Cat","Cow","Dog","Fish","Insect","Lion","Octopus","Sheep","Snake"]),
@@ -42,7 +42,7 @@ const PLACE_EVIDENCE = {
   "Brother": ["Cambridge Road Childhood House","Current / Present House","The Unfamiliar House"],
   "Sister": ["Cambridge Road Childhood House","Current / Present House","The Unfamiliar House"],
   "Alex": ["Current / Present House","The Large Many-Roomed House","The Unfamiliar House"],
-  "Natalie": ["Current / Present House","The Large Many-Roomed House","The Unfamiliar House"],
+  "reference corpus": ["Current / Present House","The Large Many-Roomed House","The Unfamiliar House"],
   "Food": ["Cambridge Road Childhood House","Current / Present House","The Large Many-Roomed House","The Unfamiliar House"],
   "Fish": ["Family Home","Current / Present House"],
   "Insect": ["Current / Present House","The Large Many-Roomed House","The Unfamiliar House"],
@@ -70,7 +70,7 @@ const SOURCE_READINGS = {
     summary: "Known homes, unfamiliar houses and impossible mansions hold family, privacy, memory, danger and discovery.",
     associations: "family · rooms · garden · doors · belonging",
   },
-  "Natalie": {
+  "reference corpus": {
     subtitle: "Recurring dream figure",
     summary: "A recurrent living presence whose authoritative source-dream corpus intersects Hearthlands as well as other territories. Interpretation is kept separate from the evidence.",
     associations: "relationship · family · home · journey · intimacy",

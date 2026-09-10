@@ -1,0 +1,50 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dreamscape.local/schemas/tarot-card.schema.json",
+  "title": "Dreamscape Tarot Detail Card",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "subjectType", "subjectId", "title", "cardImage", "interpretation", "corpusGrounding", "relatedItems", "privacyClass"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+    "subjectType": {"enum": ["place", "symbol", "territory"]},
+    "subjectId": {"type": "string", "minLength": 1},
+    "title": {"type": "string", "minLength": 1},
+    "cardImage": {"type": ["string", "null"]},
+    "interpretation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "analysisStatus"],
+      "properties": {
+        "summary": {"type": "string", "minLength": 1},
+        "basicAnalysis": {"type": "string"},
+        "analysisStatus": {"enum": ["derived", "reviewed", "approved"]}
+      }
+    },
+    "corpusGrounding": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["summary", "evidenceRefs"],
+      "properties": {
+        "summary": {"type": "string", "minLength": 1},
+        "evidenceRefs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "occurrenceCount": {"type": ["integer", "null"], "minimum": 0},
+        "occurrenceCountStatus": {"enum": ["known", "unknown", "not-published"]}
+      }
+    },
+    "relatedItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["type", "id"],
+        "properties": {
+          "type": {"enum": ["place", "symbol", "territory", "dream"]},
+          "id": {"type": "string", "minLength": 1},
+          "label": {"type": "string"}
+        }
+      }
+    },
+    "privacyClass": {"enum": ["private-derived", "public-safe-derived"]}
+  }
+}

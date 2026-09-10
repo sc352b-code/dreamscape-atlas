@@ -1,0 +1,49 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dreamscape.local/schemas/place.schema.json",
+  "title": "Dreamscape Territory Place",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["id", "name", "summary", "type", "map", "corpusEvidence", "tarotCardRef", "interaction"],
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+    "name": {"type": "string", "minLength": 1},
+    "summary": {"type": "string", "minLength": 1},
+    "type": {"enum": ["home", "garden", "water", "institution", "route", "settlement", "landscape", "threshold", "other"]},
+    "map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["x", "y", "hitRadius", "visibleFromZoom"],
+      "properties": {
+        "x": {"type": "number", "minimum": 0, "maximum": 1},
+        "y": {"type": "number", "minimum": 0, "maximum": 1},
+        "hitRadius": {"type": "number", "exclusiveMinimum": 0},
+        "visibleFromZoom": {"type": "number", "minimum": 0},
+        "artCue": {"type": "string"}
+      }
+    },
+    "corpusEvidence": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["privacyClass", "summary", "evidenceRefs"],
+      "properties": {
+        "privacyClass": {"enum": ["private-derived", "public-safe-derived"]},
+        "summary": {"type": "string", "minLength": 1},
+        "evidenceRefs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "dreamCount": {"type": ["integer", "null"], "minimum": 0},
+        "dreamCountStatus": {"enum": ["known", "unknown", "not-published"]}
+      }
+    },
+    "tarotCardRef": {"type": "string", "minLength": 1},
+    "interaction": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["hoverable", "clickable"],
+      "properties": {
+        "hoverable": {"type": "boolean"},
+        "clickable": {"type": "boolean"},
+        "hoverLabel": {"type": "boolean"}
+      }
+    }
+  }
+}

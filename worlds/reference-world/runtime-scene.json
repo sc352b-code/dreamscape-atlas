@@ -1,0 +1,22 @@
+{
+  "$schema": "../../dreamscape-engine/schemas/runtime-scene.schema.json",
+  "engineVersion": "1.0.0",
+  "worldId": "dreamscape-reference-world",
+  "renderer": {
+    "sphereSegments": [128, 96],
+    "texture": {
+      "wrapS": "RepeatWrapping",
+      "wrapT": "ClampToEdgeWrapping",
+      "minFilter": "LinearFilter",
+      "magFilter": "LinearFilter",
+      "generateMipmaps": false
+    }
+  },
+  "planets": [
+    {"id":"littoral","position":[-2.55,1.18,-0.42],"mobilePosition":[-0.68,0.88,-0.45],"radius":0.50,"spin":0.105,"tilt":-0.13,"tint":"#bbeeff","offset":0.20},
+    {"id":"roadlands","position":[2.40,0.82,-0.72],"mobilePosition":[0.66,0.69,-0.56],"radius":0.52,"spin":0.076,"tilt":0.16,"tint":"#ffd19b","offset":0.10},
+    {"id":"hearthlands","position":[-0.12,-0.02,0.16],"mobilePosition":[-0.04,0.08,0.02],"radius":0.60,"spin":0.088,"tilt":-0.08,"tint":"#ffebc2","offset":0.02,"live":true,"entryRoute":"hearthlands"},
+    {"id":"institutional","position":[-1.68,-1.48,-0.82],"mobilePosition":[-0.62,-0.60,-0.58],"radius":0.47,"spin":0.061,"tilt":0.11,"tint":"#dbe1ff","offset":0.08},
+    {"id":"river","position":[2.06,-1.38,-0.50],"mobilePosition":[0.62,-0.86,-0.44],"radius":0.52,"spin":0.112,"tilt":-0.18,"tint":"#bcebdc","offset":0.16}
+  ]
+}

@@ -1,0 +1,115 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "example-territory",
+  "worldId": "example-world",
+  "name": "Example Territory",
+  "subtitle": "Example · subtitle · triad",
+  "description": "A short territory-level description.",
+  "provenance": {
+    "derivationSummary": "Describe how this territory emerged from corpus analysis.",
+    "evidenceStatus": "derived",
+    "methods": ["corpus-clustering", "place-pattern-review"],
+    "evidenceRefs": ["private:evidence/territory/example"]
+  },
+  "sourceCorpusSummary": {
+    "privacyClass": "public-safe-derived",
+    "associatedDreamCount": null,
+    "associatedDreamCountStatus": "unknown",
+    "summary": "Only approved, non-identifying corpus-level summary belongs here."
+  },
+  "flatMap": {
+    "status": "not-started",
+    "artDirection": "Painterly flat-map artwork related to the source planet, with embedded places and symbols and minimal labels.",
+    "asset": null,
+    "styleAnchorPlanetTexture": null,
+    "labelsPolicy": "minimal",
+    "interactiveArtwork": true
+  },
+  "zoom": {
+    "min": 1,
+    "max": 4,
+    "default": 1,
+    "stages": {
+      "overview": 1,
+      "explore": 1.6,
+      "detail": 2.6
+    },
+    "pan": {
+      "enabled": true,
+      "clampToArtwork": true,
+      "overscroll": 0.03
+    },
+    "controls": {
+      "buttons": true,
+      "wheel": true,
+      "pinch": true,
+      "doubleTap": true,
+      "dragPan": true,
+      "reset": true
+    },
+    "activationPolicy": "threshold",
+    "preserveViewState": true
+  },
+  "places": [
+    {
+      "id": "example-place",
+      "name": "Example Place",
+      "summary": "Corpus-grounded place summary.",
+      "type": "landscape",
+      "map": {
+        "x": 0.5,
+        "y": 0.5,
+        "hitRadius": 0.04,
+        "visibleFromZoom": 1.6,
+        "artCue": "Painted directly into the scene."
+      },
+      "corpusEvidence": {
+        "privacyClass": "private-derived",
+        "summary": "Derived evidence summary; raw dreams stay private.",
+        "evidenceRefs": ["private:evidence/place/example-place"],
+        "dreamCount": null,
+        "dreamCountStatus": "unknown"
+      },
+      "tarotCardRef": "tarot/example-place",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    }
+  ],
+  "symbols": [
+    {
+      "id": "example-symbol",
+      "name": "Example Symbol",
+      "summary": "Corpus-grounded symbol summary.",
+      "map": {
+        "placements": [
+          {"x": 0.7, "y": 0.4, "hitRadius": 0.025, "artCue": "Embedded subtly in the scene."}
+        ],
+        "visibleFromZoom": 2.6
+      },
+      "corpusEvidence": {
+        "privacyClass": "private-derived",
+        "summary": "Derived association summary.",
+        "evidenceRefs": ["private:evidence/symbol/example-symbol"],
+        "frequency": null,
+        "frequencyStatus": "unknown",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": ["example-place"]
+      },
+      "tarotCardRef": "tarot/example-symbol",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    }
+  ],
+  "about": {
+    "title": "About this territory",
+    "summary": "Explain what this territory represents and how it was derived.",
+    "showDerivation": true,
+    "showCorpusBasis": true
+  }
+}

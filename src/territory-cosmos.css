@@ -1,0 +1,109 @@
+/* Phase A — a living cosmos of real 3D territory worlds.
+   Legacy integrity marker only: @keyframes territory-spin is replaced by Three.js mesh rotation. */
+.atlas.territory-worlds-mode[data-state="orbit"] .globe-stage,
+.atlas.territory-worlds-mode[data-state="focus"] .globe-stage,
+.atlas.territory-worlds-mode[data-state="descent"] .globe-stage,
+.atlas.territory-worlds-mode[data-state="orbit"] .focus-panel,
+.atlas.territory-worlds-mode[data-state="focus"] .focus-panel,
+.atlas.territory-worlds-mode[data-state="descent"] .focus-panel,
+.atlas.territory-worlds-mode[data-state="orbit"] .left-poem,
+.atlas.territory-worlds-mode[data-state="focus"] .left-poem,
+.atlas.territory-worlds-mode[data-state="descent"] .left-poem{opacity:0!important;pointer-events:none!important}
+
+.territory-cosmos{
+  position:fixed;inset:0;z-index:36;overflow:hidden;
+  font-family:Georgia,'Times New Roman',serif;
+  opacity:1;transition:opacity .28s ease,visibility .28s ease;
+}
+.atlas[data-state="hearth"] .territory-cosmos{opacity:0;visibility:hidden;pointer-events:none}
+.territory-cosmos::before{
+  content:"";position:absolute;inset:0;pointer-events:none;z-index:1;
+  background:
+    radial-gradient(circle at 46% 45%,rgba(79,91,179,.055),transparent 27%),
+    radial-gradient(circle at 12% 32%,rgba(112,66,168,.05),transparent 18%),
+    radial-gradient(circle at 83% 69%,rgba(37,117,151,.045),transparent 21%);
+}
+.territory-cosmos__gl{position:absolute;inset:0;width:100%;height:100%;z-index:2;pointer-events:none}
+.territory-cosmos__tunnel-vignette{position:absolute;inset:-18%;z-index:3;pointer-events:none;opacity:0;transform:scale(1.2);background:radial-gradient(circle at 50% 50%,transparent 0 10%,rgba(126,169,255,.04) 25%,rgba(102,74,190,.13) 53%,rgba(8,11,35,.46) 77%,rgba(1,2,9,.82) 100%);mix-blend-mode:screen;transition:opacity .12s ease,transform .68s cubic-bezier(.16,.8,.22,1)}
+.territory-cosmos.is-entering .territory-cosmos__tunnel-vignette{opacity:.76;transform:scale(.84);animation:cosmicTunnelPulse .42s ease-in-out infinite alternate}
+.territory-cosmos.is-blackout .territory-cosmos__tunnel-vignette{opacity:.08}
+.territory-cosmos.map-reveal .territory-cosmos__tunnel-vignette{opacity:0}
+.territory-cosmos__blackout{position:absolute;inset:0;z-index:30;background:#010207;opacity:0;pointer-events:none;transition:opacity .12s ease}
+.territory-cosmos.is-blackout .territory-cosmos__blackout{opacity:1}
+.territory-cosmos.map-reveal .territory-cosmos__blackout{opacity:0}
+@keyframes cosmicTunnelPulse{from{filter:brightness(.94) saturate(1)}to{filter:brightness(1.16) saturate(1.16)}}
+
+.territory-cosmos__heading{position:absolute;top:7.5%;left:50%;transform:translateX(-50%);text-align:center;z-index:5;pointer-events:none;width:min(720px,72vw);transition:opacity .3s ease,transform .45s ease}
+.territory-cosmos__heading small{display:block;font:500 9px/1.2 system-ui,sans-serif;letter-spacing:.31em;text-transform:uppercase;color:rgba(222,213,230,.55);margin-bottom:9px}
+.territory-cosmos__heading h1{margin:0;font-weight:400;font-size:clamp(29px,3vw,50px);letter-spacing:.13em;text-transform:uppercase;color:#f5e5c8;text-shadow:0 0 30px rgba(220,193,255,.16)}
+.territory-cosmos__heading p{margin:8px 0 0;font-size:13px;font-style:italic;color:rgba(221,211,226,.63);letter-spacing:.035em}
+
+/* Buttons track projected Three.js spheres. The DOM circle is only an invisible hit target; the WebGL planet is the artwork. */
+.territory-world{
+  --hit-size:180px;--depth-opacity:1;
+  position:absolute;z-index:6;padding:0;border:0;background:none;color:#f7e9d4;cursor:pointer;
+  width:calc(var(--hit-size) + 96px);height:calc(var(--hit-size) + 66px);
+  transform:translate(-50%,-50%);opacity:var(--depth-opacity);
+  transition:opacity .28s ease,filter .28s ease;
+}
+.territory-world:focus-visible{outline:none}
+.territory-world__sphere{display:block;width:var(--hit-size);height:var(--hit-size);margin:0 auto;border-radius:50%;background:transparent;box-shadow:none}
+.territory-world__name{display:block;margin-top:9px;font-size:clamp(13px,1.05vw,18px);letter-spacing:.1em;text-transform:uppercase;text-shadow:0 2px 14px rgba(0,0,0,.9);transition:transform .3s ease,color .3s ease,opacity .22s ease}
+.territory-world__cue{display:block;margin-top:4px;font:500 8px/1.25 system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:rgba(216,209,225,.54);white-space:nowrap;transition:opacity .22s ease}
+.territory-world:hover .territory-world__name,.territory-world:focus-visible .territory-world__name{transform:translateY(-2px);color:#fff1d4}
+.territory-world:focus-visible .territory-world__sphere{box-shadow:0 0 0 1px rgba(255,232,195,.62),0 0 38px rgba(173,156,255,.24)}
+.territory-world[data-world="hearthlands"] .territory-world__name{color:#ffe1ae}
+.territory-world[data-world="littoral"] .territory-world__name{color:#bcecf4}
+.territory-world[data-world="roadlands"] .territory-world__name{color:#e8c894}
+.territory-world[data-world="institutional"] .territory-world__name{color:#d8ddf0}
+.territory-world[data-world="river"] .territory-world__name{color:#aee1d8}
+.territory-world.is-preview-selected .territory-world__name{color:#fff2d1;text-shadow:0 0 15px rgba(255,226,174,.34)}
+
+.territory-cosmos__hint{position:absolute;left:50%;bottom:4.2%;transform:translateX(-50%);z-index:8;padding:8px 17px;border-radius:999px;border:1px solid rgba(222,199,157,.16);background:rgba(5,8,23,.42);backdrop-filter:blur(12px);font:500 9px/1.2 system-ui,sans-serif;letter-spacing:.17em;text-transform:uppercase;color:rgba(237,219,190,.68);white-space:nowrap;transition:opacity .25s ease}
+.territory-cosmos__status{position:absolute;left:50%;bottom:9.4%;transform:translateX(-50%);z-index:9;opacity:0;transition:opacity .25s ease;font-size:13px;font-style:italic;color:rgba(242,224,199,.8);text-align:center;pointer-events:none}
+.territory-cosmos[data-message="true"] .territory-cosmos__status{opacity:1}
+
+.territory-cosmos.is-entering .territory-world:not(.is-selected){opacity:0!important;filter:blur(3px);pointer-events:none}
+.territory-cosmos.is-entering .territory-world.is-selected{z-index:20;pointer-events:none}
+.territory-cosmos.is-entering .territory-world.is-selected .territory-world__name,
+.territory-cosmos.is-entering .territory-world.is-selected .territory-world__cue{opacity:0}
+.territory-cosmos.is-entering .territory-cosmos__heading{opacity:0;transform:translateX(-50%) translateY(-10px)}
+.territory-cosmos.is-entering .territory-cosmos__hint{opacity:0}
+.territory-cosmos.map-reveal{opacity:0;pointer-events:none}
+
+/* Visually reveal the territory map as soon as the short cosmic passage completes,
+   while the legacy descent state finishes synchronising underneath. */
+.atlas.fast-hearth-reveal .flatmap-scene{opacity:1!important;clip-path:circle(150% at 50% 50%)!important;pointer-events:auto!important}
+
+/* Existing flat-map return plus a second fixed escape route that cannot be hidden by the map art. */
+.atlas.territory-worlds-mode .return-world{
+  color:#f1ddbf!important;background:rgba(4,7,18,.72)!important;border:1px solid rgba(240,207,160,.24)!important;
+  border-radius:999px!important;padding:10px 14px!important;box-shadow:0 8px 26px rgba(0,0,0,.28)!important;
+  backdrop-filter:blur(12px);letter-spacing:.04em!important;
+}
+.atlas.territory-worlds-mode .return-world:hover{background:rgba(20,18,34,.82)!important;border-color:rgba(240,207,160,.4)!important}
+.territory-cosmos-return{
+  position:fixed;left:24px;top:82px;z-index:95;display:none;align-items:center;gap:8px;
+  padding:10px 15px;border-radius:999px;border:1px solid rgba(240,207,160,.3);
+  background:rgba(4,7,18,.78);color:#f3dfc2;backdrop-filter:blur(13px);
+  box-shadow:0 10px 32px rgba(0,0,0,.34);font:600 10px/1 system-ui,sans-serif;
+  letter-spacing:.08em;text-transform:uppercase;cursor:pointer;
+}
+.atlas[data-state="hearth"] .territory-cosmos-return,.atlas.fast-hearth-reveal .territory-cosmos-return{display:flex}
+.territory-cosmos-return:hover,.territory-cosmos-return:focus-visible{background:rgba(20,18,34,.88);border-color:rgba(240,207,160,.5);outline:none}
+
+@media(max-width:800px){
+  /* The desktop app chrome was colliding with the atlas title on portrait phones. */
+  .atlas.territory-worlds-mode:not([data-state="hearth"]) .topbar{display:none!important}
+  .territory-cosmos__heading{top:3.2%;width:92vw}.territory-cosmos__heading small{font-size:7px;margin-bottom:6px}.territory-cosmos__heading h1{font-size:24px;letter-spacing:.11em}.territory-cosmos__heading p{font-size:10px;margin-top:5px}
+  .territory-world{width:calc(var(--hit-size) + 44px);height:calc(var(--hit-size) + 38px)}
+  .territory-world__name{margin-top:5px;font-size:9px;letter-spacing:.055em}.territory-world__cue{display:none}
+  .territory-cosmos__hint{bottom:1.7%;font-size:6.5px;padding:6px 9px;letter-spacing:.09em;max-width:88vw;overflow:hidden;text-overflow:ellipsis}
+  .territory-cosmos__status{bottom:5.5%;width:82vw;font-size:10px}
+  .atlas.territory-worlds-mode .return-world{padding:8px 11px!important;font-size:9px!important}
+  .territory-cosmos-return{left:10px;top:10px;padding:9px 11px;font-size:8px}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .territory-cosmos__heading,.territory-world,.territory-world__name,.territory-world__cue,.territory-cosmos__blackout,.territory-cosmos__tunnel-vignette{transition-duration:.15s;animation:none!important}
+}

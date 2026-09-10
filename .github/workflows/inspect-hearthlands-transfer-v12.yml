@@ -1,0 +1,28 @@
+name: Inspect Hearthlands final page API v12
+
+on:
+  push:
+    paths:
+      - '.github/workflows/inspect-hearthlands-transfer-v12.yml'
+
+jobs:
+  inspect:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Inspect final page JS API calls
+        shell: bash
+        run: |
+          python - <<'PY'
+          import urllib.request,re
+          url='https://firestorage.ai/_next/static/chunks/7939-2fbb6938f7c3c7e9.js'
+          js=urllib.request.urlopen(url).read().decode('utf-8','ignore')
+          print('bytes',len(js))
+          for tok in ['https://api.firestorage.ai/dev/file','finalId','/download','/files/','fetch(`','/d/']:
+              print('\nTOKEN',tok)
+              found=0
+              for m in re.finditer(re.escape(tok),js,re.I):
+                  print(js[max(0,m.start()-2200):min(len(js),m.start()+5200)])
+                  print('\n---')
+                  found+=1
+                  if found>=5: break
+          PY

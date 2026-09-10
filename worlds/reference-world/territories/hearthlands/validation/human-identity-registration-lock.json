@@ -1,0 +1,19 @@
+{
+  "schemaVersion": "1.0.0",
+  "territoryId": "hearthlands",
+  "assetRole": "human-identity-registration-lock",
+  "artworkSha256": "b7be292766f9bf0774c1fc358154adf522006ac9933b05a3a5469d29a8d917b3",
+  "registrationCount": 15,
+  "humanCount": 13,
+  "companionAnimalCount": 2,
+  "status": "locked",
+  "validation": {
+    "visualCoordinateAudit": "passed",
+    "runtimeIdentityResolution": "passed",
+    "hoverLabelWiring": "passed",
+    "tarotTitleWiring": "passed",
+    "privacyBoundary": "passed"
+  },
+  "rule": "Do not alter identity coordinates, painted figures, or semantic assignment structure without reopening Hearthlands Human Identity Registration v1 and repeating the preservation/registration audit.",
+  "privacy": "Public-safe lock record only. Semantic labels remain in the private per-user profile layer."
+}

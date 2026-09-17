@@ -19,9 +19,7 @@ async function boot(){
     if(data.previewSummary) preview.querySelector('.territory-v1-preview-grounding').textContent=data.previewSummary;
     const meta=preview.querySelector('.territory-v1-preview-meta');
     const whole=data.corpusOverview?.wholeSeriesCount;
-    if(whole!=null&&!meta.textContent.includes('series dreams')){
-      meta.insertAdjacentHTML('afterbegin',`<span><b>${whole}</b> series dreams</span>`);
-    }
+    if(whole!=null&&!meta.textContent.includes('series dreams')) meta.insertAdjacentHTML('afterbegin',`<span><b>${whole}</b> series dreams</span>`);
   }
 
   function renderArticles(target,items){
@@ -39,9 +37,7 @@ async function boot(){
 
     const stats=reader.querySelector('.territory-v1-tarot-stats');
     const whole=data.corpusOverview?.wholeSeriesCount;
-    if(whole!=null&&stats?.firstElementChild){
-      stats.firstElementChild.innerHTML=`<b>${whole}</b><small>dreams in whole series</small>`;
-    }
+    if(whole!=null&&stats?.firstElementChild) stats.firstElementChild.innerHTML=`<b>${whole}</b><small>dreams in whole series</small>`;
 
     renderArticles(reader.querySelector('.territory-v1-functions div'),data.recurringFunctions);
     renderArticles(reader.querySelector('.territory-v1-lenses div'),data.interpretiveLenses);
@@ -50,9 +46,8 @@ async function boot(){
     if(lesson&&data.possibleLesson){
       lesson.hidden=false;
       lesson.querySelector('p').textContent=data.possibleLesson;
-      if(data.reflectionPrompt){
-        lesson.querySelector('p').insertAdjacentHTML('afterend',`<p class="territory-v1-reflection"><b>Reflection:</b> ${escapeHTML(data.reflectionPrompt)}</p>`);
-      }
+      lesson.querySelector('.territory-v1-reflection')?.remove();
+      if(data.reflectionPrompt) lesson.insertAdjacentHTML('beforeend',`<p class="territory-v1-reflection"><b>Reflection:</b> ${escapeHTML(data.reflectionPrompt)}</p>`);
     }
   }
 

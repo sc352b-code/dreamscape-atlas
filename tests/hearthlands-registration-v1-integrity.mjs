@@ -10,6 +10,8 @@ const symbols=readJSON('worlds/reference-world/territories/hearthlands/symbols.j
 const index=fs.readFileSync('index.html','utf8');
 const js=fs.readFileSync('src/hearthlands-registration-v1.js','utf8');
 const css=fs.readFileSync('src/hearthlands-registration-v1.css','utf8');
+const territoryJS=fs.readFileSync('src/hearthlands-territory-v1.js','utf8');
+const territoryCSS=fs.readFileSync('src/hearthlands-territory-v1.css','utf8');
 
 assert.equal(ledger.schemaVersion,'2.0.0');
 assert.equal(ledger.territoryId,'hearthlands');
@@ -55,7 +57,7 @@ const keys=new Set();
 let registeredPlaces=0, registeredSymbols=0, artCorrection=0, identityPaused=0;
 for(const entry of ledger.entries){
   const key=`${entry.kind}:${entry.id}`;
-  assert(!keys.has(key),`duplicate registration entry ${key}`); keys.add(key);
+  assert(!keys.has(key),`duplicate registration entry ${key}`);keys.add(key);
   if(entry.kind==='place') assert(placeIds.has(entry.id),`unknown place ${entry.id}`);
   else if(entry.kind==='symbol') assert(symbolIds.has(entry.id),`unknown symbol ${entry.id}`);
   else assert.fail(`unknown registration kind ${entry.kind}`);
@@ -66,22 +68,17 @@ for(const entry of ledger.entries){
     assert(entry.hitArea&&entry.hitArea.width>0&&entry.hitArea.height>0,`${key} missing precise hit area`);
     assert(entry.activeFromZoom>0,`${key} missing zoom activation`);
     assert(entry.paintedObject,`${key} must identify the painted subject`);
-    if(entry.kind==='place') registeredPlaces++; else registeredSymbols++;
+    if(entry.kind==='place') registeredPlaces++;else registeredSymbols++;
   }else if(entry.registrationStatus==='needs-art-correction'){
-    assert.equal(entry.x,null); assert.equal(entry.y,null); assert.equal(entry.hitArea,null);
-    assert(entry.correctionReason,'unregistered items require an explicit correction reason');
-    artCorrection++;
+    assert.equal(entry.x,null);assert.equal(entry.y,null);assert.equal(entry.hitArea,null);assert(entry.correctionReason);artCorrection++;
   }else if(entry.registrationStatus==='identity-resolution-required'){
-    assert.equal(entry.kind,'symbol');
-    assert(entry.id.startsWith('person-'));
-    assert.equal(entry.x,null); assert.equal(entry.y,null); assert.equal(entry.hitArea,null);
-    identityPaused++;
+    assert.equal(entry.kind,'symbol');assert(entry.id.startsWith('person-'));identityPaused++;
   }else assert.fail(`unexpected registration status ${entry.registrationStatus}`);
 }
 assert.equal(registeredPlaces,6);
 assert.equal(registeredSymbols,61);
-assert.equal(identityPaused,0,'private identities live in the separate identity registration ledger, not the public non-person ledger');
-assert.equal(artCorrection,0,'final locked non-person artwork has no remaining public registration gaps');
+assert.equal(identityPaused,0);
+assert.equal(artCorrection,0);
 assert.equal(ledger.summary.personSymbolsPrivateProfileGated,15);
 assert.equal(ledger.summary.placesNeedingArtCorrection,0);
 assert.equal(ledger.summary.nonPersonSymbolsNeedingArtCorrection,0);
@@ -96,34 +93,39 @@ const publicText=[
 ].join('\n');
 assert(!publicText.includes('Recurring Figure'));
 assert(!publicText.includes('recurring-figure-'));
-for(const privateName of ['Alex','Alice','George','Grandma','Lily','Mum','Natalie','Percy','Stephen Coarse','Wayne']){
-  assert(!publicText.includes(privateName),`private semantic label leaked into public runtime: ${privateName}`);
-}
+for(const privateName of ['Alex','Alice','George','Grandma','Lily','Mum','Natalie','Percy','Stephen Coarse','Wayne']) assert(!publicText.includes(privateName),`private semantic label leaked into public runtime: ${privateName}`);
 
 assert(index.includes('/src/hearthlands-registration-v1.css'));
 assert(index.includes('/src/hearthlands-registration-v1.js'));
-assert(js.includes("territory-hotspot--unregistered"));
-assert(js.includes("button.disabled=true"));
-assert(js.includes("entry.hitArea.width"));
+assert(js.includes('territory-hotspot--unregistered'));
+assert(js.includes('button.disabled=true'));
+assert(js.includes('entry.hitArea.width'));
 assert(js.includes('IDENTITY_REGISTRATION_URL'));
 assert(js.includes('resolveHearthlandsPrivateIdentities'));
 assert(js.includes('__dreamscapePrivateIdentityMap'));
 assert(js.includes('private-label-required'));
-const territoryJS=fs.readFileSync('src/hearthlands-territory-v1.js','utf8');
-assert(territoryJS.includes('__dreamscapePrivateIdentityMap'));
-assert(territoryJS.includes('providerLabel||mapLabel||card.title'));
 assert(js.includes('data-territory-action="zoom-in"'));
 assert(js.includes('data-territory-action="zoom-out"'));
 assert(css.includes('.territory-hotspot--unregistered{display:none!important'));
 assert(css.includes('.territory-v1-controls'));
-
-console.log('Hearthlands registration integrity: 6 places + 61 non-person symbols are registered to the locked artwork; 15 identities remain private-profile-gated in the separate identity ledger.');
-
-const territoryCSS=fs.readFileSync('src/hearthlands-territory-v1.css','utf8');
-assert(territoryJS.includes("getBoundingClientRect().bottom"));
-assert(territoryJS.includes("'--hearthlands-safe-top'"));
-assert(territoryJS.includes('selectHotspot(button)'));
-assert(territoryJS.includes("classList.add('is-selected')"));
 assert(css.includes('.territory-hotspot--registered span::after'));
 assert(css.includes('.territory-hotspot--registered.is-selected'));
-assert(territoryCSS.includes('viewport safety'));
+
+assert(territoryJS.includes('function displayTitle'));
+assert(territoryJS.includes('__dreamscapePrivateIdentityMap'));
+assert(territoryJS.includes('territory-v1-preview'));
+assert(territoryJS.includes('Open tarot'));
+assert(territoryJS.includes('getDreamRecords'));
+assert(territoryJS.includes('dreamscape-open-dream-records'));
+assert(territoryJS.includes('recurringFunctions'));
+assert(territoryJS.includes('interpretiveLenses'));
+assert(territoryJS.includes('possibleLesson'));
+assert(territoryJS.includes('stateObserver'));
+assert(territoryJS.includes("root.dataset.state==='hearth'"));
+assert(territoryJS.includes("classList.add('territory-settled')"));
+assert(territoryJS.includes("classList.add('is-selected')"));
+assert(territoryCSS.includes('Art-first arrival'));
+assert(territoryCSS.includes('Anchored evidence preview'));
+assert(territoryCSS.includes('Tarot v2 surface'));
+
+console.log('Hearthlands registration integrity: locked artwork + 6 places + 61 non-person symbols + private-gated identities now feed the art-first hover → anchored preview → Tarot v2 interaction model.');

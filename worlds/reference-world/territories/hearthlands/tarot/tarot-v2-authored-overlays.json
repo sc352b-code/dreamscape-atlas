@@ -1,0 +1,166 @@
+{
+  "house-home": {
+    "previewSummary": "Known homes, unfamiliar houses and impossible mansions repeatedly organise belonging, memory, privacy, intrusion and discovery.",
+    "corpusOverview": {
+      "wholeSeriesCount": 114,
+      "wholeSeriesCountStatus": "known"
+    },
+    "recurringFunctions": [
+      {
+        "name": "Belonging made architectural",
+        "summary": "Family, partners, children, animals, food and care repeatedly organise themselves through kitchens, bedrooms, gardens and shared interiors. The house may externalise the question of who and what belongs here.",
+        "confidence": "high"
+      },
+      {
+        "name": "Porous boundaries and intrusion",
+        "summary": "Uninvited people, volatile inhabitants, hostile forces and displaced possessions repeatedly disturb domestic space. The house may stage the work of establishing psychological and relational boundaries.",
+        "confidence": "high"
+      },
+      {
+        "name": "More rooms than consciousness expects",
+        "summary": "Large and unfamiliar houses disclose extra rooms, levels, corridors and concealed life. Expanding architecture may image unrealised capacities, memories or complexes becoming available for exploration.",
+        "confidence": "medium-high"
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "Jungian: psyche / personality",
+        "framework": "jungian",
+        "summary": "A house can be amplified as an image of psychic structure: different levels and rooms may suggest differentiated areas of experience, but this reading must be tested against each dream.",
+        "caveat": "The house is the psyche is an amplification, not a translation key."
+      },
+      {
+        "name": "Jungian: Self and totality",
+        "framework": "jungian",
+        "summary": "Impossible scale or a building that behaves as a whole may intimate a psychic totality larger than the conscious ego; haunted and many-roomed houses are stronger candidates than ordinary kitchens."
+      },
+      {
+        "name": "Autobiographical and attachment",
+        "framework": "autobiographical",
+        "summary": "Childhood and present houses can combine episodic memory, safety, proximity and caregiving without functioning as disguised symbols."
+      }
+    ],
+    "possibleLesson": "Belonging may be something continually defended, reorganised and made habitable rather than something permanently secured.",
+    "reflectionPrompt": "Which house feels most yours, and what is happening to belonging there: shelter, crowding, discovery, inheritance, intrusion, repair or expansion?"
+  },
+  "water": {
+    "previewSummary": "Water repeatedly becomes a medium of crossing, immersion, play, overwhelm, rescue and renewed embodiment rather than carrying one fixed meaning.",
+    "corpusOverview": {
+      "wholeSeriesCount": 59,
+      "wholeSeriesCountStatus": "known"
+    },
+    "recurringFunctions": [
+      {
+        "name": "Crossing between worlds",
+        "summary": "Shores, rivers, boats and islands repeatedly make water the material boundary between a present position and another possible world.",
+        "confidence": "high"
+      },
+      {
+        "name": "Overwhelm and contested control",
+        "summary": "Floods, currents, storms, sinking and uncontrolled water recur when plans or containers fail, giving spatial form to intensity that exceeds ordinary regulation.",
+        "confidence": "medium-high"
+      },
+      {
+        "name": "Play, immersion and restoration",
+        "summary": "A contrasting group of dreams enters water bodily, rediscovers play or encounters beauty and renewal, suggesting that immersion can sometimes restore contact with vitality.",
+        "confidence": "medium-high"
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "Jungian: unconscious depth",
+        "framework": "jungian",
+        "summary": "Water may image psychic material not fully available to conscious control, especially where the dream moves beneath surfaces or into unknown depth.",
+        "caveat": "Water is not automatically emotion or the unconscious; form, movement, companions and agency matter."
+      },
+      {
+        "name": "Liminal passage",
+        "framework": "narrative",
+        "summary": "Rivers and shores create thresholds: the dreamer must cross, enter or negotiate a boundary between states rather than merely observe it."
+      },
+      {
+        "name": "Embodied memory",
+        "framework": "autobiographical",
+        "summary": "Coasts, swimming, weather and holidays may also draw directly on sensory memory and waking concerns."
+      }
+    ],
+    "possibleLesson": "The recurring question may be how to enter emotional or unconscious depth without losing agency, and how responsibility for others changes that immersion.",
+    "reflectionPrompt": "Is the water asking you to cross, surrender, play, rescue, contain, survive, or simply remember a real landscape and bodily feeling?"
+  },
+  "cat": {
+    "previewSummary": "Cats repeatedly gather a tension between cherished vulnerability and irreducible autonomy: close enough to require care, but never wholly manageable.",
+    "corpusOverview": {
+      "wholeSeriesCount": 34,
+      "wholeSeriesCountStatus": "known"
+    },
+    "recurringFunctions": [
+      {
+        "name": "Vulnerable life calling forth protection",
+        "summary": "Cats repeatedly face vehicles, hostile figures, injury, disappearance, fire or unsafe boundaries, prompting urgent rescue and practical care.",
+        "confidence": "high"
+      },
+      {
+        "name": "Instinct that exceeds domestication",
+        "summary": "Cats become lion-like, elusive, speaking, resistant or unexpectedly capable, repeatedly exceeding the passive role assigned to a pet.",
+        "confidence": "medium-high"
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "Jungian: instinctive companion",
+        "framework": "jungian",
+        "summary": "The cat can mediate between domestic consciousness and a more self-directed instinctive life: close to the household, but never wholly possessed by it."
+      },
+      {
+        "name": "Care ethics",
+        "framework": "care-ethics",
+        "summary": "The recurring question may be how responsibility remains responsive to the preferences of a dependent but agentic other."
+      },
+      {
+        "name": "Literal attachment",
+        "framework": "autobiographical",
+        "summary": "Real interspecies attachment can explain vigilance, grief and caregiving without requiring archetypal interpretation."
+      }
+    ],
+    "possibleLesson": "Protection may need to become attentive partnership: caring intensely without erasing the autonomy of the life being cared for.",
+    "reflectionPrompt": "Is the cat asking for rescue, food, space, trust, attention, or recognition that its instinct knows something your conscious plan does not?"
+  },
+  "dog": {
+    "previewSummary": "Dogs oscillate between companion and sentinel, repeatedly testing loyalty, belonging, warning, guarding and the reliability of protective instinct.",
+    "corpusOverview": {
+      "wholeSeriesCount": 25,
+      "wholeSeriesCountStatus": "known"
+    },
+    "recurringFunctions": [
+      {
+        "name": "Companionship woven into family life",
+        "summary": "Known dogs repeatedly appear with family, fields, houses and other animals as energetic members of a shared relational world.",
+        "confidence": "medium-high"
+      },
+      {
+        "name": "Guarding, warning and misjudged threat",
+        "summary": "Dogs bark, guard thresholds, chase vulnerable figures or appear threatening; other dreams expose apparent protection as ineffective or mistaken.",
+        "confidence": "medium-high"
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "Jungian: instinctive guardian",
+        "framework": "jungian",
+        "summary": "The dog can amplify protective instinct at the edge of consciousness, alerting the ego to what approaches the household or group."
+      },
+      {
+        "name": "Threat detection",
+        "framework": "other",
+        "summary": "Barking, chasing and guarding can dramatise rapid judgements about safety and uncertainty without requiring symbolic translation."
+      },
+      {
+        "name": "Literal attachment",
+        "framework": "autobiographical",
+        "summary": "Known dogs carry real affection, memory and grief that should precede symbolic amplification."
+      }
+    ],
+    "possibleLesson": "The pattern may ask which protective instincts deserve trust, which need moderation, and when apparent guardianship is only performance.",
+    "reflectionPrompt": "Is this dog accompanying, playing, resting, warning, guarding, chasing, or pretending to protect, and does your body trust its judgement?"
+  }
+}

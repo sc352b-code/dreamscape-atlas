@@ -50,17 +50,67 @@
   .territory-v1-reader h2,.territory-v1-about h2{font-size:31px}
 }
 
+/* Hearthlands viewport safety */
+.atlas.territory-v1 .flatmap-scene{background:radial-gradient(circle at 50% 42%,rgba(91,70,46,.16),transparent 54%),#0b1020}
+.atlas.territory-v1 .flatmap-world{overflow:visible}
+.atlas.territory-v1 .territory-v1-map .flatmap-art{object-fit:fill}
 
-/* Hearthlands viewport safety: the interactive painting is fitted entirely below
-   the persistent Dreamscape navigation rather than centred underneath it. */
-.atlas.territory-v1 .flatmap-scene{
-  background:
-    radial-gradient(circle at 50% 42%,rgba(91,70,46,.16),transparent 54%),
-    #0b1020;
-}
-.atlas.territory-v1 .flatmap-world{
-  overflow:visible;
-}
-.atlas.territory-v1 .territory-v1-map .flatmap-art{
-  object-fit:fill;
+/* Art-first arrival: global chrome gets out of the way once Hearthlands takes over. */
+.atlas.territory-v1[data-state="hearth"] .topbar,
+.atlas.territory-v1[data-state="hearth"] .left-poem{opacity:0;pointer-events:none;transform:translateY(-14px);transition:opacity .45s ease,transform .45s ease}
+.atlas.territory-v1[data-state="hearth"] .hearth-bar{position:absolute;inset:0;z-index:42;height:auto;border:0;background:none;backdrop-filter:none;pointer-events:none;padding:0}
+.atlas.territory-v1[data-state="hearth"] .return-world{pointer-events:auto;position:fixed;left:16px;top:16px;z-index:46;padding:10px 14px!important;border:1px solid rgba(244,210,150,.28)!important;border-radius:999px!important;background:rgba(8,13,20,.62)!important;backdrop-filter:blur(12px);font:11px/1 system-ui,sans-serif!important;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.atlas.territory-v1[data-state="hearth"] .hearth-heading{position:fixed;left:50%;top:16px;z-index:43;transform:translateX(-50%);padding:8px 13px;border-radius:999px;background:rgba(8,13,20,.4);backdrop-filter:blur(10px);transition:opacity .7s ease}
+.atlas.territory-v1[data-state="hearth"].territory-settled .hearth-heading{opacity:0;pointer-events:none}
+.atlas.territory-v1[data-state="hearth"].territory-settled .arrival-whisper{opacity:0!important}
+.atlas.territory-v1[data-state="hearth"] .arrival-whisper{left:50%;bottom:20px;transform:translateX(-50%);width:min(560px,80vw);text-align:center;padding:10px 16px;border-radius:999px;background:rgba(6,9,16,.26);backdrop-filter:blur(8px);transition:opacity .8s ease}
+.atlas.territory-v1[data-state="hearth"] .arrival-whisper b{font-size:15px;line-height:1.25}
+.atlas.territory-v1[data-state="hearth"] .arrival-whisper span{display:none}
+
+/* Anchored evidence preview: an intermediate step between painted object and tarot. */
+.territory-v1-preview{position:fixed;z-index:48;width:min(330px,calc(100vw - 24px));padding:18px 18px 15px;border:1px solid rgba(246,214,159,.42);border-radius:18px;background:linear-gradient(155deg,rgba(13,16,24,.96),rgba(18,12,28,.94));backdrop-filter:blur(18px);box-shadow:0 24px 70px rgba(0,0,0,.42);opacity:0;transform:translateY(7px) scale(.985);pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.territory-v1-preview.open{opacity:1;transform:none;pointer-events:auto}
+.territory-v1-preview::after{content:"";position:absolute;left:var(--preview-anchor-x,50%);top:100%;width:1px;height:20px;background:linear-gradient(180deg,rgba(255,226,168,.72),transparent)}
+.territory-v1-preview-close{position:absolute;right:9px;top:8px;width:28px;height:28px;border-radius:50%;border:1px solid rgba(244,214,164,.25);background:rgba(255,255,255,.04);color:#f1d8b6;cursor:pointer}
+.territory-v1-preview-kicker{margin:0 32px 5px 0;color:#d8a875;font:700 9px system-ui,sans-serif;letter-spacing:.2em}
+.territory-v1-preview h3{margin:0 34px 8px 0;color:#fff0dc;font:400 28px/1.05 Georgia,serif}
+.territory-v1-preview-grounding{margin:0;color:#d8ccd0;font:13px/1.48 Georgia,serif}
+.territory-v1-preview-meta{display:flex;gap:12px;margin:12px 0 13px}
+.territory-v1-preview-meta span{color:#b9aabd;font:10px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em}
+.territory-v1-preview-meta b{color:#f0c98f;font:400 18px Georgia,serif;margin-right:3px}
+.territory-v1-preview-open{width:100%;padding:11px 13px;border:1px solid rgba(241,194,119,.42);border-radius:999px;background:rgba(151,95,54,.15);color:#f7dfbc;cursor:pointer;text-align:left}
+.territory-v1-preview-open span{float:right}
+
+/* Tarot v2 surface: dossier-like, no empty image box when artwork is absent. */
+.territory-v1-reader.territory-v1-tarot{position:fixed;z-index:55;left:50%;right:auto;top:50%;bottom:auto;width:min(760px,92vw);max-height:88vh;padding:0;border-radius:28px;transform:translate(-50%,-46%) scale(.985);overflow:hidden;background:linear-gradient(160deg,rgba(19,14,29,.985),rgba(7,11,20,.975));box-shadow:0 34px 120px rgba(0,0,0,.62);opacity:0}
+.territory-v1-reader.territory-v1-tarot.open{transform:translate(-50%,-50%) scale(1);opacity:1}
+.territory-v1-tarot-scroll{max-height:88vh;overflow:auto;padding:44px 42px 34px}
+.territory-v1-tarot h2{font-size:50px;margin-bottom:18px}
+.territory-v1-tarot-image{margin:0 0 22px;border-radius:20px;overflow:hidden;max-height:280px}
+.territory-v1-tarot-image img{display:block;width:100%;height:100%;object-fit:cover}
+.territory-v1-tarot-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 24px}
+.territory-v1-tarot-stats span{padding:14px 16px;border:1px solid rgba(233,194,132,.17);border-radius:16px;background:rgba(255,255,255,.025)}
+.territory-v1-tarot-stats b{display:block;color:#f1ca8f;font:400 30px Georgia,serif}
+.territory-v1-tarot-stats small{color:#aa9cac;font:10px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.07em}
+.territory-v1-tarot-section{padding:19px 0;border-top:1px solid rgba(237,199,139,.12)}
+.territory-v1-tarot-section h3{margin:0 0 8px;color:#efc98f;font:400 16px Georgia,serif}
+.territory-v1-tarot-section p{margin:0;color:#d8ccd0;font:15px/1.62 Georgia,serif}
+.territory-v1-functions article,.territory-v1-lenses article{padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.territory-v1-functions article:last-child,.territory-v1-lenses article:last-child{border-bottom:0}
+.territory-v1-functions article b,.territory-v1-lenses article b{color:#f2ddbe;font:400 15px Georgia,serif}
+.territory-v1-functions article p,.territory-v1-lenses article p{margin:4px 0 0;color:#bdb0bd;font:13px/1.5 Georgia,serif}
+.territory-v1-geo-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.055);text-transform:capitalize;color:#cfc0c7;font:13px Georgia,serif}
+.territory-v1-geo-row b{color:#efcb94}
+.territory-v1-records-button{margin-top:12px;padding:11px 14px;border:1px solid rgba(239,195,121,.34);border-radius:999px;background:rgba(159,103,55,.12);color:#f0d7b4}
+.territory-v1-records-button:disabled{opacity:.42;cursor:not-allowed}
+.atlas.territory-v1.tarot-open .flatmap-scene::after{content:"";position:absolute;inset:0;z-index:40;background:rgba(3,5,10,.38);backdrop-filter:blur(2px);pointer-events:none}
+.atlas.territory-v1.tarot-open .territory-hotspot.is-selected{z-index:60}
+
+@media(max-width:800px){
+  .atlas.territory-v1[data-state="hearth"] .return-world{left:8px;top:8px}
+  .atlas.territory-v1[data-state="hearth"] .hearth-heading{top:8px}
+  .territory-v1-reader.territory-v1-tarot{width:calc(100vw - 16px);max-height:90vh}
+  .territory-v1-tarot-scroll{padding:40px 22px 26px}
+  .territory-v1-tarot h2{font-size:38px}
+  .territory-v1-tarot-stats{grid-template-columns:1fr}
 }

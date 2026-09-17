@@ -7,6 +7,8 @@ const tarot=JSON.parse(fs.readFileSync(`${base}/tarot/tarot-cards.json`,'utf8'))
 const coverage=JSON.parse(fs.readFileSync(`${base}/validation/artwork-coverage.json`,'utf8'));
 const asset=JSON.parse(fs.readFileSync(`${base}/assets/hearthlands-flat-map.asset.json`,'utf8'));
 const runtime=fs.readFileSync('src/hearthlands-territory-v1.js','utf8');
+const transition=fs.readFileSync('src/hearthlands-transition-fix.js','utf8');
+const index=fs.readFileSync('index.html','utf8');
 
 assert.equal(manifest.id,'hearthlands');
 assert.equal(manifest.worldId,'dreamscape-reference-world');
@@ -73,4 +75,13 @@ assert.match(runtime,/wheel/);
 assert.match(runtime,/pointer/);
 assert.match(runtime,/enterDreamscapeFamilyHome/);
 
-console.log('Hearthlands Territory Layer v1 integrity: 6 places, 76 symbols, 15 privacy-gated person identities, semantic zoom/pan, tarot routing, Family Home bridge and 6144x4096 technical master are coherent.');
+assert(index.includes('rel="preload" as="image" href="/worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png"'));
+assert(index.includes('/src/hearthlands-transition-fix.js'));
+assert(transition.includes("FINAL_HEARTHLANDS_ART='/worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png'"));
+assert(transition.includes('hearthlands-transition-owned'));
+assert(transition.includes('--hearthlands-owned-width'));
+assert(transition.includes('transform:none!important'));
+assert(transition.includes("(raw-.045)/.79"),'transition reveal must begin early rather than holding on black');
+assert(!transition.includes("dispatchEvent(new Event('resize'))"),'transition must not use repeated resize handoffs that cause visible snapping');
+
+console.log('Hearthlands Territory Layer v1 integrity: 6 places, 76 symbols, privacy-gated identities, semantic zoom/pan, tarot routing and a preloaded single-owner planet-to-flatmap reveal are coherent.');

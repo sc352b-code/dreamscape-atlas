@@ -1,0 +1,10 @@
+{
+  "schemaVersion": "1.0.0",
+  "territoryId": "hearthlands",
+  "assetRole": "final-nonperson-hearthlands-artwork",
+  "sourceFile": "golden_hour_hearthlands_gathering.png",
+  "sha256": "b7be292766f9bf0774c1fc358154adf522006ac9933b05a3a5469d29a8d917b3",
+  "dimensions": [1536,1024],
+  "locked": true,
+  "rule": "No further non-person artwork edits. Remaining work is registration/runtime only."
+}

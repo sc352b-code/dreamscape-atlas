@@ -1,0 +1,44 @@
+name: Build Octopus source crop
+
+on:
+  push:
+    branches: [family-home-pilot]
+    paths:
+      - 'assets/hearthlands-flatmap.png'
+      - '.github/workflows/build-octopus-crop.yml'
+
+permissions:
+  contents: write
+
+jobs:
+  crop:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: family-home-pilot
+      - name: Install ImageMagick
+        run: |
+          sudo apt-get update -qq
+          sudo apt-get install -y imagemagick
+      - name: Verify canonical Hearthlands master
+        run: |
+          identify assets/hearthlands-flatmap.png
+          test "$(identify -format '%wx%h' assets/hearthlands-flatmap.png)" = "1672x941"
+      - name: Crop Family Home Octopus source region
+        run: |
+          mkdir -p assets/family-home-pilot
+          convert assets/hearthlands-flatmap.png -crop 334x226+518+292 +repage -quality 96 assets/family-home-pilot/family-home-octopus-source-crop.webp
+          test "$(identify -format '%wx%h' assets/family-home-pilot/family-home-octopus-source-crop.webp)" = "334x226"
+      - name: Commit source crop to development branch
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git add assets/family-home-pilot/family-home-octopus-source-crop.webp
+          if git diff --cached --quiet; then
+            echo 'Crop already current'
+          else
+            git commit -m 'Build Family Home Octopus source crop'
+            git push origin HEAD:family-home-pilot
+          fi

@@ -1,0 +1,57 @@
+{
+  "generator": "tools/generate_world_atlas.py",
+  "seed": 20260908,
+  "sourcePolicy": "Generated from stable dream-corpus territory anchors; does not upscale or reuse the legacy world raster.",
+  "terrainField": "2048x1024 procedural field with independent 4K and 8K vector/micro-detail passes",
+  "outputs": {
+    "4k": {
+      "path": "assets/world-atlas-4k.webp",
+      "width": 4096,
+      "height": 2048,
+      "microDetail": "native 4K pass"
+    },
+    "8k": {
+      "path": "assets/world-atlas-8k.webp",
+      "width": 8192,
+      "height": 4096,
+      "microDetail": "native 8K pass"
+    }
+  },
+  "territories": [
+    {
+      "id": "hearthlands",
+      "name": "The Hearthlands",
+      "lon": 0,
+      "lat": 25,
+      "character": "warm domestic valleys, gardens, homes and soft lights"
+    },
+    {
+      "id": "roadlands",
+      "name": "The Roadlands",
+      "lon": 36,
+      "lat": 15,
+      "character": "roads, passes, crossings and travelling landscapes"
+    },
+    {
+      "id": "institutional",
+      "name": "Institutional Quarter",
+      "lon": 68,
+      "lat": 58,
+      "character": "ordered highlands and formal monumental geometry"
+    },
+    {
+      "id": "littoral",
+      "name": "Littoral Coast",
+      "lon": 119,
+      "lat": -29,
+      "character": "islands, coves, luminous coasts and sea routes"
+    },
+    {
+      "id": "river",
+      "name": "River Country",
+      "lon": -79,
+      "lat": 15,
+      "character": "branching waterways, wetlands and river valleys"
+    }
+  ]
+}

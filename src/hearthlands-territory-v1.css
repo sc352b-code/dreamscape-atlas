@@ -1,0 +1,116 @@
+
+/* Hearthlands Territory Layer v1 — artwork-first semantic pan/zoom runtime */
+.atlas.territory-v1:not([data-family-home-focus]) .flatmap-world{transform:none!important;touch-action:none;cursor:grab}
+.atlas.territory-v1:not([data-family-home-focus]) .flatmap-world:has(.territory-v1-map[data-dragging=true]){cursor:grabbing}
+.atlas.territory-v1:not([data-family-home-focus]) .family-home-painted-layer,
+.atlas.territory-v1:not([data-family-home-focus]) .family-home-hotspot-layer{display:none!important}
+.atlas.territory-v1 .painted-motifs,.atlas.territory-v1 .glint{display:none!important}
+.atlas.territory-v1 .flatmap-wash{z-index:3;pointer-events:none;background:linear-gradient(180deg,rgba(3,4,13,.08),transparent 17%,transparent 78%,rgba(3,4,13,.2))}
+.atlas.territory-v1 .territory-v1-map{position:absolute;inset:0;transform-origin:50% 50%;will-change:transform;touch-action:none}
+.atlas.territory-v1 .territory-v1-map .flatmap-art{position:absolute;inset:0;width:100%;height:100%;object-fit:fill;filter:saturate(1.03) contrast(1.025);user-select:none;-webkit-user-drag:none;pointer-events:none}
+.atlas.territory-v1 .flatmap-markers{z-index:4;position:absolute;inset:0}
+.atlas.territory-v1 .map-marker{display:none!important}
+.atlas.territory-v1 .territory-hotspot{--hit-size:4%;position:absolute;width:var(--hit-size);aspect-ratio:1;translate:-50% -50%;border:0;border-radius:50%;padding:0;background:transparent;color:#fff4dc;cursor:pointer;opacity:0;pointer-events:none;transition:opacity .22s,box-shadow .22s,background .22s;outline:none}
+.atlas.territory-v1 .territory-hotspot.active{opacity:1;pointer-events:auto}
+.atlas.territory-v1 .territory-hotspot.active:hover,
+.atlas.territory-v1 .territory-hotspot.active:focus-visible{background:radial-gradient(circle,rgba(255,224,159,.17) 0,rgba(255,205,120,.07) 35%,transparent 70%);box-shadow:0 0 26px rgba(255,206,126,.16)}
+.atlas.territory-v1 .territory-hotspot span{position:absolute;left:50%;top:calc(100% + 6px);translate:-50% 0;padding:5px 9px;border:1px solid rgba(239,205,148,.27);border-radius:999px;background:rgba(7,8,18,.74);backdrop-filter:blur(8px);color:#f8e8d0;font:12px Georgia,serif;white-space:nowrap;text-shadow:0 2px 8px #000;opacity:0;transform:translateY(4px);transition:.18s;pointer-events:none}
+.atlas.territory-v1 .territory-hotspot:hover span,
+.atlas.territory-v1 .territory-hotspot:focus-visible span{opacity:1;transform:none}
+.atlas.territory-v1 .territory-hotspot--place{--hit-size:7%}
+.atlas.territory-v1 .territory-hotspot--place.active:hover,
+.atlas.territory-v1 .territory-hotspot--place.active:focus-visible{box-shadow:0 0 34px rgba(255,211,137,.2)}
+.atlas.territory-v1 .hearth-bar{background:linear-gradient(180deg,rgba(8,8,20,.48),rgba(8,8,20,.22));border-color:rgba(240,204,145,.16)}
+.atlas.territory-v1 .territory-v1-controls{gap:2px;padding:3px}
+.atlas.territory-v1 .territory-v1-controls button{min-width:34px;height:34px;padding:0 10px;border-radius:999px;color:#eadac3}
+.atlas.territory-v1 .territory-v1-controls button:hover{background:rgba(230,184,113,.11)}
+.atlas.territory-v1 .arrival-whisper{pointer-events:none;transition:opacity .5s}
+.atlas.territory-v1[data-territory-zoom-stage=detail] .arrival-whisper{opacity:.12}
+.atlas.territory-v1 .place-sheet{display:none!important}
+.territory-v1-reader,.territory-v1-about{position:absolute;z-index:44;right:24px;top:78px;bottom:24px;width:min(420px,92vw);padding:50px 32px 28px;border:1px solid rgba(229,190,128,.28);border-radius:24px;background:linear-gradient(150deg,rgba(17,12,28,.96),rgba(8,11,21,.93));backdrop-filter:blur(22px);box-shadow:0 34px 110px rgba(0,0,0,.48);transform:translateX(calc(100% + 50px));opacity:0;pointer-events:none;transition:transform .52s cubic-bezier(.16,.78,.12,1),opacity .35s;overflow:auto}
+.territory-v1-reader.open,.territory-v1-about.open{transform:none;opacity:1;pointer-events:auto}
+.territory-v1-reader-close,.territory-v1-about-close{position:absolute;right:15px;top:15px;width:36px;height:36px;border-radius:50%;border:1px solid rgba(230,190,128,.3);background:rgba(5,7,16,.58);color:#f0d4a9;font-size:22px;cursor:pointer}
+.territory-v1-kicker{margin:0;color:#dba77e;font:700 9px system-ui,sans-serif;letter-spacing:.26em}
+.territory-v1-reader h2,.territory-v1-about h2{font:400 38px/1.04 Georgia,serif;color:#fff0dc;margin:12px 0 16px}
+.territory-v1-grounding,.territory-v1-interpretation,.territory-v1-about p{font:15px/1.62 Georgia,serif;color:#d8ccd0}
+.territory-v1-divider{height:1px;margin:21px 0;background:linear-gradient(90deg,rgba(228,185,117,.7),transparent)}
+.territory-v1-related b,.territory-v1-about h3{font:400 15px Georgia,serif;color:#efcb99}
+.territory-v1-related p,.territory-v1-method{font-size:12px!important;color:#aa9cad!important}
+.territory-v1-deeper{width:100%;margin-top:20px;border:1px solid rgba(239,195,121,.55);border-radius:999px;padding:14px 17px;background:rgba(159,103,55,.16);color:#f4ddba;cursor:pointer}
+.territory-v1-deeper span{float:right}
+.territory-v1-about-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:20px 0}
+.territory-v1-about-stats span{padding:12px;border:1px solid rgba(226,186,125,.15);border-radius:14px;color:#a99bac;font:9px system-ui,sans-serif;letter-spacing:.08em;text-transform:uppercase}
+.territory-v1-about-stats b{display:block;margin-bottom:4px;color:#efcc97;font:400 25px Georgia,serif;text-transform:none;letter-spacing:0}
+.atlas.territory-v1[data-family-home-focus] .territory-v1-controls,
+.atlas.territory-v1[data-family-home-focus] .arrival-whisper{opacity:0;pointer-events:none}
+@media(max-width:800px){
+  .atlas.territory-v1 .territory-v1-controls button{min-width:30px;padding:0 7px}
+  .atlas.territory-v1 .territory-v1-controls button[data-territory-action=about]{max-width:68px}
+  .territory-v1-reader,.territory-v1-about{left:10px;right:10px;top:auto;bottom:10px;width:auto;max-height:72vh}
+  .territory-v1-reader h2,.territory-v1-about h2{font-size:31px}
+}
+
+/* Hearthlands viewport safety */
+.atlas.territory-v1 .flatmap-scene{background:radial-gradient(circle at 50% 42%,rgba(91,70,46,.16),transparent 54%),#0b1020}
+.atlas.territory-v1 .flatmap-world{overflow:visible}
+.atlas.territory-v1 .territory-v1-map .flatmap-art{object-fit:fill}
+
+/* Art-first arrival: global chrome gets out of the way once Hearthlands takes over. */
+.atlas.territory-v1[data-state="hearth"] .topbar,
+.atlas.territory-v1[data-state="hearth"] .left-poem{opacity:0;pointer-events:none;transform:translateY(-14px);transition:opacity .45s ease,transform .45s ease}
+.atlas.territory-v1[data-state="hearth"] .hearth-bar{position:absolute;inset:0;z-index:42;height:auto;border:0;background:none;backdrop-filter:none;pointer-events:none;padding:0}
+.atlas.territory-v1[data-state="hearth"] .return-world{pointer-events:auto;position:fixed;left:16px;top:16px;z-index:46;padding:10px 14px!important;border:1px solid rgba(244,210,150,.28)!important;border-radius:999px!important;background:rgba(8,13,20,.62)!important;backdrop-filter:blur(12px);font:11px/1 system-ui,sans-serif!important;letter-spacing:.04em;text-transform:uppercase;box-shadow:0 10px 30px rgba(0,0,0,.18)}
+.atlas.territory-v1[data-state="hearth"] .hearth-heading{position:fixed;left:50%;top:16px;z-index:43;transform:translateX(-50%);padding:8px 13px;border-radius:999px;background:rgba(8,13,20,.4);backdrop-filter:blur(10px);transition:opacity .7s ease}
+.atlas.territory-v1[data-state="hearth"].territory-settled .hearth-heading{opacity:0;pointer-events:none}
+.atlas.territory-v1[data-state="hearth"].territory-settled .arrival-whisper{opacity:0!important}
+.atlas.territory-v1[data-state="hearth"] .arrival-whisper{left:50%;bottom:20px;transform:translateX(-50%);width:min(560px,80vw);text-align:center;padding:10px 16px;border-radius:999px;background:rgba(6,9,16,.26);backdrop-filter:blur(8px);transition:opacity .8s ease}
+.atlas.territory-v1[data-state="hearth"] .arrival-whisper b{font-size:15px;line-height:1.25}
+.atlas.territory-v1[data-state="hearth"] .arrival-whisper span{display:none}
+
+/* Anchored evidence preview: an intermediate step between painted object and tarot. */
+.territory-v1-preview{position:fixed;z-index:48;width:min(330px,calc(100vw - 24px));padding:18px 18px 15px;border:1px solid rgba(246,214,159,.42);border-radius:18px;background:linear-gradient(155deg,rgba(13,16,24,.96),rgba(18,12,28,.94));backdrop-filter:blur(18px);box-shadow:0 24px 70px rgba(0,0,0,.42);opacity:0;transform:translateY(7px) scale(.985);pointer-events:none;transition:opacity .18s ease,transform .18s ease}
+.territory-v1-preview.open{opacity:1;transform:none;pointer-events:auto}
+.territory-v1-preview::after{content:"";position:absolute;left:var(--preview-anchor-x,50%);top:100%;width:1px;height:20px;background:linear-gradient(180deg,rgba(255,226,168,.72),transparent)}
+.territory-v1-preview-close{position:absolute;right:9px;top:8px;width:28px;height:28px;border-radius:50%;border:1px solid rgba(244,214,164,.25);background:rgba(255,255,255,.04);color:#f1d8b6;cursor:pointer}
+.territory-v1-preview-kicker{margin:0 32px 5px 0;color:#d8a875;font:700 9px system-ui,sans-serif;letter-spacing:.2em}
+.territory-v1-preview h3{margin:0 34px 8px 0;color:#fff0dc;font:400 28px/1.05 Georgia,serif}
+.territory-v1-preview-grounding{margin:0;color:#d8ccd0;font:13px/1.48 Georgia,serif}
+.territory-v1-preview-meta{display:flex;gap:12px;margin:12px 0 13px}
+.territory-v1-preview-meta span{color:#b9aabd;font:10px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.06em}
+.territory-v1-preview-meta b{color:#f0c98f;font:400 18px Georgia,serif;margin-right:3px}
+.territory-v1-preview-open{width:100%;padding:11px 13px;border:1px solid rgba(241,194,119,.42);border-radius:999px;background:rgba(151,95,54,.15);color:#f7dfbc;cursor:pointer;text-align:left}
+.territory-v1-preview-open span{float:right}
+
+/* Tarot v2 surface: dossier-like, no empty image box when artwork is absent. */
+.territory-v1-reader.territory-v1-tarot{position:fixed;z-index:55;left:50%;right:auto;top:50%;bottom:auto;width:min(760px,92vw);max-height:88vh;padding:0;border-radius:28px;transform:translate(-50%,-46%) scale(.985);overflow:hidden;background:linear-gradient(160deg,rgba(19,14,29,.985),rgba(7,11,20,.975));box-shadow:0 34px 120px rgba(0,0,0,.62);opacity:0}
+.territory-v1-reader.territory-v1-tarot.open{transform:translate(-50%,-50%) scale(1);opacity:1}
+.territory-v1-tarot-scroll{max-height:88vh;overflow:auto;padding:44px 42px 34px}
+.territory-v1-tarot h2{font-size:50px;margin-bottom:18px}
+.territory-v1-tarot-image{margin:0 0 22px;border-radius:20px;overflow:hidden;max-height:280px}
+.territory-v1-tarot-image img{display:block;width:100%;height:100%;object-fit:cover}
+.territory-v1-tarot-stats{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:18px 0 24px}
+.territory-v1-tarot-stats span{padding:14px 16px;border:1px solid rgba(233,194,132,.17);border-radius:16px;background:rgba(255,255,255,.025)}
+.territory-v1-tarot-stats b{display:block;color:#f1ca8f;font:400 30px Georgia,serif}
+.territory-v1-tarot-stats small{color:#aa9cac;font:10px system-ui,sans-serif;text-transform:uppercase;letter-spacing:.07em}
+.territory-v1-tarot-section{padding:19px 0;border-top:1px solid rgba(237,199,139,.12)}
+.territory-v1-tarot-section h3{margin:0 0 8px;color:#efc98f;font:400 16px Georgia,serif}
+.territory-v1-tarot-section p{margin:0;color:#d8ccd0;font:15px/1.62 Georgia,serif}
+.territory-v1-functions article,.territory-v1-lenses article{padding:11px 0;border-bottom:1px solid rgba(255,255,255,.06)}
+.territory-v1-functions article:last-child,.territory-v1-lenses article:last-child{border-bottom:0}
+.territory-v1-functions article b,.territory-v1-lenses article b{color:#f2ddbe;font:400 15px Georgia,serif}
+.territory-v1-functions article p,.territory-v1-lenses article p{margin:4px 0 0;color:#bdb0bd;font:13px/1.5 Georgia,serif}
+.territory-v1-geo-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.055);text-transform:capitalize;color:#cfc0c7;font:13px Georgia,serif}
+.territory-v1-geo-row b{color:#efcb94}
+.territory-v1-records-button{margin-top:12px;padding:11px 14px;border:1px solid rgba(239,195,121,.34);border-radius:999px;background:rgba(159,103,55,.12);color:#f0d7b4}
+.territory-v1-records-button:disabled{opacity:.42;cursor:not-allowed}
+.atlas.territory-v1.tarot-open .flatmap-scene::after{content:"";position:absolute;inset:0;z-index:40;background:rgba(3,5,10,.38);backdrop-filter:blur(2px);pointer-events:none}
+.atlas.territory-v1.tarot-open .territory-hotspot.is-selected{z-index:60}
+
+@media(max-width:800px){
+  .atlas.territory-v1[data-state="hearth"] .return-world{left:8px;top:8px}
+  .atlas.territory-v1[data-state="hearth"] .hearth-heading{top:8px}
+  .territory-v1-reader.territory-v1-tarot{width:calc(100vw - 16px);max-height:90vh}
+  .territory-v1-tarot-scroll{padding:40px 22px 26px}
+  .territory-v1-tarot h2{font-size:38px}
+  .territory-v1-tarot-stats{grid-template-columns:1fr}
+}

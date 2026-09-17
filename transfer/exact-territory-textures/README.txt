@@ -1,0 +1,1 @@
+Exact territory texture transfer staging. The five mounted JPEGs are copied byte-for-byte from territory-sources-q18.zip and validated at 768x384, 2:1. This staging marker can be removed after the binary commit.

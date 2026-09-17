@@ -1,0 +1,95 @@
+{
+  "$schema": "../../dreamscape-engine/schemas/world-manifest.schema.json",
+  "engineVersion": "1.0.0",
+  "worldId": "dreamscape-reference-world",
+  "title": "Dreamscape Atlas",
+  "version": "planetary-v1",
+  "status": "planetary_approved",
+  "privacy": {
+    "runtimeClassification": "public-safe-derived",
+    "rawCorpusPublic": false,
+    "identifiableSourceMaterialPublic": false
+  },
+  "corpus": {
+    "totalDreams": 362,
+    "sourceLabel": "v57 handover snapshot"
+  },
+  "runtimeScene": "./runtime-scene.json",
+  "territories": [
+    {
+      "id": "hearthlands",
+      "name": "The Hearthlands",
+      "subtitle": "Home · gardens · belonging",
+      "meaning": "Domestic warmth, belonging, cultivated life and intimacy.",
+      "planetTexture": "/assets/territory-planets/hearthlands-final.png",
+      "planetTextureSha256": "f82fa882827a2313df3c65960634d94d9dce2490a34926e9ddbd67d1a2f204e6",
+      "approved": true,
+      "associationCount": 213,
+      "associationCountStatus": "known",
+      "palette": ["green", "gold", "warm floral"],
+      "geography": ["inhabited", "cultivated", "gardened", "sheltered"],
+      "flatMap": {"status": "pilot", "keyPlaces": ["family-home"]}
+    },
+    {
+      "id": "roadlands",
+      "name": "The Roadlands",
+      "subtitle": "Journeys · crossings · movement",
+      "meaning": "Journeys, crossings, routes, thresholds and traversed space.",
+      "planetTexture": "/assets/territory-planets/roadlands-final.png",
+      "planetTextureSha256": "15fba2314fe53f12ed3078b24163ad5be3b0398cb811b1fd3f560ceafb39abb0",
+      "approved": true,
+      "associationCount": null,
+      "associationCountStatus": "unknown",
+      "palette": ["ochre", "earth", "travel-toned"],
+      "geography": ["routes", "crossings", "passes", "causeways"],
+      "flatMap": {"status": "not_started", "keyPlaces": []}
+    },
+    {
+      "id": "littoral",
+      "name": "Littoral Coast",
+      "subtitle": "Shorelines · tides · thresholds",
+      "meaning": "Shorelines, tides, islands and coastal thresholds.",
+      "planetTexture": "/assets/territory-planets/littoral-final.png",
+      "planetTextureSha256": "a43e24323ed7cd949f080648868c9dfa5934a3ba81b8f5e374e628bb94d91021",
+      "approved": true,
+      "associationCount": null,
+      "associationCountStatus": "unknown",
+      "palette": ["aqua", "turquoise", "deep blue"],
+      "geography": ["archipelagos", "coves", "cliffs", "tidal channels"],
+      "flatMap": {"status": "not_started", "keyPlaces": []}
+    },
+    {
+      "id": "institutional",
+      "name": "Institutional Quarter",
+      "subtitle": "Structure · order · public life",
+      "meaning": "Structure, order, public systems and civic life.",
+      "planetTexture": "/assets/territory-planets/institutional-final.png",
+      "planetTextureSha256": "3e1d4577ec4b42d678d9fdc1846cd365cfabb875a32945043842d7707f53d4e8",
+      "approved": true,
+      "associationCount": null,
+      "associationCountStatus": "unknown",
+      "palette": ["pale stone", "cool blue", "cream", "gold"],
+      "geography": ["planned geometry", "terraces", "bridges", "civic districts"],
+      "flatMap": {"status": "not_started", "keyPlaces": []}
+    },
+    {
+      "id": "river",
+      "name": "River Country",
+      "subtitle": "Waterways · bridges · flow",
+      "meaning": "Flow, waterways, channels, confluence and floodplain life.",
+      "planetTexture": "/assets/territory-planets/river-final.png",
+      "planetTextureSha256": "337636d9da2bc8f13e1d0489aac62335e9fb3112d844994b1508e385a49f18bc",
+      "approved": true,
+      "associationCount": null,
+      "associationCountStatus": "unknown",
+      "palette": ["green-blue", "jade", "wetland"],
+      "geography": ["braided rivers", "wetlands", "deltas", "confluences"],
+      "flatMap": {"status": "not_started", "keyPlaces": []}
+    }
+  ],
+  "approval": {
+    "planetaryLayer": "approved",
+    "approvedAt": "2026-09-09",
+    "checkpointBranch": "checkpoint-approved-planetary-atlas-0310f07"
+  }
+}

@@ -1,0 +1,2961 @@
+{
+  "schemaVersion": "1.0.0",
+  "id": "hearthlands",
+  "worldId": "dreamscape-reference-world",
+  "name": "Hearthlands",
+  "subtitle": "Home \u00b7 gardens \u00b7 belonging",
+  "description": "A cultivated domestic territory of recurring homes, gardens, thresholds, water and belonging, derived from the reference dream corpus.",
+  "provenance": {
+    "derivationSummary": "Hearthlands was formed from the v57 corpus model by grouping recurring domestic/home geography, canonical place clusters, spatial motifs and territory-associated symbols.",
+    "evidenceStatus": "reviewed",
+    "methods": [
+      "territory-clustering",
+      "canonical-place-review",
+      "conceptual-geography",
+      "symbol-association-review"
+    ],
+    "evidenceRefs": [
+      "private:v57/hearthlands"
+    ]
+  },
+  "sourceCorpusSummary": {
+    "privacyClass": "public-safe-derived",
+    "associatedDreamCount": 213,
+    "associatedDreamCountStatus": "known",
+    "summary": "213 dreams are associated with Hearthlands in the current v57 derived model. Raw dream text and identifying source material are not included in the public runtime."
+  },
+  "flatMap": {
+    "status": "approved",
+    "artDirection": "Painterly, luminous Hearthlands territory scene related to the approved planet palette; artwork first, with embedded discoverable places and symbols and no persistent label clutter.",
+    "asset": "./assets/hearthlands-flat-map.png",
+    "styleAnchorPlanetTexture": "/assets/territory-planets/hearthlands-final.png",
+    "labelsPolicy": "minimal",
+    "interactiveArtwork": true
+  },
+  "zoom": {
+    "min": 1.0,
+    "max": 4.0,
+    "default": 1.0,
+    "stages": {
+      "overview": 1.0,
+      "explore": 1.35,
+      "detail": 2.25
+    },
+    "pan": {
+      "enabled": true,
+      "clampToArtwork": true,
+      "overscroll": 0.04
+    },
+    "controls": {
+      "buttons": true,
+      "wheel": true,
+      "pinch": true,
+      "doubleTap": true,
+      "dragPan": true,
+      "reset": true
+    },
+    "activationPolicy": "progressive",
+    "preserveViewState": true
+  },
+  "places": [
+    {
+      "id": "childhood-house",
+      "name": "Childhood House",
+      "summary": "A recurring childhood-home place in the Hearthlands.",
+      "type": "home",
+      "map": {
+        "x": 0.16,
+        "y": 0.62,
+        "hitRadius": 0.04,
+        "visibleFromZoom": 1.15,
+        "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "3 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/place/childhood-house"
+        ],
+        "dreamCount": 3,
+        "dreamCountStatus": "known"
+      },
+      "tarotCardRef": "tarot/place/childhood-house",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "family-home",
+      "name": "Family Home",
+      "summary": "A recurring family-home place with an existing deeper place experience.",
+      "type": "home",
+      "map": {
+        "x": 0.31,
+        "y": 0.3,
+        "hitRadius": 0.04,
+        "visibleFromZoom": 1.15,
+        "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "2 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/place/family-home"
+        ],
+        "dreamCount": 2,
+        "dreamCountStatus": "known"
+      },
+      "tarotCardRef": "tarot/place/family-home",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "current-present-house",
+      "name": "Current / Present House",
+      "summary": "The strongest recurring canonical Hearthlands home in the current v57 derivation.",
+      "type": "home",
+      "map": {
+        "x": 0.49,
+        "y": 0.61,
+        "hitRadius": 0.04,
+        "visibleFromZoom": 1.15,
+        "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "31 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/place/current-present-house"
+        ],
+        "dreamCount": 31,
+        "dreamCountStatus": "known"
+      },
+      "tarotCardRef": "tarot/place/current-present-house",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "large-many-roomed-house",
+      "name": "The Large Many-Roomed House",
+      "summary": "A recurring expansive many-roomed house in the Hearthlands.",
+      "type": "home",
+      "map": {
+        "x": 0.66,
+        "y": 0.28,
+        "hitRadius": 0.04,
+        "visibleFromZoom": 1.15,
+        "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "6 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/place/large-many-roomed-house"
+        ],
+        "dreamCount": 6,
+        "dreamCountStatus": "known"
+      },
+      "tarotCardRef": "tarot/place/large-many-roomed-house",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "unfamiliar-house",
+      "name": "The Unfamiliar House",
+      "summary": "A recurring unfamiliar domestic place in the Hearthlands.",
+      "type": "home",
+      "map": {
+        "x": 0.78,
+        "y": 0.61,
+        "hitRadius": 0.04,
+        "visibleFromZoom": 1.15,
+        "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "5 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/place/unfamiliar-house"
+        ],
+        "dreamCount": 5,
+        "dreamCountStatus": "known"
+      },
+      "tarotCardRef": "tarot/place/unfamiliar-house",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "haunted-17-bedroom-mansion",
+      "name": "The Haunted 17-Bedroom Mansion",
+      "summary": "A rare one-dream mansion retained as part of the Hearthlands geography.",
+      "type": "home",
+      "map": {
+        "x": 0.89,
+        "y": 0.27,
+        "hitRadius": 0.032,
+        "visibleFromZoom": 1.15,
+        "artCue": "Integrated painted house/grounds in the approved Hearthlands scene."
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "1 source dream contribute to this canonical Hearthlands place in the current v57 derivation.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/place/haunted-17-bedroom-mansion"
+        ],
+        "dreamCount": 1,
+        "dreamCountStatus": "known"
+      },
+      "tarotCardRef": "tarot/place/haunted-17-bedroom-mansion",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    }
+  ],
+  "symbols": [
+    {
+      "id": "person-01",
+      "name": "person-01",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.7791,
+            "y": 0.6459,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 34 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-01"
+        ],
+        "frequency": 34,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house",
+          "large-many-roomed-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/person-01",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-02",
+      "name": "person-02",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.1346,
+            "y": 0.5211,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 10 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-02"
+        ],
+        "frequency": 10,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/person-02",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-03",
+      "name": "person-03",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5213,
+            "y": 0.5883,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 28 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-03"
+        ],
+        "frequency": 28,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "childhood-house",
+          "current-present-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/person-03",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-04",
+      "name": "person-04",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.4979,
+            "y": 0.5385,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-04"
+        ],
+        "frequency": 2,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/person-04",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-05",
+      "name": "person-05",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.8096,
+            "y": 0.6296,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 18 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-05"
+        ],
+        "frequency": 18,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "childhood-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/person-05",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-06",
+      "name": "person-06",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.7076,
+            "y": 0.4775,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-06"
+        ],
+        "frequency": 3,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/person-06",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-07",
+      "name": "person-07",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.2136,
+            "y": 0.5286,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-07"
+        ],
+        "frequency": 5,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/person-07",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-08",
+      "name": "person-08",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5513,
+            "y": 0.4945,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-08"
+        ],
+        "frequency": 5,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/person-08",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-09",
+      "name": "person-09",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.8079,
+            "y": 0.5007,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-09"
+        ],
+        "frequency": 3,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/person-09",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-10",
+      "name": "person-10",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.29,
+            "y": 0.31,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 53 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-10"
+        ],
+        "frequency": 53,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "childhood-house",
+          "family-home",
+          "current-present-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/person-10",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-11",
+      "name": "person-11",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5,
+            "y": 0.6,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 59 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-11"
+        ],
+        "frequency": 59,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house",
+          "large-many-roomed-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/person-11",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-12",
+      "name": "person-12",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.46,
+            "y": 0.65,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 29 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-12"
+        ],
+        "frequency": 29,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "childhood-house",
+          "current-present-house",
+          "large-many-roomed-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/person-12",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-13",
+      "name": "person-13",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.7484,
+            "y": 0.6259,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 24 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-13"
+        ],
+        "frequency": 24,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "childhood-house",
+          "current-present-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/person-13",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-14",
+      "name": "person-14",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.1281,
+            "y": 0.5056,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-14"
+        ],
+        "frequency": 3,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/person-14",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "person-15",
+      "name": "person-15",
+      "summary": "An anonymised recurring dream figure associated with Hearthlands. Public preview data intentionally withholds identifying source names.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.4571,
+            "y": 0.6095,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/person-15"
+        ],
+        "frequency": 3,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/person-15",
+      "interaction": {
+        "hoverable": false,
+        "clickable": false,
+        "hoverLabel": false
+      },
+      "semanticIdentity": {
+        "kind": "person",
+        "labelSource": "private-profile",
+        "labelResolvedInPublicRuntime": false,
+        "userFacingLabelPolicy": "resolve-private-semantic-label-before-display"
+      }
+    },
+    {
+      "id": "bag",
+      "name": "Bag",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.4925,
+            "y": 0.6306,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 9 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/bag"
+        ],
+        "frequency": 9,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/bag",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "bed",
+      "name": "Bed",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.66,
+            "y": 0.24,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 22 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/bed"
+        ],
+        "frequency": 22,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "family-home",
+          "current-present-house",
+          "large-many-roomed-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/bed",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "bench",
+      "name": "Bench",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.1554,
+            "y": 0.7311,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 6 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/bench"
+        ],
+        "frequency": 6,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/bench",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "book",
+      "name": "Book",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.64,
+            "y": 0.3,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 13 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/book"
+        ],
+        "frequency": 13,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "large-many-roomed-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/book",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "box",
+      "name": "Box",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5186,
+            "y": 0.6431,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 9 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/box"
+        ],
+        "frequency": 9,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/box",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "chair",
+      "name": "Chair",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.4333,
+            "y": 0.8326,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 10 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/chair"
+        ],
+        "frequency": 10,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/chair",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "clock",
+      "name": "Clock",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.4779,
+            "y": 0.6364,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 9 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/clock"
+        ],
+        "frequency": 9,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/clock",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "clothes",
+      "name": "Clothes",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.7903,
+            "y": 0.7698,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 13 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/clothes"
+        ],
+        "frequency": 13,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/clothes",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "computer",
+      "name": "Computer",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5064,
+            "y": 0.5928,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 8 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/computer"
+        ],
+        "frequency": 8,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/computer",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "door",
+      "name": "Door",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.51,
+            "y": 0.58,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 39 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/door"
+        ],
+        "frequency": 39,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house",
+          "large-many-roomed-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/door",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "drink",
+      "name": "Drink",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.1734,
+            "y": 0.7687,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 14 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/drink"
+        ],
+        "frequency": 14,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/drink",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "egg",
+      "name": "Egg",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.29,
+            "y": 0.27,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/egg"
+        ],
+        "frequency": 4,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "family-home"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/egg",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "food",
+      "name": "Food",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.7613,
+            "y": 0.6343,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 31 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/food"
+        ],
+        "frequency": 31,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "childhood-house",
+          "current-present-house",
+          "large-many-roomed-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/food",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "house-home",
+      "name": "House / Home",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.49,
+            "y": 0.61,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 97 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/house-home"
+        ],
+        "frequency": 97,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "childhood-house",
+          "family-home",
+          "current-present-house",
+          "large-many-roomed-house",
+          "unfamiliar-house",
+          "haunted-17-bedroom-mansion"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/house-home",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "key",
+      "name": "Key",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5557,
+            "y": 0.8275,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/key"
+        ],
+        "frequency": 2,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/key",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "light",
+      "name": "Light",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.88,
+            "y": 0.24,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 12 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/light"
+        ],
+        "frequency": 12,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "family-home",
+          "haunted-17-bedroom-mansion"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/light",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "mirror",
+      "name": "Mirror",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.8178,
+            "y": 0.8188,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/mirror"
+        ],
+        "frequency": 2,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/mirror",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "money",
+      "name": "Money",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.1103,
+            "y": 0.8061,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 12 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/money"
+        ],
+        "frequency": 12,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/money",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "phone",
+      "name": "Phone",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.4494,
+            "y": 0.5934,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 16 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/phone"
+        ],
+        "frequency": 16,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/phone",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "shirt",
+      "name": "Shirt",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5295,
+            "y": 0.62,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 17 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/shirt"
+        ],
+        "frequency": 17,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/shirt",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "shoe",
+      "name": "Shoe",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.4857,
+            "y": 0.7975,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 7 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/shoe"
+        ],
+        "frequency": 7,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/shoe",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "table",
+      "name": "Table",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.7213,
+            "y": 0.7498,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 25 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/table"
+        ],
+        "frequency": 25,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/table",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "teddy",
+      "name": "Teddy",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.4937,
+            "y": 0.6412,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/teddy"
+        ],
+        "frequency": 4,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/teddy",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "toy",
+      "name": "Toy",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.7543,
+            "y": 0.5961,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 7 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/toy"
+        ],
+        "frequency": 7,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/toy",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "weight",
+      "name": "Weight",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5058,
+            "y": 0.5971,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/weight"
+        ],
+        "frequency": 2,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/weight",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "window",
+      "name": "Window",
+      "summary": "A recurring domestic symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.86,
+            "y": 0.28,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 18 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/window"
+        ],
+        "frequency": 18,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "family-home",
+          "large-many-roomed-house",
+          "unfamiliar-house",
+          "haunted-17-bedroom-mansion"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/window",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "bicycle",
+      "name": "Bicycle",
+      "summary": "A recurring transport symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.1391,
+            "y": 0.1496,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/bicycle"
+        ],
+        "frequency": 5,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/bicycle",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "boat",
+      "name": "Boat",
+      "summary": "A recurring transport symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.3436,
+            "y": 0.5022,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 10 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/boat"
+        ],
+        "frequency": 10,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/boat",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "bus",
+      "name": "Bus",
+      "summary": "A recurring transport symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.6781,
+            "y": 0.575,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/bus"
+        ],
+        "frequency": 4,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/bus",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "car",
+      "name": "Car",
+      "summary": "A recurring transport symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.55,
+            "y": 0.68,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 55 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/car"
+        ],
+        "frequency": 55,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house",
+          "large-many-roomed-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/car",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "plane",
+      "name": "Plane",
+      "summary": "A recurring transport symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.1087,
+            "y": 0.1493,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/plane"
+        ],
+        "frequency": 4,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/plane",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "train",
+      "name": "Train",
+      "summary": "A recurring transport symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.6125,
+            "y": 0.5608,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 13 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/train"
+        ],
+        "frequency": 13,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/train",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "cat",
+      "name": "Cat",
+      "summary": "A recurring animals symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.3,
+            "y": 0.34,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 34 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/cat"
+        ],
+        "frequency": 34,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "family-home",
+          "childhood-house",
+          "current-present-house",
+          "large-many-roomed-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/cat",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "cow",
+      "name": "Cow",
+      "summary": "A recurring animals symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.1565,
+            "y": 0.8547,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/cow"
+        ],
+        "frequency": 3,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/cow",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "dog",
+      "name": "Dog",
+      "summary": "A recurring animals symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.53,
+            "y": 0.64,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 25 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/dog"
+        ],
+        "frequency": 25,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "family-home",
+          "current-present-house",
+          "large-many-roomed-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/dog",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "fish",
+      "name": "Fish",
+      "summary": "A recurring animals symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.35,
+            "y": 0.37,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/fish"
+        ],
+        "frequency": 4,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "family-home",
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/fish",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "insect",
+      "name": "Insect",
+      "summary": "A recurring animals symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5094,
+            "y": 0.5916,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 6 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/insect"
+        ],
+        "frequency": 6,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house",
+          "large-many-roomed-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/insect",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "lion",
+      "name": "Lion",
+      "summary": "A recurring animals symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.1588,
+            "y": 0.5735,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/lion"
+        ],
+        "frequency": 3,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "childhood-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/lion",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "octopus",
+      "name": "Octopus",
+      "summary": "A recurring animals symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.33,
+            "y": 0.29,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/octopus"
+        ],
+        "frequency": 2,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "family-home"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/octopus",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "sheep",
+      "name": "Sheep",
+      "summary": "A recurring animals symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.486,
+            "y": 0.8744,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/sheep"
+        ],
+        "frequency": 3,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/sheep",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "snake",
+      "name": "Snake",
+      "summary": "A recurring animals symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.8094,
+            "y": 0.796,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/snake"
+        ],
+        "frequency": 3,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/snake",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "field",
+      "name": "Field",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.1724,
+            "y": 0.236,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 14 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/field"
+        ],
+        "frequency": 14,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/field",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "fire",
+      "name": "Fire",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.46,
+            "y": 0.58,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/fire"
+        ],
+        "frequency": 4,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/fire",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "forest",
+      "name": "Forest",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5228,
+            "y": 0.3129,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/forest"
+        ],
+        "frequency": 4,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/forest",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "garden",
+      "name": "Garden",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.31,
+            "y": 0.34,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 25 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/garden"
+        ],
+        "frequency": 25,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "childhood-house",
+          "family-home",
+          "current-present-house",
+          "large-many-roomed-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/garden",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "grass",
+      "name": "Grass",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.9198,
+            "y": 0.3545,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 10 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/grass"
+        ],
+        "frequency": 10,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/grass",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "lake",
+      "name": "Lake",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.9303,
+            "y": 0.8312,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/lake"
+        ],
+        "frequency": 2,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/lake",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "ocean",
+      "name": "Ocean",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.2013,
+            "y": 0.2746,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/ocean"
+        ],
+        "frequency": 5,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/ocean",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "rain",
+      "name": "Rain",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5147,
+            "y": 0.2443,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/rain"
+        ],
+        "frequency": 3,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/rain",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "river",
+      "name": "River",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.8182,
+            "y": 0.382,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/river"
+        ],
+        "frequency": 5,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/river",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "sea",
+      "name": "Sea",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.6898,
+            "y": 0.861,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 16 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/sea"
+        ],
+        "frequency": 16,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/sea",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "sky",
+      "name": "Sky",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.1509,
+            "y": 0.305,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 8 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/sky"
+        ],
+        "frequency": 8,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/sky",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "snow",
+      "name": "Snow",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.5035,
+            "y": 0.5955,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/snow"
+        ],
+        "frequency": 2,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/snow",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "storm",
+      "name": "Storm",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.3869,
+            "y": 0.2802,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/storm"
+        ],
+        "frequency": 3,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/storm",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "sun",
+      "name": "Sun",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.68,
+            "y": 0.13,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/sun"
+        ],
+        "frequency": 5,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "large-many-roomed-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/sun",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "tree",
+      "name": "Tree",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.18,
+            "y": 0.66,
+            "hitRadius": 0.02,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.45
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 15 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/tree"
+        ],
+        "frequency": 15,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "childhood-house",
+          "current-present-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/tree",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "water",
+      "name": "Water",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.43,
+            "y": 0.43,
+            "hitRadius": 0.022,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 1.35
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 42 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/water"
+        ],
+        "frequency": 42,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": [
+          "family-home",
+          "current-present-house",
+          "large-many-roomed-house",
+          "unfamiliar-house"
+        ]
+      },
+      "tarotCardRef": "tarot/symbol/water",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": true
+      }
+    },
+    {
+      "id": "wind",
+      "name": "Wind",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.8452,
+            "y": 0.214,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 8 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/wind"
+        ],
+        "frequency": 8,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/wind",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "woods",
+      "name": "Woods",
+      "summary": "A recurring landscape symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.7289,
+            "y": 0.9253,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/woods"
+        ],
+        "frequency": 2,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/woods",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "gun",
+      "name": "Gun",
+      "summary": "A recurring objects symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.2949,
+            "y": 0.77,
+            "hitRadius": 0.018,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.1
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/gun"
+        ],
+        "frequency": 5,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/gun",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    },
+    {
+      "id": "knife",
+      "name": "Knife",
+      "summary": "A recurring objects symbol evidenced in the Hearthlands corpus.",
+      "map": {
+        "placements": [
+          {
+            "x": 0.6433,
+            "y": 0.7205,
+            "hitRadius": 0.016,
+            "artCue": "Embedded within the approved painterly scene; interaction remains visually quiet."
+          }
+        ],
+        "visibleFromZoom": 2.75
+      },
+      "corpusEvidence": {
+        "privacyClass": "public-safe-derived",
+        "summary": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+        "evidenceRefs": [
+          "private:v57/hearthlands/symbol/knife"
+        ],
+        "frequency": 3,
+        "frequencyStatus": "known",
+        "associationStatus": "territory-specific",
+        "relatedPlaceIds": []
+      },
+      "tarotCardRef": "tarot/symbol/knife",
+      "interaction": {
+        "hoverable": true,
+        "clickable": true,
+        "hoverLabel": false
+      }
+    }
+  ],
+  "about": {
+    "title": "About Hearthlands",
+    "summary": "Hearthlands gathers the corpus's recurring domestic geography: homes, gardens, rooms, thresholds, water and the figures and objects that repeatedly inhabit them. Its six canonical places and wider motif/symbol field were derived from the v57 corpus model rather than invented as fantasy-map decoration.",
+    "showDerivation": true,
+    "showCorpusBasis": true
+  }
+}

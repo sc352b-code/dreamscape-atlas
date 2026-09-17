@@ -1,0 +1,109 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dreamscape.local/schemas/territory-manifest.schema.json",
+  "title": "Dreamscape Territory Manifest",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schemaVersion", "id", "worldId", "name", "subtitle", "description", "provenance", "sourceCorpusSummary", "flatMap", "zoom", "places", "symbols", "about"],
+  "properties": {
+    "schemaVersion": {"const": "1.0.0"},
+    "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+    "worldId": {"type": "string", "minLength": 1},
+    "name": {"type": "string", "minLength": 1},
+    "subtitle": {"type": "string", "minLength": 1},
+    "description": {"type": "string", "minLength": 1},
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["derivationSummary", "evidenceStatus"],
+      "properties": {
+        "derivationSummary": {"type": "string", "minLength": 1},
+        "evidenceStatus": {"enum": ["derived", "reviewed", "approved"]},
+        "methods": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+        "evidenceRefs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true}
+      }
+    },
+    "sourceCorpusSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["privacyClass"],
+      "properties": {
+        "privacyClass": {"enum": ["private-derived", "public-safe-derived"]},
+        "associatedDreamCount": {"type": ["integer", "null"], "minimum": 0},
+        "associatedDreamCountStatus": {"enum": ["known", "unknown", "not-published"]},
+        "summary": {"type": "string"}
+      }
+    },
+    "flatMap": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "artDirection", "asset"],
+      "properties": {
+        "status": {"enum": ["not-started", "briefed", "in-progress", "approved"]},
+        "artDirection": {"type": "string", "minLength": 1},
+        "asset": {"type": ["string", "null"]},
+        "styleAnchorPlanetTexture": {"type": ["string", "null"]},
+        "labelsPolicy": {"enum": ["minimal", "none", "selective"]},
+        "interactiveArtwork": {"type": "boolean"}
+      }
+    },
+    "zoom": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["min", "max", "default", "stages", "pan", "controls", "preserveViewState"],
+      "properties": {
+        "min": {"type": "number", "exclusiveMinimum": 0},
+        "max": {"type": "number", "exclusiveMinimum": 0},
+        "default": {"type": "number", "exclusiveMinimum": 0},
+        "stages": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["overview", "explore", "detail"],
+          "properties": {
+            "overview": {"type": "number", "exclusiveMinimum": 0},
+            "explore": {"type": "number", "exclusiveMinimum": 0},
+            "detail": {"type": "number", "exclusiveMinimum": 0}
+          }
+        },
+        "pan": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["enabled", "clampToArtwork"],
+          "properties": {
+            "enabled": {"type": "boolean"},
+            "clampToArtwork": {"type": "boolean"},
+            "overscroll": {"type": "number", "minimum": 0, "maximum": 0.25}
+          }
+        },
+        "controls": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": ["buttons", "wheel", "pinch", "doubleTap", "dragPan", "reset"],
+          "properties": {
+            "buttons": {"type": "boolean"},
+            "wheel": {"type": "boolean"},
+            "pinch": {"type": "boolean"},
+            "doubleTap": {"type": "boolean"},
+            "dragPan": {"type": "boolean"},
+            "reset": {"type": "boolean"}
+          }
+        },
+        "activationPolicy": {"enum": ["threshold", "progressive"]},
+        "preserveViewState": {"type": "boolean"}
+      }
+    },
+    "places": {"type": "array", "items": {"$ref": "./place.schema.json"}},
+    "symbols": {"type": "array", "items": {"$ref": "./symbol.schema.json"}},
+    "about": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["title", "summary", "showDerivation", "showCorpusBasis"],
+      "properties": {
+        "title": {"type": "string", "minLength": 1},
+        "summary": {"type": "string", "minLength": 1},
+        "showDerivation": {"type": "boolean"},
+        "showCorpusBasis": {"type": "boolean"}
+      }
+    }
+  }
+}

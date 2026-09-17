@@ -34,7 +34,7 @@ function waitForTerritory(payload){
 
   function suppress(button,status){
     button.classList.add('territory-hotspot--unregistered');
-    button.classList.remove('territory-hotspot--registered');
+    button.classList.remove('territory-hotspot--registered','active');
     button.dataset.registrationStatus=status;
     button.disabled=true;
     button.tabIndex=-1;
@@ -49,7 +49,6 @@ function waitForTerritory(payload){
     button.style.setProperty('--registered-hit-w',`${entry.hitArea.width*100}%`);
     button.style.setProperty('--registered-hit-h',`${entry.hitArea.height*100}%`);
     button.style.setProperty('--registered-hit-radius',entry.hitArea.shape==='ellipse'?'50%':'22%');
-
     button.dataset.authoredVisibleFrom=String(entry.activeFromZoom);
     button.dataset.visibleFrom='1';
 
@@ -69,7 +68,8 @@ function waitForTerritory(payload){
     if(button.dataset.privateTarotPatch) return;
     button.dataset.privateTarotPatch='true';
     button.addEventListener('click',()=>{
-      const activeLabel=button.dataset.privateLabel||'Person';
+      const activeLabel=button.dataset.privateLabel;
+      if(!activeLabel) return;
       setTimeout(()=>{
         const preview=document.querySelector('.territory-v1-preview.open');
         if(preview){
@@ -92,9 +92,8 @@ function waitForTerritory(payload){
     if(identityEntry){
       button.dataset.privateIdentity='true';
       button.dataset.privateLabelResolved='false';
-      button.dataset.privateLabel='Person';
-      activate(button,identityEntry,'Person');
-      wirePrivateHeadingPatch(button,identityEntry);
+      delete button.dataset.privateLabel;
+      suppress(button,'private-label-required');
       unresolved.push({kind,id,status:'private-label-required'});
       return;
     }
@@ -125,10 +124,9 @@ function waitForTerritory(payload){
       const label=providerLabel||mapLabel;
 
       if(!label){
-        activate(button,entry,'Person');
+        suppress(button,'private-label-required');
         button.dataset.privateLabelResolved='false';
-        button.dataset.privateLabel='Person';
-        wirePrivateHeadingPatch(button,entry);
+        delete button.dataset.privateLabel;
         pending.push(entry.id);
         continue;
       }
@@ -140,6 +138,7 @@ function waitForTerritory(payload){
       resolved.push(entry.id);
     }
     window.__hearthlandsRegistrationV1.privateIdentity={resolved,pending};
+    window.dispatchEvent(new CustomEvent('hearthlands-private-identities-resolved',{detail:{resolved,pending}}));
     return {resolved,pending};
   }
 

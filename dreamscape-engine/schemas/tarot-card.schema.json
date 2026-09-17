@@ -11,6 +11,59 @@
     "subjectId": {"type": "string", "minLength": 1},
     "title": {"type": "string", "minLength": 1},
     "cardImage": {"type": ["string", "null"]},
+    "previewSummary": {"type": "string"},
+    "corpusOverview": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "wholeSeriesCount": {"type": ["integer", "null"], "minimum": 0},
+        "wholeSeriesCountStatus": {"enum": ["known", "unknown", "private", "pending"]},
+        "territoryCounts": {
+          "type": "object",
+          "additionalProperties": {"type": "integer", "minimum": 0}
+        }
+      }
+    },
+    "recurringFunctions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "summary"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "summary": {"type": "string", "minLength": 1},
+          "evidenceRefs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "confidence": {"enum": ["low", "medium", "medium-high", "high"]}
+        }
+      }
+    },
+    "interpretiveLenses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["name", "summary"],
+        "properties": {
+          "name": {"type": "string", "minLength": 1},
+          "summary": {"type": "string", "minLength": 1},
+          "framework": {"enum": ["jungian", "attachment", "family-systems", "autobiographical", "narrative", "care-ethics", "other"]},
+          "evidenceRefs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
+          "caveat": {"type": "string"}
+        }
+      }
+    },
+    "possibleLesson": {"type": ["string", "null"]},
+    "reflectionPrompt": {"type": ["string", "null"]},
+    "dreamRecordAccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "status": {"enum": ["private-connected", "private-pending", "not-published"]},
+        "recordCount": {"type": ["integer", "null"], "minimum": 0},
+        "provider": {"type": ["string", "null"]}
+      }
+    },
     "interpretation": {
       "type": "object",
       "additionalProperties": false,
@@ -18,7 +71,8 @@
       "properties": {
         "summary": {"type": "string", "minLength": 1},
         "basicAnalysis": {"type": "string"},
-        "analysisStatus": {"enum": ["derived", "reviewed", "approved"]}
+        "analysisStatus": {"enum": ["derived", "reviewed", "approved"]},
+        "boundary": {"type": "string"}
       }
     },
     "corpusGrounding": {

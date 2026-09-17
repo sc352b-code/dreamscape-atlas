@@ -49,15 +49,25 @@ function waitForTerritory(payload){
     button.style.setProperty('--registered-hit-w',`${entry.hitArea.width*100}%`);
     button.style.setProperty('--registered-hit-h',`${entry.hitArea.height*100}%`);
     button.style.setProperty('--registered-hit-radius',entry.hitArea.shape==='ellipse'?'50%':'22%');
-    button.dataset.visibleFrom=String(entry.activeFromZoom);
+
+    // All defensibly registered public subjects must be discoverable immediately.
+    // Keep the authored zoom threshold as metadata for future semantic emphasis,
+    // but do not use it to disable hover/click interaction.
+    button.dataset.authoredVisibleFrom=String(entry.activeFromZoom);
+    button.dataset.visibleFrom='1';
+
+    // Small precise objects must win pointer hit-testing over broad landscape areas
+    // such as Water/Sky/Woods when the hit regions overlap.
+    const area=Math.max(0.00001,entry.hitArea.width*entry.hitArea.height);
+    const precisionPriority=Math.round(1000-Math.min(900,area*5000));
+    button.style.zIndex=String((entry.kind==='place'?200:300)+precisionPriority);
+
     button.setAttribute('aria-label',`${label}, ${entry.kind}`);
     const span=button.querySelector('span');
     if(span) span.textContent=label;
-    const state=window.__hearthlandsTerritoryV1?.getState?.();
-    const active=(state?.scale??1)+0.001>=entry.activeFromZoom;
-    button.disabled=!active;
-    button.tabIndex=active?0:-1;
-    button.classList.toggle('active',active);
+    button.disabled=false;
+    button.tabIndex=0;
+    button.classList.add('active');
   }
 
   markers.querySelectorAll('.territory-hotspot').forEach(button=>{
@@ -133,6 +143,11 @@ function waitForTerritory(payload){
     markers.querySelectorAll('.territory-hotspot--unregistered').forEach(button=>{
       button.disabled=true;
       button.tabIndex=-1;
+    });
+    markers.querySelectorAll('.territory-hotspot--registered').forEach(button=>{
+      button.disabled=false;
+      button.tabIndex=0;
+      button.classList.add('active');
     });
   });
   observer.observe(root,{attributes:true,attributeFilter:['data-territory-zoom-stage']});

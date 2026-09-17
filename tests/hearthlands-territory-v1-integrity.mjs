@@ -8,6 +8,7 @@ const coverage=JSON.parse(fs.readFileSync(`${base}/validation/artwork-coverage.j
 const asset=JSON.parse(fs.readFileSync(`${base}/assets/hearthlands-flat-map.asset.json`,'utf8'));
 const runtime=fs.readFileSync('src/hearthlands-territory-v1.js','utf8');
 const transition=fs.readFileSync('src/hearthlands-transition-fix.js','utf8');
+const transitionCSS=fs.readFileSync('src/hearthlands-seamless-entry.css','utf8');
 const index=fs.readFileSync('index.html','utf8');
 
 assert.equal(manifest.id,'hearthlands');
@@ -69,7 +70,7 @@ assert.match(asset.sourceTreatment,/composition-preserving/);
 assert.ok(fs.existsSync(`${base}/assets/hearthlands-flat-map.png`),'Missing approved Hearthlands flat-map PNG');
 
 const serialized=JSON.stringify(manifest);
-for(const forbidden of ['Natalie','Alex','Alice','Stephen Coarse','Wayne','Carl Jung','Recurring Figure','recurring-figure-']) assert.ok(!serialized.includes(forbidden),`Private or false public label leaked: ${forbidden}`);
+for(const forbidden of ['Natalie','Alex','Alice','Stephen Coarse','Wayne','Carl Jung','Recurring Figure','recurring-figure-']) assert.ok(!serialized.includes(forbidden),`Manifest still intentionally contains technical identity records only: ${forbidden}`);
 assert.match(runtime,/territoryZoomStage/);
 assert.match(runtime,/wheel/);
 assert.match(runtime,/pointer/);
@@ -77,11 +78,16 @@ assert.match(runtime,/enterDreamscapeFamilyHome/);
 
 assert(index.includes('rel="preload" as="image" href="/worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png"'));
 assert(index.includes('/src/hearthlands-transition-fix.js'));
+assert(index.includes('/src/hearthlands-seamless-entry.css'));
 assert(transition.includes("FINAL_HEARTHLANDS_ART='/worlds/reference-world/territories/hearthlands/assets/hearthlands-flat-map.png'"));
-assert(transition.includes('hearthlands-transition-owned'));
-assert(transition.includes('--hearthlands-owned-width'));
-assert(transition.includes('transform:none!important'));
-assert(transition.includes("(raw-.045)/.79"),'transition reveal must begin early rather than holding on black');
-assert(!transition.includes("dispatchEvent(new Event('resize'))"),'transition must not use repeated resize handoffs that cause visible snapping');
+assert(transition.includes('hearthlands-seamless-entry'));
+assert(transition.includes('hearthlands-map-takeover'));
+assert(!transition.includes("dispatchEvent(new Event('resize'))"));
+assert(transitionCSS.includes('.territory-cosmos__blackout'));
+assert(transitionCSS.includes('.descent-copy'));
+assert(transitionCSS.includes('display:none!important'));
+assert(transitionCSS.includes('transition:opacity 1.18s'));
+assert(transitionCSS.includes('transform:none!important'));
+assert(transitionCSS.includes('width:min(100vw,150vh)!important'));
 
-console.log('Hearthlands Territory Layer v1 integrity: 6 places, 76 symbols, privacy-gated identities, semantic zoom/pan, tarot routing and a preloaded single-owner planet-to-flatmap reveal are coherent.');
+console.log('Hearthlands Territory Layer v1 integrity: 6 places, 76 symbols, semantic zoom/pan, tarot routing and a preloaded direct planet-to-map crossfade are coherent.');

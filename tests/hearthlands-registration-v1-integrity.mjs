@@ -66,7 +66,7 @@ for(const entry of ledger.entries){
     assert(Number.isFinite(entry.x)&&entry.x>=0&&entry.x<=1,`${key} x out of bounds`);
     assert(Number.isFinite(entry.y)&&entry.y>=0&&entry.y<=1,`${key} y out of bounds`);
     assert(entry.hitArea&&entry.hitArea.width>0&&entry.hitArea.height>0,`${key} missing precise hit area`);
-    assert(entry.activeFromZoom>0,`${key} missing zoom activation`);
+    assert(entry.activeFromZoom>0,`${key} missing authored zoom metadata`);
     assert(entry.paintedObject,`${key} must identify the painted subject`);
     if(entry.kind==='place') registeredPlaces++;else registeredSymbols++;
   }else if(entry.registrationStatus==='needs-art-correction'){
@@ -106,10 +106,15 @@ assert(js.includes('__dreamscapePrivateIdentityMap'));
 assert(js.includes('private-label-required'));
 assert(js.includes('data-territory-action="zoom-in"'));
 assert(js.includes('data-territory-action="zoom-out"'));
+assert(js.includes("button.dataset.visibleFrom='1'"),'all registered public subjects must be hoverable from arrival view');
+assert(js.includes('button.dataset.authoredVisibleFrom'),'authored semantic-zoom threshold must be retained only as metadata');
+assert(js.includes('precisionPriority'),'small precise hotspots must outrank broad landscape hit regions');
 assert(css.includes('.territory-hotspot--unregistered{display:none!important'));
 assert(css.includes('.territory-v1-controls'));
 assert(css.includes('.territory-hotspot--registered span::after'));
 assert(css.includes('.territory-hotspot--registered.is-selected'));
+assert(css.includes('width:10px'),'visible hover affordance must be point-based, not the full hitbox');
+assert(!css.includes('position:absolute;inset:0;border-radius:inherit'),'full registration rectangle must never be rendered visibly');
 
 assert(territoryJS.includes('function displayTitle'));
 assert(territoryJS.includes('__dreamscapePrivateIdentityMap'));
@@ -128,4 +133,4 @@ assert(territoryCSS.includes('Art-first arrival'));
 assert(territoryCSS.includes('Anchored evidence preview'));
 assert(territoryCSS.includes('Tarot v2 surface'));
 
-console.log('Hearthlands registration integrity: locked artwork + 6 places + 61 non-person symbols + private-gated identities now feed the art-first hover → anchored preview → Tarot v2 interaction model.');
+console.log('Hearthlands registration integrity: locked artwork + 6 places + 61 non-person symbols are immediately hoverable with invisible hit targets, point-based labels/previews, and private-gated identities.');

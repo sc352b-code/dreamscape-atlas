@@ -2,6 +2,7 @@ import fs from 'node:fs';
 import assert from 'node:assert/strict';
 
 const profile=fs.readFileSync('src/dreamscape-private-profile.js','utf8');
+const profileLoader=fs.readFileSync('src/dreamscape-private-profile-loader.js','utf8');
 const registration=fs.readFileSync('src/hearthlands-registration-v1.js','utf8');
 const index=fs.readFileSync('index.html','utf8');
 const server=fs.readFileSync('server.js','utf8');
@@ -9,7 +10,9 @@ const gitignore=fs.readFileSync('.gitignore','utf8');
 const tarotOverlay=fs.readFileSync('src/hearthlands-tarot-v2-overlays.js','utf8');
 
 assert(index.includes('/src/dreamscape-private-profile.js'));
-assert(index.indexOf('/src/dreamscape-private-profile.js')<index.indexOf('/src/hearthlands-registration-v1.js'));
+assert(index.includes('/src/dreamscape-private-profile-loader.js'));
+assert(index.indexOf('/src/dreamscape-private-profile.js')<index.indexOf('/src/dreamscape-private-profile-loader.js'));
+assert(index.indexOf('/src/dreamscape-private-profile-loader.js')<index.indexOf('/src/hearthlands-registration-v1.js'));
 assert(index.includes('/src/hearthlands-tarot-v2-overlays.js'));
 assert(!index.includes('</script>\\n    <script type="module" src="/src/hearthlands-territory-v1.js">'));
 
@@ -24,9 +27,18 @@ assert(profile.includes('setDreamRecords'));
 assert(profile.includes('dreamRecordsBySubject'));
 assert(profile.includes('dreamscape-private-profile-change'));
 
+assert(profileLoader.includes('dreamscape.privateProfile.browser.v1'));
+assert(profileLoader.includes("input.type='file'"));
+assert(profileLoader.includes("input.accept='application/json,.json'"));
+assert(profileLoader.includes('localStorage.setItem'));
+assert(profileLoader.includes('api.setProfile(parsed)'));
+assert(profileLoader.includes("button.textContent=count>0?'✓':'ID'"));
+
 assert(registration.includes('window.DreamscapePrivateProfile'));
 assert(registration.includes('getSemanticLabel'));
 assert(registration.includes('resolveHearthlandsPrivateIdentities'));
+assert(registration.includes("suppress(button,'private-label-required')"));
+assert(!registration.includes("activate(button,entry,'Person')"),'unresolved private identities must not be relabelled as generic Person');
 
 assert(tarotOverlay.includes('tarot-v2-authored-overlays.json'));
 assert(tarotOverlay.includes('recurringFunctions'));
@@ -40,7 +52,8 @@ assert(gitignore.includes('.dreamscape/'));
 
 for(const forbidden of ['Alex','Alice','George','Grandma','Lily','Mum','Natalie','Percy','Stephen Coarse','Wayne']){
   assert(!profile.includes(forbidden));
+  assert(!profileLoader.includes(forbidden));
   assert(!server.includes(forbidden));
 }
 
-console.log('Dreamscape private profile runtime integrity: private identity + dream-record provider seam and localhost-only preview path are wired for Tarot v2 without public identity leakage.');
+console.log('Dreamscape private profile runtime integrity: real private identity labels can be loaded browser-locally without public identity leakage; unresolved figures stay hidden rather than becoming generic Person labels.');

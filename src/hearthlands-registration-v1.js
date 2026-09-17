@@ -50,14 +50,9 @@ function waitForTerritory(payload){
     button.style.setProperty('--registered-hit-h',`${entry.hitArea.height*100}%`);
     button.style.setProperty('--registered-hit-radius',entry.hitArea.shape==='ellipse'?'50%':'22%');
 
-    // All defensibly registered public subjects must be discoverable immediately.
-    // Keep the authored zoom threshold as metadata for future semantic emphasis,
-    // but do not use it to disable hover/click interaction.
     button.dataset.authoredVisibleFrom=String(entry.activeFromZoom);
     button.dataset.visibleFrom='1';
 
-    // Small precise objects must win pointer hit-testing over broad landscape areas
-    // such as Water/Sky/Woods when the hit regions overlap.
     const area=Math.max(0.00001,entry.hitArea.width*entry.hitArea.height);
     const precisionPriority=Math.round(1000-Math.min(900,area*5000));
     button.style.zIndex=String((entry.kind==='place'?200:300)+precisionPriority);
@@ -70,13 +65,36 @@ function waitForTerritory(payload){
     button.classList.add('active');
   }
 
+  function wirePrivateHeadingPatch(button,entry){
+    if(button.dataset.privateTarotPatch) return;
+    button.dataset.privateTarotPatch='true';
+    button.addEventListener('click',()=>{
+      const activeLabel=button.dataset.privateLabel||'Person';
+      setTimeout(()=>{
+        const preview=document.querySelector('.territory-v1-preview.open');
+        if(preview){
+          const previewHeading=preview.querySelector('h3');
+          if(previewHeading) previewHeading.textContent=activeLabel;
+        }
+        const reader=document.querySelector('.territory-v1-reader');
+        if(reader?.dataset.card===entry.id){
+          const heading=reader.querySelector('h2');
+          if(heading) heading.textContent=activeLabel;
+        }
+      },0);
+    },true);
+  }
+
   markers.querySelectorAll('.territory-hotspot').forEach(button=>{
     const kind=button.dataset.kind;
     const id=button.dataset.id;
     const identityEntry=privateIdentityById.get(id);
     if(identityEntry){
-      suppress(button,'private-label-required');
       button.dataset.privateIdentity='true';
+      button.dataset.privateLabelResolved='false';
+      button.dataset.privateLabel='Person';
+      activate(button,identityEntry,'Person');
+      wirePrivateHeadingPatch(button,identityEntry);
       unresolved.push({kind,id,status:'private-label-required'});
       return;
     }
@@ -105,26 +123,20 @@ function waitForTerritory(payload){
         ? privateRecord
         : privateRecord?.label||privateRecord?.semanticLabel||null;
       const label=providerLabel||mapLabel;
+
       if(!label){
-        suppress(button,'private-label-required');
+        activate(button,entry,'Person');
+        button.dataset.privateLabelResolved='false';
+        button.dataset.privateLabel='Person';
+        wirePrivateHeadingPatch(button,entry);
         pending.push(entry.id);
         continue;
       }
+
       activate(button,entry,label);
       button.dataset.privateLabelResolved='true';
       button.dataset.privateLabel=label;
-      if(!button.dataset.privateTarotPatch){
-        button.dataset.privateTarotPatch='true';
-        button.addEventListener('click',()=>{
-          const activeLabel=button.dataset.privateLabel;
-          setTimeout(()=>{
-            const reader=document.querySelector('.territory-v1-reader');
-            if(!reader||reader.dataset.card!==entry.id) return;
-            const heading=reader.querySelector('h2');
-            if(heading&&activeLabel) heading.textContent=activeLabel;
-          },0);
-        },true);
-      }
+      wirePrivateHeadingPatch(button,entry);
       resolved.push(entry.id);
     }
     window.__hearthlandsRegistrationV1.privateIdentity={resolved,pending};

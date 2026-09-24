@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: visually validate the exact deck-edge companion Tarot hotfix before propagating the system.
+Immediate priority: visually validate the cleaned exact-subject-frame companion Tarot system before propagating it.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`4fb50bb34146ee487fdca8488cb1db35af9b1c2d`
+`f6df81e0d577bed6949b91472ac9c321b397bbe1`
 
 No merge to production has been performed.
 
@@ -164,6 +164,37 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-24 — Companion Tarot structural correction after screenshot review
+
+Screenshot review exposed two remaining failures in all seven companion cards:
+
+1. the visible border was still not the Water Tarot border; the previous layered CSS systems were competing in the cascade, leaving the invented companion ornament visible;
+2. long chapter content was being forced into a fixed Tarot shape without a dedicated internal scroll region, causing Geography, Patterns, Alongside and other cards to clip at the bottom.
+
+Correction implemented:
+- removed the three stacked companion-card CSS systems introduced in prior passes and replaced them with one clean V4 system;
+- the companion card no longer uses the separately invented ornate SVG at all;
+- the visible frame is now the actual subject Tarot image itself, masked to the top/bottom/side edge bands so the real Water Tarot moons, gold edge, corner ornament and silhouette are used directly;
+- future subjects inherit the same mechanism from `--tarot-deck-image`, so their own artwork becomes the exact frame source;
+- companion cards are now bounded Tarot objects with fixed viewport-aware height rather than oversized webpage panels;
+- every companion card now has a fixed header plus an independently scrollable `.tarot-companion-body`, preventing lower content from disappearing behind the frame;
+- removed all companion blur/fade effects;
+- fixed a renderer bug where Geography, Recurring Patterns and Interpretive Lenses could accidentally target decorative header DIVs after the first refresh;
+- stable content containers are now explicitly classed (`territory-v1-geo-list`, `territory-v1-function-list`, `territory-v1-lens-list`);
+- body typography remains full-opacity ivory/parchment;
+- tab-specific interior compositions remain, but all seven cards now share one and only one outer deck-edge mechanism.
+
+Superseded:
+- all previous companion-card border systems and their CSS cascade layers;
+- the custom ornate SVG is retained only as a historical unused asset.
+
+Acceptance test:
+- top of the companion card must visibly show the same Water Tarot moon-phase/gold edge language as the image card;
+- no duplicate/custom geometric frame should be visible;
+- bottom content must remain accessible inside the card rather than being cropped;
+- switching tabs must not cause data to render into decorative header containers.
+
 
 ### 2026-09-24 — Exact deck-edge correction + legibility hotfix
 

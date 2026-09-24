@@ -85,7 +85,12 @@ async function boot(){
 
   function renderGeography(reader,data){
     const section=reader.querySelector('.territory-v1-tarot-geography');
-    const target=section?.querySelector('div');
+    let target=section?.querySelector('.territory-v1-geo-list');
+    if(!target&&section){
+      target=Array.from(section.children).find(node=>node.tagName==='DIV'&&!node.classList.contains('tarot-companion-body'))||
+        section.querySelector('.tarot-companion-body > div');
+      if(target) target.classList.add('territory-v1-geo-list');
+    }
     const entries=Object.entries(data.corpusOverview?.territoryCounts||{});
     if(!section||!target||!entries.length) return;
     section.hidden=false;
@@ -432,6 +437,16 @@ async function boot(){
         header.insertAdjacentElement('afterend',river);
       }
     }
+
+    let body=section.querySelector(':scope > .tarot-companion-body');
+    if(!body){
+      body=document.createElement('div');
+      body.className='tarot-companion-body';
+      Array.from(section.children).forEach(node=>{
+        if(node!==header&&node!==body) body.appendChild(node);
+      });
+      section.appendChild(body);
+    }
   }
 
   function consolidateMeaningsCard(interpretation,lenses,method){
@@ -664,6 +679,17 @@ async function boot(){
     }
   }
 
+
+  function stableArticleTarget(section,className){
+    if(!section) return null;
+    let target=section.querySelector('.'+className);
+    if(target) return target;
+    target=Array.from(section.children).find(node=>node.tagName==='DIV'&&!node.classList.contains('tarot-companion-body'))||
+      section.querySelector('.tarot-companion-body > div');
+    if(target) target.classList.add(className);
+    return target;
+  }
+
   function applyTarot(){
     const reader=root.querySelector('.territory-v1-reader.open');
     const data=selectedData();
@@ -690,9 +716,9 @@ async function boot(){
     renderStats(reader.querySelector('.territory-v1-tarot-stats'),data.quickStats);
     renderGeography(reader,data);
     if(data.corpusGrounding) reader.querySelector('.territory-v1-grounding').textContent=data.corpusGrounding;
-    renderArticles(reader.querySelector('.territory-v1-functions div'),data.recurringFunctions);
+    renderArticles(stableArticleTarget(reader.querySelector('.territory-v1-functions'),'territory-v1-function-list'),data.recurringFunctions);
     renderMeanings(reader,data);
-    renderArticles(reader.querySelector('.territory-v1-lenses div'),data.interpretiveLenses);
+    renderArticles(stableArticleTarget(reader.querySelector('.territory-v1-lenses'),'territory-v1-lens-list'),data.interpretiveLenses);
 
     const lesson=reader.querySelector('.territory-v1-lesson');
     if(lesson&&data.possibleLesson){

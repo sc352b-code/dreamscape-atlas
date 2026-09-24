@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: Tarot v2 refinement.
+Immediate priority: canonical Tarot side-panel refinement, with Water as the gold-standard exemplar.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`bfd6e84a4a64fc1a50bb9e88d34bb6940b097e38`
+`1de06ae1880a12c67759d8a39f5d8411aa2fb4a6`
 
 No merge to production has been performed.
 
@@ -164,6 +164,42 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-24 — Canonical right-side Tarot shell
+
+User review rejected the almost-full-screen Water v3 presentation and re-established the older Tarot interaction model as the stronger reference.
+
+**Locked interaction direction:**
+- keep the dream territory visible on the left;
+- open Tarot as a tall right-hand panel on desktop;
+- use portrait Tarot artwork as the visual anchor at the top;
+- overlay the whole-series dream count as a circular medallion;
+- place title and a plain-language corpus subtitle beneath the artwork;
+- navigate the reading through chapters rather than one giant document;
+- preserve evidence before interpretation;
+- return to the same Atlas context on close.
+
+Implemented on `tarot-v2-refinement`:
+- Water presentation mode changed from `artefact-scroll` to reusable `side-panel`;
+- canonical shell width is `clamp(430px, 37vw, 640px)` on desktop;
+- Atlas dimming reduced to preserve the world as visible context;
+- complete portrait artwork uses `contain` rather than a heavy crop;
+- 42-dream medallion is overlaid on the artwork;
+- plain-language subtitle now explains the recurring Water pattern;
+- chapter navigation added: Overview, Where it appears, Recurring patterns, Appears alongside, How it changes, Source dreams, Possible meanings;
+- previous/next chapter arrows and direct chapter selection added;
+- Overview includes the evidence statement “Water appears in 42 of your 362 dreams” from public-safe corpus counts;
+- geography remains corpus-derived;
+- related items are explicitly marked as related-not-cooccurrence unless same-dream evidence is verified;
+- chronology has a truthful pending/fallback state instead of an invented developmental narrative;
+- private dream records remain behind `DreamscapePrivateProfile`;
+- possible meanings remain explicitly marked as interpretation, not corpus fact;
+- mobile falls back to a near/full-width Tarot panel.
+
+**Superseded:** the full-screen `artefact-scroll` Water presentation is no longer the target interaction model. Its CSS may remain historically in the stylesheet for now, but Water no longer receives that class/mode.
+
+**Acceptance test:** the user should be able to see both the Dreamscape territory and the open Tarot at the same time on desktop, matching the strengths of the older Tarot reference.
+
 
 
 ### 2026-09-24 — Water Tarot v3 artefact build

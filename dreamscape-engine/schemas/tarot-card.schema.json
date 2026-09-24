@@ -434,6 +434,37 @@
           "type": "string"
         }
       }
+    },
+    "companionCards": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": [
+          "title",
+          "subtitle",
+          "motif",
+          "tone"
+        ],
+        "properties": {
+          "title": {
+            "type": "string"
+          },
+          "subtitle": {
+            "type": "string"
+          },
+          "motif": {
+            "type": "string"
+          },
+          "tone": {
+            "enum": [
+              "evidence",
+              "source",
+              "interpretation"
+            ]
+          }
+        }
+      }
     }
   }
 }

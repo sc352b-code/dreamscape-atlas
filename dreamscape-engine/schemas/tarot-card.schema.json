@@ -345,7 +345,8 @@
             "dossier",
             "artefact-scroll",
             "side-panel",
-            "triptych"
+            "triptych",
+            "docked-workspace"
           ]
         },
         "visualFamily": {
@@ -364,6 +365,9 @@
           ]
         },
         "eyebrow": {
+          "type": "string"
+        },
+        "responsiveStrategy": {
           "type": "string"
         }
       }

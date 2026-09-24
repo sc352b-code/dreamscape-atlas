@@ -6,7 +6,6 @@ const cards=JSON.parse(fs.readFileSync('worlds/reference-world/territories/heart
 const css=fs.readFileSync('src/hearthlands-territory-v1.css','utf8');
 const js=fs.readFileSync('src/hearthlands-tarot-v2-overlays.js','utf8');
 const profile=fs.readFileSync('src/dreamscape-private-profile.js','utf8');
-const frame=fs.readFileSync('assets/tarot-ornate-frame.svg','utf8');
 
 test('Water defines seven reusable companion Tarot cards',()=>{
   const companions=cards.water.companionCards||{};
@@ -20,7 +19,23 @@ test('Water defines seven reusable companion Tarot cards',()=>{
   assert.equal(companions.chronology.title,'Water Through Time');
   assert.equal(companions.sources.title,'The Book of Waters');
   assert.equal(companions.meanings.title,'The Mirror of Water');
-  assert.equal(companions.meanings.tone,'interpretation');
+});
+
+test('companion cards reuse the exact Water Tarot artwork as their deck edge',()=>{
+  const exactWaterAsset="/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png";
+  assert.ok(css.includes(exactWaterAsset));
+  assert.match(css,/EXACT WATER-DECK FRAME \+ LEGIBILITY HOTFIX/);
+  assert.match(css,/aspect-ratio:2\/3/);
+  assert.match(css,/background:[\s\S]*water-v2\.png/);
+});
+
+test('failed fade and blur behaviour is removed',()=>{
+  assert.doesNotMatch(js,/is-companion-entering/);
+  assert.doesNotMatch(js,/filter:'blur\(3px\)'/);
+  assert.match(css,/\.tarot-companion-card\.is-active-companion/);
+  assert.match(css,/animation:none!important/);
+  assert.match(css,/opacity:1!important/);
+  assert.match(css,/filter:none!important/);
 });
 
 test('renderer treats each selected tab as one companion card',()=>{
@@ -30,21 +45,18 @@ test('renderer treats each selected tab as one companion card',()=>{
   assert.match(js,/consolidateMeaningsCard/);
   assert.match(js,/tarot-constellation-core/);
   assert.match(js,/tarot-time-river/);
-  assert.match(js,/is-companion-entering/);
   assert.match(js,/:scope > h3/);
 });
 
-test('ornate frame is a multi-layer gilded deck frame, not a rounded UI border',()=>{
-  assert.match(frame,/linearGradient id="gold"/);
-  assert.match(frame,/radialGradient id="jewel"/);
-  assert.match(frame,/curl|wave|path/i);
-  assert.ok((frame.match(/<rect/g)||[]).length>=4);
-  assert.ok((frame.match(/<path/g)||[]).length>=20);
-  assert.match(css,/DREAMSCAPE COMPANION TAROT CARDS/);
-  assert.match(css,/url\('\/assets\/tarot-ornate-frame\.svg'\)/);
+test('Overview remains composed as a knowledge Tarot',()=>{
+  assert.match(js,/of \$\{escapeHTML\(total\)\} dreams/);
+  assert.match(js,/tarot-overview-poles/);
+  assert.match(css,/font-size:57px!important/);
+  assert.match(css,/tarot-behaviour-summary/);
+  assert.match(css,/color:#eee3df!important/);
 });
 
-test('each companion card has a distinct visual composition',()=>{
+test('all seven chapters keep distinct interior composition while sharing one frame',()=>{
   for(const chapter of ['overview','geography','patterns','alongside','chronology','sources','meanings']){
     assert.match(css,new RegExp(`tarot-companion-${chapter}`));
   }
@@ -54,13 +66,6 @@ test('each companion card has a distinct visual composition',()=>{
   assert.match(css,/tarot-time-river/);
   assert.match(css,/tarot-private-dream-row/);
   assert.match(css,/tarot-companion-subsection/);
-});
-
-test('Overview is composed as a Tarot record rather than paragraphs poured into a panel',()=>{
-  assert.match(js,/of \$\{escapeHTML\(total\)\} dreams/);
-  assert.match(js,/tarot-overview-poles/);
-  assert.match(css,/font:400 64px/);
-  assert.match(css,/border-radius:50%/);
 });
 
 test('Water private corpus access remains enabled and unblocked',()=>{

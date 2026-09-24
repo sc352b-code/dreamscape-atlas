@@ -136,46 +136,114 @@ async function boot(){
     if(!section) return;
     const id=selectedId();
     const count=data.dreamRecordCount??data.corpusOverview?.uniqueDreamCount??data.corpusOverview?.wholeSeriesCount;
-    const records=getPrivateRecords(id);
     const copy=section.querySelector('p');
     const button=section.querySelector('.territory-v1-records-button');
+
     let fragments=section.querySelector('.territory-v1-source-fragments');
     if(!fragments){
       fragments=document.createElement('div');
       fragments.className='territory-v1-source-fragments';
       section.insertBefore(fragments,button);
     }
-    if(records.length){
+
+    let browser=section.querySelector('.territory-v1-private-record-browser');
+    if(!browser){
+      browser=document.createElement('div');
+      browser.className='territory-v1-private-record-browser';
+      section.appendChild(browser);
+    }
+
+    const renderRows=records=>{
       fragments.innerHTML=records.slice(0,3).map(record=>`
         <article>
           <small>${escapeHTML(record.date||record.title||'Dream record')}</small>
           <p>${escapeHTML(record.excerpt||record.title||'Private dream record')}</p>
         </article>`).join('');
-      if(copy) copy.textContent='A few private source fragments are shown here. They remain in your authenticated dream layer.';
-    }else{
-      fragments.innerHTML='';
-      if(copy&&count!=null) copy.textContent=`${data.title||'This subject'} appears in ${count} dream${count===1?'':'s'} in this series. Full source text stays in your private dream library.`;
-    }
-    if(button&&count!=null){
-      button.textContent=`See all ${count} dream${count===1?'':'s'} →`;
-      button.disabled=!records.length;
-      button.title=records.length?'Open private source dreams':'Private dream records are not connected in this preview';
-      button.onclick=()=>{
-        if(!records.length) return;
-        window.dispatchEvent(new CustomEvent('dreamscape-open-dream-records',{detail:{subjectId:id,records}}));
-        let browser=section.querySelector('.territory-v1-private-record-browser');
-        if(!browser){
-          browser=document.createElement('div');
-          browser.className='territory-v1-private-record-browser';
-          section.appendChild(browser);
-        }
-        browser.classList.toggle('open');
-        browser.innerHTML=records.map(record=>`
-          <article>
+
+      browser.innerHTML=records.map(record=>`
+        <article class="tarot-private-dream-row">
+          <div>
             <small>${escapeHTML(record.date||'')}</small>
             <b>${escapeHTML(record.title||record.id)}</b>
             ${record.excerpt?`<p>${escapeHTML(record.excerpt)}</p>`:''}
-          </article>`).join('');
+          </div>
+          <button type="button" data-private-record-id="${escapeHTML(record.id)}">Open dream →</button>
+        </article>`).join('');
+
+      browser.querySelectorAll('[data-private-record-id]').forEach(openButton=>{
+        openButton.addEventListener('click',async()=>{
+          const record=records.find(item=>item.id===openButton.dataset.privateRecordId);
+          if(!record) return;
+          const opened=await window.DreamscapePrivateProfile?.openDreamRecord?.(record);
+          if(opened===false){
+            openButton.textContent='Dream loaded here';
+            openButton.disabled=true;
+          }
+        });
+      });
+    };
+
+    const renderUnavailable=()=>{
+      fragments.innerHTML='';
+      browser.innerHTML=`
+        <div class="tarot-private-access-card">
+          <small>PRIVATE DREAM LIBRARY</small>
+          <b>Your source dreams are not loaded in this browser session yet.</b>
+          <p>You can connect the authenticated Dreamscape corpus provider, or load a private Dreamscape profile file locally. The file stays in this browser session and is not added to the public Atlas repository.</p>
+          <label class="tarot-private-import">
+            Load private corpus profile
+            <input type="file" accept="application/json,.json" hidden />
+          </label>
+        </div>`;
+      const input=browser.querySelector('input[type=file]');
+      input?.addEventListener('change',async()=>{
+        const file=input.files?.[0];
+        if(!file) return;
+        try{
+          await window.DreamscapePrivateProfile?.importProfileFile?.(file);
+          const records=await window.DreamscapePrivateProfile?.getOrLoadDreamRecords?.(id)||[];
+          if(records.length){
+            renderRows(records);
+            browser.classList.add('open');
+          }
+        }catch{
+          const message=browser.querySelector('.tarot-private-access-card p');
+          if(message) message.textContent='That file could not be read as a Dreamscape private profile.';
+        }
+      });
+    };
+
+    const records=getPrivateRecords(id);
+    if(records.length){
+      renderRows(records);
+      if(copy) copy.textContent=`${records.length} private source dream${records.length===1?' is':'s are'} currently available for this Tarot.`;
+    }else{
+      fragments.innerHTML='';
+      if(copy&&count!=null) copy.textContent=`${data.title||'This subject'} appears in ${count} dream${count===1?'':'s'} in this series. Open the private dream library to view the linked source records.`;
+    }
+
+    if(button&&count!=null){
+      button.textContent=`See all ${count} dream${count===1?'':'s'} →`;
+      button.disabled=false;
+      button.title='Open linked private source dreams';
+      button.onclick=async()=>{
+        button.classList.add('is-loading');
+        button.textContent='Opening dream library…';
+        let loaded=[];
+        try{
+          loaded=await window.DreamscapePrivateProfile?.getOrLoadDreamRecords?.(id)||[];
+        }catch{}
+        button.classList.remove('is-loading');
+        button.textContent=`See all ${count} dream${count===1?'':'s'} →`;
+        browser.classList.add('open');
+        if(loaded.length){
+          renderRows(loaded);
+          if(copy) copy.textContent=`${loaded.length} private source dream${loaded.length===1?' is':'s are'} currently available for this Tarot.`;
+          window.dispatchEvent(new CustomEvent('dreamscape-open-dream-records',{detail:{subjectId:id,records:loaded}}));
+        }else{
+          renderUnavailable();
+          window.dispatchEvent(new CustomEvent('dreamscape-request-dream-records',{detail:{subjectId:id,expectedCount:count}}));
+        }
       };
     }
   }

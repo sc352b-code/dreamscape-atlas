@@ -593,11 +593,7 @@ async function boot(){
       info.querySelectorAll('[data-chapter]').forEach(node=>{
         const active=node.dataset.chapter===valid;
         node.hidden=!active;
-        node.classList.remove('is-companion-entering');
-        if(active){
-          void node.offsetWidth;
-          node.classList.add('is-companion-entering');
-        }
+        node.classList.toggle('is-active-companion',active);
       });
       shell.querySelectorAll('[data-chapter-id]').forEach(button=>{
         const active=button.dataset.chapterId===valid;

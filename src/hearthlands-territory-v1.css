@@ -2410,3 +2410,273 @@
     padding-top:22px;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   TAROT DOCK REFINEMENT — larger artefact, ornate chapter fields, explicit data logic
+   -------------------------------------------------------------------------- */
+
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-center .territory-v1-tarot-image{
+  width:min(100%,390px);
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-center h2{
+  font-size:29px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-center .territory-v1-tarot-subtitle{
+  max-width:420px;
+  font-size:10.5px;
+}
+.territory-v1-reader.tarot-docked-workspace .territory-v1-tarot-stats[hidden]{
+  display:none!important;
+}
+
+/* One chapter means one visible reading. Prevent render helpers from leaking later sections back in. */
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info [data-chapter][hidden]{
+  display:none!important;
+}
+
+/* Every active reading becomes a quiet extension of the ornate Tarot rather than a website block. */
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info [data-chapter]{
+  position:relative;
+  margin:0 0 18px;
+  padding:27px 24px 25px!important;
+  border:1px solid rgba(229,188,113,.20)!important;
+  border-radius:19px;
+  background:
+    radial-gradient(circle at 11% 8%,rgba(226,185,111,.055),transparent 25%),
+    radial-gradient(circle at 88% 88%,rgba(68,128,148,.045),transparent 28%),
+    linear-gradient(145deg,rgba(17,16,31,.58),rgba(6,10,21,.48))!important;
+  box-shadow:
+    inset 0 0 0 5px rgba(5,8,18,.24),
+    inset 0 0 0 6px rgba(232,193,119,.055),
+    0 16px 36px rgba(0,0,0,.10);
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info [data-chapter]::after{
+  content:"✦";
+  position:absolute;
+  right:17px;
+  top:14px;
+  color:rgba(226,184,112,.48);
+  font:8px/1 Georgia,serif;
+  text-shadow:0 0 12px rgba(226,184,112,.10);
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info [data-chapter]::before{
+  margin-bottom:12px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info [data-chapter] h3{
+  padding-right:24px;
+}
+
+/* Overview: factual inscription first, then what the dreamer tends to be doing. */
+.tarot-overview-metrics{
+  display:grid;
+  grid-template-columns:repeat(3,minmax(0,1fr));
+  gap:0;
+  margin:23px 0 18px;
+  border-top:1px solid rgba(228,188,115,.16);
+  border-bottom:1px solid rgba(228,188,115,.16);
+}
+.tarot-mini-inscription{
+  position:relative;
+  min-width:0;
+  padding:15px 10px 14px;
+  text-align:center;
+}
+.tarot-mini-inscription+.tarot-mini-inscription::before{
+  content:"";
+  position:absolute;
+  left:0;
+  top:20%;
+  bottom:20%;
+  width:1px;
+  background:linear-gradient(180deg,transparent,rgba(227,187,114,.20),transparent);
+}
+.tarot-mini-inscription b{
+  display:block;
+  color:#e4bd7d;
+  font:400 22px/1 Georgia,serif;
+}
+.tarot-mini-inscription span{
+  display:block;
+  margin-top:5px;
+  color:#8d8490;
+  font:8px/1.35 system-ui,sans-serif;
+  letter-spacing:.04em;
+}
+.tarot-behaviour-summary{
+  position:relative;
+  margin:18px 0 0;
+  padding:19px 19px 18px 24px;
+  border:1px solid rgba(111,162,172,.12);
+  border-left-color:rgba(225,186,113,.34);
+  border-radius:14px;
+  background:
+    radial-gradient(circle at 90% 12%,rgba(91,156,168,.055),transparent 30%),
+    rgba(255,255,255,.012);
+}
+.tarot-behaviour-summary::before{
+  content:"";
+  position:absolute;
+  left:8px;
+  top:17px;
+  width:5px;height:5px;
+  border:1px solid rgba(231,194,123,.58);
+  transform:rotate(45deg);
+  box-shadow:0 0 10px rgba(228,189,116,.12);
+}
+.tarot-behaviour-summary small,
+.tarot-confidence-legend>small{
+  color:#88a8ad;
+  font:700 8px/1 system-ui,sans-serif;
+  letter-spacing:.18em;
+}
+.tarot-behaviour-summary p{
+  margin:9px 0 0!important;
+  color:#d0c3c3!important;
+  font:13px/1.67 Georgia,serif!important;
+}
+
+/* Geography: make the overlap logic impossible to miss. */
+.tarot-territory-logic{
+  margin:0 0 22px;
+  padding:17px 18px 16px;
+  border:1px solid rgba(226,186,112,.16);
+  border-radius:14px;
+  background:
+    linear-gradient(135deg,rgba(63,124,143,.045),rgba(222,181,108,.025));
+}
+.tarot-territory-logic b{
+  display:block;
+  color:#e2c08d;
+  font:400 15px/1.35 Georgia,serif;
+}
+.tarot-territory-logic p{
+  margin:7px 0 0!important;
+  color:#9f98a1!important;
+  font:11px/1.55 Georgia,serif!important;
+}
+.territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row{
+  padding:11px 0;
+}
+.territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row i{
+  position:relative;
+  height:7px;
+  overflow:visible;
+  border-radius:999px;
+  background:
+    linear-gradient(90deg,rgba(67,124,145,.08),rgba(255,255,255,.025));
+  box-shadow:inset 0 0 10px rgba(65,140,160,.05);
+}
+.territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row i::after{
+  background:
+    linear-gradient(90deg,
+      rgba(74,150,174,.42) 0%,
+      rgba(87,174,193,.72) 48%,
+      rgba(225,187,112,.88) 88%,
+      rgba(255,220,146,.98) 100%);
+  box-shadow:
+    0 0 10px rgba(87,166,185,.13),
+    0 0 14px rgba(225,187,112,.08);
+}
+.territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row i::before{
+  content:"";
+  position:absolute;
+  z-index:2;
+  left:calc(var(--territory-share,0%) - 4px);
+  top:50%;
+  width:8px;
+  height:8px;
+  transform:translateY(-50%) rotate(45deg);
+  border:1px solid rgba(248,215,148,.70);
+  background:#152331;
+  box-shadow:
+    0 0 8px rgba(105,186,202,.30),
+    0 0 13px rgba(239,198,122,.14);
+}
+.territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row:hover i::before{
+  box-shadow:
+    0 0 10px rgba(105,186,202,.48),
+    0 0 18px rgba(239,198,122,.22);
+}
+
+/* Recurring patterns: qualitative strength is defined, not guessed. */
+.tarot-confidence-legend{
+  margin:0 0 18px;
+  padding:17px 18px;
+  border:1px solid rgba(123,163,170,.13);
+  border-radius:14px;
+  background:
+    linear-gradient(145deg,rgba(66,119,133,.04),rgba(226,185,111,.018));
+}
+.tarot-confidence-legend>p{
+  margin:8px 0 12px!important;
+  color:#96909a!important;
+  font:11px/1.5 Georgia,serif!important;
+}
+.tarot-confidence-legend>div{
+  display:flex;
+  flex-direction:column;
+  gap:9px;
+}
+.tarot-confidence-legend span{
+  display:grid;
+  grid-template-columns:86px 1fr;
+  gap:11px;
+  align-items:start;
+}
+.tarot-confidence-legend span b{
+  color:#dab77d;
+  font:400 11px/1.35 Georgia,serif;
+}
+.tarot-confidence-legend span em{
+  color:#8e8791;
+  font:italic 10px/1.45 Georgia,serif;
+}
+.territory-v1-reader.tarot-docked-workspace .territory-v1-confidence{
+  min-width:74px;
+  text-align:right;
+  color:#91aeb2;
+}
+
+/* Meanings stays visually distinct from evidence without reverting to plain website text. */
+.territory-v1-reader.tarot-docked-workspace .territory-v1-possible-readings[data-chapter],
+.territory-v1-reader.tarot-docked-workspace .territory-v1-lenses[data-chapter],
+.territory-v1-reader.tarot-docked-workspace .territory-v1-method[data-chapter]{
+  border-color:rgba(203,163,101,.18)!important;
+  background:
+    radial-gradient(circle at 88% 8%,rgba(210,170,104,.045),transparent 26%),
+    linear-gradient(145deg,rgba(24,17,33,.56),rgba(8,10,20,.48))!important;
+}
+
+@media(min-width:1600px){
+  .territory-v1-reader.tarot-docked-workspace .tarot-triptych-center .territory-v1-tarot-image{
+    width:min(100%,410px);
+  }
+}
+@media(min-width:900px) and (max-width:1199px){
+  .territory-v1-reader.tarot-docked-workspace .tarot-triptych-center .territory-v1-tarot-image{
+    width:min(100%,335px);
+  }
+}
+@media(max-width:899px){
+  .territory-v1-reader.tarot-docked-workspace .tarot-triptych-center .territory-v1-tarot-image{
+    width:min(84vw,390px);
+  }
+  .tarot-overview-metrics{
+    grid-template-columns:1fr;
+  }
+  .tarot-mini-inscription+.tarot-mini-inscription::before{
+    left:12%;
+    right:12%;
+    top:0;
+    bottom:auto;
+    width:auto;
+    height:1px;
+    background:linear-gradient(90deg,transparent,rgba(227,187,114,.16),transparent);
+  }
+}
+@media(prefers-reduced-motion:reduce){
+  .territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row i::before{
+    transition:none;
+  }
+}

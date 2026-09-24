@@ -5,13 +5,62 @@
   "provisional": true,
   "sizingMode": "visual-demonstration-weight",
   "note": "Prototype weights demonstrate proportional planets only. They are not dream statistics.",
+  "visualSystem": {
+    "language": "luminous cinematic fantasy illustration, painterly storybook detail, celestial mysticism, dreamlike spiritual surrealism, antique magical atlas",
+    "sharedLighting": "cool celestial fill with restrained warm directional illumination",
+    "detailHierarchy": ["planetary silhouette", "regional geography", "small symbolic landmarks"],
+    "textureTarget": "runtime authored 2048x1024 painterly atlas; pipeline ready for 4096x2048 authored assets",
+    "avoid": ["generic game planets", "NASA realism", "neon sci-fi", "flat gradient spheres", "literal dream clip-art"]
+  },
   "worlds": [
-    {"id":"threshold","label":"Threshold","provisional":true,"dreamCount":null,"visualWeight":1.00,"summary":"Journeys, crossings and states of transition","motifs":["train station","roads","bridge","bus","motorhome","maps","homeward travel"],"tarotCandidates":["Train","Bridge","Bus","Road","Motorhome","Home"],"rotationSpeed":0.0007,"palette":["#315d89","#8dc4d8","#ddb26e","#6f79a9"],"surfacePreset":"roads"},
-    {"id":"integration","label":"Integration / Healing","provisional":true,"dreamCount":null,"visualWeight":0.90,"summary":"Restoration, cleansing and return to embodied life","motifs":["turquoise water","pools","woodland","flowers","waterfalls","honeycomb","bees"],"tarotCandidates":["Bee","Water","Spa","Cleansing","Dance","Body"],"rotationSpeed":0.00058,"palette":["#317f85","#72d4ce","#9cc98a","#e0b76c"],"surfacePreset":"water"},
-    {"id":"shadow","label":"Shadow","provisional":true,"dreamCount":null,"visualWeight":0.86,"summary":"Danger, confinement and unresolved intensity","motifs":["enclosed architecture","labyrinths","towers","underground passages","abandoned structures","smoke","escape routes"],"tarotCandidates":["Tower","Labyrinth","Passage","Smoke","Ruins","Escape"],"rotationSpeed":0.00048,"palette":["#171a38","#3c2847","#702f43","#b97865"],"surfacePreset":"shadow"},
-    {"id":"otherworldly","label":"Otherworldly","provisional":true,"dreamCount":null,"visualWeight":0.74,"summary":"Impossible places where normal physical laws fall away","motifs":["floating terrain","portals","strange structures","hovering forms","dream-within-dream","altered skies"],"tarotCandidates":["Portal","Floating Land","Strange Structure","Double Dream","Sky","Fragment"],"rotationSpeed":0.00074,"palette":["#3a327c","#8a5ab3","#2b7996","#d4a4d9"],"surfacePreset":"otherworldly"},
-    {"id":"luminous","label":"Luminous / Numinous","provisional":true,"dreamCount":null,"visualWeight":0.66,"summary":"Awe, revelation and luminous encounter","motifs":["high mountains","clear moons","aurora","aligned planets","pink and blue rays","golden clouds"],"tarotCandidates":["Mountain","Moon","Aurora","Alignment","Golden Cloud","Ray"],"rotationSpeed":0.00052,"palette":["#547fb1","#8d86c5","#d8d9ee","#d8af63"],"surfacePreset":"luminous"},
-    {"id":"direct-message","label":"Direct Message","provisional":true,"dreamCount":null,"visualWeight":0.60,"summary":"Knowing, guidance and messages that arrive with unusual clarity","motifs":["temples","gardens","libraries","inscriptions","pathways of light","spoken messages"],"tarotCandidates":["Message","Temple","Library","Inscription","Path","Knowing"],"rotationSpeed":0.00044,"palette":["#516d70","#91a78d","#c5ad76","#e1d6b3"],"surfacePreset":"message"}
+    {
+      "id":"threshold","label":"Threshold","provisional":true,"dreamCount":null,"visualWeight":1.00,
+      "summary":"Journeys, crossings and states of transition",
+      "motifs":["train station","roads","bridge","bus","motorhome","maps","homeward travel"],
+      "tarotCandidates":["Train","Bridge","Bus","Road","Motorhome","Home"],
+      "rotationSpeed":0.0007,"palette":["#203f68","#5b8fa5","#caa669","#766f9b"],"surfacePreset":"roads",
+      "artSpec":{"terrainCharacter":"mountain roads, river valleys, station towns and misted crossings","architectureType":"small stations, viaducts, bridges and warm distant homes","atmosphere":"low travel mist and scattered cloud","celestialPhenomena":"large quiet stars over routes","waterPresence":"deep blue rivers beneath bridges","vegetation":"mossy hills and sparse woodland","movementMotifs":["travelling route lights","distant train","slow vehicle"],"landmarkTypes":["station","bridge","viaduct","home light"],"symbolDensity":"medium","lightingCharacter":"cool journey-space punctuated by amber destinations","surfaceAnimation":["route lights","station glow","mist drift"],"outerAtmosphere":"thin blue-violet haze","emissive":"#e7bd78"}
+    },
+    {
+      "id":"integration","label":"Integration / Healing","provisional":true,"dreamCount":null,"visualWeight":0.90,
+      "summary":"Restoration, cleansing and return to embodied life",
+      "motifs":["turquoise water","pools","woodland","flowers","waterfalls","honeycomb","bees"],
+      "tarotCandidates":["Bee","Water","Spa","Cleansing","Dance","Body"],
+      "rotationSpeed":0.00058,"palette":["#1d676d","#49aca9","#86b97e","#d8ad67"],"surfacePreset":"water",
+      "artSpec":{"terrainCharacter":"river-fed forests, turquoise lakes, terraces and warm clearings","architectureType":"organic bathing settlements and honeycomb terraces","atmosphere":"humid luminous air and soft water vapour","celestialPhenomena":"warm pearly light","waterPresence":"extensive connected rivers, pools and waterfalls","vegetation":"lush woodland, moss, flowers and gardens","movementMotifs":["flowing water","bees","leaf movement","warm settlement lights"],"landmarkTypes":["waterfall","healing pool","honeycomb terrace","dance clearing"],"symbolDensity":"medium","lightingCharacter":"sun-warmed turquoise and honey-gold","surfaceAnimation":["water shimmer","bee drift","pollen rise"],"outerAtmosphere":"soft aqua vapour","emissive":"#d9bc77"}
+    },
+    {
+      "id":"shadow","label":"Shadow","provisional":true,"dreamCount":null,"visualWeight":0.86,
+      "summary":"Danger, confinement and unresolved intensity",
+      "motifs":["enclosed architecture","labyrinths","towers","underground passages","abandoned structures","smoke","escape routes"],
+      "tarotCandidates":["Tower","Labyrinth","Passage","Smoke","Ruins","Escape"],
+      "rotationSpeed":0.00048,"palette":["#11152d","#30223e","#5a293b","#9a6557"],"surfacePreset":"shadow",
+      "artSpec":{"terrainCharacter":"walled valleys, labyrinths, ruins and subterranean districts","architectureType":"towers, enclosed complexes, damaged houses and tunnels","atmosphere":"dense indigo mist and drifting smoke","celestialPhenomena":"few distant cold stars","waterPresence":"minimal dark canals","vegetation":"sparse overgrown edges","movementMotifs":["mist","smoke","weak window lights","one distant escape light"],"landmarkTypes":["tower","labyrinth","ruin","lit doorway"],"symbolDensity":"low","lightingCharacter":"deep blue-black with rare amber refuge","surfaceAnimation":["mist drift","faint flicker","distant moving light"],"outerAtmosphere":"charcoal-violet smoke","emissive":"#c17c63"}
+    },
+    {
+      "id":"otherworldly","label":"Otherworldly","provisional":true,"dreamCount":null,"visualWeight":0.74,
+      "summary":"Impossible places where normal physical laws fall away",
+      "motifs":["floating terrain","portals","strange structures","hovering forms","dream-within-dream","altered skies"],
+      "tarotCandidates":["Portal","Floating Land","Strange Structure","Double Dream","Sky","Fragment"],
+      "rotationSpeed":0.00074,"palette":["#2d2868","#76519f","#267a91","#c78bc6"],"surfacePreset":"otherworldly",
+      "artSpec":{"terrainCharacter":"impossible continents, inverted mountains and broken horizons","architectureType":"hollow stones, suspended temples and impossible stairs","atmosphere":"contradictory violet-cyan cloud systems","celestialPhenomena":"transparent moon, doubled horizons and stars beneath terrain","waterPresence":"upward rivers and suspended falls","vegetation":"strange sparse iridescent growth","movementMotifs":["orbiting fragments","portal distortion","reversing water","hovering objects"],"landmarkTypes":["portal","floating island","inverted peak","suspended temple"],"symbolDensity":"medium","lightingCharacter":"iridescent indigo with impossible warm interruptions","surfaceAnimation":["fragment orbit","portal pulse","counter-moving cloud"],"outerAtmosphere":"warped violet-cyan haze","emissive":"#8fd8df"}
+    },
+    {
+      "id":"luminous","label":"Luminous / Numinous","provisional":true,"dreamCount":null,"visualWeight":0.66,
+      "summary":"Awe, revelation and luminous encounter",
+      "motifs":["high mountains","clear moons","aurora","aligned planets","pink and blue rays","golden clouds"],
+      "tarotCandidates":["Mountain","Moon","Aurora","Alignment","Golden Cloud","Ray"],
+      "rotationSpeed":0.00052,"palette":["#315f87","#706eab","#bfcbe0","#d3aa62"],"surfacePreset":"luminous",
+      "artSpec":{"terrainCharacter":"towering blue-green mountains above pearlescent cloud seas","architectureType":"almost none; landscape carries the sacred scale","atmosphere":"silver-violet haze, high cloud and auroral curtains","celestialPhenomena":"enormous moon, aligned planets and rose-blue rays","waterPresence":"mirrored alpine lakes","vegetation":"highland green and delicate alpine growth","movementMotifs":["aurora shimmer","cloud drift","gold light migration"],"landmarkTypes":["vision peak","moon lake","alignment valley","gold cloud region"],"symbolDensity":"low","lightingCharacter":"cool sacred blue balanced by living celestial gold","surfaceAnimation":["aurora","golden cloud","luminous dust"],"outerAtmosphere":"pearlescent blue-violet halo","emissive":"#ead19a"}
+    },
+    {
+      "id":"direct-message","label":"Direct Message","provisional":true,"dreamCount":null,"visualWeight":0.60,
+      "summary":"Knowing, guidance and messages that arrive with unusual clarity",
+      "motifs":["temples","gardens","libraries","inscriptions","pathways of light","spoken messages"],
+      "tarotCandidates":["Message","Temple","Library","Inscription","Path","Knowing"],
+      "rotationSpeed":0.00044,"palette":["#365b5c","#738c78","#b39a63","#d6c9a6"],"surfacePreset":"message",
+      "artSpec":{"terrainCharacter":"ordered green valleys, contemplative gardens and ceremonial terraces","architectureType":"libraries, circular temples, carved walls and amphitheatres","atmosphere":"quiet mist and faint geometric light","celestialPhenomena":"constellation-like script and measured star alignments","waterPresence":"reflecting pools and narrow channels","vegetation":"formal gardens, old trees and moss","movementMotifs":["light travelling along paths","inscriptions breathing into visibility","window lights"],"landmarkTypes":["library","temple","inscribed wall","symbolic garden"],"symbolDensity":"medium","lightingCharacter":"moonlit stone, antique ivory and old gold","surfaceAnimation":["path light","glyph pulse","leaf movement"],"outerAtmosphere":"still teal-gold haze","emissive":"#d8c68d"}
+    }
   ],
   "futureSizingFormula": "planetArea = primaryDreamCount / totalDreamCount; renderedRadius ∝ sqrt(planetArea)"
 }

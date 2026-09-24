@@ -15,26 +15,35 @@ test('exemplar cards support independent preview and full framing',()=>{
   }
 });
 
-test('Water is the single gold-standard artefact exemplar',()=>{
+test('Water is the single gold-standard side-panel exemplar',()=>{
   const gold=Object.entries(cards).filter(([,card])=>card.goldStandardExemplar);
   assert.equal(gold.length,1);
   assert.equal(gold[0][0],'water');
-  assert.equal(cards.water.presentation?.mode,'artefact-scroll');
+  assert.equal(cards.water.presentation?.mode,'side-panel');
   assert.equal(cards.water.presentation?.evidenceFirst,true);
   assert.equal(cards.water.presentation?.fullArtworkOpening,true);
-  assert.equal(cards.water.imageFraming?.full?.objectFit,'contain');
+  assert.equal(cards.water.corpusOverview?.totalCorpusDreams,362);
+  assert.equal(cards.water.relationshipStatus,'related-not-cooccurrence');
   assert.match(cards.water.interpretiveBoundary,/hypotheses|fixed translations/i);
 });
 
-test('renderer uses framing metadata and an evidence-first Water structure',()=>{
-  assert.match(js,/applyFraming\(img,data,'preview'\)/);
-  assert.match(js,/applyFraming\(img,data,'full'\)/);
-  assert.match(js,/ensureWaterV3Structure/);
+test('side-panel shell preserves map context and chapter navigation',()=>{
+  assert.match(js,/ensureSidePanelShell/);
+  assert.match(js,/tarot-chapter-nav/);
+  assert.match(js,/data-chapter-id/);
+  assert.match(js,/tarot-dream-medallion/);
   assert.match(js,/INTERPRETATION · NOT CORPUS FACT/);
   assert.match(js,/dreamscape-open-dream-records/);
-  assert.doesNotMatch(js,/\\n\s+target\.innerHTML/);
+  assert.match(js,/does not yet support a strong chronology claim/);
+  assert.doesNotMatch(js,/ensureWaterV3Structure/);
   assert.doesNotMatch(css,/object-position:center 38%/);
-  assert.match(css,/WATER TAROT v3/);
-  assert.match(css,/object-fit:contain!important/);
-  assert.match(css,/attr\(data-layer-label\)/);
+  assert.match(css,/TAROT SIDE-PANEL SHELL/);
+  assert.match(css,/width:clamp\(430px,37vw,640px\)/);
+  assert.match(css,/background:rgba\(3,5,12,.18\)/);
+});
+
+test('Water keeps complete portrait artwork and avoids unverified co-occurrence claims',()=>{
+  assert.equal(cards.water.imageFraming?.full?.objectFit,'contain');
+  assert.match(js,/related-not-cooccurrence/);
+  assert.match(js,/does not yet claim that each one repeatedly occurs in the same dreams/);
 });

@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: visually validate the illustrated companion Tarot card system against the Water artwork before propagating it to other symbols and places.
+Immediate priority: visually validate the exact deck-edge companion Tarot hotfix before propagating the system.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`b8566e09514afacff4d288666a55756e491838b0`
+`4fb50bb34146ee487fdca8488cb1db35af9b1c2d`
 
 No merge to production has been performed.
 
@@ -164,6 +164,36 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-24 — Exact deck-edge correction + legibility hotfix
+
+User review found the first illustrated companion-card implementation visually unacceptable: companion cards were faded/blurred and the invented ornate frame was still not an exact replica of the Water Tarot frame.
+
+Immediate correction implemented:
+- removed the companion-card fade/blur animation loop that could keep cards in a veiled/unreadable state;
+- removed blur from the dock-opening animation;
+- companion cards now render at full opacity with no blur/filter transform;
+- companion cards use the **actual subject Tarot artwork itself as the deck skin** via `--tarot-deck-image`;
+- for Water, that means the exact `water-v2.png` artwork is reused as the outer card surface rather than a separately invented SVG frame;
+- an opaque indigo inner field covers the pictorial centre while leaving the real Water Tarot border, moon phases, corner ornament, gold linework and silhouette visible around it;
+- all seven Water companion chapters therefore share the same exact outer deck edge;
+- companion cards now use the same 2:3 Tarot proportion rather than a tall webpage-panel silhouette;
+- card width is capped and centred so it reads as a physical object rather than a full-screen panel;
+- typography and body text were brightened to crisp parchment/ivory/pale-gold values;
+- Overview retains the composed 42-of-362 medallion, 59 appearances, 5 territories and corpus-derived behaviour synthesis;
+- other chapters keep their distinct interior compositions but no longer receive different outer frames;
+- Source Dreams access remains active and private;
+- the deck-skin mechanism is reusable: future Tarot subjects automatically expose their own card artwork as the exact companion-card frame source.
+
+Superseded:
+- the separately designed `assets/tarot-ornate-frame.svg` is no longer the canonical companion-card border. It remains in the repository for historical/reference purposes, but the final computed companion-card style uses the subject's actual Tarot artwork instead.
+
+Acceptance test:
+1. companion card must be immediately readable at rest;
+2. no blur, opacity veil or dark overlay may sit above the text;
+3. Water companion card must visibly reuse the exact Water Tarot deck edge;
+4. companion card must read as a bounded 2:3 Tarot object, not a webpage panel.
+
 
 ### 2026-09-24 — Illustrated companion Tarot card system
 

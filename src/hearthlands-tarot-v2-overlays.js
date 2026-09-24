@@ -498,13 +498,13 @@ async function boot(){
     if(method) method.removeAttribute('data-chapter');
     consolidateMeaningsCard(interpretation,lenses,method);
 
-    if(grounding) grounding.querySelector('h3').textContent='Overview';
-    if(geography) geography.querySelector('h3').textContent=`Where ${data.title||'it'} appears`;
-    if(functions) functions.querySelector('h3').textContent='Recurring patterns';
-    if(records) records.querySelector('h3').textContent=`Dreams containing ${data.title||'this'}`;
-    if(interpretation) interpretation.querySelector('h3').textContent='Possible meanings';
-    if(lenses) lenses.querySelector('h3').textContent='Interpretive lenses';
-    if(lesson) lesson.querySelector('h3').textContent='Reflection';
+    if(grounding) grounding.querySelector(':scope > h3').textContent='Overview';
+    if(geography) geography.querySelector(':scope > h3').textContent=`Where ${data.title||'it'} appears`;
+    if(functions) functions.querySelector(':scope > h3').textContent='Recurring patterns';
+    if(records) records.querySelector(':scope > h3').textContent=`Dreams containing ${data.title||'this'}`;
+    if(interpretation) interpretation.querySelector(':scope > h3').textContent='Possible meanings';
+    if(lenses) lenses.querySelector(':scope > h3').textContent='Interpretive lenses';
+    if(lesson) lesson.querySelector(':scope > h3').textContent='Reflection';
 
     geography?.setAttribute('data-layer-label','EVIDENCE');
     grounding?.setAttribute('data-layer-label','EVIDENCE');

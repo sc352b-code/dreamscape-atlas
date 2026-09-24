@@ -1,0 +1,17 @@
+{
+  "id": "natalie-prototype",
+  "owner": "Natalie",
+  "title": "Natalie’s Dreamscape",
+  "provisional": true,
+  "sizingMode": "visual-demonstration-weight",
+  "note": "Prototype weights demonstrate proportional planets only. They are not dream statistics.",
+  "worlds": [
+    {"id":"threshold","label":"Threshold","provisional":true,"dreamCount":null,"visualWeight":1.00,"summary":"Journeys, crossings and states of transition","motifs":["train station","roads","bridge","bus","motorhome","maps","homeward travel"],"tarotCandidates":["Train","Bridge","Bus","Road","Motorhome","Home"],"rotationSpeed":0.0007,"palette":["#315d89","#8dc4d8","#ddb26e","#6f79a9"],"surfacePreset":"roads"},
+    {"id":"integration","label":"Integration / Healing","provisional":true,"dreamCount":null,"visualWeight":0.90,"summary":"Restoration, cleansing and return to embodied life","motifs":["turquoise water","pools","woodland","flowers","waterfalls","honeycomb","bees"],"tarotCandidates":["Bee","Water","Spa","Cleansing","Dance","Body"],"rotationSpeed":0.00058,"palette":["#317f85","#72d4ce","#9cc98a","#e0b76c"],"surfacePreset":"water"},
+    {"id":"shadow","label":"Shadow","provisional":true,"dreamCount":null,"visualWeight":0.86,"summary":"Danger, confinement and unresolved intensity","motifs":["enclosed architecture","labyrinths","towers","underground passages","abandoned structures","smoke","escape routes"],"tarotCandidates":["Tower","Labyrinth","Passage","Smoke","Ruins","Escape"],"rotationSpeed":0.00048,"palette":["#171a38","#3c2847","#702f43","#b97865"],"surfacePreset":"shadow"},
+    {"id":"otherworldly","label":"Otherworldly","provisional":true,"dreamCount":null,"visualWeight":0.74,"summary":"Impossible places where normal physical laws fall away","motifs":["floating terrain","portals","strange structures","hovering forms","dream-within-dream","altered skies"],"tarotCandidates":["Portal","Floating Land","Strange Structure","Double Dream","Sky","Fragment"],"rotationSpeed":0.00074,"palette":["#3a327c","#8a5ab3","#2b7996","#d4a4d9"],"surfacePreset":"otherworldly"},
+    {"id":"luminous","label":"Luminous / Numinous","provisional":true,"dreamCount":null,"visualWeight":0.66,"summary":"Awe, revelation and luminous encounter","motifs":["high mountains","clear moons","aurora","aligned planets","pink and blue rays","golden clouds"],"tarotCandidates":["Mountain","Moon","Aurora","Alignment","Golden Cloud","Ray"],"rotationSpeed":0.00052,"palette":["#547fb1","#8d86c5","#d8d9ee","#d8af63"],"surfacePreset":"luminous"},
+    {"id":"direct-message","label":"Direct Message","provisional":true,"dreamCount":null,"visualWeight":0.60,"summary":"Knowing, guidance and messages that arrive with unusual clarity","motifs":["temples","gardens","libraries","inscriptions","pathways of light","spoken messages"],"tarotCandidates":["Message","Temple","Library","Inscription","Path","Knowing"],"rotationSpeed":0.00044,"palette":["#516d70","#91a78d","#c5ad76","#e1d6b3"],"surfacePreset":"message"}
+  ],
+  "futureSizingFormula": "planetArea = primaryDreamCount / totalDreamCount; renderedRadius ∝ sqrt(planetArea)"
+}

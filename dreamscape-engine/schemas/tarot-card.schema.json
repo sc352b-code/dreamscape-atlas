@@ -72,6 +72,13 @@
             "type": "integer",
             "minimum": 0
           }
+        },
+        "totalCorpusDreams": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
         }
       }
     },
@@ -336,7 +343,8 @@
         "mode": {
           "enum": [
             "dossier",
-            "artefact-scroll"
+            "artefact-scroll",
+            "side-panel"
           ]
         },
         "visualFamily": {
@@ -349,6 +357,19 @@
           "type": "boolean"
         }
       }
+    },
+    "relationshipStatus": {
+      "enum": [
+        "cooccurrence-verified",
+        "related-not-cooccurrence",
+        "pending"
+      ]
+    },
+    "chronologySummary": {
+      "type": [
+        "string",
+        "null"
+      ]
     }
   }
 }

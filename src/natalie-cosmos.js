@@ -442,7 +442,7 @@ const atmosphereVertex = [
   "varying vec3 vNormal;",
   "varying vec3 vWorld;",
   "void main(){",
-  "vNormal = normalize(normalMatrix * normal);",
+  "vNormal = normalize(mat3(modelMatrix) * normal);",
   "vec4 worldPosition = modelMatrix * vec4(position,1.0);",
   "vWorld = worldPosition.xyz;",
   "gl_Position = projectionMatrix * viewMatrix * worldPosition;",

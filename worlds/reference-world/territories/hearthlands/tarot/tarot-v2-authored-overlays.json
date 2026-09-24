@@ -193,6 +193,12 @@
         "medium-high": "Substantial recurring support, but less strong than High.",
         "medium": "A recurring pattern with more limited or mixed support."
       }
+    },
+    "privateCorpusAccess": {
+      "enabled": true,
+      "subjectId": "water",
+      "expectedDreamCount": 42,
+      "accessMode": "authenticated-provider-or-local-private-profile"
     }
   },
   "cat": {

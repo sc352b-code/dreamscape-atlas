@@ -1,36 +1,83 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 900" preserveAspectRatio="none">
   <defs>
-    <linearGradient id="g" x1="0" x2="1">
-      <stop offset="0" stop-color="#8f6729"/>
-      <stop offset=".22" stop-color="#e3bd73"/>
-      <stop offset=".5" stop-color="#fff0b2"/>
-      <stop offset=".78" stop-color="#d2a35b"/>
-      <stop offset="1" stop-color="#7d5724"/>
+    <linearGradient id="gold" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#6f4b1c"/>
+      <stop offset=".12" stop-color="#c89445"/>
+      <stop offset=".28" stop-color="#f1cf88"/>
+      <stop offset=".46" stop-color="#fff1ba"/>
+      <stop offset=".63" stop-color="#d6aa61"/>
+      <stop offset=".82" stop-color="#a06d2c"/>
+      <stop offset="1" stop-color="#5d3b16"/>
     </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
-      <feGaussianBlur stdDeviation="1.7" result="b"/>
+    <radialGradient id="jewel">
+      <stop offset="0" stop-color="#d9fbff"/>
+      <stop offset=".35" stop-color="#83c8d7"/>
+      <stop offset=".72" stop-color="#315a6a"/>
+      <stop offset="1" stop-color="#0b1924"/>
+    </radialGradient>
+    <filter id="soft" x="-30%" y="-30%" width="160%" height="160%">
+      <feGaussianBlur stdDeviation="2.1" result="b"/>
       <feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
   </defs>
-  <rect x="10" y="10" width="1180" height="880" rx="34" fill="none" stroke="url(#g)" stroke-width="2.2" opacity=".9"/>
-  <rect x="22" y="22" width="1156" height="856" rx="27" fill="none" stroke="#d9b56f" stroke-width=".8" opacity=".38"/>
-  <g fill="none" stroke="url(#g)" stroke-width="2.3" stroke-linecap="round" opacity=".9" filter="url(#glow)">
-    <path d="M20 120 C55 112 78 90 88 54 C94 34 111 23 140 22"/>
-    <path d="M1180 120 C1145 112 1122 90 1112 54 C1106 34 1089 23 1060 22"/>
-    <path d="M20 780 C55 788 78 810 88 846 C94 866 111 877 140 878"/>
-    <path d="M1180 780 C1145 788 1122 810 1112 846 C1106 866 1089 877 1060 878"/>
-    <path d="M48 92 C72 92 85 78 92 55 M1152 92 C1128 92 1115 78 1108 55"/>
-    <path d="M48 808 C72 808 85 822 92 845 M1152 808 C1128 808 1115 822 1108 845"/>
+
+  <rect x="11" y="11" width="1178" height="878" rx="38" fill="none" stroke="url(#gold)" stroke-width="4.5"/>
+  <rect x="20" y="20" width="1160" height="860" rx="31" fill="none" stroke="#edd092" stroke-width="1.25" opacity=".55"/>
+  <rect x="33" y="33" width="1134" height="834" rx="25" fill="none" stroke="#b98032" stroke-width="1.05" opacity=".5"/>
+  <rect x="48" y="48" width="1104" height="804" rx="19" fill="none" stroke="#f1d69b" stroke-width=".72" opacity=".38"/>
+
+  <g fill="none" stroke="url(#gold)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" filter="url(#soft)">
+    <path d="M35 168C87 157 104 123 111 83c4-23 21-38 56-49"/>
+    <path d="M35 127c37-5 55-22 66-52 9-24 26-35 54-41"/>
+    <path d="M73 92c19 2 31-7 38-25 8 17 19 26 38 25-14 12-21 27-21 45-10-8-22-12-35-12-14 0-26 4-36 12 1-18-5-33-19-45 12 1 23 1 35 0z"/>
+    <path d="M1165 168c-52-11-69-45-76-85-4-23-21-38-56-49"/>
+    <path d="M1165 127c-37-5-55-22-66-52-9-24-26-35-54-41"/>
+    <path d="M1127 92c-19 2-31-7-38-25-8 17-19 26-38 25 14 12 21 27 21 45 10-8 22-12 35-12 14 0 26 4 36 12-1-18 5-33 19-45-12 1-23 1-35 0z"/>
+
+    <path d="M35 732c52 11 69 45 76 85 4 23 21 38 56 49"/>
+    <path d="M35 773c37 5 55 22 66 52 9 24 26 35 54 41"/>
+    <path d="M73 808c19-2 31 7 38 25 8-17 19-26 38-25-14-12-21-27-21-45-10 8-22 12-35 12-14 0-26-4-36-12 1 18-5 33-19 45 12-1 23-1 35 0z"/>
+    <path d="M1165 732c-52 11-69 45-76 85-4 23-21 38-56 49"/>
+    <path d="M1165 773c-37 5-55 22-66 52-9 24-26 35-54 41"/>
+    <path d="M1127 808c-19-2-31 7-38 25-8-17-19-26-38-25 14-12 21-27 21-45 10 8 22 12 35 12 14 0 26-4 36-12-1 18 5 33 19 45-12-1-23-1-35 0z"/>
+
+    <path d="M178 35c57 16 99 16 154 0M868 35c55 16 97 16 154 0"/>
+    <path d="M178 865c57-16 99-16 154 0M868 865c55-16 97-16 154 0"/>
+    <path d="M35 232c18 48 18 88 0 136M35 532c18 48 18 88 0 136"/>
+    <path d="M1165 232c-18 48-18 88 0 136M1165 532c-18 48-18 88 0 136"/>
   </g>
-  <g fill="url(#g)" opacity=".9">
-    <path d="M91 61 l7 12 13 2-10 9 3 13-13-6-12 6 2-13-10-9 14-2z"/>
-    <path d="M1109 61 l7 12 13 2-10 9 3 13-13-6-12 6 2-13-10-9 14-2z"/>
-    <path d="M91 839 l7-12 13-2-10-9 3-13-13 6-12-6 2 13-10 9 14 2z"/>
-    <path d="M1109 839 l7-12 13-2-10-9 3-13-13 6-12-6 2 13-10 9 14 2z"/>
+
+  <g fill="none" stroke="#ddb974" stroke-width="1.3" opacity=".7">
+    <path d="M405 35c34 15 61 14 91-2 31 19 68 19 104 1 36 18 73 18 104-1 30 16 57 17 91 2"/>
+    <path d="M405 865c34-15 61-14 91 2 31-19 68-19 104-1 36-18 73-18 104 1 30-16 57-17 91-2"/>
+    <path d="M35 402c17 24 17 48 0 72M1165 402c-17 24-17 48 0 72"/>
   </g>
-  <g stroke="#efd08b" stroke-width="1.2" fill="none" opacity=".62">
-    <circle cx="600" cy="22" r="6"/><circle cx="600" cy="878" r="6"/>
-    <path d="M560 22h26M614 22h26M560 878h26M614 878h26"/>
-    <path d="M600 10v24M600 866v24"/>
+
+  <g fill="none" stroke="url(#gold)" stroke-width="2.2" opacity=".9">
+    <path d="M540 35c13-21 27-31 42-31 12 0 20 6 18 16-2 11-12 18-25 15 8 15 16 25 25 30"/>
+    <path d="M660 35c-13-21-27-31-42-31-12 0-20 6-18 16 2 11 12 18 25 15-8 15-16 25-25 30"/>
+    <path d="M540 865c13 21 27 31 42 31 12 0 20-6 18-16-2-11-12-18-25-15 8-15 16-25 25-30"/>
+    <path d="M660 865c-13 21-27 31-42 31-12 0-20-6-18-16 2-11 12-18 25-15-8-15-16-25-25-30"/>
+  </g>
+
+  <g fill="url(#jewel)" stroke="#f4d696" stroke-width="1.6" filter="url(#soft)">
+    <circle cx="600" cy="31" r="7"/>
+    <circle cx="600" cy="869" r="7"/>
+    <circle cx="31" cy="450" r="6"/>
+    <circle cx="1169" cy="450" r="6"/>
+  </g>
+
+  <g fill="#efd18d" opacity=".85">
+    <path d="M598 75l4 8 9 2-7 6 2 9-8-4-8 4 2-9-7-6 9-2z"/>
+    <path d="M598 825l4-8 9-2-7-6 2-9-8 4-8-4 2 9-7 6 9 2z"/>
+    <circle cx="91" cy="450" r="2.6"/><circle cx="1109" cy="450" r="2.6"/>
+    <circle cx="155" cy="450" r="1.5"/><circle cx="1045" cy="450" r="1.5"/>
+  </g>
+
+  <g fill="none" stroke="#7ec3d3" stroke-width="1" opacity=".34">
+    <path d="M86 188c22-14 40 14 62 0s40 14 62 0"/>
+    <path d="M990 188c22-14 40 14 62 0s40 14 62 0"/>
+    <path d="M86 712c22 14 40-14 62 0s40-14 62 0"/>
+    <path d="M990 712c22 14 40-14 62 0s40-14 62 0"/>
   </g>
 </svg>

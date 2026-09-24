@@ -33,6 +33,16 @@ async function boot(){
     return wrap;
   }
 
+  function ensurePreviewCaption(preview){
+    const image=ensurePreviewImage(preview);
+    let caption=image.querySelector('.tarot-preview-caption');
+    if(caption) return caption;
+    caption=document.createElement('div');
+    caption.className='tarot-preview-caption';
+    image.appendChild(caption);
+    return caption;
+  }
+
   function applyFraming(img,data,mode){
     if(!img) return;
     const framing=data?.imageFraming?.[mode]||data?.imageFraming?.full||{};
@@ -92,8 +102,8 @@ async function boot(){
     const related=reader.querySelector('.territory-v1-related');
     if(!related) return;
     const items=Array.isArray(data.relatedItems)?data.relatedItems:[];
-    const relationshipStatus=data.relationshipStatus||'related-not-cooccurrence';
-    const note=relationshipStatus==='cooccurrence-verified'
+    const verified=data.relationshipStatus==='cooccurrence-verified';
+    const note=verified
       ?'These relationships are supported by recurring same-dream evidence.'
       :'These are related Dreamscape elements. This view does not yet claim that each one repeatedly occurs in the same dreams.';
     related.innerHTML=`
@@ -144,7 +154,7 @@ async function boot(){
       if(copy) copy.textContent='A few private source fragments are shown here. They remain in your authenticated dream layer.';
     }else{
       fragments.innerHTML='';
-      if(copy&&count!=null) copy.textContent=`Water appears in ${count} dream${count===1?'':'s'} in this series. Full source text stays in your private dream library.`;
+      if(copy&&count!=null) copy.textContent=`${data.title||'This subject'} appears in ${count} dream${count===1?'':'s'} in this series. Full source text stays in your private dream library.`;
     }
     if(button&&count!=null){
       button.textContent=`See all ${count} dream${count===1?'':'s'} →`;
@@ -179,17 +189,45 @@ async function boot(){
       const records=reader.querySelector('.territory-v1-dream-records');
       records?.parentNode.insertBefore(section,records);
     }
-    const copy=data.chronologySummary||'The current published Water model does not yet support a strong chronology claim. A future private analysis can test whether Water changes in form, emotional tone or dreamer response across the series.';
-    section.querySelector('p').textContent=copy;
+    section.querySelector('p').textContent=data.chronologySummary||
+      `The current published ${data.title||'Tarot'} model does not yet support a strong chronology claim. A future private analysis can test changes in form, emotional tone and dreamer response across the series.`;
     return section;
   }
 
-  function ensureSidePanelShell(reader,data){
-    const sidePanel=data.presentation?.mode==='side-panel';
-    reader.classList.toggle('tarot-sidepanel',sidePanel);
-    reader.classList.remove('tarot-v3-water');
-    if(!sidePanel) return;
+  function restoreTriptych(reader){
+    const shell=reader.querySelector('.tarot-triptych-shell');
+    if(!shell) return;
+    const scroll=reader.querySelector('.territory-v1-tarot-scroll');
+    const center=shell.querySelector('.tarot-triptych-center');
+    const info=shell.querySelector('.tarot-triptych-info');
+    const originalSelectors=[
+      '.territory-v1-tarot-image',
+      '.territory-v1-kicker',
+      'h2',
+      '.territory-v1-tarot-subtitle',
+      '.territory-v1-tarot-stats'
+    ];
+    originalSelectors.forEach(selector=>{
+      const node=center?.querySelector(selector);
+      if(node) scroll.insertBefore(node,shell);
+    });
+    info?.querySelectorAll('[data-chapter]').forEach(node=>scroll.insertBefore(node,shell));
+    shell.remove();
+    reader.classList.remove('tarot-triptych');
+    delete reader.dataset.activeChapter;
+  }
 
+  function ensureTriptychShell(reader,data){
+    const triptych=data.presentation?.mode==='triptych';
+    if(!triptych){
+      restoreTriptych(reader);
+      return;
+    }
+
+    reader.classList.remove('tarot-sidepanel','tarot-v3-water');
+    reader.classList.add('tarot-triptych');
+
+    const scroll=reader.querySelector('.territory-v1-tarot-scroll');
     const imageWrap=reader.querySelector('.territory-v1-tarot-image');
     const title=reader.querySelector('h2');
     const kicker=reader.querySelector('.territory-v1-kicker');
@@ -203,26 +241,7 @@ async function boot(){
     const records=reader.querySelector('.territory-v1-dream-records');
     const related=reader.querySelector('.territory-v1-related');
     const chronology=ensureChronology(reader,data);
-
-    if(kicker) kicker.textContent='HEARTHLANDS · SYMBOL TAROT';
-
-    let emblem=reader.querySelector('.tarot-sidepanel-emblem');
-    if(!emblem){
-      emblem=document.createElement('div');
-      emblem.className='tarot-sidepanel-emblem';
-      emblem.setAttribute('aria-hidden','true');
-      emblem.innerHTML='<span>✦</span>';
-      reader.querySelector('.territory-v1-tarot-scroll')?.prepend(emblem);
-    }
-
-    let medallion=imageWrap?.querySelector('.tarot-dream-medallion');
-    if(imageWrap&&!medallion){
-      medallion=document.createElement('div');
-      medallion.className='tarot-dream-medallion';
-      imageWrap.appendChild(medallion);
-    }
-    const dreamCount=data.corpusOverview?.wholeSeriesCount??data.corpusOverview?.uniqueDreamCount;
-    if(medallion&&dreamCount!=null) medallion.innerHTML=`<b>${escapeHTML(dreamCount)}</b><small>DREAMS</small>`;
+    const method=reader.querySelector('.territory-v1-method');
 
     let subtitle=reader.querySelector('.territory-v1-tarot-subtitle');
     if(!subtitle){
@@ -231,21 +250,12 @@ async function boot(){
       title?.insertAdjacentElement('afterend',subtitle);
     }
     subtitle.textContent=data.friendlySubtitle||data.previewSummary||'';
-
-    const scroll=reader.querySelector('.territory-v1-tarot-scroll');
-    if(imageWrap&&title&&imageWrap.nextElementSibling!==title){
-      scroll.insertBefore(imageWrap,kicker);
-      imageWrap.insertAdjacentElement('afterend',kicker);
-      kicker.insertAdjacentElement('afterend',title);
-      title.insertAdjacentElement('afterend',subtitle);
-      subtitle.insertAdjacentElement('afterend',stats);
-    }
+    if(kicker) kicker.textContent=(data.presentation?.eyebrow||'DREAMSCAPE · TAROT');
 
     grounding?.classList.add('territory-v1-corpus-grounding');
     interpretation?.classList.add('territory-v1-possible-readings');
 
     grounding?.setAttribute('data-chapter','overview');
-    stats?.setAttribute('data-chapter','overview');
     geography?.setAttribute('data-chapter','geography');
     functions?.setAttribute('data-chapter','patterns');
     related?.setAttribute('data-chapter','alongside');
@@ -254,13 +264,14 @@ async function boot(){
     interpretation?.setAttribute('data-chapter','meanings');
     lenses?.setAttribute('data-chapter','meanings');
     lesson?.setAttribute('data-chapter','meanings');
+    if(method) method.dataset.chapter='meanings';
 
     if(grounding) grounding.querySelector('h3').textContent='Overview';
-    if(geography) geography.querySelector('h3').textContent='Where Water appears';
+    if(geography) geography.querySelector('h3').textContent=`Where ${data.title||'it'} appears`;
     if(functions) functions.querySelector('h3').textContent='Recurring patterns';
+    if(records) records.querySelector('h3').textContent=`Dreams containing ${data.title||'this'}`;
     if(interpretation) interpretation.querySelector('h3').textContent='Possible meanings';
     if(lenses) lenses.querySelector('h3').textContent='Interpretive lenses';
-    if(records) records.querySelector('h3').textContent='Dreams containing Water';
     if(lesson) lesson.querySelector('h3').textContent='Reflection';
 
     geography?.setAttribute('data-layer-label','EVIDENCE');
@@ -271,45 +282,52 @@ async function boot(){
     interpretation?.setAttribute('data-layer-label','INTERPRETATION · NOT CORPUS FACT');
     lenses?.setAttribute('data-layer-label','INTERPRETIVE LENSES');
 
-    let nav=reader.querySelector('.tarot-chapter-nav');
-    if(!nav){
-      nav=document.createElement('nav');
-      nav.className='tarot-chapter-nav';
-      nav.setAttribute('aria-label','Tarot sections');
-      nav.innerHTML=`
-        <button type="button" class="tarot-chapter-arrow" data-chapter-step="-1" aria-label="Previous section">←</button>
-        <div class="tarot-chapter-tabs">${chapters.map(ch=>`<button type="button" data-chapter-id="${ch.id}">${ch.label}</button>`).join('')}</div>
-        <button type="button" class="tarot-chapter-arrow" data-chapter-step="1" aria-label="Next section">→</button>`;
-      stats?.insertAdjacentElement('afterend',nav);
+    let shell=reader.querySelector('.tarot-triptych-shell');
+    if(!shell){
+      shell=document.createElement('div');
+      shell.className='tarot-triptych-shell';
+      shell.innerHTML=`
+        <nav class="tarot-triptych-nav" aria-label="Tarot sections">
+          <p class="tarot-triptych-nav-kicker">Explore the card</p>
+          <div class="tarot-triptych-nav-items">
+            ${chapters.map((chapter,index)=>`
+              <button type="button" data-chapter-id="${chapter.id}">
+                <small>${String(index+1).padStart(2,'0')}</small>
+                <span>${chapter.label}</span>
+                <i aria-hidden="true">✦</i>
+              </button>`).join('')}
+          </div>
+          <div class="tarot-triptych-nav-arrows">
+            <button type="button" data-chapter-step="-1" aria-label="Previous section">←</button>
+            <button type="button" data-chapter-step="1" aria-label="Next section">→</button>
+          </div>
+        </nav>
+        <div class="tarot-triptych-center"></div>
+        <div class="tarot-triptych-info" aria-live="polite"></div>`;
+      scroll.appendChild(shell);
     }
 
-    const activate=id=>{
-      const valid=chapters.some(ch=>ch.id===id)?id:'overview';
-      reader.dataset.activeChapter=valid;
-      reader.querySelectorAll('[data-chapter]').forEach(el=>el.hidden=el.dataset.chapter!==valid);
-      reader.querySelectorAll('[data-chapter-id]').forEach(btn=>{
-        const active=btn.dataset.chapterId===valid;
-        btn.classList.toggle('active',active);
-        btn.setAttribute('aria-current',active?'page':'false');
-        if(active) btn.scrollIntoView({block:'nearest',inline:'center'});
-      });
-      reader.querySelector('.territory-v1-tarot-scroll')?.scrollTo({top:0,behavior:'smooth'});
-    };
+    const center=shell.querySelector('.tarot-triptych-center');
+    const info=shell.querySelector('.tarot-triptych-info');
 
-    if(!nav.dataset.bound){
-      nav.dataset.bound='true';
-      nav.addEventListener('click',event=>{
-        const tab=event.target.closest('[data-chapter-id]');
-        if(tab){activate(tab.dataset.chapterId);return;}
-        const arrow=event.target.closest('[data-chapter-step]');
-        if(!arrow) return;
-        const current=chapters.findIndex(ch=>ch.id===(reader.dataset.activeChapter||'overview'));
-        const next=(current+Number(arrow.dataset.chapterStep)+chapters.length)%chapters.length;
-        activate(chapters[next].id);
-      });
+    if(imageWrap&&imageWrap.parentElement!==center) center.appendChild(imageWrap);
+    if(kicker&&kicker.parentElement!==center) center.appendChild(kicker);
+    if(title&&title.parentElement!==center) center.appendChild(title);
+    if(subtitle&&subtitle.parentElement!==center) center.appendChild(subtitle);
+    if(stats&&stats.parentElement!==center) center.appendChild(stats);
+
+    const dreamCount=data.corpusOverview?.wholeSeriesCount??data.corpusOverview?.uniqueDreamCount;
+    let medallion=imageWrap?.querySelector('.tarot-dream-medallion');
+    if(imageWrap&&!medallion){
+      medallion=document.createElement('div');
+      medallion.className='tarot-dream-medallion';
+      imageWrap.appendChild(medallion);
     }
+    if(medallion&&dreamCount!=null) medallion.innerHTML=`<b>${escapeHTML(dreamCount)}</b><small>DREAMS</small>`;
 
-    if(!reader.dataset.activeChapter) activate('overview');
+    [grounding,geography,functions,related,chronology,records,interpretation,lenses,lesson,method].forEach(node=>{
+      if(node&&node.parentElement!==info) info.appendChild(node);
+    });
 
     const total=data.corpusOverview?.totalCorpusDreams;
     const whole=data.corpusOverview?.wholeSeriesCount;
@@ -320,20 +338,41 @@ async function boot(){
         lead.className='tarot-overview-lead';
         grounding.insertBefore(lead,grounding.querySelector('.territory-v1-grounding'));
       }
-      lead.textContent=`Water appears in ${whole} of your ${total} dreams.`;
+      lead.textContent=`${data.title||'This subject'} appears in ${whole} of your ${total} dreams.`;
     }
 
-    const method=reader.querySelector('.territory-v1-method');
-    if(method){
-      method.dataset.chapter='meanings';
-      method.hidden=(reader.dataset.activeChapter||'overview')!=='meanings';
+    const activate=id=>{
+      const valid=chapters.some(ch=>ch.id===id)?id:'overview';
+      reader.dataset.activeChapter=valid;
+      info.querySelectorAll('[data-chapter]').forEach(node=>node.hidden=node.dataset.chapter!==valid);
+      shell.querySelectorAll('[data-chapter-id]').forEach(button=>{
+        const active=button.dataset.chapterId===valid;
+        button.classList.toggle('active',active);
+        button.setAttribute('aria-current',active?'page':'false');
+      });
+      info.scrollTo({top:0,behavior:'smooth'});
+    };
+
+    if(!shell.dataset.bound){
+      shell.dataset.bound='true';
+      shell.addEventListener('click',event=>{
+        const chapterButton=event.target.closest('[data-chapter-id]');
+        if(chapterButton){activate(chapterButton.dataset.chapterId);return;}
+        const arrow=event.target.closest('[data-chapter-step]');
+        if(!arrow) return;
+        const current=chapters.findIndex(ch=>ch.id===(reader.dataset.activeChapter||'overview'));
+        const next=(current+Number(arrow.dataset.chapterStep)+chapters.length)%chapters.length;
+        activate(chapters[next].id);
+      });
     }
 
-    if(!reader.dataset.sidepanelAnimated){
-      reader.dataset.sidepanelAnimated='true';
+    if(!reader.dataset.activeChapter) activate('overview');
+
+    if(!reader.dataset.triptychAnimated){
+      reader.dataset.triptychAnimated='true';
       reader.animate(
-        [{opacity:.35,transform:'translateX(24px)'},{opacity:1,transform:'translateX(0)'}],
-        {duration:520,easing:'cubic-bezier(.16,.78,.12,1)'}
+        [{opacity:.25,transform:'translate(-50%,-48%) scale(.975)',filter:'blur(4px)'},{opacity:1,transform:'translate(-50%,-50%) scale(1)',filter:'blur(0)'}],
+        {duration:620,easing:'cubic-bezier(.16,.78,.12,1)'}
       );
     }
   }
@@ -342,7 +381,11 @@ async function boot(){
     const preview=root.querySelector('.territory-v1-preview.open');
     const data=selectedData();
     if(!preview||!data) return;
+
+    const imageLed=data.presentation?.previewMode==='image-led'||data.presentation?.mode==='triptych';
+    preview.classList.toggle('tarot-preview-image-led',imageLed);
     preview.classList.add('tarot-v2-exemplar-preview');
+
     const image=ensurePreviewImage(preview);
     const img=image.querySelector('img');
     if(data.previewImage||data.cardImage){
@@ -351,10 +394,24 @@ async function boot(){
       applyFraming(img,data,'preview');
       image.hidden=false;
     }else image.hidden=true;
-    if(data.title) preview.querySelector('h3').textContent=data.title;
-    if(data.friendlySubtitle) preview.querySelector('.territory-v1-preview-kicker').textContent=data.friendlySubtitle;
-    if(data.previewSummary) preview.querySelector('.territory-v1-preview-grounding').textContent=data.previewSummary;
-    renderStats(preview.querySelector('.territory-v1-preview-meta'),(data.quickStats||[]).slice(0,2));
+
+    if(imageLed){
+      const count=data.corpusOverview?.wholeSeriesCount??data.corpusOverview?.uniqueDreamCount;
+      const caption=ensurePreviewCaption(preview);
+      caption.innerHTML=`<b>${escapeHTML(data.title||'Tarot')}</b>${count!=null?`<span>${escapeHTML(count)} dreams</span>`:''}`;
+      preview.querySelector('.territory-v1-preview-kicker').textContent='';
+      preview.querySelector('h3').textContent='';
+      preview.querySelector('.territory-v1-preview-grounding').textContent='';
+      preview.querySelector('.territory-v1-preview-meta').innerHTML='';
+      const open=preview.querySelector('.territory-v1-preview-open');
+      if(open) open.innerHTML='Open tarot <span>→</span>';
+    }else{
+      image.querySelector('.tarot-preview-caption')?.remove();
+      if(data.title) preview.querySelector('h3').textContent=data.title;
+      if(data.friendlySubtitle) preview.querySelector('.territory-v1-preview-kicker').textContent=data.friendlySubtitle;
+      if(data.previewSummary) preview.querySelector('.territory-v1-preview-grounding').textContent=data.previewSummary;
+      renderStats(preview.querySelector('.territory-v1-preview-meta'),(data.quickStats||[]).slice(0,2));
+    }
   }
 
   function applyTarot(){
@@ -395,15 +452,16 @@ async function boot(){
 
     renderRecordAccess(reader,data);
     renderRelated(reader,data);
-    ensureSidePanelShell(reader,data);
 
     const method=reader.querySelector('.territory-v1-method');
     if(method) method.textContent=data.interpretiveBoundary||'Evidence describes patterns found across your dreams. Interpretations and theoretical lenses are possible readings, not fixed meanings.';
+
+    ensureTriptychShell(reader,data);
   }
 
   function makeLanguageFriendly(){
     const reader=root.querySelector('.territory-v1-reader');
-    if(!reader||reader.classList.contains('tarot-sidepanel')) return;
+    if(!reader||reader.classList.contains('tarot-triptych')) return;
     const headings=[
       ['.territory-v1-tarot-geography h3','Where it appears'],
       ['.territory-v1-grounding','What shows up across your dreams','previous'],
@@ -430,7 +488,12 @@ async function boot(){
   const observer=new MutationObserver(refresh);
   observer.observe(root,{subtree:true,attributes:true,attributeFilter:['class']});
   window.addEventListener('dreamscape-private-profile-change',refresh);
-  window.__hearthlandsTarotV2={overlays:Object.keys(overlays),exemplars:['family-home','water','person-11'],goldStandard:'water',shells:['side-panel']};
+  window.__hearthlandsTarotV2={
+    overlays:Object.keys(overlays),
+    exemplars:['family-home','water','person-11'],
+    goldStandard:'water',
+    canonicalShell:'triptych'
+  };
 }
 
 boot().catch(error=>console.warn('Hearthlands Tarot overlays unavailable.',error));

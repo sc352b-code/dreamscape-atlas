@@ -10,6 +10,16 @@ async function boot(){
   const root=document.querySelector('.atlas');
   if(!root) return;
 
+  const chapters=[
+    {id:'overview',label:'Overview'},
+    {id:'geography',label:'Where it appears'},
+    {id:'patterns',label:'Recurring patterns'},
+    {id:'alongside',label:'Appears alongside'},
+    {id:'chronology',label:'How it changes'},
+    {id:'sources',label:'Source dreams'},
+    {id:'meanings',label:'Possible meanings'}
+  ];
+
   function selectedId(){return root.querySelector('.territory-hotspot.is-selected')?.dataset.id||null;}
   function selectedData(){return overlays[selectedId()]||null;}
 
@@ -49,7 +59,7 @@ async function boot(){
       <article>
         <div class="territory-v1-article-heading">
           <b>${escapeHTML(item.name)}</b>
-          ${item.confidence?`<span class="territory-v1-confidence">${escapeHTML(item.confidence)} confidence</span>`:''}
+          ${item.confidence?`<span class="territory-v1-confidence">${escapeHTML(item.confidence)}</span>`:''}
         </div>
         <p>${escapeHTML(item.summary)}</p>
         ${item.caveat?`<small>${escapeHTML(item.caveat)}</small>`:''}
@@ -80,12 +90,20 @@ async function boot(){
 
   function renderRelated(reader,data){
     const related=reader.querySelector('.territory-v1-related');
-    if(!related||!Array.isArray(data.relatedItems)||!data.relatedItems.length) return;
-    related.innerHTML=`<b>Related in your dream world</b><div class="territory-v1-related-buttons">${data.relatedItems.map(item=>{
-      const id=typeof item==='string'?item:item.id;
-      const label=typeof item==='string'?titleCase(item):(item.label||titleCase(id));
-      return `<button type="button" data-related-id="${escapeHTML(id)}"><i aria-hidden="true"></i>${escapeHTML(label)}</button>`;
-    }).join('')}</div>`;
+    if(!related) return;
+    const items=Array.isArray(data.relatedItems)?data.relatedItems:[];
+    const relationshipStatus=data.relationshipStatus||'related-not-cooccurrence';
+    const note=relationshipStatus==='cooccurrence-verified'
+      ?'These relationships are supported by recurring same-dream evidence.'
+      :'These are related Dreamscape elements. This view does not yet claim that each one repeatedly occurs in the same dreams.';
+    related.innerHTML=`
+      <b>Appears alongside</b>
+      <p class="territory-v1-related-note">${escapeHTML(note)}</p>
+      <div class="territory-v1-related-buttons">${items.map(item=>{
+        const id=typeof item==='string'?item:item.id;
+        const label=typeof item==='string'?titleCase(item):(item.label||titleCase(id));
+        return `<button type="button" data-related-id="${escapeHTML(id)}"><i aria-hidden="true"></i>${escapeHTML(label)}</button>`;
+      }).join('')}</div>`;
     related.querySelectorAll('[data-related-id]').forEach(button=>{
       const id=button.dataset.relatedId;
       const hotspot=root.querySelector(`.territory-hotspot[data-id="${CSS.escape(id)}"]`);
@@ -99,9 +117,8 @@ async function boot(){
   }
 
   function getPrivateRecords(subjectId){
-    try{
-      return window.DreamscapePrivateProfile?.getDreamRecords?.(subjectId)||[];
-    }catch{return [];}
+    try{return window.DreamscapePrivateProfile?.getDreamRecords?.(subjectId)||[];}
+    catch{return [];}
   }
 
   function renderRecordAccess(reader,data){
@@ -127,7 +144,7 @@ async function boot(){
       if(copy) copy.textContent='A few private source fragments are shown here. They remain in your authenticated dream layer.';
     }else{
       fragments.innerHTML='';
-      if(copy&&count!=null) copy.textContent=`${count} source dream${count===1?' is':'s are'} linked to this Tarot. Source text stays in your private dream library.`;
+      if(copy&&count!=null) copy.textContent=`Water appears in ${count} dream${count===1?'':'s'} in this series. Full source text stays in your private dream library.`;
     }
     if(button&&count!=null){
       button.textContent=`See all ${count} dream${count===1?'':'s'} →`;
@@ -153,18 +170,59 @@ async function boot(){
     }
   }
 
-  function ensureWaterV3Structure(reader,data){
-    const isWater=selectedId()==='water';
-    reader.classList.toggle('tarot-v3-water',isWater);
-    if(!isWater) return;
+  function ensureChronology(reader,data){
+    let section=reader.querySelector('.territory-v1-chronology');
+    if(!section){
+      section=document.createElement('section');
+      section.className='territory-v1-tarot-section territory-v1-chronology';
+      section.innerHTML='<h3>How it changes</h3><p></p>';
+      const records=reader.querySelector('.territory-v1-dream-records');
+      records?.parentNode.insertBefore(section,records);
+    }
+    const copy=data.chronologySummary||'The current published Water model does not yet support a strong chronology claim. A future private analysis can test whether Water changes in form, emotional tone or dreamer response across the series.';
+    section.querySelector('p').textContent=copy;
+    return section;
+  }
 
-    reader.dataset.tarotId='water';
-    reader.classList.add('tarot-v2-gold-standard');
+  function ensureSidePanelShell(reader,data){
+    const sidePanel=data.presentation?.mode==='side-panel';
+    reader.classList.toggle('tarot-sidepanel',sidePanel);
+    reader.classList.remove('tarot-v3-water');
+    if(!sidePanel) return;
 
-    const scroll=reader.querySelector('.territory-v1-tarot-scroll');
+    const imageWrap=reader.querySelector('.territory-v1-tarot-image');
     const title=reader.querySelector('h2');
     const kicker=reader.querySelector('.territory-v1-kicker');
+    const stats=reader.querySelector('.territory-v1-tarot-stats');
+    const grounding=reader.querySelector('.territory-v1-grounding')?.closest('section');
+    const geography=reader.querySelector('.territory-v1-tarot-geography');
+    const functions=reader.querySelector('.territory-v1-functions');
+    const interpretation=reader.querySelector('.territory-v1-interpretation')?.closest('section');
+    const lenses=reader.querySelector('.territory-v1-lenses');
+    const lesson=reader.querySelector('.territory-v1-lesson');
+    const records=reader.querySelector('.territory-v1-dream-records');
+    const related=reader.querySelector('.territory-v1-related');
+    const chronology=ensureChronology(reader,data);
+
     if(kicker) kicker.textContent='HEARTHLANDS · SYMBOL TAROT';
+
+    let emblem=reader.querySelector('.tarot-sidepanel-emblem');
+    if(!emblem){
+      emblem=document.createElement('div');
+      emblem.className='tarot-sidepanel-emblem';
+      emblem.setAttribute('aria-hidden','true');
+      emblem.innerHTML='<span>✦</span>';
+      reader.querySelector('.territory-v1-tarot-scroll')?.prepend(emblem);
+    }
+
+    let medallion=imageWrap?.querySelector('.tarot-dream-medallion');
+    if(imageWrap&&!medallion){
+      medallion=document.createElement('div');
+      medallion.className='tarot-dream-medallion';
+      imageWrap.appendChild(medallion);
+    }
+    const dreamCount=data.corpusOverview?.wholeSeriesCount??data.corpusOverview?.uniqueDreamCount;
+    if(medallion&&dreamCount!=null) medallion.innerHTML=`<b>${escapeHTML(dreamCount)}</b><small>DREAMS</small>`;
 
     let subtitle=reader.querySelector('.territory-v1-tarot-subtitle');
     if(!subtitle){
@@ -172,46 +230,110 @@ async function boot(){
       subtitle.className='territory-v1-tarot-subtitle';
       title?.insertAdjacentElement('afterend',subtitle);
     }
-    subtitle.textContent=(data.friendlySubtitle||'').replace(/, /g,' · ').replace(/ and /g,' · ');
+    subtitle.textContent=data.friendlySubtitle||data.previewSummary||'';
 
-    const grounding=reader.querySelector('.territory-v1-grounding')?.closest('section');
-    const interpretation=reader.querySelector('.territory-v1-interpretation')?.closest('section');
-    const records=reader.querySelector('.territory-v1-dream-records');
-    const functions=reader.querySelector('.territory-v1-functions');
-    const lenses=reader.querySelector('.territory-v1-lenses');
-    const lesson=reader.querySelector('.territory-v1-lesson');
-    const related=reader.querySelector('.territory-v1-related');
+    const scroll=reader.querySelector('.territory-v1-tarot-scroll');
+    if(imageWrap&&title&&imageWrap.nextElementSibling!==title){
+      scroll.insertBefore(imageWrap,kicker);
+      imageWrap.insertAdjacentElement('afterend',kicker);
+      kicker.insertAdjacentElement('afterend',title);
+      title.insertAdjacentElement('afterend',subtitle);
+      subtitle.insertAdjacentElement('afterend',stats);
+    }
 
     grounding?.classList.add('territory-v1-corpus-grounding');
     interpretation?.classList.add('territory-v1-possible-readings');
 
-    if(records&&interpretation&&records.nextElementSibling!==interpretation){
-      interpretation.parentNode.insertBefore(records,interpretation);
-    }
-    if(related&&lesson&&related.nextElementSibling!==lesson){
-      lesson.parentNode.insertBefore(related,lesson);
-    }
+    grounding?.setAttribute('data-chapter','overview');
+    stats?.setAttribute('data-chapter','overview');
+    geography?.setAttribute('data-chapter','geography');
+    functions?.setAttribute('data-chapter','patterns');
+    related?.setAttribute('data-chapter','alongside');
+    chronology?.setAttribute('data-chapter','chronology');
+    records?.setAttribute('data-chapter','sources');
+    interpretation?.setAttribute('data-chapter','meanings');
+    lenses?.setAttribute('data-chapter','meanings');
+    lesson?.setAttribute('data-chapter','meanings');
 
-    reader.querySelector('.territory-v1-tarot-geography h3').textContent='Where Water appears';
-    if(grounding) grounding.querySelector('h3').textContent='Across the Water dreams';
-    if(functions) functions.querySelector('h3').textContent='How Water behaves';
-    if(records) records.querySelector('h3').textContent='From your dreams';
-    if(interpretation) interpretation.querySelector('h3').textContent='Possible readings';
-    if(lenses) lenses.querySelector('h3').textContent='Ways of looking';
-    if(lesson) lesson.querySelector('h3').textContent='A question to carry back';
+    if(grounding) grounding.querySelector('h3').textContent='Overview';
+    if(geography) geography.querySelector('h3').textContent='Where Water appears';
+    if(functions) functions.querySelector('h3').textContent='Recurring patterns';
+    if(interpretation) interpretation.querySelector('h3').textContent='Possible meanings';
+    if(lenses) lenses.querySelector('h3').textContent='Interpretive lenses';
+    if(records) records.querySelector('h3').textContent='Dreams containing Water';
+    if(lesson) lesson.querySelector('h3').textContent='Reflection';
 
-    reader.querySelector('.territory-v1-tarot-geography')?.setAttribute('data-layer-label','EVIDENCE');
+    geography?.setAttribute('data-layer-label','EVIDENCE');
     grounding?.setAttribute('data-layer-label','EVIDENCE');
     functions?.setAttribute('data-layer-label','EVIDENCE');
     records?.setAttribute('data-layer-label','EVIDENCE');
+    chronology?.setAttribute('data-layer-label','EVIDENCE');
     interpretation?.setAttribute('data-layer-label','INTERPRETATION · NOT CORPUS FACT');
     lenses?.setAttribute('data-layer-label','INTERPRETIVE LENSES');
 
-    if(!reader.dataset.v3Animated){
-      reader.dataset.v3Animated='true';
+    let nav=reader.querySelector('.tarot-chapter-nav');
+    if(!nav){
+      nav=document.createElement('nav');
+      nav.className='tarot-chapter-nav';
+      nav.setAttribute('aria-label','Tarot sections');
+      nav.innerHTML=`
+        <button type="button" class="tarot-chapter-arrow" data-chapter-step="-1" aria-label="Previous section">←</button>
+        <div class="tarot-chapter-tabs">${chapters.map(ch=>`<button type="button" data-chapter-id="${ch.id}">${ch.label}</button>`).join('')}</div>
+        <button type="button" class="tarot-chapter-arrow" data-chapter-step="1" aria-label="Next section">→</button>`;
+      stats?.insertAdjacentElement('afterend',nav);
+    }
+
+    const activate=id=>{
+      const valid=chapters.some(ch=>ch.id===id)?id:'overview';
+      reader.dataset.activeChapter=valid;
+      reader.querySelectorAll('[data-chapter]').forEach(el=>el.hidden=el.dataset.chapter!==valid);
+      reader.querySelectorAll('[data-chapter-id]').forEach(btn=>{
+        const active=btn.dataset.chapterId===valid;
+        btn.classList.toggle('active',active);
+        btn.setAttribute('aria-current',active?'page':'false');
+        if(active) btn.scrollIntoView({block:'nearest',inline:'center'});
+      });
+      reader.querySelector('.territory-v1-tarot-scroll')?.scrollTo({top:0,behavior:'smooth'});
+    };
+
+    if(!nav.dataset.bound){
+      nav.dataset.bound='true';
+      nav.addEventListener('click',event=>{
+        const tab=event.target.closest('[data-chapter-id]');
+        if(tab){activate(tab.dataset.chapterId);return;}
+        const arrow=event.target.closest('[data-chapter-step]');
+        if(!arrow) return;
+        const current=chapters.findIndex(ch=>ch.id===(reader.dataset.activeChapter||'overview'));
+        const next=(current+Number(arrow.dataset.chapterStep)+chapters.length)%chapters.length;
+        activate(chapters[next].id);
+      });
+    }
+
+    if(!reader.dataset.activeChapter) activate('overview');
+
+    const total=data.corpusOverview?.totalCorpusDreams;
+    const whole=data.corpusOverview?.wholeSeriesCount;
+    if(grounding&&whole!=null&&total!=null){
+      let lead=grounding.querySelector('.tarot-overview-lead');
+      if(!lead){
+        lead=document.createElement('p');
+        lead.className='tarot-overview-lead';
+        grounding.insertBefore(lead,grounding.querySelector('.territory-v1-grounding'));
+      }
+      lead.textContent=`Water appears in ${whole} of your ${total} dreams.`;
+    }
+
+    const method=reader.querySelector('.territory-v1-method');
+    if(method){
+      method.dataset.chapter='meanings';
+      method.hidden=(reader.dataset.activeChapter||'overview')!=='meanings';
+    }
+
+    if(!reader.dataset.sidepanelAnimated){
+      reader.dataset.sidepanelAnimated='true';
       reader.animate(
-        [{opacity:.25,transform:'translate(-50%,-50%) scale(.955)',filter:'blur(5px)'},{opacity:1,transform:'translate(-50%,-50%) scale(1)',filter:'blur(0)'}],
-        {duration:720,easing:'cubic-bezier(.16,.78,.12,1)'}
+        [{opacity:.35,transform:'translateX(24px)'},{opacity:1,transform:'translateX(0)'}],
+        {duration:520,easing:'cubic-bezier(.16,.78,.12,1)'}
       );
     }
   }
@@ -268,12 +390,12 @@ async function boot(){
       lesson.hidden=false;
       lesson.querySelector('p').textContent=data.possibleLesson;
       lesson.querySelector('.territory-v1-reflection')?.remove();
-      if(data.reflectionPrompt) lesson.insertAdjacentHTML('beforeend',`<p class="territory-v1-reflection"><b>A question to sit with:</b> ${escapeHTML(data.reflectionPrompt)}</p>`);
+      if(data.reflectionPrompt) lesson.insertAdjacentHTML('beforeend',`<p class="territory-v1-reflection">${escapeHTML(data.reflectionPrompt)}</p>`);
     }
 
     renderRecordAccess(reader,data);
     renderRelated(reader,data);
-    ensureWaterV3Structure(reader,data);
+    ensureSidePanelShell(reader,data);
 
     const method=reader.querySelector('.territory-v1-method');
     if(method) method.textContent=data.interpretiveBoundary||'Evidence describes patterns found across your dreams. Interpretations and theoretical lenses are possible readings, not fixed meanings.';
@@ -281,7 +403,7 @@ async function boot(){
 
   function makeLanguageFriendly(){
     const reader=root.querySelector('.territory-v1-reader');
-    if(!reader||reader.classList.contains('tarot-v3-water')) return;
+    if(!reader||reader.classList.contains('tarot-sidepanel')) return;
     const headings=[
       ['.territory-v1-tarot-geography h3','Where it appears'],
       ['.territory-v1-grounding','What shows up across your dreams','previous'],
@@ -308,7 +430,7 @@ async function boot(){
   const observer=new MutationObserver(refresh);
   observer.observe(root,{subtree:true,attributes:true,attributeFilter:['class']});
   window.addEventListener('dreamscape-private-profile-change',refresh);
-  window.__hearthlandsTarotV2={overlays:Object.keys(overlays),exemplars:['family-home','water','person-11'],goldStandard:'water'};
+  window.__hearthlandsTarotV2={overlays:Object.keys(overlays),exemplars:['family-home','water','person-11'],goldStandard:'water',shells:['side-panel']};
 }
 
 boot().catch(error=>console.warn('Hearthlands Tarot overlays unavailable.',error));

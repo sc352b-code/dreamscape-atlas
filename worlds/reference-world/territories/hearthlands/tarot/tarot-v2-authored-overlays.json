@@ -45,7 +45,7 @@
   },
   "water": {
     "title": "Water",
-    "friendlySubtitle": "Change, depth, crossing and renewal",
+    "friendlySubtitle": "Change · Depth · Crossing · Renewal",
     "cardImage": "/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png",
     "previewImage": "/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png",
     "previewSummary": "Water appears in 42 dreams across the series, taking forms such as sea, rivers, rain, baths, pools, floods and crossings.",
@@ -57,10 +57,6 @@
       {
         "value": 59,
         "label": "recorded appearances"
-      },
-      {
-        "value": 19,
-        "label": "Hearthlands dreams"
       }
     ],
     "corpusOverview": {
@@ -171,11 +167,18 @@
         "objectPosition": "50% 52%"
       },
       "full": {
-        "objectPosition": "50% 48%"
+        "objectPosition": "50% 50%",
+        "objectFit": "contain"
       }
     },
     "goldStandardExemplar": true,
-    "interpretiveBoundary": "Evidence describes recurring corpus patterns. Possible meanings and theory lenses are hypotheses, not fixed translations."
+    "interpretiveBoundary": "Evidence describes recurring corpus patterns. Possible meanings and theory lenses are hypotheses, not fixed translations.",
+    "presentation": {
+      "mode": "artefact-scroll",
+      "visualFamily": "celestial-illuminated",
+      "evidenceFirst": true,
+      "fullArtworkOpening": true
+    }
   },
   "cat": {
     "previewSummary": "Cats repeatedly gather a tension between cherished vulnerability and irreducible autonomy: close enough to require care, but never wholly manageable.",

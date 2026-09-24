@@ -17,6 +17,7 @@
     <link rel="stylesheet" href="/src/styles.css" />
     <link rel="stylesheet" href="/src/buildpass.css" />
     <link rel="stylesheet" href="/src/hearthlands-symbols.css" />
+    <link rel="stylesheet" href="/src/natalie-cosmos.css" />
   </head>
   <body>
     <main id="app"><div id="boot"><div><b>Dreamscape</b><span>Entering your living dream world…</span></div></div></main>
@@ -31,7 +32,10 @@
       window.addEventListener('unhandledrejection', bootError);
     </script>
     <script src="/src/buildpass-prelude.js"></script>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module">
+      const corpus = new URLSearchParams(location.search).get("corpus");
+      await import(corpus === "natalie" ? "/src/natalie-cosmos.js" : "/src/main.js");
+    </script>
     <script type="module" src="/src/v57-hearthlands-geography.js"></script>
     <script type="module" src="/src/hearthlands-symbols.js"></script>
     <script type="module" src="/src/cosmos-ambience.js"></script>

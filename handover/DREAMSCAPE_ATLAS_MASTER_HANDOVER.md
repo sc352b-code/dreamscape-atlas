@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: canonical Tarot triptych refinement, with Water as the gold-standard exemplar.
+Immediate priority: responsive Mum-style Tarot dock refinement, with Water as the gold-standard exemplar.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`b722059dbd6924d019729c3fdba3575d23b53191`
+`67db54b349f1d38a997038956ff3739d3604a7b0`
 
 No merge to production has been performed.
 
@@ -164,6 +164,39 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-24 — Mum-style responsive Tarot dock
+
+User review confirmed that the compact preview card works, but the full-screen/central overlay breaks the sense of place. The canonical desktop relationship is now:
+
+**Hearthlands remains the place. The Tarot opens beside it.**
+
+Locked responsive architecture:
+- desktop: Hearthlands remains visible on the left while a Tarot workspace docks on the right;
+- wide desktop: the dock can use an internal mini-triptych (chapter rail | Tarot | selected reading);
+- standard desktop/tablet: the Tarot is artwork-first, followed by a compact chapter strip and one selected reading;
+- mobile: the same hierarchy collapses into a full-height drawer (Tarot -> chapters -> one reading);
+- closing the Tarot returns the user to the same map context;
+- the small image-led preview remains the discovery step and is not expanded into a mini webpage.
+
+Implemented on `tarot-v2-refinement`:
+- Water presentation mode changed from `triptych` to reusable `docked-workspace`;
+- desktop dock width is responsive, preserving roughly 54–60% of the viewport for Hearthlands;
+- the map viewport shrinks to make physical room for the dock rather than being covered by a modal;
+- background dimming is reduced substantially so Hearthlands stays visually alive;
+- wide desktops retain a compact three-zone reading inside the dock;
+- medium desktops/tablets use the older Mum-style artwork-first hierarchy;
+- mobile uses a full-height drawer without losing chapter semantics;
+- Water artwork remains portrait, full-frame and dominant inside the dock;
+- the dream-count medallion is reduced and attached more tightly to the Tarot;
+- only the active chapter is shown in the reading region;
+- evidence/privacy/co-occurrence/chronology boundaries are unchanged.
+
+**Superseded:** the large centred triptych overlay is no longer the canonical desktop pattern.
+
+Acceptance test:
+On desktop, the user must be able to see a meaningful amount of Hearthlands and the open Tarot at the same time; the Tarot must read as an object opened beside the world rather than a new page covering it.
+
 
 ### 2026-09-24 — Canonical Tarot triptych
 

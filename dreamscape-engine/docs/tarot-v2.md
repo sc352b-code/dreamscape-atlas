@@ -129,3 +129,65 @@ Older evidence-only cards remain valid while richer corpus analysis is derived a
 ## Privacy rule
 
 The public atlas can contain approved derived summaries and aggregate counts. Raw dreams, private identity mappings and individual dream-record payloads remain in the authenticated private corpus layer.
+
+
+## Companion Tarot card system
+
+The canonical docked Tarot does not render selected chapters as ordinary web panels.
+
+Each chapter is a **Dreamscape companion Tarot card**: a second physical/mystical card from the same visual deck as the subject artwork.
+
+### Visual contract
+
+A companion card must:
+
+- use the same gilded/celestial deck language as the main Tarot;
+- have a physical-card silhouette and multi-layer ornate frame;
+- remain beautiful even if its text is removed;
+- preserve exact corpus meaning if its ornament is removed;
+- use a display-serif / book-serif hierarchy rather than generic application typography;
+- compose data as inscriptions, constellations, currents, emblems or manuscript records where appropriate;
+- never turn uncertain evidence into decorative certainty.
+
+### Chapter contract
+
+The reusable chapter IDs remain factual and stable:
+
+- `overview`
+- `geography`
+- `patterns`
+- `alongside`
+- `chronology`
+- `sources`
+- `meanings`
+
+A card may additionally supply `companionCards.<chapterId>` metadata:
+
+- `title` — evocative in-card title;
+- `subtitle` — concise explanatory inscription;
+- `motif` — visual motif identifier;
+- `tone` — `evidence`, `source`, or `interpretation`.
+
+The navigation label remains literal and predictable. The companion-card title may be more poetic without changing the meaning of the tab.
+
+### Water gold-standard mapping
+
+Water currently establishes the exemplar:
+
+- Overview → **The Water Record**
+- Where it appears → **The Geography of Water**
+- Recurring patterns → **The Forms of Water**
+- Appears alongside → **The Constellation of Water**
+- How it changes → **Water Through Time**
+- Source dreams → **The Book of Waters**
+- Possible meanings → **The Mirror of Water**
+
+The renderer must remain subject-agnostic so other symbols, places, animals and people can supply their own motifs while remaining recognisably part of the same Dreamscape Tarot deck.
+
+### Responsive rule
+
+Desktop may present the main Tarot and companion card beside each other inside the dock when space allows. Smaller desktop/tablet can place the companion card below the main Tarot. Mobile must preserve the sequence:
+
+**main Tarot → chapter selector → companion Tarot card**
+
+At no breakpoint should the companion card fall back to an ordinary article/page treatment.

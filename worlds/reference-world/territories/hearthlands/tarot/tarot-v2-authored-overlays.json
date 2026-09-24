@@ -199,6 +199,50 @@
       "subjectId": "water",
       "expectedDreamCount": 42,
       "accessMode": "authenticated-provider-or-local-private-profile"
+    },
+    "companionCards": {
+      "overview": {
+        "title": "The Water Record",
+        "subtitle": "The waters of your dream world",
+        "motif": "record",
+        "tone": "evidence"
+      },
+      "geography": {
+        "title": "The Geography of Water",
+        "subtitle": "Five territories · overlapping memberships",
+        "motif": "currents",
+        "tone": "evidence"
+      },
+      "patterns": {
+        "title": "The Forms of Water",
+        "subtitle": "Recurring functions and evidence strength",
+        "motif": "forms",
+        "tone": "evidence"
+      },
+      "alongside": {
+        "title": "The Constellation of Water",
+        "subtitle": "Related Dreamscape elements",
+        "motif": "constellation",
+        "tone": "evidence"
+      },
+      "chronology": {
+        "title": "Water Through Time",
+        "subtitle": "What the chronology can — and cannot — support",
+        "motif": "river-time",
+        "tone": "evidence"
+      },
+      "sources": {
+        "title": "The Book of Waters",
+        "subtitle": "42 linked source dreams",
+        "motif": "manuscript",
+        "tone": "source"
+      },
+      "meanings": {
+        "title": "The Mirror of Water",
+        "subtitle": "Possible meanings · interpretation, not corpus fact",
+        "motif": "mirror",
+        "tone": "interpretation"
+      }
     }
   },
   "cat": {

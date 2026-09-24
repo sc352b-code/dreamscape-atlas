@@ -23,6 +23,13 @@ async function boot(){
     return wrap;
   }
 
+  function applyFraming(img,data,mode){
+    if(!img) return;
+    const framing=data?.imageFraming?.[mode]||data?.imageFraming?.full||{};
+    img.style.objectPosition=framing.objectPosition||'50% 50%';
+    img.style.objectFit=framing.objectFit||'cover';
+  }
+
   function renderStats(target,stats){
     if(!target||!Array.isArray(stats)||!stats.length) return;
     target.innerHTML=stats.map(stat=>`<span><b>${escapeHTML(stat.value)}</b><small>${escapeHTML(stat.label)}</small></span>`).join('');
@@ -33,7 +40,7 @@ async function boot(){
     const section=target.closest('section');
     if(!Array.isArray(items)||!items.length){section?.setAttribute('hidden','');target.innerHTML='';return;}
     section?.removeAttribute('hidden');
-    target.innerHTML=items.map(item=>`<article><b>${escapeHTML(item.name)}</b><p>${escapeHTML(item.summary)}</p>${item.caveat?`<small>${escapeHTML(item.caveat)}</small>`:''}</article>`).join('');
+    target.innerHTML=items.map(item=>`<article><div class="territory-v1-article-heading"><b>${escapeHTML(item.name)}</b>${item.confidence?`<span class="territory-v1-confidence">${escapeHTML(item.confidence)} confidence</span>`:''}</div><p>${escapeHTML(item.summary)}</p>${item.caveat?`<small>${escapeHTML(item.caveat)}</small>`:''}</article>`).join('');
   }
 
   function renderMeanings(reader,data){
@@ -48,7 +55,7 @@ async function boot(){
     const entries=Object.entries(data.corpusOverview?.territoryCounts||{});
     if(!section||!target||!entries.length) return;
     section.hidden=false;
-    target.innerHTML=entries.map(([territory,count])=>`<div class="territory-v1-geo-row"><span>${escapeHTML(titleCase(territory))}</span><b>${count}</b></div>`).join('');
+    const max=Math.max(...entries.map(([,count])=>Number(count)||0),1);\n    target.innerHTML=entries.map(([territory,count])=>`<div class="territory-v1-geo-row" style="--territory-share:${Math.max(4,Math.round((Number(count)||0)/max*100))}%"><span>${escapeHTML(titleCase(territory))}</span><i></i><b>${count}</b></div>`).join('');
     section.querySelector('.territory-v1-geo-note')?.remove();
     if(data.geographyNote) section.insertAdjacentHTML('beforeend',`<p class="territory-v1-geo-note">${escapeHTML(data.geographyNote)}</p>`);
   }
@@ -92,7 +99,7 @@ async function boot(){
     const img=image.querySelector('img');
     if(data.previewImage||data.cardImage){
       img.src=data.previewImage||data.cardImage;
-      img.alt=`Dreamscape artwork for ${data.title||preview.querySelector('h3')?.textContent||'this tarot'}`;
+      img.alt=`Dreamscape artwork for ${data.title||preview.querySelector('h3')?.textContent||'this tarot'}`;\n      applyFraming(img,data,'preview');
       image.hidden=false;
     }else image.hidden=true;
     if(data.title) preview.querySelector('h3').textContent=data.title;
@@ -105,7 +112,7 @@ async function boot(){
     const reader=root.querySelector('.territory-v1-reader.open');
     const data=selectedData();
     if(!reader||!data) return;
-    reader.classList.add('tarot-v2-exemplar');
+    reader.classList.add('tarot-v2-exemplar');\n    reader.dataset.tarotId=selectedId()||'';\n    reader.classList.toggle('tarot-v2-gold-standard',Boolean(data.goldStandardExemplar));
     if(data.title) reader.querySelector('h2').textContent=data.title;
     reader.querySelector('.territory-v1-kicker').textContent=data.friendlySubtitle||'A pattern across your dreams';
 
@@ -114,7 +121,7 @@ async function boot(){
       imageWrap.hidden=false;
       const img=imageWrap.querySelector('img');
       img.src=data.cardImage||data.previewImage;
-      img.alt=`Dreamscape tarot artwork for ${data.title||'this card'}`;
+      img.alt=`Dreamscape tarot artwork for ${data.title||'this card'}`;\n      applyFraming(img,data,'full');
     }
 
     renderStats(reader.querySelector('.territory-v1-tarot-stats'),data.quickStats);

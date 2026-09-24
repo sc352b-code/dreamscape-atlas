@@ -384,6 +384,34 @@
         "string",
         "null"
       ]
+    },
+    "geographyCountMode": {
+      "enum": [
+        "exclusive-dream-counts",
+        "overlapping-memberships",
+        "pending"
+      ]
+    },
+    "behaviorSummary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "confidenceScale": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "levels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     }
   }
 }

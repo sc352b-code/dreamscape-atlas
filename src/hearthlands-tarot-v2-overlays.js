@@ -366,6 +366,86 @@ async function boot(){
         <span><b>${escapeHTML(titleCase(level))}</b><em>${escapeHTML(meaning)}</em></span>`).join('')}</div>`;
   }
 
+
+  function companionGlyph(motif){
+    const common='viewBox="0 0 72 72" aria-hidden="true"';
+    const glyphs={
+      record:`<svg ${common}><circle cx="36" cy="36" r="21"/><path d="M36 12v48M12 36h48"/><circle cx="36" cy="36" r="5"/><path d="M21 21l30 30M51 21L21 51"/></svg>`,
+      currents:`<svg ${common}><path d="M8 23c10-10 18 10 28 0s18 10 28 0M8 36c10-10 18 10 28 0s18 10 28 0M8 49c10-10 18 10 28 0s18 10 28 0"/><circle cx="36" cy="36" r="4"/></svg>`,
+      forms:`<svg ${common}><circle cx="36" cy="36" r="6"/><circle cx="18" cy="18" r="5"/><circle cx="54" cy="18" r="5"/><circle cx="18" cy="54" r="5"/><circle cx="54" cy="54" r="5"/><path d="M22 22l10 10M50 22L40 32M22 50l10-10M50 50L40 40"/></svg>`,
+      constellation:`<svg ${common}><circle cx="36" cy="36" r="7"/><circle cx="14" cy="21" r="3"/><circle cx="57" cy="17" r="3"/><circle cx="60" cy="49" r="3"/><circle cx="20" cy="56" r="3"/><path d="M20 24l11 8M42 31l12-11M43 40l14 7M31 42L22 53"/></svg>`,
+      'river-time':`<svg ${common}><path d="M34 7c14 12-12 17 4 29s-11 17 1 29"/><circle cx="35" cy="14" r="3"/><circle cx="34" cy="36" r="3"/><circle cx="39" cy="58" r="3"/></svg>`,
+      manuscript:`<svg ${common}><path d="M17 12h31c7 0 10 5 7 11v36H24c-7 0-10-5-7-11z"/><path d="M24 20h23M24 29h23M24 38h17M24 47h20"/><path d="M48 12c-5 2-7 6-6 11"/></svg>`,
+      mirror:`<svg ${common}><ellipse cx="36" cy="31" rx="20" ry="24"/><path d="M36 55v9M26 64h20"/><path d="M27 24c5-7 13-9 20-4"/><circle cx="36" cy="31" r="5"/></svg>`
+    };
+    return glyphs[motif]||glyphs.record;
+  }
+
+  function ensureCompanionCard(section,chapterId,data){
+    if(!section) return;
+    const config=data.companionCards?.[chapterId];
+    if(!config) return;
+
+    section.classList.add('tarot-companion-card',`tarot-companion-${chapterId}`,`tarot-motif-${config.motif||chapterId}`,`tarot-tone-${config.tone||'evidence'}`);
+    section.dataset.companionCard=chapterId;
+    section.dataset.companionTone=config.tone||'evidence';
+
+    let header=section.querySelector(':scope > .tarot-companion-header');
+    if(!header){
+      header=document.createElement('header');
+      header.className='tarot-companion-header';
+      section.insertBefore(header,section.firstChild);
+    }
+    const toneLabel=config.tone==='interpretation'?'INTERPRETIVE CARD · NOT CORPUS FACT':config.tone==='source'?'SOURCE CARD · PRIVATE CORPUS':'CORPUS EVIDENCE CARD';
+    header.innerHTML=`
+      <small>${escapeHTML(toneLabel)}</small>
+      <div class="tarot-companion-glyph">${companionGlyph(config.motif)}</div>
+      <h3>${escapeHTML(config.title)}</h3>
+      <p>${escapeHTML(config.subtitle)}</p>
+      <div class="tarot-companion-rule" aria-hidden="true"><i></i><span>✦</span><i></i></div>`;
+
+    const originalHeading=Array.from(section.children).find(node=>
+      node!==header&&(node.tagName==='H3'||(chapterId==='alongside'&&node.tagName==='B'))
+    );
+    if(originalHeading) originalHeading.classList.add('tarot-companion-original-heading');
+
+    if(chapterId==='alongside'){
+      let core=section.querySelector('.tarot-constellation-core');
+      if(!core){
+        core=document.createElement('div');
+        core.className='tarot-constellation-core';
+        core.innerHTML=`<span>${companionGlyph('currents')}</span><b>${escapeHTML(data.title||'Water')}</b><small>RELATED DREAMSCAPE ELEMENTS</small>`;
+        const note=section.querySelector('.territory-v1-related-note');
+        note?.insertAdjacentElement('afterend',core);
+      }
+    }
+
+    if(chapterId==='chronology'){
+      let river=section.querySelector('.tarot-time-river');
+      if(!river){
+        river=document.createElement('div');
+        river.className='tarot-time-river';
+        river.setAttribute('aria-hidden','true');
+        river.innerHTML='<i></i><i></i><i></i>';
+        header.insertAdjacentElement('afterend',river);
+      }
+    }
+  }
+
+  function consolidateMeaningsCard(interpretation,lenses,method){
+    if(!interpretation) return;
+    if(lenses&&lenses.parentElement!==interpretation){
+      lenses.removeAttribute('data-chapter');
+      lenses.classList.add('tarot-companion-subsection');
+      interpretation.appendChild(lenses);
+    }
+    if(method&&method.parentElement!==interpretation){
+      method.removeAttribute('data-chapter');
+      method.classList.add('tarot-companion-boundary');
+      interpretation.appendChild(method);
+    }
+  }
+
   function ensureDockedWorkspace(reader,data){
     const docked=data.presentation?.mode==='docked-workspace';
     if(!docked){
@@ -411,9 +491,10 @@ async function boot(){
     chronology?.setAttribute('data-chapter','chronology');
     records?.setAttribute('data-chapter','sources');
     interpretation?.setAttribute('data-chapter','meanings');
-    lenses?.setAttribute('data-chapter','meanings');
+    if(lenses) lenses.removeAttribute('data-chapter');
     if(lesson){ lesson.hidden=true; lesson.removeAttribute('data-chapter'); }
-    if(method) method.dataset.chapter='meanings';
+    if(method) method.removeAttribute('data-chapter');
+    consolidateMeaningsCard(interpretation,lenses,method);
 
     if(grounding) grounding.querySelector('h3').textContent='Overview';
     if(geography) geography.querySelector('h3').textContent=`Where ${data.title||'it'} appears`;
@@ -475,7 +556,7 @@ async function boot(){
     }
     if(medallion&&dreamCount!=null) medallion.innerHTML=`<b>${escapeHTML(dreamCount)}</b><small>DREAMS</small>`;
 
-    [grounding,geography,functions,related,chronology,records,interpretation,lenses,method].forEach(node=>{
+    [grounding,geography,functions,related,chronology,records,interpretation].forEach(node=>{
       if(node&&node.parentElement!==info) info.appendChild(node);
     });
 
@@ -493,10 +574,29 @@ async function boot(){
     ensureGeographyExplanation(geography,data);
     ensureConfidenceLegend(functions,data);
 
+    const companionSections={
+      overview:grounding,
+      geography,
+      patterns:functions,
+      alongside:related,
+      chronology,
+      sources:records,
+      meanings:interpretation
+    };
+    Object.entries(companionSections).forEach(([chapterId,section])=>ensureCompanionCard(section,chapterId,data));
+
     const activate=id=>{
       const valid=chapters.some(ch=>ch.id===id)?id:'overview';
       reader.dataset.activeChapter=valid;
-      info.querySelectorAll('[data-chapter]').forEach(node=>node.hidden=node.dataset.chapter!==valid);
+      info.querySelectorAll('[data-chapter]').forEach(node=>{
+        const active=node.dataset.chapter===valid;
+        node.hidden=!active;
+        node.classList.remove('is-companion-entering');
+        if(active){
+          void node.offsetWidth;
+          node.classList.add('is-companion-entering');
+        }
+      });
       shell.querySelectorAll('[data-chapter-id]').forEach(button=>{
         const active=button.dataset.chapterId===valid;
         button.classList.toggle('active',active);

@@ -1,0 +1,49 @@
+name: Build procedural world atlas
+
+on:
+  push:
+    branches: [family-home-pilot]
+    paths:
+      - '.github/workflows/build-procedural-world.yml'
+      - 'tools/generate_world_atlas.py'
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    if: ${{ !contains(github.event.head_commit.message, '[procedural-world]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: family-home-pilot
+          fetch-depth: 0
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install renderer dependencies
+        run: python -m pip install --disable-pip-version-check pillow numpy scipy
+      - name: Generate 4K and 8K atlas textures
+        run: python tools/generate_world_atlas.py --output-dir assets
+      - name: Verify generated dimensions
+        run: |
+          python - <<'PY'
+          from PIL import Image
+          expected={'assets/world-atlas-4k.webp':(4096,2048),'assets/world-atlas-8k.webp':(8192,4096)}
+          for path,size in expected.items():
+              with Image.open(path) as im:
+                  assert im.size==size,(path,im.size,size)
+                  print(path,im.size)
+          PY
+      - name: Commit procedural world assets
+        run: |
+          git config user.name 'dreamscape-build-bot'
+          git config user.email 'actions@users.noreply.github.com'
+          git add assets/world-atlas-4k.webp assets/world-atlas-8k.webp assets/world-atlas-metadata.json
+          if git diff --cached --quiet; then
+            echo 'Procedural atlas assets already current'
+          else
+            git commit -m 'Build corpus-derived 4K and 8K world atlas [procedural-world]'
+            git push origin HEAD:family-home-pilot
+          fi

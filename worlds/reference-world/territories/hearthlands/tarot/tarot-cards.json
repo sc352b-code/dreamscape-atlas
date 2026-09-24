@@ -1,0 +1,1181 @@
+{
+  "tarot/place/childhood-house": {
+    "id": "tarot/place/childhood-house",
+    "type": "place",
+    "title": "Childhood House",
+    "image": null,
+    "interpretation": "Interpretive profile pending unless an authored v57 reading already exists. This card stays with the established corpus geography rather than inventing psychology.",
+    "corpusGrounding": "3 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+    "relatedItems": [
+      "person-03",
+      "person-05",
+      "person-10",
+      "person-12",
+      "person-13",
+      "food",
+      "house-home",
+      "cat",
+      "lion",
+      "garden",
+      "tree"
+    ],
+    "deeperDestination": null
+  },
+  "tarot/place/family-home": {
+    "id": "tarot/place/family-home",
+    "type": "place",
+    "title": "Family Home",
+    "image": null,
+    "interpretation": {
+      "summary": "A recurring place of care, recovery and transformation."
+    },
+    "corpusGrounding": "The two Family Home dreams share a striking pattern. In each one, a fragile creature is found outside the home and brought into a bedroom or protected enclosure. With water, food, shelter and patient care, it recovers and becomes stronger or more extraordinary. The home acts less like a backdrop and more like a place that makes recovery possible.",
+    "relatedItems": [
+      {
+        "id": "person-10",
+        "label": "Mum"
+      },
+      {
+        "id": "water",
+        "label": "Water"
+      },
+      {
+        "id": "octopus",
+        "label": "Octopus"
+      },
+      {
+        "id": "cat",
+        "label": "Cat"
+      },
+      {
+        "id": "dog",
+        "label": "Dog"
+      },
+      {
+        "id": "egg",
+        "label": "Egg"
+      },
+      {
+        "id": "garden",
+        "label": "Garden"
+      }
+    ],
+    "deeperDestination": "family-home",
+    "cardImage": "/worlds/reference-world/territories/hearthlands/tarot/art/family-home-v2.png",
+    "previewSummary": "In both Family Home dreams, something vulnerable is brought inside, cared for over time, and given the chance to recover and transform.",
+    "corpusOverview": {
+      "uniqueDreamCount": 2,
+      "wholeSeriesCount": 2,
+      "wholeSeriesCountStatus": "known",
+      "territoryCounts": {
+        "hearthlands": 2
+      }
+    },
+    "recurringFunctions": [
+      {
+        "name": "A place where vulnerable life is brought inside",
+        "summary": "Both dreams begin with something fragile or close to death being found outside and carried into the home.",
+        "confidence": "high"
+      },
+      {
+        "name": "Care changes what is possible",
+        "summary": "Recovery happens through steady practical care over time rather than through a sudden rescue alone.",
+        "confidence": "high"
+      },
+      {
+        "name": "The bedroom becomes a place of growth",
+        "summary": "In both dreams the bedroom becomes an unusual nurturing space where vulnerable life can recover, expand and transform.",
+        "confidence": "high"
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "A simple life-story view",
+        "summary": "These dreams can be read directly as stories about care, responsibility, animals and the emotional meaning of home. They do not need a symbolic explanation to be meaningful."
+      },
+      {
+        "name": "A Jungian view",
+        "summary": "One possible Jungian reading is that the home represents part of the inner life, while the vulnerable creatures represent neglected or undeveloped parts that become stronger when they are welcomed and cared for.",
+        "caveat": "This is one possible reading, not a fixed translation of the house or the animals."
+      }
+    ],
+    "possibleLesson": "What you make room for and care for over time may grow into something stronger, stranger and more alive than it first seemed.",
+    "dreamRecordCount": 2
+  },
+  "tarot/place/current-present-house": {
+    "id": "tarot/place/current-present-house",
+    "type": "place",
+    "title": "Current / Present House",
+    "image": null,
+    "interpretation": "Interpretive profile pending unless an authored v57 reading already exists. This card stays with the established corpus geography rather than inventing psychology.",
+    "corpusGrounding": "31 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+    "relatedItems": [
+      "person-01",
+      "person-03",
+      "person-10",
+      "person-11",
+      "person-12",
+      "person-13",
+      "person-15",
+      "bag",
+      "bed",
+      "box",
+      "clock",
+      "computer"
+    ],
+    "deeperDestination": null
+  },
+  "tarot/place/large-many-roomed-house": {
+    "id": "tarot/place/large-many-roomed-house",
+    "type": "place",
+    "title": "The Large Many-Roomed House",
+    "image": null,
+    "interpretation": "Interpretive profile pending unless an authored v57 reading already exists. This card stays with the established corpus geography rather than inventing psychology.",
+    "corpusGrounding": "6 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+    "relatedItems": [
+      "person-01",
+      "person-11",
+      "person-12",
+      "bed",
+      "book",
+      "door",
+      "food",
+      "house-home",
+      "window",
+      "car",
+      "cat",
+      "dog"
+    ],
+    "deeperDestination": null
+  },
+  "tarot/place/unfamiliar-house": {
+    "id": "tarot/place/unfamiliar-house",
+    "type": "place",
+    "title": "The Unfamiliar House",
+    "image": null,
+    "interpretation": "Interpretive profile pending unless an authored v57 reading already exists. This card stays with the established corpus geography rather than inventing psychology.",
+    "corpusGrounding": "5 source dreams contribute to this canonical Hearthlands place in the current v57 derivation.",
+    "relatedItems": [
+      "person-01",
+      "person-03",
+      "person-05",
+      "person-10",
+      "person-11",
+      "person-13",
+      "bed",
+      "door",
+      "food",
+      "house-home",
+      "phone",
+      "toy"
+    ],
+    "deeperDestination": null
+  },
+  "tarot/place/haunted-17-bedroom-mansion": {
+    "id": "tarot/place/haunted-17-bedroom-mansion",
+    "type": "place",
+    "title": "The Haunted 17-Bedroom Mansion",
+    "image": null,
+    "interpretation": "Interpretive profile pending unless an authored v57 reading already exists. This card stays with the established corpus geography rather than inventing psychology.",
+    "corpusGrounding": "1 source dream contribute to this canonical Hearthlands place in the current v57 derivation.",
+    "relatedItems": [
+      "house-home",
+      "light",
+      "window"
+    ],
+    "deeperDestination": null
+  },
+  "tarot/symbol/person-01": {
+    "id": "tarot/symbol/person-01",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 34 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house",
+      "large-many-roomed-house",
+      "unfamiliar-house"
+    ],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-02": {
+    "id": "tarot/symbol/person-02",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 10 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-03": {
+    "id": "tarot/symbol/person-03",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 28 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "childhood-house",
+      "current-present-house",
+      "unfamiliar-house"
+    ],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-04": {
+    "id": "tarot/symbol/person-04",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-05": {
+    "id": "tarot/symbol/person-05",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 18 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "childhood-house",
+      "unfamiliar-house"
+    ],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-06": {
+    "id": "tarot/symbol/person-06",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-07": {
+    "id": "tarot/symbol/person-07",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-08": {
+    "id": "tarot/symbol/person-08",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-09": {
+    "id": "tarot/symbol/person-09",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-10": {
+    "id": "tarot/symbol/person-10",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 53 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "childhood-house",
+      "family-home",
+      "current-present-house",
+      "unfamiliar-house"
+    ],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-11": {
+    "id": "tarot/symbol/person-11",
+    "type": "symbol",
+    "title": "Natalie",
+    "image": null,
+    "interpretation": {
+      "summary": "A recurring relationship figure around love, choice, change, family and intimacy."
+    },
+    "corpusGrounding": "Across 59 dreams, Natalie is most often present when the dream is dealing with love and commitment, movement or change, family belonging, choice, intimacy and the question of what should be carried forward. She appears in all five territories, most strongly in Roadlands and Hearthlands. The pattern is varied: some dreams emphasise closeness and being deeply understood, others separation, boundaries, family responsibility, desire, danger or choosing a direction.",
+    "relatedItems": [
+      {
+        "id": "family-home",
+        "label": "Family Home"
+      },
+      {
+        "id": "person-10",
+        "label": "Mum"
+      },
+      {
+        "id": "person-05",
+        "label": "Dad"
+      },
+      {
+        "id": "water",
+        "label": "Water"
+      },
+      {
+        "id": "cat",
+        "label": "Cat"
+      },
+      {
+        "id": "dog",
+        "label": "Dog"
+      },
+      {
+        "id": "garden",
+        "label": "Garden"
+      }
+    ],
+    "semanticIdentityStatus": "public-approved",
+    "cardImage": "/worlds/reference-world/territories/hearthlands/tarot/art/natalie-v2.png",
+    "previewSummary": "Natalie appears in 59 dreams and most often turns up when the dreams are exploring love, change, family belonging, choice and intimacy.",
+    "corpusOverview": {
+      "uniqueDreamCount": 59,
+      "wholeSeriesCount": 59,
+      "wholeSeriesCountStatus": "known",
+      "territoryCounts": {
+        "roadlands": 40,
+        "hearthlands": 31,
+        "institutional": 18,
+        "littoral": 8,
+        "river": 6
+      },
+      "themeCounts": {
+        "love and commitment": 53,
+        "journey and change": 40,
+        "family and belonging": 29,
+        "choice and return": 22,
+        "desire and intimacy": 22,
+        "care and responsibility": 12,
+        "threat and uncertainty": 10
+      }
+    },
+    "recurringFunctions": [
+      {
+        "name": "A relationship at the centre of important choices",
+        "summary": "Love and commitment appear in 53 of the 59 Natalie dreams, while choice or return appears in 22. Her presence often coincides with deciding what to keep, leave, repair or move toward.",
+        "confidence": "high"
+      },
+      {
+        "name": "A companion through change",
+        "summary": "Journey and transition appear in 40 dreams. Natalie is frequently present while travelling, moving between places, preparing to leave, returning, or working out where a relationship is going.",
+        "confidence": "high"
+      },
+      {
+        "name": "A bridge between intimacy and family life",
+        "summary": "Family and belonging appear in 29 dreams and desire or intimacy in 22, so the relationship is repeatedly placed inside a wider world of children, homes, relatives and responsibility.",
+        "confidence": "high"
+      },
+      {
+        "name": "A figure through whom trust and boundaries are tested",
+        "summary": "A smaller but clear group of dreams brings uncertainty, conflict or danger into the relationship, asking what feels safe, fair, honest or trustworthy.",
+        "confidence": "medium"
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "The literal relationship",
+        "summary": "The first and most important reading is Natalie as a real person with a real shared history. Many of these dreams may simply be working through love, memory, conflict, desire, family life and change in that relationship."
+      },
+      {
+        "name": "A Jungian view",
+        "summary": "One possible Jungian reading is that Natalie sometimes takes on an anima-like role: a figure through whom feeling, intimacy, vulnerability and relationship become especially vivid. In that sense, some dreams may be exploring how you relate to those qualities within yourself as well as through another person.",
+        "caveat": "Because Natalie is a real person, this should sit beside the literal relationship reading, not replace her with an archetype."
+      },
+      {
+        "name": "A pattern-over-time view",
+        "summary": "Across the series, the repeated themes of leaving, returning, travelling, choosing and understanding one another make Natalie a useful marker of how your relationship to closeness and commitment is changing over time."
+      }
+    ],
+    "possibleLesson": "The recurring question may be less “What does Natalie symbolise?” and more “What kind of closeness feels alive and honest, and what needs to be chosen, spoken or bounded for love to remain real rather than automatic?”",
+    "dreamRecordCount": 59
+  },
+  "tarot/symbol/person-12": {
+    "id": "tarot/symbol/person-12",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 29 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "childhood-house",
+      "current-present-house",
+      "large-many-roomed-house"
+    ],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-13": {
+    "id": "tarot/symbol/person-13",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 24 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "childhood-house",
+      "current-present-house",
+      "unfamiliar-house"
+    ],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-14": {
+    "id": "tarot/symbol/person-14",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/person-15": {
+    "id": "tarot/symbol/person-15",
+    "type": "symbol",
+    "title": "Private semantic label required",
+    "image": null,
+    "interpretation": "This person symbol is intentionally withheld from the public runtime until its corpus-supported semantic label is resolved from the private profile layer.",
+    "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house"
+    ],
+    "semanticIdentityStatus": "private-label-required"
+  },
+  "tarot/symbol/bag": {
+    "id": "tarot/symbol/bag",
+    "type": "symbol",
+    "title": "Bag",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 9 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house"
+    ]
+  },
+  "tarot/symbol/bed": {
+    "id": "tarot/symbol/bed",
+    "type": "symbol",
+    "title": "Bed",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 22 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "family-home",
+      "current-present-house",
+      "large-many-roomed-house",
+      "unfamiliar-house"
+    ]
+  },
+  "tarot/symbol/bench": {
+    "id": "tarot/symbol/bench",
+    "type": "symbol",
+    "title": "Bench",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 6 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/book": {
+    "id": "tarot/symbol/book",
+    "type": "symbol",
+    "title": "Book",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 13 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "large-many-roomed-house"
+    ]
+  },
+  "tarot/symbol/box": {
+    "id": "tarot/symbol/box",
+    "type": "symbol",
+    "title": "Box",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 9 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house"
+    ]
+  },
+  "tarot/symbol/chair": {
+    "id": "tarot/symbol/chair",
+    "type": "symbol",
+    "title": "Chair",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 10 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/clock": {
+    "id": "tarot/symbol/clock",
+    "type": "symbol",
+    "title": "Clock",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 9 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house"
+    ]
+  },
+  "tarot/symbol/clothes": {
+    "id": "tarot/symbol/clothes",
+    "type": "symbol",
+    "title": "Clothes",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 13 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/computer": {
+    "id": "tarot/symbol/computer",
+    "type": "symbol",
+    "title": "Computer",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 8 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house"
+    ]
+  },
+  "tarot/symbol/door": {
+    "id": "tarot/symbol/door",
+    "type": "symbol",
+    "title": "Door",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 39 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house",
+      "large-many-roomed-house",
+      "unfamiliar-house"
+    ]
+  },
+  "tarot/symbol/drink": {
+    "id": "tarot/symbol/drink",
+    "type": "symbol",
+    "title": "Drink",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 14 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/egg": {
+    "id": "tarot/symbol/egg",
+    "type": "symbol",
+    "title": "Egg",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "family-home"
+    ]
+  },
+  "tarot/symbol/food": {
+    "id": "tarot/symbol/food",
+    "type": "symbol",
+    "title": "Food",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 31 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "childhood-house",
+      "current-present-house",
+      "large-many-roomed-house",
+      "unfamiliar-house"
+    ]
+  },
+  "tarot/symbol/house-home": {
+    "id": "tarot/symbol/house-home",
+    "type": "symbol",
+    "title": "House / Home",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 97 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "childhood-house",
+      "family-home",
+      "current-present-house",
+      "large-many-roomed-house",
+      "unfamiliar-house",
+      "haunted-17-bedroom-mansion"
+    ]
+  },
+  "tarot/symbol/key": {
+    "id": "tarot/symbol/key",
+    "type": "symbol",
+    "title": "Key",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/light": {
+    "id": "tarot/symbol/light",
+    "type": "symbol",
+    "title": "Light",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 12 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "family-home",
+      "haunted-17-bedroom-mansion"
+    ]
+  },
+  "tarot/symbol/mirror": {
+    "id": "tarot/symbol/mirror",
+    "type": "symbol",
+    "title": "Mirror",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/money": {
+    "id": "tarot/symbol/money",
+    "type": "symbol",
+    "title": "Money",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 12 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/phone": {
+    "id": "tarot/symbol/phone",
+    "type": "symbol",
+    "title": "Phone",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 16 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house",
+      "unfamiliar-house"
+    ]
+  },
+  "tarot/symbol/shirt": {
+    "id": "tarot/symbol/shirt",
+    "type": "symbol",
+    "title": "Shirt",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 17 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house"
+    ]
+  },
+  "tarot/symbol/shoe": {
+    "id": "tarot/symbol/shoe",
+    "type": "symbol",
+    "title": "Shoe",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 7 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/table": {
+    "id": "tarot/symbol/table",
+    "type": "symbol",
+    "title": "Table",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 25 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/teddy": {
+    "id": "tarot/symbol/teddy",
+    "type": "symbol",
+    "title": "Teddy",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house"
+    ]
+  },
+  "tarot/symbol/toy": {
+    "id": "tarot/symbol/toy",
+    "type": "symbol",
+    "title": "Toy",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 7 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house",
+      "unfamiliar-house"
+    ]
+  },
+  "tarot/symbol/weight": {
+    "id": "tarot/symbol/weight",
+    "type": "symbol",
+    "title": "Weight",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house"
+    ]
+  },
+  "tarot/symbol/window": {
+    "id": "tarot/symbol/window",
+    "type": "symbol",
+    "title": "Window",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 18 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "family-home",
+      "large-many-roomed-house",
+      "unfamiliar-house",
+      "haunted-17-bedroom-mansion"
+    ]
+  },
+  "tarot/symbol/bicycle": {
+    "id": "tarot/symbol/bicycle",
+    "type": "symbol",
+    "title": "Bicycle",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/boat": {
+    "id": "tarot/symbol/boat",
+    "type": "symbol",
+    "title": "Boat",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 10 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/bus": {
+    "id": "tarot/symbol/bus",
+    "type": "symbol",
+    "title": "Bus",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/car": {
+    "id": "tarot/symbol/car",
+    "type": "symbol",
+    "title": "Car",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 55 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house",
+      "large-many-roomed-house"
+    ]
+  },
+  "tarot/symbol/plane": {
+    "id": "tarot/symbol/plane",
+    "type": "symbol",
+    "title": "Plane",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/train": {
+    "id": "tarot/symbol/train",
+    "type": "symbol",
+    "title": "Train",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 13 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/cat": {
+    "id": "tarot/symbol/cat",
+    "type": "symbol",
+    "title": "Cat",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 34 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "family-home",
+      "childhood-house",
+      "current-present-house",
+      "large-many-roomed-house"
+    ]
+  },
+  "tarot/symbol/cow": {
+    "id": "tarot/symbol/cow",
+    "type": "symbol",
+    "title": "Cow",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/dog": {
+    "id": "tarot/symbol/dog",
+    "type": "symbol",
+    "title": "Dog",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 25 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "family-home",
+      "current-present-house",
+      "large-many-roomed-house"
+    ]
+  },
+  "tarot/symbol/fish": {
+    "id": "tarot/symbol/fish",
+    "type": "symbol",
+    "title": "Fish",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "family-home",
+      "current-present-house"
+    ]
+  },
+  "tarot/symbol/insect": {
+    "id": "tarot/symbol/insect",
+    "type": "symbol",
+    "title": "Insect",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 6 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house",
+      "large-many-roomed-house",
+      "unfamiliar-house"
+    ]
+  },
+  "tarot/symbol/lion": {
+    "id": "tarot/symbol/lion",
+    "type": "symbol",
+    "title": "Lion",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "childhood-house"
+    ]
+  },
+  "tarot/symbol/octopus": {
+    "id": "tarot/symbol/octopus",
+    "type": "symbol",
+    "title": "Octopus",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "family-home"
+    ]
+  },
+  "tarot/symbol/sheep": {
+    "id": "tarot/symbol/sheep",
+    "type": "symbol",
+    "title": "Sheep",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/snake": {
+    "id": "tarot/symbol/snake",
+    "type": "symbol",
+    "title": "Snake",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/field": {
+    "id": "tarot/symbol/field",
+    "type": "symbol",
+    "title": "Field",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 14 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/fire": {
+    "id": "tarot/symbol/fire",
+    "type": "symbol",
+    "title": "Fire",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house"
+    ]
+  },
+  "tarot/symbol/forest": {
+    "id": "tarot/symbol/forest",
+    "type": "symbol",
+    "title": "Forest",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 4 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/garden": {
+    "id": "tarot/symbol/garden",
+    "type": "symbol",
+    "title": "Garden",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 25 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "childhood-house",
+      "family-home",
+      "current-present-house",
+      "large-many-roomed-house"
+    ]
+  },
+  "tarot/symbol/grass": {
+    "id": "tarot/symbol/grass",
+    "type": "symbol",
+    "title": "Grass",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 10 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/lake": {
+    "id": "tarot/symbol/lake",
+    "type": "symbol",
+    "title": "Lake",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/ocean": {
+    "id": "tarot/symbol/ocean",
+    "type": "symbol",
+    "title": "Ocean",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/rain": {
+    "id": "tarot/symbol/rain",
+    "type": "symbol",
+    "title": "Rain",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/river": {
+    "id": "tarot/symbol/river",
+    "type": "symbol",
+    "title": "River",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/sea": {
+    "id": "tarot/symbol/sea",
+    "type": "symbol",
+    "title": "Sea",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 16 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/sky": {
+    "id": "tarot/symbol/sky",
+    "type": "symbol",
+    "title": "Sky",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 8 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/snow": {
+    "id": "tarot/symbol/snow",
+    "type": "symbol",
+    "title": "Snow",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "current-present-house"
+    ]
+  },
+  "tarot/symbol/storm": {
+    "id": "tarot/symbol/storm",
+    "type": "symbol",
+    "title": "Storm",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/sun": {
+    "id": "tarot/symbol/sun",
+    "type": "symbol",
+    "title": "Sun",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "large-many-roomed-house"
+    ]
+  },
+  "tarot/symbol/tree": {
+    "id": "tarot/symbol/tree",
+    "type": "symbol",
+    "title": "Tree",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 15 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": [
+      "childhood-house",
+      "current-present-house"
+    ]
+  },
+  "tarot/symbol/water": {
+    "id": "tarot/symbol/water",
+    "type": "symbol",
+    "title": "Water",
+    "image": null,
+    "interpretation": {
+      "summary": "Water changes meaning with its form and with what you are doing in relation to it."
+    },
+    "corpusGrounding": "Water appears in 42 different dreams and is recorded 59 times. It is especially common in Roadlands and Hearthlands, but it reaches all five territories. Across the dreams it can be a route, a barrier, a danger, a place of play, a source of care, or something that overwhelms ordinary control. Its meaning changes with what the water is doing and how you respond to it.",
+    "relatedItems": [
+      {
+        "id": "river",
+        "label": "River"
+      },
+      {
+        "id": "sea",
+        "label": "Sea"
+      },
+      {
+        "id": "lake",
+        "label": "Lake"
+      },
+      {
+        "id": "storm",
+        "label": "Storm"
+      },
+      {
+        "id": "rain",
+        "label": "Rain"
+      },
+      {
+        "id": "boat",
+        "label": "Boat"
+      },
+      {
+        "id": "family-home",
+        "label": "Family Home"
+      }
+    ],
+    "cardImage": "/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png",
+    "previewSummary": "Water appears in 42 dreams across the series, taking forms such as sea, rivers, rain, baths, pools, floods and crossings.",
+    "corpusOverview": {
+      "uniqueDreamCount": 42,
+      "appearanceCount": 59,
+      "wholeSeriesCount": 42,
+      "wholeSeriesCountStatus": "known",
+      "territoryCounts": {
+        "roadlands": 27,
+        "hearthlands": 19,
+        "littoral": 12,
+        "institutional": 6,
+        "river": 5
+      }
+    },
+    "recurringFunctions": [
+      {
+        "name": "Crossing from one place or state to another",
+        "summary": "Rivers, seas, boats and shorelines repeatedly create a journey, boundary or decision about whether and how to cross.",
+        "confidence": "high"
+      },
+      {
+        "name": "Intensity that is hard to control",
+        "summary": "Floods, storms, currents and deep water often appear when the dream world becomes harder to contain or manage.",
+        "confidence": "medium-high"
+      },
+      {
+        "name": "Care, cleansing and restoration",
+        "summary": "Baths, fresh water, swimming and caring for animals show another side of water: something that can soothe, nourish or help life recover.",
+        "confidence": "medium-high"
+      },
+      {
+        "name": "Play and renewed aliveness",
+        "summary": "Some dreams enter water with curiosity, beauty or pleasure, suggesting that depth is not always a threat.",
+        "confidence": "medium"
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "A Jungian view",
+        "summary": "Water can sometimes represent the deeper parts of inner life that are moving underneath ordinary conscious control. This fits best when the dream involves depth, immersion, currents or something hidden below the surface.",
+        "caveat": "Water does not automatically mean emotion or the unconscious. The exact form of the water and your actions in the dream matter."
+      },
+      {
+        "name": "A story view",
+        "summary": "In many dreams water simply creates the problem or possibility that drives the story: cross it, survive it, enter it, protect someone in it, or find a route around it."
+      },
+      {
+        "name": "A life-experience view",
+        "summary": "Swimming, weather, coastlines, holidays, bathing and caring for animals may also draw directly on real memories and everyday concerns."
+      }
+    ],
+    "possibleLesson": "The repeating question may be how to enter change or emotional depth without losing your ability to choose, act and care for yourself or others.",
+    "dreamRecordCount": 42
+  },
+  "tarot/symbol/wind": {
+    "id": "tarot/symbol/wind",
+    "type": "symbol",
+    "title": "Wind",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 8 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/woods": {
+    "id": "tarot/symbol/woods",
+    "type": "symbol",
+    "title": "Woods",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 2 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/gun": {
+    "id": "tarot/symbol/gun",
+    "type": "symbol",
+    "title": "Gun",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 5 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  },
+  "tarot/symbol/knife": {
+    "id": "tarot/symbol/knife",
+    "type": "symbol",
+    "title": "Knife",
+    "image": null,
+    "interpretation": "Corpus-grounded symbol record. A fuller authored interpretation can be mounted later; this runtime does not infer meaning from map position.",
+    "corpusGrounding": "Appears in 3 Hearthlands-associated dreams in the v57 derived symbol atlas. Specific place links are included only where already verified.",
+    "relatedItems": []
+  }
+}

@@ -1,0 +1,38 @@
+/* Thread 2 visual polish: preserve the authored world art, improve legibility at the planet layer. */
+.cosmic-art img{
+  filter:saturate(1.08) contrast(1.10) brightness(.68);
+}
+.cosmic-veil{
+  background:
+    radial-gradient(circle at 50% 48%,transparent 0,rgba(1,3,12,.025) 30%,rgba(1,3,12,.33) 72%,rgba(0,1,7,.68) 100%),
+    linear-gradient(180deg,rgba(0,1,7,.08),rgba(0,1,7,.24));
+}
+.globe-stage canvas{
+  filter:saturate(1.09) contrast(1.055) brightness(1.02);
+  transform-origin:50% 50%;
+  transition:filter .8s ease,transform 1.1s cubic-bezier(.18,.72,.18,1);
+  will-change:filter,transform;
+}
+.atlas[data-state="orbit"] .globe-stage canvas{transform:scale(1.045)}
+.atlas[data-state="focus"] .globe-stage canvas{transform:scale(1.02);filter:saturate(1.10) contrast(1.06) brightness(1.025)}
+.territory-label{
+  gap:7px;
+  padding:5px 9px 5px 6px;
+  border-color:rgba(239,198,128,.18);
+  background:rgba(6,7,20,.37);
+  font-size:13px;
+  backdrop-filter:blur(5px);
+  box-shadow:0 4px 18px rgba(0,0,0,.12);
+}
+.territory-label i{width:7px;height:7px;box-shadow:0 0 12px rgba(242,190,100,.34)}
+.territory-label.primary{
+  border-color:rgba(245,199,121,.52);
+  background:rgba(18,12,30,.57);
+  font-size:14px;
+}
+.orbit-help{background:rgba(3,4,14,.20);color:#cfc1d0}
+@media(max-width:800px){
+  .atlas[data-state="orbit"] .globe-stage canvas{transform:scale(1.025)}
+  .territory-label{font-size:11px;padding:4px 7px 4px 5px}
+}
+@media(prefers-reduced-motion:reduce){.globe-stage canvas{transition:none!important}}

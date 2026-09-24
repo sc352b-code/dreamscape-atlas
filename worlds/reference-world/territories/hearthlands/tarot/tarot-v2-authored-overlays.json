@@ -1,0 +1,480 @@
+{
+  "house-home": {
+    "previewSummary": "Known homes, unfamiliar houses and impossible mansions repeatedly organise belonging, memory, privacy, intrusion and discovery.",
+    "corpusOverview": {
+      "wholeSeriesCount": 114,
+      "wholeSeriesCountStatus": "known"
+    },
+    "recurringFunctions": [
+      {
+        "name": "Belonging made architectural",
+        "summary": "Family, partners, children, animals, food and care repeatedly organise themselves through kitchens, bedrooms, gardens and shared interiors. The house may externalise the question of who and what belongs here.",
+        "confidence": "high"
+      },
+      {
+        "name": "Porous boundaries and intrusion",
+        "summary": "Uninvited people, volatile inhabitants, hostile forces and displaced possessions repeatedly disturb domestic space. The house may stage the work of establishing psychological and relational boundaries.",
+        "confidence": "high"
+      },
+      {
+        "name": "More rooms than consciousness expects",
+        "summary": "Large and unfamiliar houses disclose extra rooms, levels, corridors and concealed life. Expanding architecture may image unrealised capacities, memories or complexes becoming available for exploration.",
+        "confidence": "medium-high"
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "Jungian: psyche / personality",
+        "framework": "jungian",
+        "summary": "A house can be amplified as an image of psychic structure: different levels and rooms may suggest differentiated areas of experience, but this reading must be tested against each dream.",
+        "caveat": "The house is the psyche is an amplification, not a translation key."
+      },
+      {
+        "name": "Jungian: Self and totality",
+        "framework": "jungian",
+        "summary": "Impossible scale or a building that behaves as a whole may intimate a psychic totality larger than the conscious ego; haunted and many-roomed houses are stronger candidates than ordinary kitchens."
+      },
+      {
+        "name": "Autobiographical and attachment",
+        "framework": "autobiographical",
+        "summary": "Childhood and present houses can combine episodic memory, safety, proximity and caregiving without functioning as disguised symbols."
+      }
+    ],
+    "possibleLesson": "Belonging may be something continually defended, reorganised and made habitable rather than something permanently secured.",
+    "reflectionPrompt": "Which house feels most yours, and what is happening to belonging there: shelter, crowding, discovery, inheritance, intrusion, repair or expansion?"
+  },
+  "water": {
+    "title": "Water",
+    "friendlySubtitle": "Change, depth, crossing and renewal",
+    "cardImage": "/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png",
+    "previewImage": "/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png",
+    "previewSummary": "Water appears in 42 dreams across the series, taking forms such as sea, rivers, rain, baths, pools, floods and crossings.",
+    "quickStats": [
+      {
+        "value": 42,
+        "label": "dreams in the series"
+      },
+      {
+        "value": 59,
+        "label": "recorded appearances"
+      },
+      {
+        "value": 19,
+        "label": "Hearthlands dreams"
+      }
+    ],
+    "corpusOverview": {
+      "uniqueDreamCount": 42,
+      "appearanceCount": 59,
+      "wholeSeriesCount": 42,
+      "wholeSeriesCountStatus": "known",
+      "territoryCounts": {
+        "roadlands": 27,
+        "hearthlands": 19,
+        "littoral": 12,
+        "institutional": 6,
+        "river": 5
+      }
+    },
+    "geographyNote": "A dream can belong to more than one territory, so these territory counts overlap.",
+    "corpusGrounding": "Water appears in 42 different dreams and is recorded 59 times. It is especially common in Roadlands and Hearthlands, but it reaches all five territories. Across the dreams it can be a route, a barrier, a danger, a place of play, a source of care, or something that overwhelms ordinary control. Its meaning changes with what the water is doing and how you respond to it.",
+    "recurringFunctions": [
+      {
+        "name": "Crossing from one place or state to another",
+        "summary": "Rivers, seas, boats and shorelines repeatedly create a journey, boundary or decision about whether and how to cross.",
+        "confidence": "high"
+      },
+      {
+        "name": "Intensity that is hard to control",
+        "summary": "Floods, storms, currents and deep water often appear when the dream world becomes harder to contain or manage.",
+        "confidence": "medium-high"
+      },
+      {
+        "name": "Care, cleansing and restoration",
+        "summary": "Baths, fresh water, swimming and caring for animals show another side of water: something that can soothe, nourish or help life recover.",
+        "confidence": "medium-high"
+      },
+      {
+        "name": "Play and renewed aliveness",
+        "summary": "Some dreams enter water with curiosity, beauty or pleasure, suggesting that depth is not always a threat.",
+        "confidence": "medium"
+      }
+    ],
+    "possibleMeanings": [
+      {
+        "name": "Change and movement",
+        "summary": "Water often appears when something is in motion and cannot simply stay fixed."
+      },
+      {
+        "name": "Feeling that is larger than a plan",
+        "summary": "When water floods, deepens or becomes powerful, it may reflect experience that cannot be fully managed through control alone."
+      },
+      {
+        "name": "A crossing",
+        "summary": "Water can mark the space between where you are and somewhere you are trying to reach."
+      },
+      {
+        "name": "Renewal",
+        "summary": "When water cleans, nourishes or invites play, it may point toward recovery, release or renewed contact with life."
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "A Jungian view",
+        "summary": "Water can sometimes represent the deeper parts of inner life that are moving underneath ordinary conscious control. This fits best when the dream involves depth, immersion, currents or something hidden below the surface.",
+        "caveat": "Water does not automatically mean emotion or the unconscious. The exact form of the water and your actions in the dream matter."
+      },
+      {
+        "name": "A story view",
+        "summary": "In many dreams water simply creates the problem or possibility that drives the story: cross it, survive it, enter it, protect someone in it, or find a route around it."
+      },
+      {
+        "name": "A life-experience view",
+        "summary": "Swimming, weather, coastlines, holidays, bathing and caring for animals may also draw directly on real memories and everyday concerns."
+      }
+    ],
+    "possibleLesson": "The repeating question may be how to enter change or emotional depth without losing your ability to choose, act and care for yourself or others.",
+    "reflectionPrompt": "When water appears, are you crossing it, being overwhelmed by it, caring for something with it, playing in it, or trying to keep it under control?",
+    "dreamRecordCount": 42,
+    "relatedItems": [
+      {
+        "id": "river",
+        "label": "River"
+      },
+      {
+        "id": "sea",
+        "label": "Sea"
+      },
+      {
+        "id": "lake",
+        "label": "Lake"
+      },
+      {
+        "id": "storm",
+        "label": "Storm"
+      },
+      {
+        "id": "rain",
+        "label": "Rain"
+      },
+      {
+        "id": "boat",
+        "label": "Boat"
+      },
+      {
+        "id": "family-home",
+        "label": "Family Home"
+      }
+    ]
+  },
+  "cat": {
+    "previewSummary": "Cats repeatedly gather a tension between cherished vulnerability and irreducible autonomy: close enough to require care, but never wholly manageable.",
+    "corpusOverview": {
+      "wholeSeriesCount": 34,
+      "wholeSeriesCountStatus": "known"
+    },
+    "recurringFunctions": [
+      {
+        "name": "Vulnerable life calling forth protection",
+        "summary": "Cats repeatedly face vehicles, hostile figures, injury, disappearance, fire or unsafe boundaries, prompting urgent rescue and practical care.",
+        "confidence": "high"
+      },
+      {
+        "name": "Instinct that exceeds domestication",
+        "summary": "Cats become lion-like, elusive, speaking, resistant or unexpectedly capable, repeatedly exceeding the passive role assigned to a pet.",
+        "confidence": "medium-high"
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "Jungian: instinctive companion",
+        "framework": "jungian",
+        "summary": "The cat can mediate between domestic consciousness and a more self-directed instinctive life: close to the household, but never wholly possessed by it."
+      },
+      {
+        "name": "Care ethics",
+        "framework": "care-ethics",
+        "summary": "The recurring question may be how responsibility remains responsive to the preferences of a dependent but agentic other."
+      },
+      {
+        "name": "Literal attachment",
+        "framework": "autobiographical",
+        "summary": "Real interspecies attachment can explain vigilance, grief and caregiving without requiring archetypal interpretation."
+      }
+    ],
+    "possibleLesson": "Protection may need to become attentive partnership: caring intensely without erasing the autonomy of the life being cared for.",
+    "reflectionPrompt": "Is the cat asking for rescue, food, space, trust, attention, or recognition that its instinct knows something your conscious plan does not?"
+  },
+  "dog": {
+    "previewSummary": "Dogs oscillate between companion and sentinel, repeatedly testing loyalty, belonging, warning, guarding and the reliability of protective instinct.",
+    "corpusOverview": {
+      "wholeSeriesCount": 25,
+      "wholeSeriesCountStatus": "known"
+    },
+    "recurringFunctions": [
+      {
+        "name": "Companionship woven into family life",
+        "summary": "Known dogs repeatedly appear with family, fields, houses and other animals as energetic members of a shared relational world.",
+        "confidence": "medium-high"
+      },
+      {
+        "name": "Guarding, warning and misjudged threat",
+        "summary": "Dogs bark, guard thresholds, chase vulnerable figures or appear threatening; other dreams expose apparent protection as ineffective or mistaken.",
+        "confidence": "medium-high"
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "Jungian: instinctive guardian",
+        "framework": "jungian",
+        "summary": "The dog can amplify protective instinct at the edge of consciousness, alerting the ego to what approaches the household or group."
+      },
+      {
+        "name": "Threat detection",
+        "framework": "other",
+        "summary": "Barking, chasing and guarding can dramatise rapid judgements about safety and uncertainty without requiring symbolic translation."
+      },
+      {
+        "name": "Literal attachment",
+        "framework": "autobiographical",
+        "summary": "Known dogs carry real affection, memory and grief that should precede symbolic amplification."
+      }
+    ],
+    "possibleLesson": "The pattern may ask which protective instincts deserve trust, which need moderation, and when apparent guardianship is only performance.",
+    "reflectionPrompt": "Is this dog accompanying, playing, resting, warning, guarding, chasing, or pretending to protect, and does your body trust its judgement?"
+  },
+  "family-home": {
+    "title": "Family Home",
+    "friendlySubtitle": "Care, belonging and making room for life to grow",
+    "cardImage": "/worlds/reference-world/territories/hearthlands/tarot/art/family-home-v2.png",
+    "previewImage": "/worlds/reference-world/territories/hearthlands/tarot/art/family-home-v2.png",
+    "previewSummary": "In both Family Home dreams, something vulnerable is brought inside, cared for over time, and given the chance to recover and transform.",
+    "quickStats": [
+      {
+        "value": 2,
+        "label": "dreams linked to this place"
+      },
+      {
+        "value": "Hearthlands",
+        "label": "home territory"
+      }
+    ],
+    "corpusOverview": {
+      "uniqueDreamCount": 2,
+      "wholeSeriesCount": 2,
+      "wholeSeriesCountStatus": "known",
+      "territoryCounts": {
+        "hearthlands": 2
+      }
+    },
+    "geographyNote": "Both source dreams belong to Hearthlands.",
+    "corpusGrounding": "The two Family Home dreams share a striking pattern. In each one, a fragile creature is found outside the home and brought into a bedroom or protected enclosure. With water, food, shelter and patient care, it recovers and becomes stronger or more extraordinary. The home acts less like a backdrop and more like a place that makes recovery possible.",
+    "recurringFunctions": [
+      {
+        "name": "A place where vulnerable life is brought inside",
+        "summary": "Both dreams begin with something fragile or close to death being found outside and carried into the home.",
+        "confidence": "high"
+      },
+      {
+        "name": "Care changes what is possible",
+        "summary": "Recovery happens through steady practical care over time rather than through a sudden rescue alone.",
+        "confidence": "high"
+      },
+      {
+        "name": "The bedroom becomes a place of growth",
+        "summary": "In both dreams the bedroom becomes an unusual nurturing space where vulnerable life can recover, expand and transform.",
+        "confidence": "high"
+      }
+    ],
+    "possibleMeanings": [
+      {
+        "name": "Sanctuary and recovery",
+        "summary": "The Family Home may represent a place where damaged or neglected life can be protected long enough to recover."
+      },
+      {
+        "name": "Making room for something fragile",
+        "summary": "The dreams may be asking what happens when something vulnerable is allowed into the centre of ordinary life rather than kept outside."
+      },
+      {
+        "name": "Growth through sustained care",
+        "summary": "The repeated transformation suggests that patient attention can change what initially looks weak, strange or almost lost."
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "A simple life-story view",
+        "summary": "These dreams can be read directly as stories about care, responsibility, animals and the emotional meaning of home. They do not need a symbolic explanation to be meaningful."
+      },
+      {
+        "name": "A Jungian view",
+        "summary": "One possible Jungian reading is that the home represents part of the inner life, while the vulnerable creatures represent neglected or undeveloped parts that become stronger when they are welcomed and cared for.",
+        "caveat": "This is one possible reading, not a fixed translation of the house or the animals."
+      }
+    ],
+    "possibleLesson": "What you make room for and care for over time may grow into something stronger, stranger and more alive than it first seemed.",
+    "reflectionPrompt": "What in your life currently needs shelter, patience or the right conditions to grow rather than being pushed away?",
+    "dreamRecordCount": 2,
+    "relatedItems": [
+      {
+        "id": "person-10",
+        "label": "Mum"
+      },
+      {
+        "id": "water",
+        "label": "Water"
+      },
+      {
+        "id": "octopus",
+        "label": "Octopus"
+      },
+      {
+        "id": "cat",
+        "label": "Cat"
+      },
+      {
+        "id": "dog",
+        "label": "Dog"
+      },
+      {
+        "id": "egg",
+        "label": "Egg"
+      },
+      {
+        "id": "garden",
+        "label": "Garden"
+      }
+    ]
+  },
+  "person-11": {
+    "title": "Natalie",
+    "friendlySubtitle": "Love, change, family belonging and being deeply known",
+    "cardImage": "/worlds/reference-world/territories/hearthlands/tarot/art/natalie-v2.png",
+    "previewImage": "/worlds/reference-world/territories/hearthlands/tarot/art/natalie-v2.png",
+    "previewSummary": "Natalie appears in 59 dreams and most often turns up when the dreams are exploring love, change, family belonging, choice and intimacy.",
+    "quickStats": [
+      {
+        "value": 59,
+        "label": "dreams in the series"
+      },
+      {
+        "value": 40,
+        "label": "Roadlands dreams"
+      },
+      {
+        "value": 31,
+        "label": "Hearthlands dreams"
+      }
+    ],
+    "corpusOverview": {
+      "uniqueDreamCount": 59,
+      "wholeSeriesCount": 59,
+      "wholeSeriesCountStatus": "known",
+      "territoryCounts": {
+        "roadlands": 40,
+        "hearthlands": 31,
+        "institutional": 18,
+        "littoral": 8,
+        "river": 6
+      },
+      "themeCounts": {
+        "love and commitment": 53,
+        "journey and change": 40,
+        "family and belonging": 29,
+        "choice and return": 22,
+        "desire and intimacy": 22,
+        "care and responsibility": 12,
+        "threat and uncertainty": 10
+      }
+    },
+    "geographyNote": "A dream can belong to more than one territory, so these territory counts overlap.",
+    "corpusGrounding": "Across 59 dreams, Natalie is most often present when the dream is dealing with love and commitment, movement or change, family belonging, choice, intimacy and the question of what should be carried forward. She appears in all five territories, most strongly in Roadlands and Hearthlands. The pattern is varied: some dreams emphasise closeness and being deeply understood, others separation, boundaries, family responsibility, desire, danger or choosing a direction.",
+    "recurringFunctions": [
+      {
+        "name": "A relationship at the centre of important choices",
+        "summary": "Love and commitment appear in 53 of the 59 Natalie dreams, while choice or return appears in 22. Her presence often coincides with deciding what to keep, leave, repair or move toward.",
+        "confidence": "high"
+      },
+      {
+        "name": "A companion through change",
+        "summary": "Journey and transition appear in 40 dreams. Natalie is frequently present while travelling, moving between places, preparing to leave, returning, or working out where a relationship is going.",
+        "confidence": "high"
+      },
+      {
+        "name": "A bridge between intimacy and family life",
+        "summary": "Family and belonging appear in 29 dreams and desire or intimacy in 22, so the relationship is repeatedly placed inside a wider world of children, homes, relatives and responsibility.",
+        "confidence": "high"
+      },
+      {
+        "name": "A figure through whom trust and boundaries are tested",
+        "summary": "A smaller but clear group of dreams brings uncertainty, conflict or danger into the relationship, asking what feels safe, fair, honest or trustworthy.",
+        "confidence": "medium"
+      }
+    ],
+    "possibleMeanings": [
+      {
+        "name": "Love that has to be actively chosen",
+        "summary": "The dreams often treat relationship as something that develops through choices, conversations and actions rather than something that simply exists in the background."
+      },
+      {
+        "name": "Being deeply known",
+        "summary": "Several dreams value the feeling of being understood without having to explain everything, making Natalie a strong carrier of recognition and emotional intimacy."
+      },
+      {
+        "name": "What to carry forward from a relationship",
+        "summary": "Dreams of leaving, returning, travelling together or meeting again can explore which parts of a relationship belong to the future and which belong to the past."
+      },
+      {
+        "name": "Closeness with boundaries",
+        "summary": "The series repeatedly places intimacy beside independence, family responsibility, disagreement or risk, suggesting that closeness and clear boundaries need to coexist."
+      }
+    ],
+    "interpretiveLenses": [
+      {
+        "name": "The literal relationship",
+        "summary": "The first and most important reading is Natalie as a real person with a real shared history. Many of these dreams may simply be working through love, memory, conflict, desire, family life and change in that relationship."
+      },
+      {
+        "name": "A Jungian view",
+        "summary": "One possible Jungian reading is that Natalie sometimes takes on an anima-like role: a figure through whom feeling, intimacy, vulnerability and relationship become especially vivid. In that sense, some dreams may be exploring how you relate to those qualities within yourself as well as through another person.",
+        "caveat": "Because Natalie is a real person, this should sit beside the literal relationship reading, not replace her with an archetype."
+      },
+      {
+        "name": "A pattern-over-time view",
+        "summary": "Across the series, the repeated themes of leaving, returning, travelling, choosing and understanding one another make Natalie a useful marker of how your relationship to closeness and commitment is changing over time."
+      }
+    ],
+    "possibleLesson": "The recurring question may be less “What does Natalie symbolise?” and more “What kind of closeness feels alive and honest, and what needs to be chosen, spoken or bounded for love to remain real rather than automatic?”",
+    "reflectionPrompt": "When Natalie appears, is the dream asking about closeness, choice, trust, family, desire, separation, return, or the feeling of being deeply understood?",
+    "dreamRecordCount": 59,
+    "relatedItems": [
+      {
+        "id": "family-home",
+        "label": "Family Home"
+      },
+      {
+        "id": "person-10",
+        "label": "Mum"
+      },
+      {
+        "id": "person-05",
+        "label": "Dad"
+      },
+      {
+        "id": "water",
+        "label": "Water"
+      },
+      {
+        "id": "cat",
+        "label": "Cat"
+      },
+      {
+        "id": "dog",
+        "label": "Dog"
+      },
+      {
+        "id": "garden",
+        "label": "Garden"
+      }
+    ]
+  }
+}

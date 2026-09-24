@@ -1,0 +1,60 @@
+name: Family Home integrity
+
+on:
+  push:
+    branches: [family-home-pilot]
+  pull_request:
+    branches: [main]
+    paths:
+      - 'src/family-home-*'
+      - 'src/hearthlands-territory-v1.*'
+      - 'src/hearthlands-registration-v1.*'
+      - 'src/territory-cosmos.*'
+      - 'src/world-runtime-config.js'
+      - 'worlds/**'
+      - 'dreamscape-engine/**'
+      - 'assets/family-home-pilot/**'
+      - 'assets/territory-planets/**'
+      - 'tools/upgrade_territory_planets.py'
+      - 'tools/validate_territory_planets.py'
+      - 'index.html'
+      - 'tests/family-home-integrity.mjs'
+      - 'tests/hearthlands-territory-v1-integrity.mjs'
+      - 'tests/hearthlands-registration-v1-integrity.mjs'
+      - 'tests/hearthlands-human-identity-registration-v1-integrity.mjs'
+      - 'tests/dreamscape-private-profile-integrity.mjs'
+      - 'src/dreamscape-private-profile.js'
+      - 'tests/territory-cosmos-integrity.mjs'
+      - 'tests/world-engine-v1-integrity.mjs'
+      - '.github/workflows/family-home-integrity.yml'
+
+jobs:
+  integrity:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Install territory image validation dependencies
+        run: python -m pip install --quiet pillow numpy
+      - name: Run Family Home pilot integrity suite
+        run: node tests/family-home-integrity.mjs
+      - name: Run Hearthlands Territory Layer v1 integrity suite
+        run: node tests/hearthlands-territory-v1-integrity.mjs
+      - name: Run Hearthlands image-registration integrity suite
+        run: node tests/hearthlands-registration-v1-integrity.mjs
+      - name: Run Hearthlands human-identity registration integrity suite
+        run: node tests/hearthlands-human-identity-registration-v1-integrity.mjs
+      - name: Run private Dreamscape profile integrity suite
+        run: node tests/dreamscape-private-profile-integrity.mjs
+      - name: Run territory cosmos integrity suite
+        run: node tests/territory-cosmos-integrity.mjs
+      - name: Run Dreamscape World Engine v1 integrity suite
+        run: node tests/world-engine-v1-integrity.mjs
+      - name: Validate five planet assets at full 360 degrees
+        run: python tools/validate_territory_planets.py

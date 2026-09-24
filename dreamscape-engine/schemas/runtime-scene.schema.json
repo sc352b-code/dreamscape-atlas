@@ -1,0 +1,53 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dreamscape.local/schemas/runtime-scene.schema.json",
+  "title": "Dreamscape World Engine v1 Runtime Scene",
+  "type": "object",
+  "required": ["engineVersion","worldId","renderer","planets"],
+  "properties": {
+    "engineVersion":{"type":"string"},
+    "worldId":{"type":"string","minLength":1},
+    "renderer":{
+      "type":"object",
+      "required":["sphereSegments","texture"],
+      "properties":{
+        "sphereSegments":{"type":"array","prefixItems":[{"type":"integer","minimum":16},{"type":"integer","minimum":8}],"minItems":2,"maxItems":2},
+        "texture":{
+          "type":"object",
+          "required":["wrapS","wrapT","minFilter","magFilter","generateMipmaps"],
+          "properties":{
+            "wrapS":{"const":"RepeatWrapping"},
+            "wrapT":{"const":"ClampToEdgeWrapping"},
+            "minFilter":{"const":"LinearFilter"},
+            "magFilter":{"const":"LinearFilter"},
+            "generateMipmaps":{"const":false}
+          },
+          "additionalProperties":true
+        }
+      },
+      "additionalProperties":true
+    },
+    "planets":{
+      "type":"array",
+      "minItems":1,
+      "items":{
+        "type":"object",
+        "required":["id","position","mobilePosition","radius","spin","tilt","tint","offset"],
+        "properties":{
+          "id":{"type":"string"},
+          "position":{"type":"array","items":{"type":"number"},"minItems":3,"maxItems":3},
+          "mobilePosition":{"type":"array","items":{"type":"number"},"minItems":3,"maxItems":3},
+          "radius":{"type":"number","exclusiveMinimum":0},
+          "spin":{"type":"number","minimum":0},
+          "tilt":{"type":"number"},
+          "tint":{"type":"string","pattern":"^#[0-9a-fA-F]{6}$"},
+          "offset":{"type":"number"},
+          "live":{"type":"boolean"},
+          "entryRoute":{"type":"string"}
+        },
+        "additionalProperties":true
+      }
+    }
+  },
+  "additionalProperties":true
+}

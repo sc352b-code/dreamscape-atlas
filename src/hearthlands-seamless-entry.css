@@ -1,0 +1,57 @@
+/* Hearthlands entry: one continuous handoff from the selected planet to the final map. */
+.atlas.hearthlands-seamless-entry .descent-copy,
+.atlas.hearthlands-seamless-entry .territory-cosmos__blackout,
+.atlas.hearthlands-seamless-entry .territory-cosmos__tunnel-vignette{
+  display:none!important;
+}
+
+/* The final map uses one fixed outer frame before, during and after handoff. */
+.atlas.territory-v1 .flatmap-world{
+  width:min(100vw,150vh)!important;
+  height:min(100vh,66.6667vw)!important;
+  left:50%!important;
+  top:50%!important;
+  translate:-50% -50%!important;
+  transform:none!important;
+}
+
+.atlas.hearthlands-seamless-entry .flatmap-scene{
+  opacity:.015!important;
+  clip-path:none!important;
+  pointer-events:none!important;
+  transition:opacity 1.18s cubic-bezier(.2,.72,.2,1)!important;
+  background:#0b1020!important;
+}
+
+.atlas.hearthlands-seamless-entry .territory-cosmos{
+  opacity:1!important;
+  visibility:visible!important;
+  transition:opacity 1.18s cubic-bezier(.2,.72,.2,1)!important;
+}
+
+.atlas.hearthlands-map-takeover .flatmap-scene{
+  opacity:1!important;
+  clip-path:none!important;
+}
+
+.atlas.hearthlands-map-takeover .territory-cosmos{
+  opacity:0!important;
+  pointer-events:none!important;
+}
+
+/* Keep the map visually identical when the legacy state finally reaches hearth. */
+.atlas[data-state="hearth"].territory-v1 .flatmap-scene{
+  opacity:1!important;
+  clip-path:none!important;
+}
+
+/* Main.js has an old mouse-parallax transform on the outer world. Territory v1 owns
+   pan/zoom on the inner map, so disabling this removes the late arrival jerk. */
+.atlas.territory-v1[data-state="hearth"] .flatmap-world{
+  transform:none!important;
+}
+
+@media(prefers-reduced-motion:reduce){
+  .atlas.hearthlands-seamless-entry .flatmap-scene,
+  .atlas.hearthlands-seamless-entry .territory-cosmos{transition-duration:.18s!important}
+}

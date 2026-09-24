@@ -131,7 +131,7 @@
       }
     ],
     "possibleLesson": "The repeating question may be how to enter change or emotional depth without losing your ability to choose, act and care for yourself or others.",
-    "reflectionPrompt": "When water appears, are you crossing it, being overwhelmed by it, caring for something with it, playing in it, or trying to keep it under control?",
+    "reflectionPrompt": null,
     "dreamRecordCount": 42,
     "relatedItems": [
       {
@@ -183,7 +183,17 @@
       "eyebrow": "HEARTHLANDS · SYMBOL TAROT",
       "responsiveStrategy": "wide-desktop-mini-triptych; standard-desktop-artwork-first; mobile-full-height-drawer"
     },
-    "relationshipStatus": "related-not-cooccurrence"
+    "relationshipStatus": "related-not-cooccurrence",
+    "geographyCountMode": "overlapping-memberships",
+    "behaviorSummary": "The strongest current pattern is crossing: Water repeatedly appears when you are approaching, attempting or negotiating a boundary or passage. It also recurs when conditions become harder to control, and in dreams where you are caring, cleansing or restoring. Play and renewed aliveness appear too, but with more limited support in the current analysis.",
+    "confidenceScale": {
+      "note": "These are qualitative evidence-strength labels used by the current analysis. They are not percentages, probabilities or counts of dreams.",
+      "levels": {
+        "high": "Strongest support among the recurring patterns currently identified.",
+        "medium-high": "Substantial recurring support, but less strong than High.",
+        "medium": "A recurring pattern with more limited or mixed support."
+      }
+    }
   },
   "cat": {
     "previewSummary": "Cats repeatedly gather a tension between cherished vulnerability and irreducible autonomy: close enough to require care, but never wholly manageable.",

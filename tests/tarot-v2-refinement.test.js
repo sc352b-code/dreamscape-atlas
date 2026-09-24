@@ -15,16 +15,26 @@ test('exemplar cards support independent preview and full framing',()=>{
   }
 });
 
-test('one card establishes the gold-standard pattern',()=>{
-  const gold=Object.values(cards).filter(card=>card.goldStandardExemplar);
+test('Water is the single gold-standard artefact exemplar',()=>{
+  const gold=Object.entries(cards).filter(([,card])=>card.goldStandardExemplar);
   assert.equal(gold.length,1);
-  assert.match(gold[0].interpretiveBoundary,/hypotheses|fixed translations/i);
+  assert.equal(gold[0][0],'water');
+  assert.equal(cards.water.presentation?.mode,'artefact-scroll');
+  assert.equal(cards.water.presentation?.evidenceFirst,true);
+  assert.equal(cards.water.presentation?.fullArtworkOpening,true);
+  assert.equal(cards.water.imageFraming?.full?.objectFit,'contain');
+  assert.match(cards.water.interpretiveBoundary,/hypotheses|fixed translations/i);
 });
 
-test('renderer uses metadata and distinguishes evidence from interpretation',()=>{
+test('renderer uses framing metadata and an evidence-first Water structure',()=>{
   assert.match(js,/applyFraming\(img,data,'preview'\)/);
   assert.match(js,/applyFraming\(img,data,'full'\)/);
+  assert.match(js,/ensureWaterV3Structure/);
+  assert.match(js,/INTERPRETATION · NOT CORPUS FACT/);
+  assert.match(js,/dreamscape-open-dream-records/);
+  assert.doesNotMatch(js,/\\n\s+target\.innerHTML/);
   assert.doesNotMatch(css,/object-position:center 38%/);
-  assert.match(css,/EVIDENCE/);
-  assert.match(css,/INTERPRETATION/);
+  assert.match(css,/WATER TAROT v3/);
+  assert.match(css,/object-fit:contain!important/);
+  assert.match(css,/attr\(data-layer-label\)/);
 });

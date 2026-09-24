@@ -3330,3 +3330,181 @@
     scroll-behavior:auto;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   COMPANION TAB ISOLATION + CARD-FIT CORRECTION
+   -------------------------------------------------------------------------- */
+
+/* The tab controller owns visibility. Exactly one top-level companion card may
+   exist in the reading viewport at a time, regardless of what data renderers do. */
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info{
+  display:block;
+  position:relative;
+  overflow:hidden;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info > [data-chapter]{
+  display:none!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="overview"] > [data-chapter="overview"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="geography"] > [data-chapter="geography"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="patterns"] > [data-chapter="patterns"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="alongside"] > [data-chapter="alongside"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="chronology"] > [data-chapter="chronology"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="sources"] > [data-chapter="sources"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="meanings"] > [data-chapter="meanings"]{
+  display:flex!important;
+}
+
+/* Each active chapter is one complete physical card. Nothing is allowed to
+   continue below it into the dock. */
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-card{
+  flex-direction:column;
+  align-items:stretch;
+  justify-content:flex-start;
+  overflow:hidden!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-body{
+  width:100%;
+  min-height:0;
+  overflow-y:auto!important;
+  overflow-x:hidden!important;
+  overscroll-behavior:contain;
+  padding-right:5px;
+  padding-bottom:8px;
+  box-sizing:border-box;
+}
+
+/* Keep all prose and visualisations inside the safe inner field of the frame. */
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-body > *{
+  max-width:100%;
+  box-sizing:border-box;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-card p{
+  margin-left:0!important;
+  margin-right:0!important;
+}
+
+/* Overview: compress without deleting information. */
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-companion-header{
+  margin-bottom:12px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-overview-lead{
+  width:116px;
+  height:116px;
+  margin-bottom:12px!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-overview-lead b{
+  font-size:44px!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .territory-v1-grounding{
+  font-size:11.5px!important;
+  line-height:1.52!important;
+  margin-bottom:10px!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-overview-metrics{
+  margin-bottom:9px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-mini-inscription{
+  padding-top:8px;
+  padding-bottom:8px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-behaviour-summary{
+  padding:10px 11px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-behaviour-summary>p{
+  font-size:10.5px!important;
+  line-height:1.48!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-overview-poles{
+  gap:4px;
+  margin-top:7px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-overview-poles span{
+  padding:5px 7px;
+}
+
+/* Geography: all five territory rows should fit as one composed reading. */
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-geography .tarot-territory-logic{
+  margin-bottom:10px;
+  padding:10px 11px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-geography .territory-v1-geo-row{
+  padding:6px 0;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-geography .territory-v1-geo-note{
+  margin-top:6px!important;
+  font-size:9.5px!important;
+}
+
+/* Patterns: concise two-column constellation of four functions, with the
+   strength legend compacted above it. */
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns .tarot-confidence-legend{
+  margin-bottom:9px;
+  padding:9px 10px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns .tarot-confidence-legend>p{
+  margin:5px 0 7px!important;
+  font-size:9.25px!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns .tarot-confidence-legend span{
+  grid-template-columns:64px 1fr;
+  gap:6px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns .territory-v1-function-list{
+  grid-template-columns:1fr 1fr;
+  gap:6px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns article{
+  padding:8px!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns article p{
+  font-size:8.9px!important;
+  line-height:1.35!important;
+}
+
+/* Related constellation: keep all related elements visible within the card. */
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-alongside .territory-v1-related-note{
+  font-size:10.5px!important;
+  line-height:1.45!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-alongside .tarot-constellation-core{
+  width:96px;
+  height:96px;
+  margin:6px auto 8px;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-alongside .territory-v1-related-buttons{
+  gap:5px!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-alongside .territory-v1-related-buttons button{
+  padding:6px 5px!important;
+  font-size:10px!important;
+}
+
+/* Meanings is the densest card. Preserve every developed section but keep it
+   inside the card with a discreet internal scroll rather than leaking below it. */
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-meanings .territory-v1-meaning-list article,
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-meanings .territory-v1-lenses article{
+  margin:5px 0!important;
+  padding:8px 9px!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-meanings article span,
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-meanings article p{
+  font-size:9.5px!important;
+  line-height:1.4!important;
+}
+
+/* Keep the chapter selector in view while the user consults a card on standard
+   desktop/tablet, rather than making them scroll past a stack of cards. */
+@media(min-width:900px) and (max-width:1599px){
+  .territory-v1-reader.tarot-docked-workspace .tarot-triptych-nav{
+    position:sticky;
+    top:0;
+    z-index:12;
+    background:linear-gradient(180deg,rgba(10,10,23,.995) 76%,rgba(10,10,23,.92) 90%,transparent);
+    backdrop-filter:blur(4px);
+  }
+  .territory-v1-reader.tarot-docked-workspace .tarot-triptych-info{
+    min-height:min(72vh,660px);
+  }
+}

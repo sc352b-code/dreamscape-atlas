@@ -34,10 +34,14 @@
     <script src="/src/buildpass-prelude.js"></script>
     <script type="module">
       const corpus = new URLSearchParams(location.search).get("corpus");
-      await import(corpus === "natalie" ? "/src/natalie-cosmos.js" : "/src/main.js");
+      if (corpus === "natalie") {
+        await import("/src/natalie-cosmos.js");
+      } else {
+        await import("/src/main.js");
+        await import("/src/v57-hearthlands-geography.js");
+        await import("/src/hearthlands-symbols.js");
+        await import("/src/cosmos-ambience.js");
+      }
     </script>
-    <script type="module" src="/src/v57-hearthlands-geography.js"></script>
-    <script type="module" src="/src/hearthlands-symbols.js"></script>
-    <script type="module" src="/src/cosmos-ambience.js"></script>
   </body>
 </html>

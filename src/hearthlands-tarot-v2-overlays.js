@@ -302,7 +302,6 @@ async function boot(){
       grounding.appendChild(metrics);
     }
     metrics.innerHTML=[
-      whole!=null?{value:whole,label:`unique ${subject} dreams`}:null,
       appearances!=null?{value:appearances,label:`recorded ${subject} appearances`}:null,
       territoryCount?{value:territoryCount,label:'territories reached'}:null
     ].filter(Boolean).map(item=>`
@@ -315,12 +314,15 @@ async function boot(){
       grounding.appendChild(behaviour);
     }
     const behaviourText=data.behaviorSummary||data.behaviourSummary||'';
+    const keyPatterns=(data.recurringFunctions||[]).slice(0,3);
     behaviour.innerHTML=behaviourText?`
       <small>WHAT YOU TEND TO BE DOING AROUND ${escapeHTML(subject.toUpperCase())}</small>
-      <p>${escapeHTML(behaviourText)}</p>`:'';
+      <p>${escapeHTML(behaviourText)}</p>
+      <div class="tarot-overview-poles">${keyPatterns.map((item,index)=>`
+        <span><i aria-hidden="true">${['◇','☾','✦'][index]||'✦'}</i><b>${escapeHTML(item.name)}</b></span>`).join('')}</div>`:'';
 
     const lead=grounding.querySelector('.tarot-overview-lead');
-    if(lead&&whole!=null&&total!=null) lead.textContent=`${data.title||'This subject'} appears in ${whole} of your ${total} dreams.`;
+    if(lead&&whole!=null&&total!=null) lead.innerHTML=`<b>${escapeHTML(whole)}</b><span>of ${escapeHTML(total)} dreams</span><small>contain ${escapeHTML(subject)}</small>`;
   }
 
   function ensureGeographyExplanation(geography,data){

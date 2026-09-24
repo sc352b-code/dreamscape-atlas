@@ -671,6 +671,8 @@ async function boot(){
 
     reader.classList.add('tarot-v2-exemplar');
     reader.dataset.tarotId=selectedId()||'';
+    const deckImage=data.cardImage||data.previewImage;
+    if(deckImage) reader.style.setProperty('--tarot-deck-image',`url("${deckImage}")`);
     reader.classList.toggle('tarot-v2-gold-standard',Boolean(data.goldStandardExemplar));
 
     if(data.title) reader.querySelector('h2').textContent=data.title;

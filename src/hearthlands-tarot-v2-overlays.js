@@ -621,8 +621,8 @@ async function boot(){
     if(!reader.dataset.triptychAnimated){
       reader.dataset.triptychAnimated='true';
       reader.animate(
-        [{opacity:.25,transform:'translateX(28px)',filter:'blur(3px)'},{opacity:1,transform:'translateX(0)',filter:'blur(0)'}],
-        {duration:560,easing:'cubic-bezier(.16,.78,.12,1)'}
+        [{opacity:.72,transform:'translateX(18px)'},{opacity:1,transform:'translateX(0)'}],
+        {duration:360,easing:'cubic-bezier(.16,.78,.12,1)'}
       );
     }
   }

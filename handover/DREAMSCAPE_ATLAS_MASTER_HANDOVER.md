@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: refine Water's responsive dock, corpus explanations and ornate tab presentation before propagating the shell.
+Immediate priority: visually validate the ornate companion-card pass and connect/verify the private Water dream provider before propagating the shell.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`08dd9d6343dafc3ca1b01e6b20ecf1d7720c60b4`
+`9b490cc407fc26c15c24c05613c43498c50b7054`
 
 No merge to production has been performed.
 
@@ -164,6 +164,29 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-24 — Ornate companion cards + active Water source dreams
+
+User approved the Water Tarot size and tab differentiation, then requested two refinements: make every tab feel as magical/ornate as the Tarot itself, and remove the block on the 42 linked Water dreams.
+
+Implemented:
+- added one reusable scalable ornate frame asset at `assets/tarot-ornate-frame.svg`;
+- every active Tarot chapter now uses that same companion-card frame language rather than a plain information panel;
+- introduced a more magical serif typographic system using resilient system serif stacks (display/text/small-cap roles) without committing font files or adding a fragile font dependency;
+- headings, body copy, navigation labels, confidence labels, source-dream rows and buttons now inherit the Tarot typography system;
+- inner evidence pieces retain lighter miniature Tarot framing so the information still has hierarchy;
+- Source Dreams is now always clickable; it is no longer disabled merely because records were not preloaded;
+- `DreamscapePrivateProfile` can now lazily request records from a private/authenticated provider via `loadDreamRecords(subjectId)`;
+- providers can optionally implement `openDreamRecord(record)` to open the full source dream;
+- URL-valued private record refs are supported as a fallback;
+- a local private-profile JSON can be loaded directly into the browser session when no provider is connected;
+- local import remains session/private and is not written to the public repository;
+- Water declares `privateCorpusAccess.enabled=true`, subject `water`, expected count 42;
+- public code still contains no raw Water dream narrative.
+
+Important limitation:
+The public repository does not contain the 42 private Water dream records themselves. The UI is now active and will load/open all 42 when the authenticated provider supplies them. In a preview session without that provider, the Source Dreams card offers a local private-profile import instead of a disabled control.
+
 
 ### 2026-09-24 — Water data-logic and ornate-tab refinement
 

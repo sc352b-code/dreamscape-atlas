@@ -26,6 +26,8 @@ test('companion cards reuse the exact Water Tarot artwork as their deck edge',()
   assert.ok(css.includes(exactWaterAsset));
   assert.match(css,/EXACT WATER-DECK FRAME \+ LEGIBILITY HOTFIX/);
   assert.match(css,/aspect-ratio:2\/3/);
+  assert.match(css,/--tarot-deck-image/);
+  assert.match(js,/setProperty\('--tarot-deck-image'/);
   assert.match(css,/background:[\s\S]*water-v2\.png/);
 });
 

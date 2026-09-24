@@ -194,7 +194,7 @@
   border:1px solid rgba(240,195,113,.42);
   box-shadow:0 18px 45px rgba(0,0,0,.28),inset 0 0 0 1px rgba(255,255,255,.05)
 }
-.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-image img{object-position:center 38%}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-image img{object-position:50% 50%;transition:transform .7s cubic-bezier(.16,.78,.12,1),object-position .35s ease}
 .territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-stats{
   grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px
 }
@@ -252,4 +252,69 @@
   .territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-scroll{max-height:94vh;padding:42px 20px 28px}
   .territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-image{height:34vh}
   .territory-v1-meaning-list{grid-template-columns:1fr}
+}
+
+
+/* Tarot v2 refinement — manuscript/oracle artefact, with evidence kept visibly distinct from interpretation. */
+.territory-v1-reader.territory-v1-tarot.tarot-v2-exemplar{
+  isolation:isolate;
+}
+.territory-v1-reader.territory-v1-tarot.tarot-v2-exemplar::after{
+  left:34px;right:34px;top:24px;height:9px;
+  background:
+    radial-gradient(circle,rgba(250,218,154,.72) 0 1px,transparent 1.5px) center/18px 9px repeat-x;
+  opacity:.45;
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-image{
+  position:relative;
+  background:radial-gradient(circle at 50% 35%,rgba(229,190,116,.12),transparent 52%),rgba(2,7,14,.72);
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-image::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  box-shadow:inset 0 0 42px rgba(2,5,12,.38),inset 0 0 0 1px rgba(255,236,195,.08);
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-image img{
+  min-height:100%;
+}
+.territory-v1-tarot.tarot-v2-exemplar.tarot-v2-gold-standard .territory-v1-tarot-image{
+  box-shadow:0 22px 65px rgba(0,0,0,.36),0 0 45px rgba(108,170,184,.08),inset 0 0 0 1px rgba(255,255,255,.05);
+}
+.territory-v1-geo-row{
+  display:grid;grid-template-columns:minmax(105px,.9fr) minmax(90px,2fr) auto;align-items:center;gap:12px;
+  border-bottom:0;padding:7px 0;
+}
+.territory-v1-geo-row i{
+  position:relative;height:5px;border-radius:999px;overflow:hidden;background:rgba(255,255,255,.055);
+}
+.territory-v1-geo-row i::after{
+  content:"";position:absolute;inset:0 auto 0 0;width:var(--territory-share,0%);
+  border-radius:inherit;background:linear-gradient(90deg,rgba(225,181,102,.34),rgba(238,214,159,.82));
+  box-shadow:0 0 16px rgba(224,190,126,.18);
+}
+.territory-v1-article-heading{display:flex;align-items:baseline;justify-content:space-between;gap:10px}
+.territory-v1-confidence{
+  flex:0 0 auto;border:1px solid rgba(230,194,131,.17);border-radius:999px;padding:3px 7px;
+  color:#a99b9f;font:9px/1 system-ui,sans-serif;letter-spacing:.04em;text-transform:uppercase;
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-functions::before,
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-geography::before{
+  content:"EVIDENCE";display:block;margin:0 0 8px;color:#8fb4b6;
+  font:700 9px/1 system-ui,sans-serif;letter-spacing:.24em;
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-lenses::before,
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-lesson::before{
+  content:"INTERPRETATION";display:block;margin:0 0 8px;color:#c8a76f;
+  font:700 9px/1 system-ui,sans-serif;letter-spacing:.24em;
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-method{
+  border:1px solid rgba(148,181,183,.12);
+  background:linear-gradient(145deg,rgba(77,126,132,.065),rgba(255,255,255,.018));
+}
+.territory-v1-preview.tarot-v2-exemplar-preview .territory-v1-preview-image img{
+  transition:transform .55s cubic-bezier(.16,.78,.12,1);
+}
+.territory-v1-preview.tarot-v2-exemplar-preview:hover .territory-v1-preview-image img{transform:scale(1.018)}
+@media(max-width:800px){
+  .territory-v1-geo-row{grid-template-columns:92px 1fr auto;gap:8px}
+  .territory-v1-confidence{font-size:8px}
 }

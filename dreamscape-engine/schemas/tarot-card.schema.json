@@ -4,23 +4,74 @@
   "title": "Dreamscape Tarot Detail Card",
   "type": "object",
   "additionalProperties": false,
-  "required": ["id", "subjectType", "subjectId", "title", "cardImage", "interpretation", "corpusGrounding", "relatedItems", "privacyClass"],
+  "required": [
+    "id",
+    "subjectType",
+    "subjectId",
+    "title",
+    "cardImage",
+    "interpretation",
+    "corpusGrounding",
+    "relatedItems",
+    "privacyClass"
+  ],
   "properties": {
-    "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
-    "subjectType": {"enum": ["place", "symbol", "territory"]},
-    "subjectId": {"type": "string", "minLength": 1},
-    "title": {"type": "string", "minLength": 1},
-    "cardImage": {"type": ["string", "null"]},
-    "previewSummary": {"type": "string"},
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9-]+$"
+    },
+    "subjectType": {
+      "enum": [
+        "place",
+        "symbol",
+        "person",
+        "animal",
+        "object",
+        "territory"
+      ]
+    },
+    "subjectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cardImage": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "previewSummary": {
+      "type": "string"
+    },
     "corpusOverview": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "wholeSeriesCount": {"type": ["integer", "null"], "minimum": 0},
-        "wholeSeriesCountStatus": {"enum": ["known", "unknown", "private", "pending"]},
+        "wholeSeriesCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "wholeSeriesCountStatus": {
+          "enum": [
+            "known",
+            "unknown",
+            "private",
+            "pending"
+          ]
+        },
         "territoryCounts": {
           "type": "object",
-          "additionalProperties": {"type": "integer", "minimum": 0}
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
         }
       }
     },
@@ -29,12 +80,34 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["name", "summary"],
+        "required": [
+          "name",
+          "summary"
+        ],
         "properties": {
-          "name": {"type": "string", "minLength": 1},
-          "summary": {"type": "string", "minLength": 1},
-          "evidenceRefs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
-          "confidence": {"enum": ["low", "medium", "medium-high", "high"]}
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "confidence": {
+            "enum": [
+              "low",
+              "medium",
+              "medium-high",
+              "high"
+            ]
+          }
         }
       }
     },
@@ -43,47 +116,141 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["name", "summary"],
+        "required": [
+          "name",
+          "summary"
+        ],
         "properties": {
-          "name": {"type": "string", "minLength": 1},
-          "summary": {"type": "string", "minLength": 1},
-          "framework": {"enum": ["jungian", "attachment", "family-systems", "autobiographical", "narrative", "care-ethics", "other"]},
-          "evidenceRefs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
-          "caveat": {"type": "string"}
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "framework": {
+            "enum": [
+              "jungian",
+              "attachment",
+              "family-systems",
+              "autobiographical",
+              "narrative",
+              "care-ethics",
+              "other"
+            ]
+          },
+          "evidenceRefs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "uniqueItems": true
+          },
+          "caveat": {
+            "type": "string"
+          }
         }
       }
     },
-    "possibleLesson": {"type": ["string", "null"]},
-    "reflectionPrompt": {"type": ["string", "null"]},
+    "possibleLesson": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "reflectionPrompt": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
     "dreamRecordAccess": {
       "type": "object",
       "additionalProperties": false,
       "properties": {
-        "status": {"enum": ["private-connected", "private-pending", "not-published"]},
-        "recordCount": {"type": ["integer", "null"], "minimum": 0},
-        "provider": {"type": ["string", "null"]}
+        "status": {
+          "enum": [
+            "private-connected",
+            "private-pending",
+            "not-published"
+          ]
+        },
+        "recordCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "provider": {
+          "type": [
+            "string",
+            "null"
+          ]
+        }
       }
     },
     "interpretation": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["summary", "analysisStatus"],
+      "required": [
+        "summary",
+        "analysisStatus"
+      ],
       "properties": {
-        "summary": {"type": "string", "minLength": 1},
-        "basicAnalysis": {"type": "string"},
-        "analysisStatus": {"enum": ["derived", "reviewed", "approved"]},
-        "boundary": {"type": "string"}
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "basicAnalysis": {
+          "type": "string"
+        },
+        "analysisStatus": {
+          "enum": [
+            "derived",
+            "reviewed",
+            "approved"
+          ]
+        },
+        "boundary": {
+          "type": "string"
+        }
       }
     },
     "corpusGrounding": {
       "type": "object",
       "additionalProperties": false,
-      "required": ["summary", "evidenceRefs"],
+      "required": [
+        "summary",
+        "evidenceRefs"
+      ],
       "properties": {
-        "summary": {"type": "string", "minLength": 1},
-        "evidenceRefs": {"type": "array", "items": {"type": "string"}, "uniqueItems": true},
-        "occurrenceCount": {"type": ["integer", "null"], "minimum": 0},
-        "occurrenceCountStatus": {"enum": ["known", "unknown", "not-published"]}
+        "summary": {
+          "type": "string",
+          "minLength": 1
+        },
+        "evidenceRefs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "uniqueItems": true
+        },
+        "occurrenceCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "occurrenceCountStatus": {
+          "enum": [
+            "known",
+            "unknown",
+            "not-published"
+          ]
+        }
       }
     },
     "relatedItems": {
@@ -91,14 +258,76 @@
       "items": {
         "type": "object",
         "additionalProperties": false,
-        "required": ["type", "id"],
+        "required": [
+          "type",
+          "id"
+        ],
         "properties": {
-          "type": {"enum": ["place", "symbol", "territory", "dream"]},
-          "id": {"type": "string", "minLength": 1},
-          "label": {"type": "string"}
+          "type": {
+            "enum": [
+              "place",
+              "symbol",
+              "territory",
+              "dream"
+            ]
+          },
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "label": {
+            "type": "string"
+          }
         }
       }
     },
-    "privacyClass": {"enum": ["private-derived", "public-safe-derived"]}
+    "privacyClass": {
+      "enum": [
+        "private-derived",
+        "public-safe-derived"
+      ]
+    },
+    "imageFraming": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "preview": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "objectPosition": {
+              "type": "string"
+            },
+            "objectFit": {
+              "enum": [
+                "cover",
+                "contain"
+              ]
+            }
+          }
+        },
+        "full": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "objectPosition": {
+              "type": "string"
+            },
+            "objectFit": {
+              "enum": [
+                "cover",
+                "contain"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "interpretiveBoundary": {
+      "type": "string"
+    },
+    "goldStandardExemplar": {
+      "type": "boolean"
+    }
   }
 }

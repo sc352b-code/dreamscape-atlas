@@ -15,35 +15,45 @@ test('exemplar cards support independent preview and full framing',()=>{
   }
 });
 
-test('Water is the single gold-standard side-panel exemplar',()=>{
+test('Water is the single gold-standard triptych exemplar',()=>{
   const gold=Object.entries(cards).filter(([,card])=>card.goldStandardExemplar);
   assert.equal(gold.length,1);
   assert.equal(gold[0][0],'water');
-  assert.equal(cards.water.presentation?.mode,'side-panel');
+  assert.equal(cards.water.presentation?.mode,'triptych');
+  assert.equal(cards.water.presentation?.previewMode,'image-led');
   assert.equal(cards.water.presentation?.evidenceFirst,true);
   assert.equal(cards.water.presentation?.fullArtworkOpening,true);
   assert.equal(cards.water.corpusOverview?.totalCorpusDreams,362);
   assert.equal(cards.water.relationshipStatus,'related-not-cooccurrence');
-  assert.match(cards.water.interpretiveBoundary,/hypotheses|fixed translations/i);
+  assert.equal(cards.water.imageFraming?.full?.objectFit,'contain');
 });
 
-test('side-panel shell preserves map context and chapter navigation',()=>{
-  assert.match(js,/ensureSidePanelShell/);
-  assert.match(js,/tarot-chapter-nav/);
-  assert.match(js,/data-chapter-id/);
+test('triptych shell makes the Tarot the central object',()=>{
+  assert.match(js,/ensureTriptychShell/);
+  assert.match(js,/tarot-triptych-shell/);
+  assert.match(js,/tarot-triptych-nav/);
+  assert.match(js,/tarot-triptych-center/);
+  assert.match(js,/tarot-triptych-info/);
   assert.match(js,/tarot-dream-medallion/);
+  assert.match(js,/data-chapter-id/);
+  assert.doesNotMatch(js,/ensureSidePanelShell/);
+  assert.match(css,/CANONICAL TAROT TRIPTYCH/);
+  assert.match(css,/grid-template-columns:minmax\(170px,.72fr\) minmax\(360px,1.28fr\) minmax\(300px,1fr\)/);
+  assert.match(css,/aspect-ratio:2\/3/);
+});
+
+test('preview is image-led rather than a mini information page',()=>{
+  assert.match(js,/tarot-preview-image-led/);
+  assert.match(js,/tarot-preview-caption/);
+  assert.match(css,/territory-v1-preview\.tarot-preview-image-led/);
+  assert.match(css,/aspect-ratio:4\/5/);
+  assert.match(css,/display:none!important/);
+});
+
+test('evidence remains separate from interpretation and privacy is preserved',()=>{
   assert.match(js,/INTERPRETATION · NOT CORPUS FACT/);
   assert.match(js,/dreamscape-open-dream-records/);
-  assert.match(js,/does not yet support a strong chronology claim/);
-  assert.doesNotMatch(js,/ensureWaterV3Structure/);
-  assert.doesNotMatch(css,/object-position:center 38%/);
-  assert.match(css,/TAROT SIDE-PANEL SHELL/);
-  assert.match(css,/width:clamp\(430px,37vw,640px\)/);
-  assert.match(css,/background:rgba\(3,5,12,.18\)/);
-});
-
-test('Water keeps complete portrait artwork and avoids unverified co-occurrence claims',()=>{
-  assert.equal(cards.water.imageFraming?.full?.objectFit,'contain');
   assert.match(js,/related-not-cooccurrence/);
-  assert.match(js,/does not yet claim that each one repeatedly occurs in the same dreams/);
+  assert.match(js,/does not yet support a strong chronology claim/);
+  assert.doesNotMatch(css,/object-position:center 38%/);
 });

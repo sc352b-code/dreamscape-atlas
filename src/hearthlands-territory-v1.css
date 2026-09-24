@@ -114,3 +114,142 @@
   .territory-v1-tarot h2{font-size:38px}
   .territory-v1-tarot-stats{grid-template-columns:1fr}
 }
+
+
+/* Tarot v2 exemplar art direction — one visual language from map preview to full reading. */
+.territory-v1-preview.tarot-v2-exemplar-preview{
+  width:min(360px,calc(100vw - 24px));
+  padding:18px;
+  border:1px solid rgba(242,196,112,.72);
+  border-radius:22px;
+  background:
+    linear-gradient(145deg,rgba(8,22,32,.985),rgba(13,13,29,.985));
+  box-shadow:
+    0 28px 80px rgba(0,0,0,.52),
+    inset 0 0 0 1px rgba(255,233,186,.08),
+    inset 0 0 34px rgba(205,154,72,.06);
+}
+.territory-v1-preview.tarot-v2-exemplar-preview::before{
+  content:"";position:absolute;inset:6px;border:1px solid rgba(240,199,124,.25);
+  border-radius:17px;pointer-events:none;
+}
+.territory-v1-preview-image{
+  height:122px;margin:-8px -8px 15px;border-radius:15px;overflow:hidden;
+  border:1px solid rgba(242,207,145,.35);
+  box-shadow:inset 0 0 24px rgba(0,0,0,.25);
+}
+.territory-v1-preview-image img{width:100%;height:100%;display:block;object-fit:cover}
+.territory-v1-preview.tarot-v2-exemplar-preview .territory-v1-preview-kicker{
+  color:#d7bc89;font:italic 12px/1.3 Georgia,serif;letter-spacing:.02em;text-transform:none
+}
+.territory-v1-preview.tarot-v2-exemplar-preview h3{font-size:30px;color:#fff2d4}
+.territory-v1-preview.tarot-v2-exemplar-preview .territory-v1-preview-meta{
+  display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:7px
+}
+.territory-v1-preview.tarot-v2-exemplar-preview .territory-v1-preview-meta span{
+  padding:8px 9px;border:1px solid rgba(241,200,127,.15);border-radius:11px;
+  background:rgba(255,255,255,.025);text-transform:none;letter-spacing:0;line-height:1.2
+}
+.territory-v1-preview.tarot-v2-exemplar-preview .territory-v1-preview-open{
+  position:relative;z-index:2;background:linear-gradient(90deg,rgba(160,99,49,.24),rgba(112,72,75,.16));
+  border-color:rgba(246,205,132,.58);font-family:Georgia,serif
+}
+
+.territory-v1-reader.territory-v1-tarot.tarot-v2-exemplar{
+  width:min(930px,94vw);max-height:92vh;border:1px solid rgba(237,190,104,.72);
+  border-radius:30px;
+  background:
+    radial-gradient(circle at 50% 0,rgba(49,81,87,.22),transparent 38%),
+    linear-gradient(155deg,rgba(6,24,33,.992),rgba(10,11,28,.992));
+  box-shadow:
+    0 40px 145px rgba(0,0,0,.72),
+    inset 0 0 0 5px rgba(4,8,16,.56),
+    inset 0 0 0 6px rgba(238,193,111,.15),
+    inset 0 0 55px rgba(190,139,62,.055);
+}
+.territory-v1-reader.territory-v1-tarot.tarot-v2-exemplar::before,
+.territory-v1-reader.territory-v1-tarot.tarot-v2-exemplar::after{
+  content:"";position:absolute;z-index:2;pointer-events:none
+}
+.territory-v1-reader.territory-v1-tarot.tarot-v2-exemplar::before{
+  inset:10px;border:1px solid rgba(245,207,135,.31);border-radius:22px
+}
+.territory-v1-reader.territory-v1-tarot.tarot-v2-exemplar::after{
+  left:26px;right:26px;top:18px;height:1px;
+  background:linear-gradient(90deg,transparent,rgba(255,216,143,.58),transparent)
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-reader-close{z-index:5}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-scroll{
+  max-height:92vh;padding:48px 48px 38px;position:relative;z-index:3
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-kicker{
+  color:#dec28f;font:italic 14px/1.4 Georgia,serif;letter-spacing:.015em;text-transform:none
+}
+.territory-v1-tarot.tarot-v2-exemplar h2{
+  margin:7px 0 18px;font-size:clamp(44px,6vw,68px);color:#fff0cf;
+  text-shadow:0 0 24px rgba(225,184,105,.12)
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-image{
+  height:min(390px,44vh);max-height:none;margin:0 0 18px;border-radius:20px;
+  border:1px solid rgba(240,195,113,.42);
+  box-shadow:0 18px 45px rgba(0,0,0,.28),inset 0 0 0 1px rgba(255,255,255,.05)
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-image img{object-position:center 38%}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-stats{
+  grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-stats span{
+  background:linear-gradient(145deg,rgba(255,249,230,.045),rgba(215,173,91,.025));
+  border-color:rgba(238,196,121,.2)
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-stats small{
+  display:block;margin-top:2px;text-transform:none;letter-spacing:.02em;font:11px/1.3 Georgia,serif;color:#c6b9b2
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-section{
+  padding:22px 0;border-top:1px solid rgba(238,197,126,.16)
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-section h3{
+  font-size:20px;color:#f1cf92
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-section p{
+  color:#ddd2c9;font-size:15px;line-height:1.7
+}
+.territory-v1-functions article,.territory-v1-lenses article,
+.territory-v1-meaning-list article{
+  position:relative;padding:13px 14px;margin:8px 0;border:1px solid rgba(235,194,121,.12);
+  border-radius:14px;background:rgba(255,255,255,.022)
+}
+.territory-v1-meaning-list{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.territory-v1-meaning-list article{margin:0}
+.territory-v1-meaning-list article b{display:block;color:#f0d8ad;font:400 15px Georgia,serif;margin-bottom:5px}
+.territory-v1-meaning-list article span{color:#c5b9b7;font:13px/1.5 Georgia,serif}
+.territory-v1-lenses article small{
+  display:block;margin-top:8px;color:#a99da4;font:italic 12px/1.45 Georgia,serif
+}
+.territory-v1-geo-note,.territory-v1-reflection{
+  margin-top:11px!important;color:#ad9fa6!important;font:italic 12px/1.5 Georgia,serif!important
+}
+.territory-v1-reflection b{color:#d9bd8d;font-weight:400}
+.territory-v1-related{padding-top:20px;border-top:1px solid rgba(238,197,126,.16)}
+.territory-v1-related>b{display:block;margin-bottom:10px;font-size:17px}
+.territory-v1-related-buttons{display:flex;flex-wrap:wrap;gap:7px}
+.territory-v1-related-buttons button{
+  border:1px solid rgba(238,196,121,.22);border-radius:999px;padding:8px 11px;
+  background:rgba(255,255,255,.025);color:#e9d6b8;font:12px Georgia,serif;cursor:pointer
+}
+.territory-v1-related-buttons button:hover:not(:disabled){background:rgba(190,128,59,.14);border-color:rgba(238,196,121,.45)}
+.territory-v1-related-buttons button:disabled{opacity:.35;cursor:default}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-method{
+  margin-top:18px;padding:13px 15px;border-radius:12px;background:rgba(255,255,255,.025);
+  color:#a99ea3!important;font:italic 12px/1.5 Georgia,serif!important
+}
+.territory-v1-tarot.tarot-v2-exemplar .territory-v1-records-button:not(:disabled){
+  cursor:pointer;background:rgba(155,100,50,.2)
+}
+
+@media(max-width:800px){
+  .territory-v1-reader.territory-v1-tarot.tarot-v2-exemplar{width:calc(100vw - 10px);max-height:94vh;border-radius:20px}
+  .territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-scroll{max-height:94vh;padding:42px 20px 28px}
+  .territory-v1-tarot.tarot-v2-exemplar .territory-v1-tarot-image{height:34vh}
+  .territory-v1-meaning-list{grid-template-columns:1fr}
+}

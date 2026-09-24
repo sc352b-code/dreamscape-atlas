@@ -213,19 +213,19 @@ async function boot(){
     });
     info?.querySelectorAll('[data-chapter]').forEach(node=>scroll.insertBefore(node,shell));
     shell.remove();
-    reader.classList.remove('tarot-triptych');
+    reader.classList.remove('tarot-triptych','tarot-docked-workspace');
     delete reader.dataset.activeChapter;
   }
 
-  function ensureTriptychShell(reader,data){
-    const triptych=data.presentation?.mode==='triptych';
-    if(!triptych){
+  function ensureDockedWorkspace(reader,data){
+    const docked=data.presentation?.mode==='docked-workspace';
+    if(!docked){
       restoreTriptych(reader);
       return;
     }
 
-    reader.classList.remove('tarot-sidepanel','tarot-v3-water');
-    reader.classList.add('tarot-triptych');
+    reader.classList.remove('tarot-sidepanel','tarot-v3-water','tarot-triptych');
+    reader.classList.add('tarot-docked-workspace');
 
     const scroll=reader.querySelector('.territory-v1-tarot-scroll');
     const imageWrap=reader.querySelector('.territory-v1-tarot-image');
@@ -371,8 +371,8 @@ async function boot(){
     if(!reader.dataset.triptychAnimated){
       reader.dataset.triptychAnimated='true';
       reader.animate(
-        [{opacity:.25,transform:'translate(-50%,-48%) scale(.975)',filter:'blur(4px)'},{opacity:1,transform:'translate(-50%,-50%) scale(1)',filter:'blur(0)'}],
-        {duration:620,easing:'cubic-bezier(.16,.78,.12,1)'}
+        [{opacity:.25,transform:'translateX(28px)',filter:'blur(3px)'},{opacity:1,transform:'translateX(0)',filter:'blur(0)'}],
+        {duration:560,easing:'cubic-bezier(.16,.78,.12,1)'}
       );
     }
   }
@@ -382,7 +382,7 @@ async function boot(){
     const data=selectedData();
     if(!preview||!data) return;
 
-    const imageLed=data.presentation?.previewMode==='image-led'||data.presentation?.mode==='triptych';
+    const imageLed=data.presentation?.previewMode==='image-led'||data.presentation?.mode==='docked-workspace';
     preview.classList.toggle('tarot-preview-image-led',imageLed);
     preview.classList.add('tarot-v2-exemplar-preview');
 
@@ -456,12 +456,12 @@ async function boot(){
     const method=reader.querySelector('.territory-v1-method');
     if(method) method.textContent=data.interpretiveBoundary||'Evidence describes patterns found across your dreams. Interpretations and theoretical lenses are possible readings, not fixed meanings.';
 
-    ensureTriptychShell(reader,data);
+    ensureDockedWorkspace(reader,data);
   }
 
   function makeLanguageFriendly(){
     const reader=root.querySelector('.territory-v1-reader');
-    if(!reader||reader.classList.contains('tarot-triptych')) return;
+    if(!reader||reader.classList.contains('tarot-docked-workspace')) return;
     const headings=[
       ['.territory-v1-tarot-geography h3','Where it appears'],
       ['.territory-v1-grounding','What shows up across your dreams','previous'],
@@ -492,7 +492,7 @@ async function boot(){
     overlays:Object.keys(overlays),
     exemplars:['family-home','water','person-11'],
     goldStandard:'water',
-    canonicalShell:'triptych'
+    canonicalShell:'docked-workspace'
   };
 }
 

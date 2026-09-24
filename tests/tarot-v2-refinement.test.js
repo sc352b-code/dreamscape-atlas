@@ -6,40 +6,52 @@ const cards=JSON.parse(fs.readFileSync('worlds/reference-world/territories/heart
 const css=fs.readFileSync('src/hearthlands-territory-v1.css','utf8');
 const js=fs.readFileSync('src/hearthlands-tarot-v2-overlays.js','utf8');
 
-test('Water is the single gold-standard docked-workspace exemplar',()=>{
-  const gold=Object.entries(cards).filter(([,card])=>card.goldStandardExemplar);
-  assert.equal(gold.length,1);
-  assert.equal(gold[0][0],'water');
+test('Water keeps the responsive docked workspace and image-led preview',()=>{
   assert.equal(cards.water.presentation?.mode,'docked-workspace');
   assert.equal(cards.water.presentation?.previewMode,'image-led');
-  assert.equal(cards.water.presentation?.evidenceFirst,true);
-  assert.match(cards.water.presentation?.responsiveStrategy||'',/wide-desktop-mini-triptych/);
   assert.equal(cards.water.imageFraming?.full?.objectFit,'contain');
+  assert.match(cards.water.presentation?.responsiveStrategy||'',/mobile-full-height-drawer/);
 });
 
-test('docked workspace keeps Hearthlands beside Tarot on desktop',()=>{
-  assert.match(js,/ensureDockedWorkspace/);
-  assert.match(js,/tarot-docked-workspace/);
-  assert.match(js,/canonicalShell:'docked-workspace'/);
-  assert.match(css,/CANONICAL TAROT DOCK/);
-  assert.match(css,/right:var\(--tarot-dock-width\)!important/);
-  assert.match(css,/--tarot-dock-width:clamp\(560px,42vw,720px\)/);
-  assert.match(css,/background:rgba\(3,5,11,.07\)/);
+test('Water count semantics distinguish unique dreams from overlapping memberships',()=>{
+  const counts=cards.water.corpusOverview?.territoryCounts||{};
+  const memberships=Object.values(counts).reduce((sum,value)=>sum+Number(value||0),0);
+  assert.equal(cards.water.corpusOverview?.wholeSeriesCount,42);
+  assert.equal(memberships,69);
+  assert.equal(cards.water.geographyCountMode,'overlapping-memberships');
+  assert.match(js,/unique dreams ·/);
+  assert.match(js,/not supposed to add up/);
 });
 
-test('responsive dock has distinct wide desktop, compact desktop and mobile modes',()=>{
-  assert.match(css,/@media\(min-width:1600px\)/);
-  assert.match(css,/@media\(min-width:900px\) and \(max-width:1199px\)/);
-  assert.match(css,/@media\(max-width:899px\)/);
-  assert.match(css,/--tarot-dock-width:100vw/);
-  assert.match(css,/grid-template-columns:132px minmax\(300px,1.1fr\) minmax\(245px,.9fr\)/);
+test('Water replaces reflection with corpus-grounded behaviour synthesis',()=>{
+  assert.equal(cards.water.reflectionPrompt,null);
+  assert.match(cards.water.behaviorSummary||'',/crossing/i);
+  assert.match(cards.water.behaviorSummary||'',/care/i);
+  assert.match(js,/WHAT YOU TEND TO BE DOING AROUND WATER/);
 });
 
-test('preview remains image-led and lightweight',()=>{
-  assert.match(js,/tarot-preview-image-led/);
-  assert.match(js,/tarot-preview-caption/);
-  assert.match(css,/territory-v1-preview\.tarot-preview-image-led/);
-  assert.match(css,/Open tarot/);
+test('confidence labels are explained rather than left implicit',()=>{
+  assert.match(cards.water.confidenceScale?.note||'',/not percentages/i);
+  assert.ok(cards.water.confidenceScale?.levels?.high);
+  assert.ok(cards.water.confidenceScale?.levels?.['medium-high']);
+  assert.ok(cards.water.confidenceScale?.levels?.medium);
+  assert.match(js,/HOW TO READ EVIDENCE STRENGTH/);
+});
+
+test('tab state is re-applied after render helpers so sections cannot leak between tabs',()=>{
+  assert.match(js,/activate\(reader\.dataset\.activeChapter\|\|'overview'\)/);
+  assert.match(css,/\[data-chapter\]\[hidden\]/);
+  assert.match(css,/display:none!important/);
+});
+
+test('dock refinement enlarges Tarot and ornaments the reading fields',()=>{
+  assert.match(css,/TAROT DOCK REFINEMENT/);
+  assert.match(css,/width:min\(100%,390px\)/);
+  assert.match(css,/width:min\(100%,410px\)/);
+  assert.match(css,/tarot-territory-logic/);
+  assert.match(css,/tarot-confidence-legend/);
+  assert.match(css,/tarot-behaviour-summary/);
+  assert.match(css,/linear-gradient\(90deg,\s*rgba\(74,150,174/);
 });
 
 test('evidence and interpretation boundaries remain intact',()=>{

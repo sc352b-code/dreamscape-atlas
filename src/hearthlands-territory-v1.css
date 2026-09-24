@@ -3497,7 +3497,7 @@
   border:0!important;
   border-radius:18px!important;
   background:
-    url('/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png')
+    var(--tarot-deck-image,url('/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png'))
     center/100% 100% no-repeat!important;
   box-shadow:
     0 24px 58px rgba(0,0,0,.34),
@@ -3557,7 +3557,7 @@
 .territory-v1-reader.tarot-docked-workspace .tarot-companion-sources,
 .territory-v1-reader.tarot-docked-workspace .tarot-companion-meanings{
   background:
-    url('/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png')
+    var(--tarot-deck-image,url('/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png'))
     center/100% 100% no-repeat!important;
 }
 

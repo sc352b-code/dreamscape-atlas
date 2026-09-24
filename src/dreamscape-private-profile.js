@@ -46,6 +46,7 @@ function readSessionProfile(){
 }
 
 let current=sanitiseProfile(window.__DREAMSCAPE_PRIVATE_PROFILE_BOOTSTRAP__||readSessionProfile());
+let activeProvider=window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__||null;
 
 function persist(){
   try{sessionStorage.setItem(STORAGE_KEY,JSON.stringify(current));}catch{}
@@ -91,14 +92,58 @@ const api={
     try{sessionStorage.removeItem(STORAGE_KEY);}catch{}
     notify('clear');
   },
-  async hydrateFromProvider(provider=window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__){
-    if(!provider||typeof provider.loadProfile!=='function') return api.getProfile();
-    const profile=await provider.loadProfile();
-    if(profile) applyProfile(profile,'provider');
+  async hydrateFromProvider(provider=activeProvider||window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__){
+    if(!provider) return api.getProfile();
+    activeProvider=provider;
+    if(typeof provider.loadProfile==='function'){
+      const profile=await provider.loadProfile();
+      if(profile) applyProfile(profile,'provider');
+    }
     if(typeof provider.subscribe==='function'){
       provider.subscribe(next=>{if(next) applyProfile(next,'provider-subscription');});
     }
     return api.getProfile();
+  },
+  async getOrLoadDreamRecords(subjectId){
+    const existing=current.dreamRecordsBySubject[subjectId]||[];
+    if(existing.length) return structuredClone(existing);
+    const provider=activeProvider||window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__;
+    if(provider&&typeof provider.loadDreamRecords==='function'){
+      const records=await provider.loadDreamRecords(subjectId);
+      if(Array.isArray(records)&&records.length){
+        const next=structuredClone(current);
+        next.dreamRecordsBySubject[subjectId]=records;
+        applyProfile(next,'provider-records');
+        return api.getDreamRecords(subjectId);
+      }
+    }
+    if(provider&&typeof provider.loadProfile==='function'){
+      await api.hydrateFromProvider(provider);
+      return api.getDreamRecords(subjectId);
+    }
+    return [];
+  },
+  async openDreamRecord(record){
+    const provider=activeProvider||window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__;
+    if(provider&&typeof provider.openDreamRecord==='function'){
+      return provider.openDreamRecord(structuredClone(record));
+    }
+    const ref=record?.privateRecordRef;
+    if(typeof ref==='string'&&/^https?:\/\//i.test(ref)){
+      window.open(ref,'_blank','noopener,noreferrer');
+      return true;
+    }
+    return false;
+  },
+  async importProfileFile(file){
+    if(!file) return api.getProfile();
+    const text=await file.text();
+    const parsed=JSON.parse(text);
+    return applyProfile(parsed,'local-private-import');
+  },
+  hasProvider(){
+    const provider=activeProvider||window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__;
+    return Boolean(provider&&(typeof provider.loadProfile==='function'||typeof provider.loadDreamRecords==='function'));
   }
 };
 
@@ -119,6 +164,7 @@ async function loadLocalPreviewProvider(){
   let provider=window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__;
   if(!provider) provider=await loadLocalPreviewProvider();
   if(provider){
+    activeProvider=provider;
     window.__DREAMSCAPE_PRIVATE_PROFILE_PROVIDER__=provider;
     await api.hydrateFromProvider(provider);
     return;

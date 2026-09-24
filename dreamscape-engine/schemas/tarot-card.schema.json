@@ -328,6 +328,27 @@
     },
     "goldStandardExemplar": {
       "type": "boolean"
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "mode": {
+          "enum": [
+            "dossier",
+            "artefact-scroll"
+          ]
+        },
+        "visualFamily": {
+          "type": "string"
+        },
+        "evidenceFirst": {
+          "type": "boolean"
+        },
+        "fullArtworkOpening": {
+          "type": "boolean"
+        }
+      }
     }
   }
 }

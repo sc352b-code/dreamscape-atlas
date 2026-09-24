@@ -344,7 +344,8 @@
           "enum": [
             "dossier",
             "artefact-scroll",
-            "side-panel"
+            "side-panel",
+            "triptych"
           ]
         },
         "visualFamily": {
@@ -355,6 +356,15 @@
         },
         "fullArtworkOpening": {
           "type": "boolean"
+        },
+        "previewMode": {
+          "enum": [
+            "standard",
+            "image-led"
+          ]
+        },
+        "eyebrow": {
+          "type": "string"
         }
       }
     },

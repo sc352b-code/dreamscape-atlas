@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: visually validate the cleaned exact-subject-frame companion Tarot system before propagating it.
+Immediate priority: visually validate one-tab-one-card behaviour and internal card fit before propagating the Tarot system.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`f6df81e0d577bed6949b91472ac9c321b397bbe1`
+`4a57b6f13925f5b2f547855c3848b0cb39e6faaa`
 
 No merge to production has been performed.
 
@@ -164,6 +164,35 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-24 — One-tab-one-card correction
+
+User screenshot review showed that, although the Water deck edge was now closer, the companion-card content still behaved incorrectly:
+
+- multiple companion cards could appear one after another in the dock;
+- long content could visually continue beyond the safe interior of the active card;
+- the tab system did not reliably own visibility because data renderers were independently unhiding their sections.
+
+Implemented:
+- removed all visibility manipulation from data render helpers;
+- the tab controller is now the sole owner of active chapter state;
+- active chapter is published on `.tarot-triptych-info[data-active-chapter]`;
+- CSS explicitly hides every top-level companion card except the selected chapter;
+- exactly one companion card can render in the reading viewport at a time;
+- every card now has a fixed header plus a dedicated `.tarot-companion-body`;
+- only that inner body may scroll, so content cannot spill below the physical Tarot object;
+- the chapter selector is sticky on standard desktop/tablet;
+- Overview, Geography, Patterns and Alongside were compacted so their developed content fits much more cleanly within the card;
+- Possible Meanings remains fully preserved but uses discreet internal scrolling when its content exceeds the available card body;
+- Related-items rendering now writes into the card body instead of replacing the whole companion-card structure;
+- render helpers no longer accidentally fight the tab state.
+
+Acceptance test:
+1. selecting a tab must show exactly one companion card;
+2. no second Tarot card may appear below it;
+3. no content may render outside the framed card;
+4. dense cards may scroll internally, but the outer card itself must remain one stable object.
+
 
 ### 2026-09-24 — Companion Tarot structural correction after screenshot review
 

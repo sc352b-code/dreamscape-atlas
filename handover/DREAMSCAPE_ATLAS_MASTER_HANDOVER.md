@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: visually validate the ornate companion-card pass and connect/verify the private Water dream provider before propagating the shell.
+Immediate priority: visually validate the illustrated companion Tarot card system against the Water artwork before propagating it to other symbols and places.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`9b490cc407fc26c15c24c05613c43498c50b7054`
+`b8566e09514afacff4d288666a55756e491838b0`
 
 No merge to production has been performed.
 
@@ -164,6 +164,44 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-24 — Illustrated companion Tarot card system
+
+User supplied the canonical visual rebuild brief requiring the information tabs to stop reading as decorated UI and instead become genuine physical/mystical cards from the same deck as the Water Tarot.
+
+Implemented:
+- added reusable `companionCards` metadata for all seven Water chapters;
+- canonical Water companion titles are:
+  - Overview → The Water Record
+  - Where it appears → The Geography of Water
+  - Recurring patterns → The Forms of Water
+  - Appears alongside → The Constellation of Water
+  - How it changes → Water Through Time
+  - Source dreams → The Book of Waters
+  - Possible meanings → The Mirror of Water
+- rebuilt `assets/tarot-ornate-frame.svg` as a substantially richer multi-layer gilded frame with four nested rules, filigreed corners, celestial jewel details and subtle water ornament;
+- renderer now creates a true companion-card header with card-specific title, subtitle, evidence/source/interpretation inscription and motif glyph;
+- companion cards use a physical-card silhouette and illustrated midnight/celestial interiors rather than plain dark panels;
+- each chapter has a distinct composition while sharing one deck language:
+  - Overview uses a central 42-dream medallion, supporting inscriptions and three recurring-action poles;
+  - Geography uses luminous Water currents and the explicit 42 unique / 69 membership logic;
+  - Patterns uses four mini-emblem evidence cards plus the qualitative strength key;
+  - Alongside uses a central Water emblem and constellation-like related-item field;
+  - Chronology uses a vertical river/time motif and retains the no-invention fallback;
+  - Source Dreams uses manuscript-like entries and the active private dream browser;
+  - Possible Meanings uses a darker mirror/interpretive treatment and consolidates meanings, lenses and method boundary into one physical companion card;
+- chapter switching now animates as one card replacing another with a restrained draw/fade/settle motion;
+- navigation labels remain literal while in-card titles may be more evocative;
+- meanings/lenses/method are now structurally consolidated so one selected tab truly renders one companion card;
+- companion-card metadata is reusable in the Tarot schema and documented in `dreamscape-engine/docs/tarot-v2.md`;
+- mobile preserves main Tarot → chapter selector → companion Tarot card rather than falling back to ordinary article styling;
+- private source-dream access remains active and public raw dream narrative remains excluded.
+
+Acceptance standard:
+1. If all text is removed, the companion card should still look like an artefact worthy of the Water Tarot deck.
+2. If all ornament is removed, the surviving information must still accurately represent the corpus.
+3. Water remains the visual reference; future subjects can vary motifs while belonging to the same Dreamscape deck.
+
 
 ### 2026-09-24 — Ornate companion cards + active Water source dreams
 

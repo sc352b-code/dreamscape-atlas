@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: responsive Mum-style Tarot dock refinement, with Water as the gold-standard exemplar.
+Immediate priority: refine Water's responsive dock, corpus explanations and ornate tab presentation before propagating the shell.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`67db54b349f1d38a997038956ff3739d3604a7b0`
+`08dd9d6343dafc3ca1b01e6b20ecf1d7720c60b4`
 
 No merge to production has been performed.
 
@@ -164,6 +164,37 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-24 — Water data-logic and ornate-tab refinement
+
+User review approved the smaller image-led preview and the docked Hearthlands/Tarot relationship, then requested a refinement pass focused on size, corpus logic, beauty, explanatory clarity and tab accuracy.
+
+Implemented:
+- enlarged the Water Tarot inside the dock (390px standard desktop, up to 410px wide desktop);
+- removed the redundant quick-stat strip beneath the Tarot in the dock so the artwork has more visual authority;
+- made the 42-vs-territory-count logic explicit:
+  - 42 = unique Water dreams;
+  - territory counts sum to 69 because they are overlapping territory memberships;
+  - a single dream may contribute to more than one territory;
+  - territory counts therefore must not be expected to add to 42;
+- added reusable `geographyCountMode` metadata so future Tarot records can declare whether territory counts are exclusive or overlapping;
+- changed Overview so it contains only overview material plus a corpus-derived “what you tend to be doing around Water” synthesis;
+- removed Water's final reflection question from the docked presentation;
+- added a qualitative confidence-scale explainer:
+  - High = strongest support among currently identified recurring patterns;
+  - Medium-high = substantial recurring support, below High;
+  - Medium = recurring but more limited/mixed support;
+  - explicitly states these are not percentages, probabilities or dream counts;
+- moved/kept territory distribution in “Where it appears” and confidence labels in “Recurring patterns” rather than allowing them to leak into Overview;
+- fixed the chapter renderer so the active tab is re-applied on every refresh, preventing later sections from reappearing under the selected tab;
+- gave every active reading field a restrained double-line/celestial Tarot frame;
+- restyled territory bars as luminous Water currents with gold/celestial endpoints;
+- added ornate overview inscriptions and an evidence-strength legend;
+- preserved evidence vs interpretation, private dream access and co-occurrence caveats.
+
+Data source note:
+The current authoritative public Water record states 42 unique dreams, 59 recorded appearances and territory memberships of Roadlands 27, Hearthlands 19, Littoral 12, Institutional 6 and River 5. The overlap note already existed in the Water authored overlay; this pass makes that logic impossible to miss in the interface.
+
 
 ### 2026-09-24 — Mum-style responsive Tarot dock
 

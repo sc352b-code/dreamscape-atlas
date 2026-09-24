@@ -217,6 +217,86 @@ async function boot(){
     delete reader.dataset.activeChapter;
   }
 
+
+  function ensureOverviewEnhancements(grounding,data){
+    if(!grounding) return;
+    const overview=data.corpusOverview||{};
+    const whole=overview.wholeSeriesCount??overview.uniqueDreamCount;
+    const total=overview.totalCorpusDreams;
+    const appearances=overview.appearanceCount;
+    const territoryCount=Object.keys(overview.territoryCounts||{}).length;
+
+    let metrics=grounding.querySelector('.tarot-overview-metrics');
+    if(!metrics){
+      metrics=document.createElement('div');
+      metrics.className='tarot-overview-metrics';
+      grounding.appendChild(metrics);
+    }
+    metrics.innerHTML=[
+      whole!=null?{value:whole,label:'unique Water dreams'}:null,
+      appearances!=null?{value:appearances,label:'recorded Water appearances'}:null,
+      territoryCount?{value:territoryCount,label:'territories reached'}:null
+    ].filter(Boolean).map(item=>`
+      <div class="tarot-mini-inscription"><b>${escapeHTML(item.value)}</b><span>${escapeHTML(item.label)}</span></div>`).join('');
+
+    let behaviour=grounding.querySelector('.tarot-behaviour-summary');
+    if(!behaviour){
+      behaviour=document.createElement('div');
+      behaviour.className='tarot-behaviour-summary';
+      grounding.appendChild(behaviour);
+    }
+    const behaviourText=data.behaviorSummary||data.behaviourSummary||'';
+    behaviour.innerHTML=behaviourText?`
+      <small>WHAT YOU TEND TO BE DOING AROUND WATER</small>
+      <p>${escapeHTML(behaviourText)}</p>`:'';
+
+    const lead=grounding.querySelector('.tarot-overview-lead');
+    if(lead&&whole!=null&&total!=null) lead.textContent=`${data.title||'This subject'} appears in ${whole} of your ${total} dreams.`;
+  }
+
+  function ensureGeographyExplanation(geography,data){
+    if(!geography) return;
+    const counts=data.corpusOverview?.territoryCounts||{};
+    const unique=data.corpusOverview?.wholeSeriesCount??data.corpusOverview?.uniqueDreamCount;
+    const memberships=Object.values(counts).reduce((sum,value)=>sum+(Number(value)||0),0);
+    let explainer=geography.querySelector('.tarot-territory-logic');
+    if(!explainer){
+      explainer=document.createElement('div');
+      explainer.className='tarot-territory-logic';
+      const chart=geography.querySelector('div');
+      chart?.insertAdjacentElement('beforebegin',explainer);
+    }
+    const mode=data.geographyCountMode||'overlapping-memberships';
+    explainer.innerHTML=mode==='overlapping-memberships'&&unique!=null?`
+      <b>${escapeHTML(unique)} unique dreams · ${escapeHTML(memberships)} territory memberships</b>
+      <p>A single dream can belong to more than one territory. These territory figures therefore overlap and are not supposed to add up to ${escapeHTML(unique)}.</p>`:
+      '<p>Territory counts use the classification supplied by the corpus analysis.</p>';
+  }
+
+  function ensureConfidenceLegend(functions,data){
+    if(!functions) return;
+    let legend=functions.querySelector('.tarot-confidence-legend');
+    if(!legend){
+      legend=document.createElement('div');
+      legend.className='tarot-confidence-legend';
+      const list=functions.querySelector(':scope > div');
+      functions.insertBefore(legend,list||null);
+    }
+    const scale=data.confidenceScale||{
+      note:'These labels describe qualitative evidence strength in the current analysis. They are not percentages and they are not counts of dreams.',
+      levels:{
+        high:'Strongest support among the recurring patterns currently identified.',
+        'medium-high':'Substantial recurring support, but less strong than High.',
+        medium:'A recurring pattern with more limited or mixed support.'
+      }
+    };
+    legend.innerHTML=`
+      <small>HOW TO READ EVIDENCE STRENGTH</small>
+      <p>${escapeHTML(scale.note||'')}</p>
+      <div>${Object.entries(scale.levels||{}).map(([level,meaning])=>`
+        <span><b>${escapeHTML(titleCase(level))}</b><em>${escapeHTML(meaning)}</em></span>`).join('')}</div>`;
+  }
+
   function ensureDockedWorkspace(reader,data){
     const docked=data.presentation?.mode==='docked-workspace';
     if(!docked){
@@ -263,7 +343,7 @@ async function boot(){
     records?.setAttribute('data-chapter','sources');
     interpretation?.setAttribute('data-chapter','meanings');
     lenses?.setAttribute('data-chapter','meanings');
-    lesson?.setAttribute('data-chapter','meanings');
+    if(lesson){ lesson.hidden=true; lesson.removeAttribute('data-chapter'); }
     if(method) method.dataset.chapter='meanings';
 
     if(grounding) grounding.querySelector('h3').textContent='Overview';
@@ -315,6 +395,7 @@ async function boot(){
     if(title&&title.parentElement!==center) center.appendChild(title);
     if(subtitle&&subtitle.parentElement!==center) center.appendChild(subtitle);
     if(stats&&stats.parentElement!==center) center.appendChild(stats);
+    if(stats) stats.hidden=true;
 
     const dreamCount=data.corpusOverview?.wholeSeriesCount??data.corpusOverview?.uniqueDreamCount;
     let medallion=imageWrap?.querySelector('.tarot-dream-medallion');
@@ -325,7 +406,7 @@ async function boot(){
     }
     if(medallion&&dreamCount!=null) medallion.innerHTML=`<b>${escapeHTML(dreamCount)}</b><small>DREAMS</small>`;
 
-    [grounding,geography,functions,related,chronology,records,interpretation,lenses,lesson,method].forEach(node=>{
+    [grounding,geography,functions,related,chronology,records,interpretation,lenses,method].forEach(node=>{
       if(node&&node.parentElement!==info) info.appendChild(node);
     });
 
@@ -338,8 +419,10 @@ async function boot(){
         lead.className='tarot-overview-lead';
         grounding.insertBefore(lead,grounding.querySelector('.territory-v1-grounding'));
       }
-      lead.textContent=`${data.title||'This subject'} appears in ${whole} of your ${total} dreams.`;
     }
+    ensureOverviewEnhancements(grounding,data);
+    ensureGeographyExplanation(geography,data);
+    ensureConfidenceLegend(functions,data);
 
     const activate=id=>{
       const valid=chapters.some(ch=>ch.id===id)?id:'overview';
@@ -366,7 +449,7 @@ async function boot(){
       });
     }
 
-    if(!reader.dataset.activeChapter) activate('overview');
+    activate(reader.dataset.activeChapter||'overview');
 
     if(!reader.dataset.triptychAnimated){
       reader.dataset.triptychAnimated='true';
@@ -444,10 +527,9 @@ async function boot(){
 
     const lesson=reader.querySelector('.territory-v1-lesson');
     if(lesson&&data.possibleLesson){
-      lesson.hidden=false;
+      lesson.hidden=data.presentation?.mode==='docked-workspace';
       lesson.querySelector('p').textContent=data.possibleLesson;
       lesson.querySelector('.territory-v1-reflection')?.remove();
-      if(data.reflectionPrompt) lesson.insertAdjacentHTML('beforeend',`<p class="territory-v1-reflection">${escapeHTML(data.reflectionPrompt)}</p>`);
     }
 
     renderRecordAccess(reader,data);

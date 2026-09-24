@@ -175,10 +175,12 @@
     "goldStandardExemplar": true,
     "interpretiveBoundary": "Evidence describes recurring corpus patterns. Possible meanings and theory lenses are hypotheses, not fixed translations.",
     "presentation": {
-      "mode": "side-panel",
-      "visualFamily": "celestial-editorial",
+      "mode": "triptych",
+      "previewMode": "image-led",
+      "visualFamily": "celestial-oracle-triptych",
       "evidenceFirst": true,
-      "fullArtworkOpening": true
+      "fullArtworkOpening": true,
+      "eyebrow": "HEARTHLANDS · SYMBOL TAROT"
     },
     "relationshipStatus": "related-not-cooccurrence"
   },

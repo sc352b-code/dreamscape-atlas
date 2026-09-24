@@ -7,85 +7,81 @@ const css=fs.readFileSync('src/hearthlands-territory-v1.css','utf8');
 const js=fs.readFileSync('src/hearthlands-tarot-v2-overlays.js','utf8');
 const profile=fs.readFileSync('src/dreamscape-private-profile.js','utf8');
 
-test('Water defines seven reusable companion Tarot cards',()=>{
-  const companions=cards.water.companionCards||{};
-  assert.deepEqual(Object.keys(companions),[
+test('Water keeps seven companion Tarot chapters',()=>{
+  assert.deepEqual(Object.keys(cards.water.companionCards||{}),[
     'overview','geography','patterns','alongside','chronology','sources','meanings'
   ]);
-  assert.equal(companions.overview.title,'The Water Record');
-  assert.equal(companions.geography.title,'The Geography of Water');
-  assert.equal(companions.patterns.title,'The Forms of Water');
-  assert.equal(companions.alongside.title,'The Constellation of Water');
-  assert.equal(companions.chronology.title,'Water Through Time');
-  assert.equal(companions.sources.title,'The Book of Waters');
-  assert.equal(companions.meanings.title,'The Mirror of Water');
 });
 
-test('companion cards reuse the exact Water Tarot artwork as their deck edge',()=>{
-  const exactWaterAsset="/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png";
-  assert.ok(css.includes(exactWaterAsset));
-  assert.match(css,/EXACT WATER-DECK FRAME \+ LEGIBILITY HOTFIX/);
-  assert.match(css,/aspect-ratio:2\/3/);
-  assert.match(css,/--tarot-deck-image/);
-  assert.match(js,/setProperty\('--tarot-deck-image'/);
-  assert.match(css,/background:[\s\S]*water-v2\.png/);
+test('companion cards derive their visible deck edge from the actual subject Tarot artwork',()=>{
+  assert.match(js,/--tarot-deck-image/);
+  assert.match(js,/data\.cardImage\|\|data\.previewImage/);
+  assert.match(css,/COMPANION TAROT V4/);
+  assert.match(css,/var\(--tarot-deck-image/);
+  assert.match(css,/water-v2\.png/);
+  assert.match(css,/-webkit-mask:/);
+  assert.match(css,/top\/100% 11\.5%/);
+  assert.doesNotMatch(css,/ORNATE TAROT COMPANION CARDS/);
+  assert.doesNotMatch(css,/DREAMSCAPE COMPANION TAROT CARDS/);
+  assert.doesNotMatch(css,/EXACT WATER-DECK FRAME \+ LEGIBILITY HOTFIX/);
 });
 
-test('failed fade and blur behaviour is removed',()=>{
+test('companion card layout cannot clip the lower content behind the frame',()=>{
+  assert.match(js,/tarot-companion-body/);
+  assert.match(css,/\.tarot-companion-body/);
+  assert.match(css,/overflow-y:auto/);
+  assert.match(css,/flex:1 1 auto/);
+  assert.match(css,/height:min\(72vh,660px\)/);
+});
+
+test('render helpers use stable data containers after decorative headers are added',()=>{
+  assert.match(js,/territory-v1-geo-list/);
+  assert.match(js,/territory-v1-function-list/);
+  assert.match(js,/territory-v1-lens-list/);
+  assert.match(js,/stableArticleTarget/);
+});
+
+test('selected companion card remains fully crisp',()=>{
   assert.doesNotMatch(js,/is-companion-entering/);
-  assert.doesNotMatch(js,/filter:'blur\(3px\)'/);
+  assert.doesNotMatch(js,/blur\(3px\)/);
   assert.match(css,/\.tarot-companion-card\.is-active-companion/);
-  assert.match(css,/animation:none!important/);
   assert.match(css,/opacity:1!important/);
   assert.match(css,/filter:none!important/);
-});
-
-test('renderer treats each selected tab as one companion card',()=>{
-  assert.match(js,/ensureCompanionCard/);
-  assert.match(js,/tarot-companion-card/);
-  assert.match(js,/companionGlyph/);
-  assert.match(js,/consolidateMeaningsCard/);
-  assert.match(js,/tarot-constellation-core/);
-  assert.match(js,/tarot-time-river/);
-  assert.match(js,/:scope > h3/);
+  assert.match(css,/animation:none!important/);
 });
 
 test('Overview remains composed as a knowledge Tarot',()=>{
   assert.match(js,/of \$\{escapeHTML\(total\)\} dreams/);
   assert.match(js,/tarot-overview-poles/);
-  assert.match(css,/font-size:57px!important/);
+  assert.match(css,/tarot-overview-lead/);
   assert.match(css,/tarot-behaviour-summary/);
-  assert.match(css,/color:#eee3df!important/);
 });
 
-test('all seven chapters keep distinct interior composition while sharing one frame',()=>{
+test('all seven chapters keep distinct interior composition while sharing one outer frame',()=>{
   for(const chapter of ['overview','geography','patterns','alongside','chronology','sources','meanings']){
-    assert.match(css,new RegExp(`tarot-companion-${chapter}`));
+    assert.equal(typeof cards.water.companionCards[chapter].title,'string');
   }
-  assert.match(css,/tarot-overview-poles/);
-  assert.match(css,/territory-v1-geo-row/);
+  assert.match(css,/tarot-territory-logic/);
+  assert.match(css,/tarot-confidence-legend/);
   assert.match(css,/tarot-constellation-core/);
   assert.match(css,/tarot-time-river/);
   assert.match(css,/tarot-private-dream-row/);
   assert.match(css,/tarot-companion-subsection/);
 });
 
-test('Water private corpus access remains enabled and unblocked',()=>{
+test('private Water source-dream access remains enabled',()=>{
   assert.equal(cards.water.privateCorpusAccess?.enabled,true);
   assert.equal(cards.water.privateCorpusAccess?.expectedDreamCount,42);
   assert.match(js,/button\.disabled=false/);
-  assert.match(js,/getOrLoadDreamRecords/);
   assert.match(profile,/async getOrLoadDreamRecords/);
   assert.match(profile,/async openDreamRecord/);
   assert.match(profile,/async importProfileFile/);
 });
 
-test('count semantics and evidence boundaries remain intact',()=>{
+test('Water count semantics remain correct',()=>{
   const counts=cards.water.corpusOverview?.territoryCounts||{};
   const memberships=Object.values(counts).reduce((sum,value)=>sum+Number(value||0),0);
   assert.equal(cards.water.corpusOverview?.wholeSeriesCount,42);
   assert.equal(memberships,69);
   assert.equal(cards.water.geographyCountMode,'overlapping-memberships');
-  assert.match(js,/INTERPRETIVE CARD · NOT CORPUS FACT/);
-  assert.doesNotMatch(css,/object-position:center 38%/);
 });

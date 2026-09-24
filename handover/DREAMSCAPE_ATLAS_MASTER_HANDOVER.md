@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: canonical Tarot side-panel refinement, with Water as the gold-standard exemplar.
+Immediate priority: canonical Tarot triptych refinement, with Water as the gold-standard exemplar.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`1de06ae1880a12c67759d8a39f5d8411aa2fb4a6`
+`b722059dbd6924d019729c3fdba3575d23b53191`
 
 No merge to production has been performed.
 
@@ -164,6 +164,40 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-24 — Canonical Tarot triptych
+
+User review established that even the right-hand side-panel still treated the Tarot artwork as an image above an interface. The canonical direction is now a triptych composition:
+
+**navigation | enlarged Tarot | selected reading**
+
+Locked principles:
+- the Tarot artwork is the visual centre and remains visible while sections change;
+- navigation is an ornate vertical chapter rail, not a generic website tab bar;
+- selected information appears in the opposite dark field, not underneath the Tarot;
+- the Dreamscape territory remains visible around/behind the presentation;
+- the compact preview becomes image-led and deliberately does not try to explain the full Tarot;
+- evidence and interpretation remain structurally distinct;
+- the architecture is reusable across symbols, places, animals, objects and people.
+
+Implemented on `tarot-v2-refinement`:
+- Water presentation mode changed from `side-panel` to `triptych`;
+- full Tarot shell uses three desktop zones: chapter navigation, large portrait Tarot, selected chapter content;
+- portrait artwork is fixed at the centre and uses `object-fit: contain`;
+- dream-count medallion remains attached to the Tarot artwork;
+- information no longer stacks underneath the Tarot on desktop;
+- chapter switching updates only the right-hand reading field while the Tarot remains in place;
+- compact Water preview is now mostly artwork, with only title, dream count and a small “Open tarot” invitation;
+- right-hand information styling uses manuscript/editorial typography and restrained dividers rather than boxed UI cards;
+- mobile collapses to Tarot first, horizontal chapter navigation second, active reading third;
+- relationship and chronology caveats remain evidence-safe;
+- private dream records continue to load only through the authenticated/private profile layer.
+
+**Superseded:** the right-side panel is no longer the target desktop architecture. It remains a historical step in the change log only.
+
+Acceptance test:
+Opening Water should immediately read as one central symbolic artefact with knowledge arranged around it; changing chapters must not displace the Tarot itself.
+
 
 ### 2026-09-24 — Canonical right-side Tarot shell
 

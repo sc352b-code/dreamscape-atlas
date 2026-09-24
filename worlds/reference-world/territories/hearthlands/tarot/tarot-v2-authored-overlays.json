@@ -165,7 +165,17 @@
         "id": "family-home",
         "label": "Family Home"
       }
-    ]
+    ],
+    "imageFraming": {
+      "preview": {
+        "objectPosition": "50% 52%"
+      },
+      "full": {
+        "objectPosition": "50% 48%"
+      }
+    },
+    "goldStandardExemplar": true,
+    "interpretiveBoundary": "Evidence describes recurring corpus patterns. Possible meanings and theory lenses are hypotheses, not fixed translations."
   },
   "cat": {
     "previewSummary": "Cats repeatedly gather a tension between cherished vulnerability and irreducible autonomy: close enough to require care, but never wholly manageable.",
@@ -343,7 +353,15 @@
         "id": "garden",
         "label": "Garden"
       }
-    ]
+    ],
+    "imageFraming": {
+      "preview": {
+        "objectPosition": "50% 48%"
+      },
+      "full": {
+        "objectPosition": "50% 45%"
+      }
+    }
   },
   "person-11": {
     "title": "Natalie",
@@ -475,6 +493,14 @@
         "id": "garden",
         "label": "Garden"
       }
-    ]
+    ],
+    "imageFraming": {
+      "preview": {
+        "objectPosition": "50% 22%"
+      },
+      "full": {
+        "objectPosition": "50% 18%"
+      }
+    }
   }
 }

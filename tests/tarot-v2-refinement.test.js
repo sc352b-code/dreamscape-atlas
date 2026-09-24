@@ -85,3 +85,23 @@ test('Water count semantics remain correct',()=>{
   assert.equal(memberships,69);
   assert.equal(cards.water.geographyCountMode,'overlapping-memberships');
 });
+
+
+test('tab controller is the sole owner of companion-card visibility',()=>{
+  assert.match(js,/info\.dataset\.activeChapter=valid/);
+  assert.doesNotMatch(js,/section\.hidden=false/);
+  assert.doesNotMatch(js,/section\?\.removeAttribute\('hidden'\)/);
+  assert.match(css,/COMPANION TAB ISOLATION \+ CARD-FIT CORRECTION/);
+  for(const chapter of ['overview','geography','patterns','alongside','chronology','sources','meanings']){
+    assert.match(css,new RegExp(`data-active-chapter="${chapter}"`));
+  }
+  assert.match(css,/\.tarot-triptych-info > \[data-chapter\]\{[\s\S]*display:none!important/);
+});
+
+test('all companion content stays inside one bounded card',()=>{
+  assert.match(js,/tarot-companion-body/);
+  assert.match(css,/overflow-y:auto!important/);
+  assert.match(css,/overscroll-behavior:contain/);
+  assert.match(css,/overflow:hidden!important/);
+  assert.match(css,/position:sticky/);
+});

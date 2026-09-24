@@ -412,6 +412,28 @@
           }
         }
       }
+    },
+    "privateCorpusAccess": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "subjectId": {
+          "type": "string"
+        },
+        "expectedDreamCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "accessMode": {
+          "type": "string"
+        }
+      }
     }
   }
 }

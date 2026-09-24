@@ -209,7 +209,7 @@ async function boot(){
     ];
     originalSelectors.forEach(selector=>{
       const node=center?.querySelector(selector);
-      if(node) scroll.insertBefore(node,shell);
+      if(node){ node.hidden=false; scroll.insertBefore(node,shell); }
     });
     info?.querySelectorAll('[data-chapter]').forEach(node=>scroll.insertBefore(node,shell));
     shell.remove();
@@ -221,6 +221,7 @@ async function boot(){
   function ensureOverviewEnhancements(grounding,data){
     if(!grounding) return;
     const overview=data.corpusOverview||{};
+    const subject=data.title||'This subject';
     const whole=overview.wholeSeriesCount??overview.uniqueDreamCount;
     const total=overview.totalCorpusDreams;
     const appearances=overview.appearanceCount;
@@ -233,8 +234,8 @@ async function boot(){
       grounding.appendChild(metrics);
     }
     metrics.innerHTML=[
-      whole!=null?{value:whole,label:'unique Water dreams'}:null,
-      appearances!=null?{value:appearances,label:'recorded Water appearances'}:null,
+      whole!=null?{value:whole,label:`unique ${subject} dreams`}:null,
+      appearances!=null?{value:appearances,label:`recorded ${subject} appearances`}:null,
       territoryCount?{value:territoryCount,label:'territories reached'}:null
     ].filter(Boolean).map(item=>`
       <div class="tarot-mini-inscription"><b>${escapeHTML(item.value)}</b><span>${escapeHTML(item.label)}</span></div>`).join('');
@@ -247,7 +248,7 @@ async function boot(){
     }
     const behaviourText=data.behaviorSummary||data.behaviourSummary||'';
     behaviour.innerHTML=behaviourText?`
-      <small>WHAT YOU TEND TO BE DOING AROUND WATER</small>
+      <small>WHAT YOU TEND TO BE DOING AROUND ${escapeHTML(subject.toUpperCase())}</small>
       <p>${escapeHTML(behaviourText)}</p>`:'';
 
     const lead=grounding.querySelector('.tarot-overview-lead');

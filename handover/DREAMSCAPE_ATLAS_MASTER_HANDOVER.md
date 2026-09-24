@@ -165,6 +165,36 @@ Before this stage is called successful:
 
 ## Change log
 
+
+### 2026-09-24 — Water Tarot v3 artefact build
+
+User review established that Water v2 still felt like an ornate image placed above an ordinary interface. The required direction is now locked:
+
+**The Tarot artwork is the interface.**
+
+Implemented on `tarot-v2-refinement`:
+- Water now uses a dedicated reusable `artefact-scroll` presentation mode.
+- Opening composition shows the complete artwork with `object-fit: contain` rather than cropping it into a hero strip.
+- Water opens almost full-screen inside one continuous gold/celestial frame.
+- Conventional statistic cards were replaced by inscription-like counters.
+- Territory distribution is rendered as fine luminous currents rather than dashboard bars.
+- Evidence sections precede interpretation in the document order.
+- Recurring functions use connected illuminated annotations rather than boxed cards.
+- Private dream-source fragments render only from `DreamscapePrivateProfile`; no raw dream text was added to the public repository.
+- The source route reads “See all 42 dreams →” and only activates when authenticated private records are present.
+- Possible readings and theoretical lenses are visually and textually marked as interpretation rather than corpus fact.
+- Related items use constellation-like links.
+- The final reflection receives a quieter moonlit/depth treatment.
+- Motion is deliberately restrained and respects reduced-motion preferences.
+- The reusable Tarot schema now contains presentation metadata so later cards can choose `artefact-scroll` without hard-coding Water.
+
+New acceptance criterion:
+If the words were removed, Water should still read as one extraordinary Tarot artefact; if the decoration were removed, its surviving information must still accurately represent the corpus.
+
+Current validation status:
+Code/build validation is still required after the v3 commits. Visual approval is not implied by implementation.
+
+
 ### 2026-09-24 — Tarot v2 refinement branch created
 - branched from `family-home-pilot` to preserve the existing pilot;
 - added per-card framing metadata;

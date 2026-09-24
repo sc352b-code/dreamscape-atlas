@@ -60,11 +60,11 @@ async function boot(){
     if(!target) return;
     const section=target.closest('section');
     if(!Array.isArray(items)||!items.length){
-      section?.setAttribute('hidden','');
+      if(section) section.dataset.empty='true';
       target.innerHTML='';
       return;
     }
-    section?.removeAttribute('hidden');
+    if(section) section.dataset.empty='false';
     target.innerHTML=items.map(item=>`
       <article>
         <div class="territory-v1-article-heading">
@@ -93,7 +93,6 @@ async function boot(){
     }
     const entries=Object.entries(data.corpusOverview?.territoryCounts||{});
     if(!section||!target||!entries.length) return;
-    section.hidden=false;
     const max=Math.max(...entries.map(([,count])=>Number(count)||0),1);
     target.innerHTML=entries.map(([territory,count])=>`
       <div class="territory-v1-geo-row" style="--territory-share:${Math.max(4,Math.round((Number(count)||0)/max*100))}%">
@@ -111,7 +110,8 @@ async function boot(){
     const note=verified
       ?'These relationships are supported by recurring same-dream evidence.'
       :'These are related Dreamscape elements. This view does not yet claim that each one repeatedly occurs in the same dreams.';
-    related.innerHTML=`
+    const host=related.querySelector(':scope > .tarot-companion-body')||related;
+    host.innerHTML=`
       <b>Appears alongside</b>
       <p class="territory-v1-related-note">${escapeHTML(note)}</p>
       <div class="territory-v1-related-buttons">${items.map(item=>{
@@ -119,7 +119,7 @@ async function boot(){
         const label=typeof item==='string'?titleCase(item):(item.label||titleCase(id));
         return `<button type="button" data-related-id="${escapeHTML(id)}"><i aria-hidden="true"></i>${escapeHTML(label)}</button>`;
       }).join('')}</div>`;
-    related.querySelectorAll('[data-related-id]').forEach(button=>{
+    host.querySelectorAll('[data-related-id]').forEach(button=>{
       const id=button.dataset.relatedId;
       const hotspot=root.querySelector(`.territory-hotspot[data-id="${CSS.escape(id)}"]`);
       button.disabled=!hotspot;
@@ -605,7 +605,8 @@ async function boot(){
     const activate=id=>{
       const valid=chapters.some(ch=>ch.id===id)?id:'overview';
       reader.dataset.activeChapter=valid;
-      info.querySelectorAll('[data-chapter]').forEach(node=>{
+      info.dataset.activeChapter=valid;
+      info.querySelectorAll(':scope > [data-chapter]').forEach(node=>{
         const active=node.dataset.chapter===valid;
         node.hidden=!active;
         node.classList.toggle('is-active-companion',active);
@@ -615,7 +616,9 @@ async function boot(){
         button.classList.toggle('active',active);
         button.setAttribute('aria-current',active?'page':'false');
       });
-      info.scrollTo({top:0,behavior:'smooth'});
+      const activeCard=info.querySelector(`:scope > [data-chapter="${CSS.escape(valid)}"]`);
+      activeCard?.querySelector('.tarot-companion-body')?.scrollTo({top:0,behavior:'auto'});
+      info.scrollTo({top:0,behavior:'auto'});
     };
 
     if(!shell.dataset.bound){

@@ -45,18 +45,18 @@
   },
   "water": {
     "title": "Water",
-    "friendlySubtitle": "Change · Depth · Crossing · Renewal",
+    "friendlySubtitle": "Water appears across dreams of movement, crossing, danger, care, play and renewal.",
     "cardImage": "/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png",
     "previewImage": "/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png",
     "previewSummary": "Water appears in 42 dreams across the series, taking forms such as sea, rivers, rain, baths, pools, floods and crossings.",
     "quickStats": [
       {
-        "value": 42,
-        "label": "dreams in the series"
-      },
-      {
         "value": 59,
         "label": "recorded appearances"
+      },
+      {
+        "value": 5,
+        "label": "territories"
       }
     ],
     "corpusOverview": {
@@ -70,7 +70,8 @@
         "littoral": 12,
         "institutional": 6,
         "river": 5
-      }
+      },
+      "totalCorpusDreams": 362
     },
     "geographyNote": "A dream can belong to more than one territory, so these territory counts overlap.",
     "corpusGrounding": "Water appears in 42 different dreams and is recorded 59 times. It is especially common in Roadlands and Hearthlands, but it reaches all five territories. Across the dreams it can be a route, a barrier, a danger, a place of play, a source of care, or something that overwhelms ordinary control. Its meaning changes with what the water is doing and how you respond to it.",
@@ -174,11 +175,12 @@
     "goldStandardExemplar": true,
     "interpretiveBoundary": "Evidence describes recurring corpus patterns. Possible meanings and theory lenses are hypotheses, not fixed translations.",
     "presentation": {
-      "mode": "artefact-scroll",
-      "visualFamily": "celestial-illuminated",
+      "mode": "side-panel",
+      "visualFamily": "celestial-editorial",
       "evidenceFirst": true,
       "fullArtworkOpening": true
-    }
+    },
+    "relationshipStatus": "related-not-cooccurrence"
   },
   "cat": {
     "previewSummary": "Cats repeatedly gather a tension between cherished vulnerability and irreducible autonomy: close enough to require care, but never wholly manageable.",

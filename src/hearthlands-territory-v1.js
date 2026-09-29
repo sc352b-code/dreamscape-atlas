@@ -176,8 +176,8 @@ async function boot(){
   function updateHotspots(){markers.querySelectorAll('.territory-hotspot').forEach(button=>{const threshold=Number(button.dataset.visibleFrom||1);const active=view.scale+0.001>=threshold;button.classList.toggle('active',active);button.tabIndex=active?0:-1;button.disabled=!active;});}
   function selectHotspot(button){view.selectedHotspot?.classList.remove('is-selected');view.selectedHotspot=button||null;view.selectedHotspot?.classList.add('is-selected');}
 
-  function positionPreview(button){
-    if(!button||!preview.classList.contains('open')) return;
+  function positionPreview(button,allowClosed=false){
+    if(!button||(!allowClosed&&!preview.classList.contains('open'))) return;
     const r=button.getBoundingClientRect();const card=preview.getBoundingClientRect();const anchorX=r.left+r.width/2;const anchorY=r.top+r.height/2;
     let left=anchorX-card.width/2;let top=anchorY-card.height-24;left=clamp(left,12,innerWidth-card.width-12);if(top<12) top=clamp(anchorY+24,12,innerHeight-card.height-12);
     preview.style.left=`${left}px`;preview.style.top=`${top}px`;preview.style.setProperty('--preview-anchor-x',`${anchorX-left}px`);
@@ -186,10 +186,15 @@ async function boot(){
   function openPreview(item,type,button){
     const card=tarots[item.tarotCardRef];if(!card) return;closeReader();about.classList.remove('open');selectHotspot(button);
     const title=displayTitle(item,type,card);const count=card.corpusOverview?.wholeSeriesCount??null;const localCount=card.corpusOverview?.territoryCounts?.hearthlands??parseCount(card.corpusGrounding);
+    preview.classList.remove('open');
     preview.querySelector('.territory-v1-preview-kicker').textContent=`HEARTHLANDS · ${type.toUpperCase()}`;preview.querySelector('h3').textContent=title;
     preview.querySelector('.territory-v1-preview-grounding').textContent=card.previewSummary||card.corpusGrounding||'Corpus-grounded record available.';
     preview.querySelector('.territory-v1-preview-meta').innerHTML=`${count!=null?`<span><b>${count}</b> series dreams</span>`:''}${localCount!=null?`<span><b>${localCount}</b> Hearthlands dreams</span>`:''}`;
-    preview.classList.add('open');previewState={item,type,button,card};requestAnimationFrame(()=>positionPreview(button));
+    previewState={item,type,button,card};
+    window.dispatchEvent(new CustomEvent('dreamscape-preview-will-open',{detail:{subjectId:item.id,type,button,preview,card}}));
+    positionPreview(button,true);
+    void preview.offsetWidth;
+    preview.classList.add('open');
   }
 
   function renderList(target,items,formatter){

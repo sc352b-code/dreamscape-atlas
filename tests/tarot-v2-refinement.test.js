@@ -10,15 +10,16 @@ const profile=fs.readFileSync('src/dreamscape-private-profile.js','utf8');
 
 test('Water companion tabs have explicit fixed-card pagination plans',()=>{
   const companions=cards.water.companionCards||{};
-  assert.equal(companions.overview.pages.length,2);
+  assert.equal(companions.overview.pages.length,3);
   assert.equal(companions.geography.pages.length,1);
   assert.equal(companions.patterns.pages.length,2);
-  assert.equal(companions.alongside.pages.length,1);
+  assert.equal(companions.alongside.pages.length,2);
   assert.equal(companions.chronology.pages.length,1);
   assert.equal(companions.sources.pages.length,1);
   assert.equal(companions.meanings.pages.length,2);
   assert.deepEqual(companions.overview.pages[0].blocks,['heroMetric','grounding','metrics']);
   assert.deepEqual(companions.overview.pages[1].blocks,['behaviour']);
+  assert.deepEqual(companions.overview.pages[2].blocks,['behaviourPoles']);
   assert.deepEqual(companions.meanings.pages[1].blocks,['lenses','boundary']);
 });
 
@@ -96,4 +97,12 @@ test('Water count semantics remain correct',()=>{
   assert.equal(cards.water.corpusOverview?.wholeSeriesCount,42);
   assert.equal(memberships,69);
   assert.equal(cards.water.geographyCountMode,'overlapping-memberships');
+});
+
+
+test('pagination refreshes do not duplicate Overview anchors or overwrite chronology headers',()=>{
+  assert.match(overlay,/behaviour\.querySelector\(':scope > small'\)/);
+  assert.match(overlay,/grounding\.querySelector\('\.tarot-overview-poles'\)/);
+  assert.match(overlay,/tarot-chronology-copy/);
+  assert.doesNotMatch(overlay,/section\.querySelector\('p'\)\.textContent=data\.chronologySummary/);
 });

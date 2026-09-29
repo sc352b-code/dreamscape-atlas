@@ -577,15 +577,21 @@ async function boot(){
 
   function consolidateMeaningsCard(interpretation,lenses,method){
     if(!interpretation) return;
-    if(lenses&&lenses.parentElement!==interpretation){
+    if(lenses&&!interpretation.contains(lenses)){
       lenses.removeAttribute('data-chapter');
       lenses.classList.add('tarot-companion-subsection');
       interpretation.appendChild(lenses);
+    }else if(lenses){
+      lenses.removeAttribute('data-chapter');
+      lenses.classList.add('tarot-companion-subsection');
     }
-    if(method&&method.parentElement!==interpretation){
+    if(method&&!interpretation.contains(method)){
       method.removeAttribute('data-chapter');
       method.classList.add('tarot-companion-boundary');
       interpretation.appendChild(method);
+    }else if(method){
+      method.removeAttribute('data-chapter');
+      method.classList.add('tarot-companion-boundary');
     }
   }
 

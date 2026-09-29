@@ -489,7 +489,8 @@
                   "type": "array",
                   "minItems": 1,
                   "items": {
-                    "type": "string"
+                    "type": "string",
+                    "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
                   }
                 }
               }
@@ -497,6 +498,13 @@
           }
         }
       }
+    },
+    "tarotEngineContractVersion": {
+      "type": "string",
+      "enum": [
+        "1.0"
+      ],
+      "description": "Canonical Dreamscape Tarot engine contract version for generated docked-workspace Tarots."
     }
   }
 }

@@ -16,11 +16,12 @@ test('Water companion tabs have explicit fixed-card pagination plans',()=>{
   assert.equal(companions.alongside.pages.length,2);
   assert.equal(companions.chronology.pages.length,1);
   assert.equal(companions.sources.pages.length,1);
-  assert.equal(companions.meanings.pages.length,2);
+  assert.equal(companions.meanings.pages.length,3);
   assert.deepEqual(companions.overview.pages[0].blocks,['heroMetric','grounding','metrics']);
   assert.deepEqual(companions.overview.pages[1].blocks,['behaviour']);
   assert.deepEqual(companions.overview.pages[2].blocks,['behaviourPoles']);
-  assert.deepEqual(companions.meanings.pages[1].blocks,['lenses','boundary']);
+  assert.deepEqual(companions.meanings.pages[1].blocks,['lensJungian']);
+  assert.deepEqual(companions.meanings.pages[2].blocks,['lensStory','lensLife','boundary']);
 });
 
 test('companion pages are fixed Tarot objects whose height is not content-driven',()=>{
@@ -105,4 +106,10 @@ test('pagination refreshes do not duplicate Overview anchors or overwrite chrono
   assert.match(overlay,/grounding\.querySelector\('\.tarot-overview-poles'\)/);
   assert.match(overlay,/tarot-chronology-copy/);
   assert.doesNotMatch(overlay,/section\.querySelector\('p'\)\.textContent=data\.chronologySummary/);
+});
+
+
+test('refreshed data replaces page blocks instead of duplicating them',()=>{
+  assert.match(overlay,/data-companion-block/);
+  assert.match(overlay,/if\(previous&&previous!==node\) previous\.remove\(\)/);
 });

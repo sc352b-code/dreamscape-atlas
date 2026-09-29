@@ -106,3 +106,20 @@ test('compact preview is composed and positioned before reveal',()=>{
   assert.ok(dispatchIndex>=0&&positionIndex>dispatchIndex&&revealIndex>positionIndex);
   assert.match(runtime,/composePreview\(preview,data\)/);
 });
+
+
+test('public Tarot packages require private-evidence provenance',()=>{
+  const card=clone(overlays.water);
+  delete card.provenance;
+  const errors=validateTarotCard(card,{id:'broken',contract});
+  assert.match(messages(errors),/provenance\.corpusVersion is required/);
+  assert.match(messages(errors),/theoryNeutralExtraction must be true/);
+});
+
+test('raw dream payload keys are forbidden in the public Tarot package',()=>{
+  const card=clone(overlays.water);
+  card.rawDreams=[{dreamText:'private text must never be public'}];
+  const errors=validateTarotCard(card,{id:'broken',contract});
+  assert.match(messages(errors),/forbidden private key "rawDreams"/);
+  assert.match(messages(errors),/forbidden private key "dreamText"/);
+});

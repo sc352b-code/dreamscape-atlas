@@ -224,6 +224,14 @@
             "blocks": [
               "behaviour"
             ]
+          },
+          {
+            "id": "anchors",
+            "title": "Recurring Actions",
+            "subtitle": "The strongest actions around Water",
+            "blocks": [
+              "behaviourPoles"
+            ]
           }
         ]
       },
@@ -278,10 +286,17 @@
           {
             "id": "constellation",
             "title": "The Constellation of Water",
-            "subtitle": "Related Dreamscape elements",
+            "subtitle": "How related Dreamscape elements gather around Water",
             "blocks": [
               "relatedNote",
-              "relatedCore",
+              "relatedCore"
+            ]
+          },
+          {
+            "id": "related",
+            "title": "Water's Companions",
+            "subtitle": "Related elements in the current derived model",
+            "blocks": [
               "relatedItems"
             ]
           }

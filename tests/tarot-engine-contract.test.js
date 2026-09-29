@@ -10,6 +10,7 @@ const overlays=JSON.parse(fs.readFileSync('worlds/reference-world/territories/he
 const runtime=fs.readFileSync('src/hearthlands-tarot-v2-overlays.js','utf8');
 const baseRuntime=fs.readFileSync('src/hearthlands-territory-v1.js','utf8');
 const css=fs.readFileSync('src/hearthlands-territory-v1.css','utf8');
+const migration=JSON.parse(fs.readFileSync('dreamscape-engine/contracts/tarot-migration-status.json','utf8'));
 
 const clone=value=>structuredClone(value);
 const messages=errors=>errors.join('\n');
@@ -176,4 +177,24 @@ test('canonical builder refuses raw/private dream payloads',()=>{
     ()=>buildTarotCardV1({...source,subjectId:'water',dreamRecords:[{dreamText:'private'}]}),
     /forbidden private key/
   );
+});
+
+
+test('only Water is currently allowed as the v1 engine exemplar',()=>{
+  assert.equal(migration.canonicalExemplar,'water');
+  assert.equal(migration.records.water.status,'canonical-v1');
+  assert.equal(migration.records.water.mayBeUsedAsEngineTemplate,true);
+  for(const [id,status] of Object.entries(migration.records)){
+    if(id==='water') continue;
+    assert.equal(status.mayBeUsedAsEngineTemplate,false,id);
+    assert.match(status.status,/pending-migration/);
+  }
+});
+
+test('fixed companion pages have a runtime overflow audit',()=>{
+  assert.equal(contract.layout.runtimeFitAuditRequired,true);
+  assert.match(runtime,/dreamscape-tarot-fit-failure/);
+  assert.match(runtime,/body\.scrollHeight>body\.clientHeight/);
+  assert.match(runtime,/ResizeObserver/);
+  assert.match(runtime,/card\.dataset\.fit=/);
 });

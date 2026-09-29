@@ -191,3 +191,43 @@ Desktop may present the main Tarot and companion card beside each other inside t
 **main Tarot → chapter selector → companion Tarot card**
 
 At no breakpoint should the companion card fall back to an ordinary article/page treatment.
+
+
+## Fixed companion-card pagination
+
+Companion Tarot chapters use a fixed physical card size. Content never determines card height.
+
+Rules:
+
+- every companion page is a fixed-ratio Tarot object;
+- body text may not be shrunk below the chosen readable hierarchy merely to fit more content;
+- content may not continue vertically into another card;
+- a tab that contains more material than one card can hold must define multiple companion pages;
+- only one companion page is visible at a time;
+- page arrows/dots belong to the card itself;
+- switching tabs starts at that tab's first page;
+- moving between pages does not change the selected tab;
+- source-dream browsing is a separate private library surface, not a 42-record list squeezed into a Tarot card.
+
+Water currently uses:
+- Overview: 2 cards;
+- Where it appears: 1 card;
+- Recurring patterns: 2 cards;
+- Appears alongside: 1 card;
+- How it changes: 1 card;
+- Source dreams: 1 doorway card;
+- Possible meanings: 2 cards.
+
+## Preview opening stability
+
+The compact preview must be fully composed before it becomes visible.
+
+The opening sequence is:
+
+1. populate base preview data;
+2. synchronously apply the image-led Tarot preview structure;
+3. position the preview using its final untransformed width/height;
+4. force layout;
+5. reveal it by changing only opacity/transform.
+
+Do not animate width, height, padding, left or top during preview opening.

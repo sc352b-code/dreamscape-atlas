@@ -20,8 +20,8 @@ test('Water companion tabs have explicit fixed-card pagination plans',()=>{
   assert.deepEqual(companions.overview.pages[0].blocks,['heroMetric','grounding','metrics']);
   assert.deepEqual(companions.overview.pages[1].blocks,['behaviour']);
   assert.deepEqual(companions.overview.pages[2].blocks,['behaviourPoles']);
-  assert.deepEqual(companions.meanings.pages[1].blocks,['lensJungian']);
-  assert.deepEqual(companions.meanings.pages[2].blocks,['lensStory','lensLife','boundary']);
+  assert.deepEqual(companions.meanings.pages[1].blocks,['lens:0']);
+  assert.deepEqual(companions.meanings.pages[2].blocks,['lens:1','lens:2','boundary']);
 });
 
 test('companion pages are fixed Tarot objects whose height is not content-driven',()=>{
@@ -148,4 +148,11 @@ test('companion pagination uses exactly one physical page shell per tab',()=>{
   assert.match(overlay,/let card=pager\.querySelector\(':scope > \.tarot-companion-page'\)/);
   assert.match(overlay,/if\(!card\)/);
   assert.doesNotMatch(overlay,/querySelectorAll\(':scope > \.tarot-companion-page'\)\.forEach/);
+});
+
+
+test('interpretive pagination is generic rather than Water-specific',()=>{
+  assert.match(js,/\^lens:\\\\d\+\$/);
+  assert.doesNotMatch(js,/lensJungian|lensStory|lensLife/);
+  assert.deepEqual(cards.water.companionCards.meanings.pages.flatMap(page=>page.blocks).filter(block=>block.startsWith('lens:')),['lens:0','lens:1','lens:2']);
 });

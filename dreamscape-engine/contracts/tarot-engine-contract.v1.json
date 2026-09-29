@@ -67,7 +67,9 @@
     "overflowResolution": "paginate",
     "pageControls": "integrated-arrows-and-dots",
     "frameSource": "subject-card-artwork",
-    "substituteFrameAllowed": false
+    "substituteFrameAllowed": false,
+    "runtimeFitAuditRequired": true,
+    "fitFailurePolicy": "fail-QA-and-repaginate; never shrink or silently clip"
   },
   "preview": {
     "mode": "image-led",
@@ -85,6 +87,12 @@
       "top",
       "object-fit",
       "aspect-ratio"
+    ],
+    "allowedContent": [
+      "subject-artwork",
+      "subject-title",
+      "unique-dream-count",
+      "open-tarot-action"
     ]
   },
   "evidence": {
@@ -181,5 +189,27 @@
       "evidenceRefsMode"
     ],
     "evidenceRefsMode": "private-provider"
+  },
+  "blockChapterOwnership": {
+    "heroMetric": "overview",
+    "grounding": "overview",
+    "metrics": "overview",
+    "behaviour": "overview",
+    "behaviourPoles": "overview",
+    "geographyLogic": "geography",
+    "geographyRows": "geography",
+    "geographyNote": "geography",
+    "strengthLegend": "patterns",
+    "functions": "patterns",
+    "relatedNote": "alongside",
+    "relatedCore": "alongside",
+    "relatedItems": "alongside",
+    "chronologyRiver": "chronology",
+    "chronologyText": "chronology",
+    "sourceIntro": "sources",
+    "sourceButton": "sources",
+    "meanings": "meanings",
+    "boundary": "meanings",
+    "lens:*": "meanings"
   }
 }

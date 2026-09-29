@@ -2684,8 +2684,11 @@
 
 
 
+
+
 /* --------------------------------------------------------------------------
-   COMPANION TAROT V4 — exact subject-card edge, stable layout, no clipping
+   COMPANION TAROT V5 — fixed physical cards + deliberate pagination
+   Content never determines card height and never flows into another card.
    -------------------------------------------------------------------------- */
 
 .territory-v1-reader.tarot-docked-workspace{
@@ -2699,26 +2702,63 @@
   font-family:var(--tarot-text);
 }
 
-/* The card is a real bounded Tarot object. The outer artwork comes from the
-   subject's actual Tarot image, masked to the edge bands so there is no
-   separately invented frame system. */
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card{
+/* Exactly one selected tab/deck in the information viewport. */
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info{
+  display:block;
+  position:relative;
+  min-width:0;
+  overflow:hidden;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info > [data-chapter]{
+  display:none!important;
+}
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="overview"] > [data-chapter="overview"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="geography"] > [data-chapter="geography"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="patterns"] > [data-chapter="patterns"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="alongside"] > [data-chapter="alongside"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="chronology"] > [data-chapter="chronology"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="sources"] > [data-chapter="sources"],
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="meanings"] > [data-chapter="meanings"]{
+  display:block!important;
+}
+
+.tarot-companion-deck{
+  position:relative;
+  width:100%;
+  min-width:0;
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:none!important;
+}
+.tarot-companion-pager{
+  position:relative;
+  display:grid;
+  place-items:center;
+  width:100%;
+  min-width:0;
+}
+.tarot-companion-page[hidden]{
+  display:none!important;
+}
+
+/* Locked physical object. Height comes from the deck ratio, never from content. */
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-page{
   position:relative;
   isolation:isolate;
   display:flex;
   flex-direction:column;
-  width:auto;
-  height:min(76vh,700px);
-  max-width:100%;
+  width:min(100%,360px);
   aspect-ratio:2/3;
+  height:auto;
   box-sizing:border-box;
   margin:0 auto!important;
-  padding:12.5% 9% 8.5%!important;
-  overflow:hidden;
+  padding:12.5% 9.5% 8.5%!important;
+  overflow:hidden!important;
   border:0!important;
   border-radius:15px!important;
   background:
-    radial-gradient(circle at 50% 15%,rgba(35,91,115,.13),transparent 31%),
+    radial-gradient(circle at 50% 16%,rgba(35,91,115,.13),transparent 31%),
     linear-gradient(180deg,#07111d 0%,#060b16 46%,#070914 100%)!important;
   box-shadow:
     0 26px 64px rgba(0,0,0,.38),
@@ -2727,19 +2767,17 @@
   filter:none!important;
   transform:none!important;
 }
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card::before{
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-page::before{
   content:"";
   position:absolute;
   z-index:0;
   inset:0;
-  margin:0!important;
   pointer-events:none;
   background-image:var(--tarot-deck-image,url('/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png'))!important;
   background-position:center!important;
   background-repeat:no-repeat!important;
   background-size:100% 100%!important;
   opacity:1!important;
-  filter:none!important;
   -webkit-mask:
     linear-gradient(#000 0 0) top/100% 11.5% no-repeat,
     linear-gradient(#000 0 0) bottom/100% 9% no-repeat,
@@ -2751,7 +2789,7 @@
     linear-gradient(#000 0 0) left/9% 100% no-repeat,
     linear-gradient(#000 0 0) right/9% 100% no-repeat;
 }
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card::after{
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-page::after{
   content:"";
   position:absolute;
   z-index:1;
@@ -2761,31 +2799,20 @@
   bottom:8.8%;
   border:1px solid rgba(225,186,113,.10);
   border-radius:9px;
-  box-shadow:inset 0 0 26px rgba(56,132,151,.025);
   pointer-events:none;
 }
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card > *{
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-page > *{
   position:relative;
   z-index:2;
 }
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card[hidden]{
-  display:none!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card.is-active-companion{
-  opacity:1!important;
-  filter:none!important;
-  transform:none!important;
-  animation:none!important;
-}
 
-/* Fixed card heading, independently scrollable card body. This removes the
-   clipped bottoms visible in Geography, Patterns and Alongside. */
+/* Header has a fixed visual budget. */
 .tarot-companion-header{
   flex:0 0 auto;
   display:flex;
   flex-direction:column;
   align-items:center;
-  margin:0 auto 16px;
+  margin:0 auto 12px;
   padding:0 3px;
   text-align:center;
 }
@@ -2794,22 +2821,21 @@
   font:700 7.5px/1.1 var(--tarot-small)!important;
   font-variant-caps:small-caps;
   letter-spacing:.18em;
-  opacity:1!important;
 }
 .tarot-companion-glyph{
   display:grid;
   place-items:center;
-  width:47px;
-  height:47px;
-  margin:10px 0 8px;
+  width:44px;
+  height:44px;
+  margin:9px 0 7px;
   border:1px solid rgba(239,200,124,.38);
   border-radius:50%;
   background:rgba(5,14,25,.82);
   box-shadow:0 0 0 3px rgba(4,9,17,.70),0 0 0 4px rgba(230,189,113,.10);
 }
 .tarot-companion-glyph svg{
-  width:30px;
-  height:30px;
+  width:28px;
+  height:28px;
   fill:none;
   stroke:#efc77e;
   stroke-width:1.4;
@@ -2819,26 +2845,25 @@
 .tarot-companion-header h3{
   margin:0!important;
   color:#ffe8b6!important;
-  font:italic 400 clamp(24px,2vw,31px)/1.04 var(--tarot-display)!important;
+  font:italic 400 27px/1.04 var(--tarot-display)!important;
   letter-spacing:.01em!important;
   text-align:center!important;
   text-shadow:0 1px 0 rgba(0,0,0,.48)!important;
 }
 .tarot-companion-header>p{
-  margin:7px auto 0!important;
-  max-width:94%;
+  margin:6px auto 0!important;
+  max-width:96%;
   color:#e0cbd2!important;
   font:italic 11.5px/1.35 var(--tarot-text)!important;
   text-align:center!important;
-  opacity:1!important;
 }
 .tarot-companion-rule{
   display:grid;
   grid-template-columns:1fr auto 1fr;
   align-items:center;
   gap:8px;
-  width:min(245px,78%);
-  margin-top:11px;
+  width:min(235px,76%);
+  margin-top:9px;
   color:#e2b76f;
 }
 .tarot-companion-rule i{
@@ -2848,23 +2873,81 @@
 .tarot-companion-rule i:last-child{transform:scaleX(-1)}
 .tarot-companion-rule span{font-size:7px}
 
-.tarot-companion-body{
+/* Page body gets a fixed budget. It does not scroll and cannot alter card size. */
+.tarot-companion-page-body{
   flex:1 1 auto;
   min-height:0;
-  overflow-y:auto;
-  overflow-x:hidden;
-  padding:0 5px 3px 1px;
-  scrollbar-width:thin;
-  scrollbar-color:rgba(230,190,116,.24) transparent;
+  width:100%;
+  overflow:hidden!important;
+  box-sizing:border-box;
+  display:block;
 }
-.tarot-companion-body::-webkit-scrollbar{width:4px}
-.tarot-companion-body::-webkit-scrollbar-thumb{
-  border-radius:999px;
-  background:rgba(230,190,116,.22);
+.tarot-companion-page-body > *{
+  max-width:100%;
+  box-sizing:border-box;
+}
+.tarot-companion-page p,
+.tarot-companion-page article p,
+.tarot-companion-page article span{
+  color:#eee3df!important;
+  opacity:1!important;
+  font:12px/1.5 var(--tarot-text)!important;
+}
+.tarot-companion-page b,
+.tarot-companion-page strong{
+  color:#f5dba8!important;
+  opacity:1!important;
+  font-family:var(--tarot-display)!important;
+}
+.tarot-companion-page small,
+.tarot-companion-page em{opacity:1!important}
+
+/* Integrated page controls are part of the card, not another UI panel. */
+.tarot-companion-page-nav{
+  flex:0 0 30px;
+  display:grid;
+  grid-template-columns:30px 1fr auto 30px;
+  align-items:center;
+  gap:8px;
+  margin-top:8px;
+  min-height:30px;
+}
+.tarot-companion-page-nav:empty{display:none}
+.tarot-companion-page-nav button{
+  width:28px;
+  height:28px;
+  padding:0;
+  border:1px solid rgba(237,197,120,.24);
+  border-radius:50%;
+  background:rgba(5,13,24,.70);
+  color:#edc77f;
+  cursor:pointer;
+  font:14px/1 var(--tarot-display);
+}
+.tarot-companion-page-nav button:disabled{
+  opacity:.22;
+  cursor:default;
+}
+.tarot-companion-page-nav>small{
+  color:#b9a99f;
+  font:9px/1 var(--tarot-small);
+}
+.tarot-page-dots{
+  display:flex;
+  justify-content:center;
+  gap:7px;
+}
+.tarot-page-dots i{
+  width:5px;height:5px;
+  border:1px solid rgba(235,194,118,.42);
+  border-radius:50%;
+}
+.tarot-page-dots i.active{
+  background:#e8bf77;
+  box-shadow:0 0 9px rgba(232,191,119,.24);
 }
 
-/* Old semantic headings remain for accessibility/data structure but the
-   companion-card heading is the visible title. */
+/* Semantic headings remain available but do not consume card space. */
 .tarot-companion-original-heading{
   position:absolute!important;
   width:1px!important;
@@ -2877,75 +2960,53 @@
   border:0!important;
 }
 
-/* Typography is deliberately crisp; no low-opacity body copy. */
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card p,
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card article p,
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card article span{
-  color:#eee3df!important;
-  opacity:1!important;
-  font:12.5px/1.62 var(--tarot-text)!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card b,
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card strong{
-  color:#f5dba8!important;
-  opacity:1!important;
-  font-family:var(--tarot-display)!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card small,
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card em{
-  opacity:1!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card [data-layer-label]::before{
-  color:#b6d1d4!important;
-  opacity:1!important;
-  font-family:var(--tarot-small)!important;
-}
-
-/* OVERVIEW — a composed knowledge card, compact enough to read at a glance. */
-.tarot-companion-overview .tarot-overview-lead{
+/* OVERVIEW page 1 */
+.tarot-companion-overview [data-page-id="record"] .tarot-overview-lead{
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  width:132px;
-  height:132px;
-  margin:0 auto 15px!important;
+  width:116px;
+  height:116px;
+  margin:0 auto 12px!important;
   border:1px solid rgba(240,200,124,.48);
   border-radius:50%;
   background:radial-gradient(circle,rgba(43,116,138,.22),rgba(5,14,25,.86) 64%)!important;
   box-shadow:0 0 0 4px rgba(4,9,18,.66),0 0 0 5px rgba(230,189,113,.12);
   text-align:center;
 }
-.tarot-companion-overview .tarot-overview-lead b{
+.tarot-companion-overview [data-page-id="record"] .tarot-overview-lead b{
   color:#ffe0a0!important;
-  font:400 49px/.86 var(--tarot-display)!important;
+  font:400 44px/.86 var(--tarot-display)!important;
 }
-.tarot-companion-overview .tarot-overview-lead span{
-  margin-top:7px;
+.tarot-companion-overview [data-page-id="record"] .tarot-overview-lead span{
+  margin-top:6px;
   color:#ecd8b1!important;
   font:italic 11px/1 var(--tarot-text)!important;
 }
-.tarot-companion-overview .tarot-overview-lead small{
+.tarot-companion-overview [data-page-id="record"] .tarot-overview-lead small{
   margin-top:5px;
   color:#bdd6d8!important;
   font:700 6.5px/1 var(--tarot-small)!important;
   letter-spacing:.13em;
   text-transform:uppercase;
 }
-.tarot-companion-overview .territory-v1-grounding{
-  margin:0 0 12px!important;
+.tarot-companion-overview [data-page-id="record"] .territory-v1-grounding{
+  margin:0 0 10px!important;
+  font-size:11.5px!important;
+  line-height:1.48!important;
 }
 .tarot-overview-metrics{
   display:grid;
   grid-template-columns:repeat(2,1fr);
   gap:0;
-  margin:0 0 12px;
+  margin:0;
   border-top:1px solid rgba(236,196,120,.18);
   border-bottom:1px solid rgba(236,196,120,.18);
 }
 .tarot-mini-inscription{
   position:relative;
-  padding:11px 8px 10px;
+  padding:8px 7px;
   text-align:center;
 }
 .tarot-mini-inscription+.tarot-mini-inscription::before{
@@ -2957,39 +3018,45 @@
 .tarot-mini-inscription b{
   display:block;
   color:#ffd894!important;
-  font:400 21px/1 var(--tarot-display)!important;
+  font:400 20px/1 var(--tarot-display)!important;
 }
 .tarot-mini-inscription span{
   display:block;
   margin-top:4px;
   color:#d2c4c7!important;
-  font:8px/1.3 var(--tarot-text)!important;
+  font:8.5px/1.25 var(--tarot-text)!important;
 }
+
+/* OVERVIEW page 2 */
 .tarot-behaviour-summary{
   margin:0;
-  padding:13px 13px 12px;
+  padding:14px 14px 13px;
   border:1px solid rgba(235,195,119,.16);
   border-radius:10px;
   background:rgba(5,14,25,.68)!important;
 }
 .tarot-behaviour-summary>small{
   color:#b9d2d4!important;
-  font:700 7px/1.15 var(--tarot-small)!important;
+  font:700 7.5px/1.15 var(--tarot-small)!important;
   letter-spacing:.14em;
 }
-.tarot-behaviour-summary>p{margin:7px 0 0!important}
+.tarot-behaviour-summary>p{
+  margin:8px 0 0!important;
+  font-size:12px!important;
+  line-height:1.5!important;
+}
 .tarot-overview-poles{
   display:grid;
   grid-template-columns:1fr;
-  gap:6px;
-  margin-top:10px;
+  gap:7px;
+  margin-top:12px;
 }
 .tarot-overview-poles span{
   display:grid;
-  grid-template-columns:20px 1fr;
+  grid-template-columns:22px 1fr;
   align-items:center;
-  gap:7px;
-  padding:7px 9px;
+  gap:8px;
+  padding:8px 9px;
   border:1px solid rgba(236,196,120,.10);
   border-radius:8px;
   background:rgba(255,255,255,.010);
@@ -3000,13 +3067,13 @@
   text-align:center;
 }
 .tarot-overview-poles b{
-  font:400 10px/1.25 var(--tarot-display)!important;
+  font:400 11px/1.28 var(--tarot-display)!important;
 }
 
 /* GEOGRAPHY */
 .tarot-territory-logic{
-  margin:0 0 14px;
-  padding:12px 13px;
+  margin:0 0 12px;
+  padding:11px 12px;
   border:1px solid rgba(234,194,119,.15);
   border-radius:10px;
   background:rgba(5,14,25,.70)!important;
@@ -3020,14 +3087,12 @@
   margin:6px 0 0!important;
   color:#e0d4d3!important;
   font-size:10.5px!important;
-}
-.territory-v1-reader.tarot-docked-workspace .territory-v1-geo-list{
-  margin-top:4px;
+  line-height:1.4!important;
 }
 .territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row{
   grid-template-columns:88px 1fr 28px;
   gap:8px;
-  padding:8px 0;
+  padding:7px 0;
 }
 .territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row span{
   color:#f0e4db!important;
@@ -3037,96 +3102,91 @@
   color:#ffd68a!important;
   font:400 12px/1 var(--tarot-display)!important;
 }
-.territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row i{
-  height:6px;
-}
+.territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row i{height:6px}
 .territory-v1-reader.tarot-docked-workspace .territory-v1-geo-note{
-  margin-top:9px!important;
+  margin-top:7px!important;
   color:#c5b9bc!important;
-  font-size:10px!important;
+  font:10.5px/1.35 var(--tarot-text)!important;
 }
 
-/* RECURRING PATTERNS */
+/* PATTERNS page 1 */
 .tarot-confidence-legend{
-  margin:0 0 12px;
-  padding:11px 12px;
+  margin:0;
+  padding:14px;
   border:1px solid rgba(234,194,119,.14);
   border-radius:10px;
   background:rgba(5,14,25,.70)!important;
 }
 .tarot-confidence-legend>small{
   color:#b9d2d4!important;
-  font:700 7px/1.15 var(--tarot-small)!important;
+  font:700 7.5px/1.15 var(--tarot-small)!important;
   letter-spacing:.14em;
 }
 .tarot-confidence-legend>p{
-  margin:6px 0 9px!important;
+  margin:8px 0 12px!important;
   color:#e0d4d3!important;
-  font-size:10px!important;
+  font:11px/1.45 var(--tarot-text)!important;
 }
 .tarot-confidence-legend>div{
   display:grid;
-  grid-template-columns:1fr;
-  gap:5px;
+  gap:9px;
 }
 .tarot-confidence-legend span{
   display:grid;
-  grid-template-columns:70px 1fr;
-  gap:7px;
+  grid-template-columns:78px 1fr;
+  gap:8px;
 }
 .tarot-confidence-legend span b{
   color:#f1ce8b!important;
-  font:400 10px/1.3 var(--tarot-display)!important;
+  font:400 11px/1.3 var(--tarot-display)!important;
 }
 .tarot-confidence-legend span em{
   color:#d0c4c6!important;
-  font:italic 9px/1.35 var(--tarot-text)!important;
+  font:italic 10.5px/1.4 var(--tarot-text)!important;
 }
-.tarot-companion-patterns.territory-v1-functions .territory-v1-function-list{
+
+/* PATTERNS page 2 */
+.tarot-companion-patterns .territory-v1-function-list{
   display:grid;
   grid-template-columns:1fr 1fr;
-  gap:7px;
+  gap:8px;
 }
-.tarot-companion-patterns.territory-v1-functions article{
-  min-height:0;
+.tarot-companion-patterns .territory-v1-function-list article{
   margin:0!important;
-  padding:10px 9px!important;
+  padding:10px!important;
   border:1px solid rgba(235,195,119,.12)!important;
   border-radius:9px!important;
   background:rgba(5,14,25,.68)!important;
 }
-.tarot-companion-patterns .territory-v1-article-heading{
-  display:block;
-}
 .tarot-companion-patterns .territory-v1-article-heading b{
   display:block;
   color:#f0d7aa!important;
-  font:400 10px/1.25 var(--tarot-display)!important;
+  font:400 11px/1.28 var(--tarot-display)!important;
 }
 .tarot-companion-patterns .territory-v1-confidence{
   display:block;
   margin-top:5px;
   color:#b9d2d4!important;
-  font:700 6.5px/1 var(--tarot-small)!important;
+  font:700 7px/1 var(--tarot-small)!important;
 }
 .tarot-companion-patterns article p{
   margin-top:6px!important;
-  font-size:9.5px!important;
-  line-height:1.4!important;
+  font:10.5px/1.4 var(--tarot-text)!important;
 }
 
 /* RELATED CONSTELLATION */
 .tarot-companion-alongside .territory-v1-related-note{
   margin:0 0 10px!important;
+  font:11.5px/1.45 var(--tarot-text)!important;
 }
 .tarot-constellation-core{
   display:flex;
   flex-direction:column;
   align-items:center;
   justify-content:center;
-  width:112px;
-  height:112px;
-  margin:8px auto 10px;
+  width:104px;
+  height:104px;
+  margin:7px auto 10px;
   border:1px solid rgba(235,196,120,.24);
   border-radius:50%;
   background:radial-gradient(circle,rgba(51,138,157,.18),rgba(4,13,24,.72) 64%);
@@ -3149,7 +3209,7 @@
 .tarot-companion-alongside .territory-v1-related-buttons{
   display:grid!important;
   grid-template-columns:repeat(2,1fr);
-  gap:6px!important;
+  gap:7px!important;
   margin:0!important;
 }
 .tarot-companion-alongside .territory-v1-related-buttons button{
@@ -3165,9 +3225,9 @@
 /* CHRONOLOGY */
 .tarot-time-river{
   position:relative;
-  width:38px;
-  height:110px;
-  margin:2px auto 10px;
+  width:40px;
+  height:118px;
+  margin:3px auto 13px;
 }
 .tarot-time-river::before{
   content:"";
@@ -3186,46 +3246,56 @@
   background:#0d1b26;
 }
 .tarot-time-river i:nth-child(1){top:5px}
-.tarot-time-river i:nth-child(2){top:50px}
+.tarot-time-river i:nth-child(2){top:54px}
 .tarot-time-river i:nth-child(3){bottom:5px}
-.tarot-companion-chronology .tarot-companion-body>p{text-align:center}
+.tarot-companion-chronology .tarot-chronology-copy{
+  text-align:center;
+  font-size:12px!important;
+  line-height:1.5!important;
+}
 
-/* SOURCE DREAMS */
-.tarot-companion-sources .territory-v1-source-fragments article,
-.tarot-companion-sources .tarot-private-dream-row{
-  margin:6px 0;
-  padding:10px 11px!important;
-  border:1px solid rgba(233,194,118,.12)!important;
-  border-radius:8px;
-  background:rgba(5,14,25,.70)!important;
+/* SOURCE DREAMS is a doorway card. The 42-record library opens separately. */
+.tarot-companion-sources .territory-v1-records-intro{
+  margin:18px 0 20px!important;
+  text-align:center;
+  font-size:12px!important;
+  line-height:1.5!important;
 }
 .territory-v1-reader.tarot-docked-workspace .territory-v1-records-button{
   display:flex!important;
   justify-content:center;
-  margin:14px auto 0!important;
-  padding:9px 14px!important;
+  width:max-content;
+  margin:0 auto!important;
+  padding:10px 15px!important;
   border:1px solid rgba(239,199,123,.40)!important;
   border-radius:999px!important;
   background:rgba(5,14,25,.76)!important;
   color:#ffe0a4!important;
-  font:italic 11px/1 var(--tarot-display)!important;
+  font:italic 11.5px/1 var(--tarot-display)!important;
 }
-.territory-v1-private-record-browser{
+.tarot-companion-deck .territory-v1-source-fragments{
+  display:none!important;
+}
+.tarot-companion-deck .territory-v1-private-record-browser{
   display:none;
-  max-height:250px;
+  position:absolute;
+  z-index:20;
+  inset:5%;
   overflow:auto;
-  margin-top:12px;
-  padding:9px;
-  border:1px solid rgba(234,194,119,.14);
-  border-radius:9px;
-  background:rgba(5,14,25,.80);
+  padding:18px;
+  border:1px solid rgba(238,198,121,.34);
+  border-radius:14px;
+  background:rgba(5,10,20,.98);
+  box-shadow:0 24px 70px rgba(0,0,0,.48);
 }
-.territory-v1-private-record-browser.open{display:block}
+.tarot-companion-deck .territory-v1-private-record-browser.open{display:block}
 .tarot-private-dream-row{
   display:grid;
   grid-template-columns:1fr auto;
-  gap:9px;
+  gap:10px;
   align-items:center;
+  padding:10px 0;
+  border-bottom:1px solid rgba(233,194,118,.10);
 }
 .tarot-private-dream-row button{
   border:0;
@@ -3234,268 +3304,72 @@
   color:#e9c27b;
   font:italic 10px/1 var(--tarot-display);
 }
-.tarot-private-access-card{
-  padding:10px;
-}
-.tarot-private-access-card>small{
-  color:#b8d1d4;
-  font:700 7px/1 var(--tarot-small);
-  letter-spacing:.14em;
-}
-.tarot-private-access-card>b{
-  display:block;
-  margin-top:6px;
-  color:#f0d8ab!important;
-  font:400 14px/1.3 var(--tarot-display)!important;
-}
-.tarot-private-import{
-  display:inline-block;
-  margin-top:8px;
-  padding:7px 10px;
-  border:1px solid rgba(234,194,119,.24);
-  border-radius:999px;
-  color:#e5bd78;
-  font:italic 10px/1 var(--tarot-display);
-}
 
-/* POSSIBLE MEANINGS */
-.tarot-companion-meanings .territory-v1-meaning-list article,
-.tarot-companion-meanings .territory-v1-lenses article{
-  margin:6px 0!important;
-  padding:10px 11px!important;
+/* MEANINGS page 1 */
+.tarot-companion-meanings .territory-v1-meaning-list{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:8px;
+}
+.tarot-companion-meanings .territory-v1-meaning-list article{
+  margin:0!important;
+  padding:10px!important;
   border:1px solid rgba(231,191,117,.11)!important;
   border-radius:8px!important;
   background:rgba(7,12,24,.72)!important;
 }
-.tarot-companion-subsection{
-  margin-top:14px!important;
-  padding-top:12px!important;
-  border-top:1px solid rgba(232,191,116,.13)!important;
-}
-.tarot-companion-subsection::before{
-  content:"INTERPRETIVE LENSES"!important;
-  display:block!important;
-  margin:0 0 8px!important;
-  color:#d0ad73!important;
-  font:700 7px/1 var(--tarot-small)!important;
-  letter-spacing:.14em!important;
-}
-.tarot-companion-boundary{
-  margin-top:12px!important;
-  padding-top:10px!important;
-  border-top:1px solid rgba(131,171,177,.12)!important;
-  color:#c7bcbf!important;
-  font:italic 9.5px/1.45 var(--tarot-text)!important;
-}
-
-/* Very wide desktops: keep the companion card comfortably inside the right
-   reading column instead of stretching it into a panel. */
-@media(min-width:1600px){
-  .territory-v1-reader.tarot-docked-workspace .tarot-companion-card{
-    height:min(66vh,620px);
-    max-width:100%;
-  }
-}
-/* Tablet/standard desktop */
-@media(min-width:900px) and (max-width:1599px){
-  .territory-v1-reader.tarot-docked-workspace .tarot-companion-card{
-    height:min(72vh,660px);
-  }
-}
-/* Mobile: same card identity, fitted to viewport; the body scrolls inside it. */
-@media(max-width:899px){
-  .territory-v1-reader.tarot-docked-workspace .tarot-companion-card{
-    width:min(92vw,390px);
-    height:min(72vh,650px);
-    aspect-ratio:auto;
-    padding:13% 9% 9%!important;
-  }
-  .territory-v1-reader.tarot-docked-workspace .tarot-companion-card::before{
-    -webkit-mask:
-      linear-gradient(#000 0 0) top/100% 11.5% no-repeat,
-      linear-gradient(#000 0 0) bottom/100% 9% no-repeat,
-      linear-gradient(#000 0 0) left/9% 100% no-repeat,
-      linear-gradient(#000 0 0) right/9% 100% no-repeat;
-    mask:
-      linear-gradient(#000 0 0) top/100% 11.5% no-repeat,
-      linear-gradient(#000 0 0) bottom/100% 9% no-repeat,
-      linear-gradient(#000 0 0) left/9% 100% no-repeat,
-      linear-gradient(#000 0 0) right/9% 100% no-repeat;
-  }
-  .tarot-private-dream-row{grid-template-columns:1fr}
-}
-
-@media(prefers-reduced-motion:reduce){
-  .territory-v1-reader.tarot-docked-workspace .tarot-companion-card{
-    scroll-behavior:auto;
-  }
-}
-
-
-/* --------------------------------------------------------------------------
-   COMPANION TAB ISOLATION + CARD-FIT CORRECTION
-   -------------------------------------------------------------------------- */
-
-/* The tab controller owns visibility. Exactly one top-level companion card may
-   exist in the reading viewport at a time, regardless of what data renderers do. */
-.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info{
+.tarot-companion-meanings .territory-v1-meaning-list article b{
   display:block;
-  position:relative;
-  overflow:hidden;
+  font-size:11px!important;
+  line-height:1.25!important;
 }
-.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info > [data-chapter]{
-  display:none!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="overview"] > [data-chapter="overview"],
-.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="geography"] > [data-chapter="geography"],
-.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="patterns"] > [data-chapter="patterns"],
-.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="alongside"] > [data-chapter="alongside"],
-.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="chronology"] > [data-chapter="chronology"],
-.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="sources"] > [data-chapter="sources"],
-.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info[data-active-chapter="meanings"] > [data-chapter="meanings"]{
-  display:flex!important;
-}
-
-/* Each active chapter is one complete physical card. Nothing is allowed to
-   continue below it into the dock. */
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card{
-  flex-direction:column;
-  align-items:stretch;
-  justify-content:flex-start;
-  overflow:hidden!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-body{
-  width:100%;
-  min-height:0;
-  overflow-y:auto!important;
-  overflow-x:hidden!important;
-  overscroll-behavior:contain;
-  padding-right:5px;
-  padding-bottom:8px;
-  box-sizing:border-box;
-}
-
-/* Keep all prose and visualisations inside the safe inner field of the frame. */
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-body > *{
-  max-width:100%;
-  box-sizing:border-box;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-card p{
-  margin-left:0!important;
-  margin-right:0!important;
-}
-
-/* Overview: compress without deleting information. */
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-companion-header{
-  margin-bottom:12px;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-overview-lead{
-  width:116px;
-  height:116px;
-  margin-bottom:12px!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-overview-lead b{
-  font-size:44px!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .territory-v1-grounding{
-  font-size:11.5px!important;
-  line-height:1.52!important;
-  margin-bottom:10px!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-overview-metrics{
-  margin-bottom:9px;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-mini-inscription{
-  padding-top:8px;
-  padding-bottom:8px;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-behaviour-summary{
-  padding:10px 11px;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-behaviour-summary>p{
+.tarot-companion-meanings .territory-v1-meaning-list article span{
+  display:block;
+  margin-top:6px;
   font-size:10.5px!important;
-  line-height:1.48!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-overview-poles{
-  gap:4px;
-  margin-top:7px;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-overview .tarot-overview-poles span{
-  padding:5px 7px;
-}
-
-/* Geography: all five territory rows should fit as one composed reading. */
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-geography .tarot-territory-logic{
-  margin-bottom:10px;
-  padding:10px 11px;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-geography .territory-v1-geo-row{
-  padding:6px 0;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-geography .territory-v1-geo-note{
-  margin-top:6px!important;
-  font-size:9.5px!important;
-}
-
-/* Patterns: concise two-column constellation of four functions, with the
-   strength legend compacted above it. */
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns .tarot-confidence-legend{
-  margin-bottom:9px;
-  padding:9px 10px;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns .tarot-confidence-legend>p{
-  margin:5px 0 7px!important;
-  font-size:9.25px!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns .tarot-confidence-legend span{
-  grid-template-columns:64px 1fr;
-  gap:6px;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns .territory-v1-function-list{
-  grid-template-columns:1fr 1fr;
-  gap:6px;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns article{
-  padding:8px!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-patterns article p{
-  font-size:8.9px!important;
-  line-height:1.35!important;
-}
-
-/* Related constellation: keep all related elements visible within the card. */
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-alongside .territory-v1-related-note{
-  font-size:10.5px!important;
-  line-height:1.45!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-alongside .tarot-constellation-core{
-  width:96px;
-  height:96px;
-  margin:6px auto 8px;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-alongside .territory-v1-related-buttons{
-  gap:5px!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-alongside .territory-v1-related-buttons button{
-  padding:6px 5px!important;
-  font-size:10px!important;
-}
-
-/* Meanings is the densest card. Preserve every developed section but keep it
-   inside the card with a discreet internal scroll rather than leaking below it. */
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-meanings .territory-v1-meaning-list article,
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-meanings .territory-v1-lenses article{
-  margin:5px 0!important;
-  padding:8px 9px!important;
-}
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-meanings article span,
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-meanings article p{
-  font-size:9.5px!important;
   line-height:1.4!important;
 }
 
-/* Keep the chapter selector in view while the user consults a card on standard
-   desktop/tablet, rather than making them scroll past a stack of cards. */
+/* MEANINGS page 2 */
+.tarot-companion-meanings .territory-v1-lenses{
+  margin:0!important;
+  padding:0!important;
+  border:0!important;
+  background:none!important;
+}
+.tarot-companion-meanings .territory-v1-lenses::before{
+  display:none!important;
+}
+.tarot-companion-meanings .territory-v1-lens-list{
+  display:grid;
+  gap:7px;
+}
+.tarot-companion-meanings .territory-v1-lens-list article{
+  margin:0!important;
+  padding:9px 10px!important;
+  border:1px solid rgba(231,191,117,.11)!important;
+  border-radius:8px!important;
+  background:rgba(7,12,24,.72)!important;
+}
+.tarot-companion-meanings .territory-v1-lens-list article b{
+  display:block;
+  font-size:11px!important;
+}
+.tarot-companion-meanings .territory-v1-lens-list article p{
+  margin-top:5px!important;
+  font-size:10.5px!important;
+  line-height:1.38!important;
+}
+.tarot-companion-boundary{
+  margin-top:9px!important;
+  padding-top:8px!important;
+  border-top:1px solid rgba(131,171,177,.12)!important;
+  color:#c7bcbf!important;
+  font:italic 10.5px/1.4 var(--tarot-text)!important;
+}
+
+/* Standard desktop: selector remains visible and the page itself never becomes a
+   long document. */
 @media(min-width:900px) and (max-width:1599px){
   .territory-v1-reader.tarot-docked-workspace .tarot-triptych-nav{
     position:sticky;
@@ -3504,7 +3378,40 @@
     background:linear-gradient(180deg,rgba(10,10,23,.995) 76%,rgba(10,10,23,.92) 90%,transparent);
     backdrop-filter:blur(4px);
   }
-  .territory-v1-reader.tarot-docked-workspace .tarot-triptych-info{
-    min-height:min(72vh,660px);
+  .territory-v1-reader.tarot-docked-workspace .tarot-companion-page{
+    width:min(100%,360px);
   }
+}
+/* Wide desktop: card fits the third column while staying the same physical ratio. */
+@media(min-width:1600px){
+  .territory-v1-reader.tarot-docked-workspace .tarot-companion-page{
+    width:min(100%,330px);
+  }
+}
+/* Mobile: same fixed-ratio object; only the deck width changes. */
+@media(max-width:899px){
+  .territory-v1-reader.tarot-docked-workspace .tarot-companion-page{
+    width:min(88vw,360px);
+    aspect-ratio:2/3;
+    padding:12.5% 9.5% 8.5%!important;
+  }
+  .tarot-companion-header h3{font-size:25px!important}
+  .tarot-private-dream-row{grid-template-columns:1fr}
+}
+
+@media(prefers-reduced-motion:reduce){
+  .territory-v1-reader.tarot-docked-workspace .tarot-companion-page{
+    transition:none!important;
+  }
+}
+
+/* Preview geometry is fixed before reveal. Opening may animate only opacity and
+   transform; no width, height, padding, image ratio or position transition. */
+.territory-v1-preview.tarot-preview-precomposed{
+  width:min(310px,calc(100vw - 24px));
+  padding:10px;
+  box-sizing:border-box;
+}
+.territory-v1-preview.tarot-preview-precomposed .territory-v1-preview-image{
+  aspect-ratio:4/5;
 }

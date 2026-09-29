@@ -351,26 +351,27 @@
             ]
           },
           {
-            "id": "jungian",
+            "id": "lens-1",
             "title": "A Jungian View",
             "subtitle": "One interpretive lens · not a fixed translation",
             "blocks": [
-              "lensJungian"
+              "lens:0"
             ]
           },
           {
-            "id": "lived",
+            "id": "lenses-2-3",
             "title": "Story & Life Experience",
             "subtitle": "Two other ways of reading Water",
             "blocks": [
-              "lensStory",
-              "lensLife",
+              "lens:1",
+              "lens:2",
               "boundary"
             ]
           }
         ]
       }
-    }
+    },
+    "tarotEngineContractVersion": "1.0"
   },
   "cat": {
     "previewSummary": "Cats repeatedly gather a tension between cherished vulnerability and irreducible autonomy: close enough to require care, but never wholly manageable.",

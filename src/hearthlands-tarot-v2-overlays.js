@@ -432,6 +432,7 @@ async function boot(){
       grounding:'.territory-v1-grounding',
       metrics:'.tarot-overview-metrics',
       behaviour:'.tarot-behaviour-summary',
+      behaviourPoles:'.tarot-overview-poles',
       geographyLogic:'.tarot-territory-logic',
       geographyRows:'.territory-v1-geo-list',
       geographyNote:'.territory-v1-geo-note',

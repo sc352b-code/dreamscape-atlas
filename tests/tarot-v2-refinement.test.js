@@ -34,12 +34,16 @@ test('companion pages are fixed Tarot objects whose height is not content-driven
   assert.doesNotMatch(css,/\.tarot-companion-page-body[\s\S]{0,250}overflow-y:auto/);
 });
 
-test('multi-page tabs use integrated arrows and page dots',()=>{
+test('multi-page tabs use deterministic direct page controls',()=>{
   assert.match(overlay,/tarot-companion-page-nav/);
   assert.match(overlay,/data-page-step="-1"/);
   assert.match(overlay,/data-page-step="1"/);
   assert.match(overlay,/tarot-page-dots/);
   assert.match(overlay,/setPage/);
+  assert.match(overlay,/button\.onclick=event=>/);
+  assert.match(overlay,/event\.stopPropagation\(\)/);
+  assert.match(overlay,/dot\.onclick=go/);
+  assert.doesNotMatch(overlay,/section\.dataset\.pageBound/);
 });
 
 test('page state survives observer refreshes but a newly selected tab starts at page one',()=>{
@@ -112,4 +116,19 @@ test('pagination refreshes do not duplicate Overview anchors or overwrite chrono
 test('refreshed data replaces page blocks instead of duplicating them',()=>{
   assert.match(overlay,/data-companion-block/);
   assert.match(overlay,/if\(previous&&previous!==node\) previous\.remove\(\)/);
+});
+
+
+test('every companion page owns a real frame element immune to article pseudo-element collisions',()=>{
+  assert.match(overlay,/tarot-companion-frame/);
+  assert.match(overlay,/page\.prepend\(frame\)/);
+  assert.match(css,/\.tarot-companion-frame\{/);
+  assert.match(css,/background-image:var\(--tarot-deck-image/);
+  assert.match(css,/\.tarot-companion-page::before,[\s\S]*content:none!important/);
+});
+
+test('Recurring Patterns uses the same physical frame layer as every other page',()=>{
+  assert.equal(cards.water.companionCards.patterns.pages.length,2);
+  assert.match(css,/\.tarot-companion-patterns \.territory-v1-function-list/);
+  assert.match(overlay,/page\.className='tarot-companion-card tarot-companion-page'/);
 });

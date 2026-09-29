@@ -286,11 +286,16 @@ async function boot(){
     if(!section){
       section=document.createElement('section');
       section.className='territory-v1-tarot-section territory-v1-chronology';
-      section.innerHTML='<h3>How it changes</h3><p></p>';
+      section.innerHTML='<h3>How it changes</h3><p class="tarot-chronology-copy"></p>';
       const records=reader.querySelector('.territory-v1-dream-records');
       records?.parentNode.insertBefore(section,records);
     }
-    section.querySelector('p').textContent=data.chronologySummary||
+    let copy=section.querySelector('.tarot-chronology-copy');
+    if(!copy){
+      copy=section.querySelector(':scope > p')||section.querySelector('p');
+      copy?.classList.add('tarot-chronology-copy');
+    }
+    if(copy) copy.textContent=data.chronologySummary||
       `The current published ${data.title||'Tarot'} model does not yet support a strong chronology claim. A future private analysis can test changes in form, emotional tone and dreamer response across the series.`;
     return section;
   }
@@ -348,11 +353,26 @@ async function boot(){
     }
     const behaviourText=data.behaviorSummary||data.behaviourSummary||'';
     const keyPatterns=(data.recurringFunctions||[]).slice(0,3);
-    behaviour.innerHTML=behaviourText?`
-      <small>WHAT YOU TEND TO BE DOING AROUND ${escapeHTML(subject.toUpperCase())}</small>
-      <p>${escapeHTML(behaviourText)}</p>
-      <div class="tarot-overview-poles">${keyPatterns.map((item,index)=>`
-        <span><i aria-hidden="true">${['◇','☾','✦'][index]||'✦'}</i><b>${escapeHTML(item.name)}</b></span>`).join('')}</div>`:'';
+    let behaviourLabel=behaviour.querySelector(':scope > small');
+    if(!behaviourLabel){
+      behaviourLabel=document.createElement('small');
+      behaviour.prepend(behaviourLabel);
+    }
+    behaviourLabel.textContent=`WHAT YOU TEND TO BE DOING AROUND ${subject.toUpperCase()}`;
+    let behaviourCopy=behaviour.querySelector(':scope > p');
+    if(!behaviourCopy){
+      behaviourCopy=document.createElement('p');
+      behaviour.appendChild(behaviourCopy);
+    }
+    behaviourCopy.textContent=behaviourText;
+    let poles=grounding.querySelector('.tarot-overview-poles');
+    if(!poles){
+      poles=document.createElement('div');
+      poles.className='tarot-overview-poles';
+      behaviour.appendChild(poles);
+    }
+    poles.innerHTML=keyPatterns.map((item,index)=>`
+      <span><i aria-hidden="true">${['◇','☾','✦'][index]||'✦'}</i><b>${escapeHTML(item.name)}</b></span>`).join('');
 
     const lead=grounding.querySelector('.tarot-overview-lead');
     if(lead&&whole!=null&&total!=null) lead.innerHTML=`<b>${escapeHTML(whole)}</b><span>of ${escapeHTML(total)} dreams</span><small>contain ${escapeHTML(subject)}</small>`;

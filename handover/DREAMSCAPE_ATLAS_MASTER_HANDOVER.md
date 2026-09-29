@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: visually validate fixed companion-card pagination and the no-jump compact preview before propagating the architecture.
+Immediate priority: visually validate the Recurring Patterns frame and page-arrow/page-dot navigation before propagating the fixed-card system.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`a6548c1168ee2483ac176ecd9d88dfd0c6f8e201`
+`f730ac208475f23533d6a7c3365ecade95d6538c`
 
 No merge to production has been performed.
 
@@ -164,6 +164,33 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-29 — Recurring-pattern frame + companion-page controls fix
+
+User review of the fixed-card pagination pass found two remaining defects:
+
+1. Recurring Patterns opened a companion card without the visible Water Tarot border;
+2. the small page arrows rendered at the bottom of multi-page tabs but did not reliably advance to the next companion card.
+
+Root causes and corrections:
+- Recurring Patterns pages are `article` elements nested inside `.territory-v1-functions`, and older Tarot CSS also targets article pseudo-elements. The frame therefore remained vulnerable to selector collisions.
+- Companion-card frame rendering no longer uses `article::before` / `::after` at all.
+- Every page now owns a real `.tarot-companion-frame` child element using the subject Tarot image as its exact deck-edge source.
+- The old page pseudo-frame is explicitly disabled.
+- Frame existence is guaranteed on every render, including already-created companion pages.
+- Multi-page navigation no longer relies on one delegated section listener.
+- Each page-arrow button now receives a direct click handler after its nav is rendered.
+- Page-arrow clicks call `preventDefault()` and `stopPropagation()`, then update the deck page deterministically.
+- Celestial page dots are now clickable/keyboard-accessible as an additional page-navigation route.
+- Page controls have explicit z-index/pointer-event protection above all decorative layers.
+
+Acceptance test:
+- both Recurring Patterns companion pages must show the same Water deck border as all other companion cards;
+- right-arrow on page 1 must reveal page 2 immediately;
+- left-arrow on page 2 must return to page 1;
+- page dots must select their corresponding companion page;
+- no page turn may change the selected chapter/tab.
+
 
 ### 2026-09-29 — Fixed companion-card pagination + preview jump fix
 

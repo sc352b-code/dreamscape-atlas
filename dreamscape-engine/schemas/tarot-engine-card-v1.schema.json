@@ -1,0 +1,861 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dreamscape.local/schemas/tarot-engine-card-v1.schema.json",
+  "title": "Dreamscape Tarot Engine Card v1",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "tarotEngineContractVersion",
+    "title",
+    "cardImage",
+    "previewImage",
+    "previewSummary",
+    "corpusOverview",
+    "corpusGrounding",
+    "recurringFunctions",
+    "possibleMeanings",
+    "interpretiveLenses",
+    "relatedItems",
+    "relationshipStatus",
+    "geographyCountMode",
+    "interpretiveBoundary",
+    "presentation",
+    "privateCorpusAccess",
+    "provenance",
+    "companionCards"
+  ],
+  "properties": {
+    "tarotEngineContractVersion": {
+      "const": "1.0"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "friendlySubtitle": {
+      "type": "string"
+    },
+    "cardImage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previewImage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previewSummary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "corpusOverview": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "uniqueDreamCount",
+        "appearanceCount",
+        "wholeSeriesCount",
+        "wholeSeriesCountStatus",
+        "territoryCounts",
+        "totalCorpusDreams"
+      ],
+      "properties": {
+        "uniqueDreamCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "appearanceCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "wholeSeriesCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "wholeSeriesCountStatus": {
+          "enum": [
+            "known",
+            "unknown",
+            "private",
+            "pending"
+          ]
+        },
+        "territoryCounts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "totalCorpusDreams": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "geographyNote": {
+      "type": "string"
+    },
+    "corpusGrounding": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recurringFunctions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "name",
+          "summary"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confidence": {
+            "enum": [
+              "low",
+              "medium",
+              "medium-high",
+              "high"
+            ]
+          }
+        }
+      }
+    },
+    "possibleMeanings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "name",
+          "summary"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "interpretiveLenses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "name",
+          "summary"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "caveat": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relatedItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relationshipStatus": {
+      "enum": [
+        "cooccurrence-verified",
+        "related-not-cooccurrence",
+        "pending"
+      ]
+    },
+    "chronologySummary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "geographyCountMode": {
+      "enum": [
+        "exclusive-dream-counts",
+        "overlapping-memberships",
+        "pending"
+      ]
+    },
+    "behaviorSummary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "confidenceScale": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "note",
+        "levels"
+      ],
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "levels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "interpretiveBoundary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "imageFraming": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "preview": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "objectPosition": {
+              "type": "string"
+            },
+            "objectFit": {
+              "enum": [
+                "cover",
+                "contain"
+              ]
+            }
+          }
+        },
+        "full": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "objectPosition": {
+              "type": "string"
+            },
+            "objectFit": {
+              "enum": [
+                "cover",
+                "contain"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "presentation": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "mode",
+        "previewMode",
+        "evidenceFirst",
+        "fullArtworkOpening",
+        "responsiveStrategy"
+      ],
+      "properties": {
+        "mode": {
+          "const": "docked-workspace"
+        },
+        "previewMode": {
+          "const": "image-led"
+        },
+        "evidenceFirst": {
+          "const": true
+        },
+        "fullArtworkOpening": {
+          "const": true
+        },
+        "responsiveStrategy": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "privateCorpusAccess": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "enabled",
+        "subjectId",
+        "expectedDreamCount",
+        "accessMode"
+      ],
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "subjectId": {
+          "type": "string",
+          "minLength": 1
+        },
+        "expectedDreamCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "accessMode": {
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "corpusVersion",
+        "sourceCorpusScope",
+        "theoryNeutralExtraction",
+        "evidenceRefsMode"
+      ],
+      "properties": {
+        "corpusVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceCorpusScope": {
+          "enum": [
+            "whole-corpus",
+            "declared-subset"
+          ]
+        },
+        "theoryNeutralExtraction": {
+          "const": true
+        },
+        "evidenceRefsMode": {
+          "enum": [
+            "private-provider",
+            "private-bundle",
+            "not-applicable"
+          ]
+        }
+      }
+    },
+    "companionCards": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "overview",
+        "geography",
+        "patterns",
+        "alongside",
+        "chronology",
+        "sources",
+        "meanings"
+      ],
+      "properties": {
+        "overview": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "subtitle",
+            "motif",
+            "tone",
+            "pages"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "subtitle": {
+              "type": "string",
+              "minLength": 1
+            },
+            "motif": {
+              "type": "string",
+              "minLength": 1
+            },
+            "tone": {
+              "const": "evidence"
+            },
+            "pages": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "title",
+                  "subtitle",
+                  "blocks"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9-]+$"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "blocks": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "geography": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "subtitle",
+            "motif",
+            "tone",
+            "pages"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "subtitle": {
+              "type": "string",
+              "minLength": 1
+            },
+            "motif": {
+              "type": "string",
+              "minLength": 1
+            },
+            "tone": {
+              "const": "evidence"
+            },
+            "pages": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "title",
+                  "subtitle",
+                  "blocks"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9-]+$"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "blocks": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "patterns": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "subtitle",
+            "motif",
+            "tone",
+            "pages"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "subtitle": {
+              "type": "string",
+              "minLength": 1
+            },
+            "motif": {
+              "type": "string",
+              "minLength": 1
+            },
+            "tone": {
+              "const": "evidence"
+            },
+            "pages": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "title",
+                  "subtitle",
+                  "blocks"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9-]+$"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "blocks": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "alongside": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "subtitle",
+            "motif",
+            "tone",
+            "pages"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "subtitle": {
+              "type": "string",
+              "minLength": 1
+            },
+            "motif": {
+              "type": "string",
+              "minLength": 1
+            },
+            "tone": {
+              "const": "evidence"
+            },
+            "pages": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "title",
+                  "subtitle",
+                  "blocks"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9-]+$"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "blocks": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "chronology": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "subtitle",
+            "motif",
+            "tone",
+            "pages"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "subtitle": {
+              "type": "string",
+              "minLength": 1
+            },
+            "motif": {
+              "type": "string",
+              "minLength": 1
+            },
+            "tone": {
+              "const": "evidence"
+            },
+            "pages": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "title",
+                  "subtitle",
+                  "blocks"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9-]+$"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "blocks": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "sources": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "subtitle",
+            "motif",
+            "tone",
+            "pages"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "subtitle": {
+              "type": "string",
+              "minLength": 1
+            },
+            "motif": {
+              "type": "string",
+              "minLength": 1
+            },
+            "tone": {
+              "const": "source"
+            },
+            "pages": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "title",
+                  "subtitle",
+                  "blocks"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9-]+$"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "blocks": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "meanings": {
+          "type": "object",
+          "additionalProperties": false,
+          "required": [
+            "title",
+            "subtitle",
+            "motif",
+            "tone",
+            "pages"
+          ],
+          "properties": {
+            "title": {
+              "type": "string",
+              "minLength": 1
+            },
+            "subtitle": {
+              "type": "string",
+              "minLength": 1
+            },
+            "motif": {
+              "type": "string",
+              "minLength": 1
+            },
+            "tone": {
+              "const": "interpretation"
+            },
+            "pages": {
+              "type": "array",
+              "minItems": 1,
+              "items": {
+                "type": "object",
+                "additionalProperties": false,
+                "required": [
+                  "id",
+                  "title",
+                  "subtitle",
+                  "blocks"
+                ],
+                "properties": {
+                  "id": {
+                    "type": "string",
+                    "pattern": "^[a-z0-9-]+$"
+                  },
+                  "title": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "subtitle": {
+                    "type": "string",
+                    "minLength": 1
+                  },
+                  "blocks": {
+                    "type": "array",
+                    "minItems": 1,
+                    "maxItems": 3,
+                    "uniqueItems": true,
+                    "items": {
+                      "type": "string",
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

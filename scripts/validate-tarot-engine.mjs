@@ -10,6 +10,13 @@ export function validateTarotCard(card,{id='unknown',contract}={}){
 
   if(card.presentation?.mode!=='docked-workspace') return errors;
 
+  if(!card.subjectId) fail('subjectId is required');
+  if(!['place','symbol','person','animal','object','territory'].includes(card.subjectType)){
+    fail('subjectType must be a supported Tarot subject type');
+  }
+  if(id!=='unknown'&&card.subjectId&&card.subjectId!==id){
+    fail(`subjectId "${card.subjectId}" does not match package key "${id}"`);
+  }
   if(card.tarotEngineContractVersion!==contract.contractVersion){
     fail(`tarotEngineContractVersion must be ${contract.contractVersion}`);
   }
@@ -161,6 +168,7 @@ export function validateTarotCard(card,{id='unknown',contract}={}){
     if(!allowedSourceBlocks.has(block)) fail(`sources: block "${block}" is forbidden inside the fixed Tarot; source records belong in the private library`);
   }
   if(card.privateCorpusAccess?.enabled){
+    if(card.privateCorpusAccess.subjectId!==card.subjectId) fail('privateCorpusAccess.subjectId must match subjectId');
     if(unique!=null&&card.privateCorpusAccess.expectedDreamCount!=null&&card.privateCorpusAccess.expectedDreamCount!==unique){
       fail('privateCorpusAccess.expectedDreamCount must match unique dream count');
     }

@@ -1,6 +1,6 @@
 # DREAMSCAPE ATLAS — MASTER HANDOVER
 
-Last updated: 2026-09-24
+Last updated: 2026-09-29
 
 ## Current state
 
@@ -10,17 +10,21 @@ Active Tarot refinement branch: `tarot-v2-refinement`
 Parent development branch: `family-home-pilot`
 Production branch: `main`
 
-The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the designated gold-standard exemplar for the current refinement pass.
+Water is the **only canonical Tarot Engine v1.0 exemplar**. Family Home, Natalie/person-11, House/Home, Cat and Dog remain legacy/pending migration and must not be copied as templates.
 
 ## Current development focus
 
-Immediate priority: visually validate the rebuilt one-shell companion pagination once, then move on to propagating the Tarot system.
+Immediate priority: finish visual/readability polish on Water without changing the locked engine architecture, then migrate the next Tarot through the v1 builder/planner/validator rather than copying legacy implementation.
 
-This pass is focused on:
-1. per-card artwork framing rather than one universal crop;
-2. a more majestic illuminated-manuscript / celestial-oracle visual language;
-3. stronger visible separation between corpus evidence and interpretation;
-4. reusable engine/schema support rather than one-off styling.
+This pass has now locked the reusable Tarot engine architecture:
+1. theory-neutral corpus analysis → public-safe derived analysis;
+2. canonical v1 builder + generic companion-page planner;
+3. exact subject-artwork deck edge rather than invented companion frames;
+4. fixed 2:3 companion Tarot with single-shell pagination;
+5. evidence/source/interpretation separation;
+6. private source-dream library boundary;
+7. machine contract validation + regression tests + runtime fit audit;
+8. desktop/mobile visual QA before propagation.
 
 ## Last known good state
 
@@ -34,11 +38,28 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`0adc8ce423d98dca606497c2e1ecbf3fc8c58c05`
+`f958da351fd1a752b290174687388c4551d0e5b1`
 
 No merge to production has been performed.
 
 ## Files changed in this Tarot refinement pass
+
+### Canonical Tarot Engine v1 files
+
+- `dreamscape-engine/docs/tarot-engine-contract.md` — authoritative human-readable contract.
+- `dreamscape-engine/docs/tarot-generation-pipeline.md` — corpus-to-Tarot generation workflow and anti-patterns.
+- `dreamscape-engine/contracts/tarot-engine-contract.v1.json` — machine-readable invariants.
+- `dreamscape-engine/contracts/tarot-migration-status.json` — identifies Water as canonical and older Tarots as legacy/pending migration.
+- `dreamscape-engine/schemas/tarot-analysis-v1.schema.json` — public-safe derived-analysis handoff from corpus analysis.
+- `dreamscape-engine/schemas/tarot-engine-card-v1.schema.json` — canonical generated runtime-card schema.
+- `dreamscape-engine/tarot/build-card.js` — canonical v1 Tarot package builder.
+- `dreamscape-engine/tarot/companion-plan.js` — subject-agnostic fixed-card pagination planner.
+- `dreamscape-engine/tarot/README.md` — developer entry point; explicitly forbids copying legacy Tarots as templates.
+- `scripts/validate-tarot-engine.mjs` — contract/privacy/count/page-budget validator.
+- `tests/tarot-engine-contract.test.js` — engine-level regression tests.
+
+New Tarots must travel through these files. Hand-copying Water or any legacy DOM/CSS is not the generation pathway.
+
 
 - `worlds/reference-world/territories/hearthlands/tarot/tarot-v2-authored-overlays.json`
   - adds per-card preview/full image framing metadata;
@@ -91,6 +112,26 @@ CONSEQUENCE: Jungian or other symbolic lenses are optional secondary readings.
 WHY: A universal crop caused important faces/subjects to be cut off.
 CONSEQUENCE: preview and full-card framing can differ for each Tarot.
 
+### DECISION: Water is the only canonical Tarot Engine v1 exemplar.
+WHY: The Water prototype exposed the interaction, layout, evidence and privacy failure modes that the engine contract now prevents.
+CONSEQUENCE: Family Home, Natalie, Cat, Dog and House/Home are legacy until migrated through `buildTarotCardV1()`, the generic planner, validator and visual QA.
+
+### DECISION: Fixed Tarot dimensions are structural, not decorative.
+WHY: Letting content determine height, shrink type, scroll like an article or create vertical card stacks repeatedly broke the Tarot metaphor.
+CONSEQUENCE: A tab owns one permanent 2:3 Tarot shell; dense content is paginated inside that shell.
+
+### DECISION: New Tarot packages are generated, not hand-authored from old UI.
+WHY: Copying prototype markup/CSS reproduces prototype bugs and Water-specific assumptions.
+CONSEQUENCE: The canonical path is derived analysis → `buildTarotCardV1()` → `planCompanionCards()` → validation/tests → visual QA.
+
+### DECISION: Public Tarot data and private corpus evidence are separate layers.
+WHY: Future user corpora will contain sensitive raw dreams and identities.
+CONSEQUENCE: theory-neutral extraction/evidence remain private; public Tarot packages contain derived summaries and aggregate counts only; Source Dreams is a doorway to the private provider.
+
+### DECISION: Runtime overflow is a QA failure, not a styling opportunity.
+WHY: Silent clipping and text shrinking caused repeated card-fit failures.
+CONSEQUENCE: the runtime emits `dreamscape-tarot-fit-failure`; the response is to repaginate, never shrink the type or grow the card.
+
 ### DECISION: Water is the current gold-standard Tarot exemplar.
 WHY: It has strong recurrence, cross-territory geography and multiple corpus-derived functions.
 CONSEQUENCE: Finish Water to a genuinely excellent standard before scaling broadly.
@@ -101,11 +142,11 @@ CONSEQUENCE: source-dream text and sensitive examples belong behind the authenti
 
 ## Known problems
 
-- The Tarot refinement has not yet been visually inspected in the deployed preview.
-- Per-card focal values are sensible first-pass metadata and must be checked against actual rendered art, especially the Natalie portrait.
-- Full source-dream access remains a private-provider integration requirement rather than a public-data feature.
-- The current public Tarot overlays contain derived material; avoid adding further sensitive source detail.
-- Water content is substantially stronger than generic dictionary interpretation, but the next content pass should connect recurring functions to private evidence references where the private provider permits it.
+- Water still needs visual/readability polish; the **engine architecture is locked**, but typography/spacing/content phrasing may be refined.
+- Water is the only current v1-migrated Tarot; all other authored overlays are explicitly legacy/pending migration.
+- Full source-dream browsing still requires the authenticated/private provider (or private local profile) and must not move into public assets.
+- Automated contract/tests now exist, but visual QA across wide desktop, laptop/tablet and mobile remains a required human release gate.
+- Runtime fit failures must be treated as page-planning defects and repaginated rather than patched with smaller text/scrolling.
 
 ## Data provenance
 
@@ -164,6 +205,36 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-29 — Tarot Engine v1.0 institutionalised from Water lessons
+
+The Water development process has now been converted into a reusable engine contract so future Tarots and future user corpora do not repeat prototype mistakes.
+
+Implemented:
+- Water marked `tarotEngineContractVersion: "1.0"` and given explicit v57/whole-corpus/theory-neutral/private-evidence provenance;
+- canonical human contract: `dreamscape-engine/docs/tarot-engine-contract.md`;
+- corpus-to-Tarot pipeline: `dreamscape-engine/docs/tarot-generation-pipeline.md`;
+- machine contract: `dreamscape-engine/contracts/tarot-engine-contract.v1.json`;
+- canonical runtime schema: `dreamscape-engine/schemas/tarot-engine-card-v1.schema.json`;
+- derived-analysis handoff schema: `dreamscape-engine/schemas/tarot-analysis-v1.schema.json`;
+- generic page planner: `dreamscape-engine/tarot/companion-plan.js`;
+- canonical package builder: `dreamscape-engine/tarot/build-card.js`;
+- contract validator: `scripts/validate-tarot-engine.mjs`;
+- engine regression suite: `tests/tarot-engine-contract.test.js`;
+- npm commands: `tarot:validate`, `tarot:test`, `check`;
+- migration manifest explicitly prevents legacy Family Home/Natalie/Cat/Dog/House-Home records being used as templates;
+- interpretive-lens pagination changed from Water-specific names to generic `lens:0`, `lens:1`, etc.;
+- one permanent companion Tarot shell per selected tab is the canonical pagination mechanism;
+- exact subject artwork is the canonical companion-card frame source;
+- runtime fixed-card overflow audit emits `dreamscape-tarot-fit-failure`;
+- preview compose-before-reveal rule is canonical to prevent layout twitch;
+- counts, confidence labels, related-item semantics, chronology honesty, interpretation boundaries and private/public separation are validator rules rather than optional prose guidance.
+
+Machine audit of the current Water package returns zero contract errors. Its 42 unique dreams, 59 appearances and 69 overlapping territory memberships remain intentionally distinct measures.
+
+Next propagation rule:
+**Do not manually restyle the next Tarot. Feed its derived corpus analysis into the v1 builder/planner, validate it, then visually QA it.**
+
 
 ### 2026-09-29 — Pagination rebuilt as one permanent Tarot shell
 

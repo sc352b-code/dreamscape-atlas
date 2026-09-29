@@ -34,16 +34,16 @@ test('companion pages are fixed Tarot objects whose height is not content-driven
   assert.doesNotMatch(css,/\.tarot-companion-page-body[\s\S]{0,250}overflow-y:auto/);
 });
 
-test('multi-page tabs use deterministic direct page controls',()=>{
+test('multi-page tabs use one stable Tarot shell and capture-phase controls',()=>{
   assert.match(overlay,/tarot-companion-page-nav/);
   assert.match(overlay,/data-page-step="-1"/);
   assert.match(overlay,/data-page-step="1"/);
-  assert.match(overlay,/tarot-page-dots/);
+  assert.match(overlay,/tarot-page-dot/);
   assert.match(overlay,/setPage/);
-  assert.match(overlay,/button\.onclick=event=>/);
-  assert.match(overlay,/event\.stopPropagation\(\)/);
-  assert.match(overlay,/dot\.onclick=go/);
-  assert.doesNotMatch(overlay,/section\.dataset\.pageBound/);
+  assert.match(overlay,/__dreamscapeSetCompanionPage/);
+  assert.match(overlay,/pager\.addEventListener\('click',[\s\S]*true\)/);
+  assert.doesNotMatch(overlay,/pages\.forEach\(\(pageConfig,index\)=>/);
+  assert.doesNotMatch(overlay,/button\.onclick=/);
 });
 
 test('page state survives observer refreshes but a newly selected tab starts at page one',()=>{
@@ -134,11 +134,18 @@ test('Recurring Patterns uses the same physical frame layer as every other page'
 });
 
 
-test('page turns do not trigger the global class observer or get reset',()=>{
-  assert.doesNotMatch(overlay,/classList\.toggle\('is-active-page'/);
-  assert.match(overlay,/page\.hidden=!active/);
-  assert.match(overlay,/aria-hidden/);
-  assert.match(overlay,/target\.closest\('\.tarot-companion-pager'\)/);
-  assert.match(css,/\.tarot-page-dots i\[aria-current="page"\]/);
-  assert.doesNotMatch(css,/\.tarot-page-dots i\.active/);
+test('page turns swap content inside one permanent physical card',()=>{
+  assert.match(overlay,/moveBodyToStash/);
+  assert.match(overlay,/card\.dataset\.pageId=pageConfig\.id/);
+  assert.match(overlay,/body\.appendChild\(node\)/);
+  assert.match(overlay,/__dreamscapeSetCompanionPage/);
+  assert.match(css,/\.tarot-companion-stash/);
+  assert.match(css,/\.tarot-page-dot\[aria-current="page"\]/);
+});
+
+
+test('companion pagination uses exactly one physical page shell per tab',()=>{
+  assert.match(overlay,/let card=pager\.querySelector\(':scope > \.tarot-companion-page'\)/);
+  assert.match(overlay,/if\(!card\)/);
+  assert.doesNotMatch(overlay,/querySelectorAll\(':scope > \.tarot-companion-page'\)\.forEach/);
 });

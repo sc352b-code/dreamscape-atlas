@@ -6,6 +6,8 @@
   "additionalProperties": true,
   "required": [
     "tarotEngineContractVersion",
+    "subjectId",
+    "subjectType",
     "title",
     "cardImage",
     "previewImage",
@@ -856,6 +858,20 @@
           }
         }
       }
+    },
+    "subjectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subjectType": {
+      "enum": [
+        "place",
+        "symbol",
+        "person",
+        "animal",
+        "object",
+        "territory"
+      ]
     }
   }
 }

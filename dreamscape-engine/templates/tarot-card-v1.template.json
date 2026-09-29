@@ -98,5 +98,7 @@
     "sourceCorpusScope": "whole-corpus",
     "theoryNeutralExtraction": true,
     "evidenceRefsMode": "private-provider"
-  }
+  },
+  "subjectId": "<subject id>",
+  "subjectType": "<place|symbol|person|animal|object|territory>"
 }

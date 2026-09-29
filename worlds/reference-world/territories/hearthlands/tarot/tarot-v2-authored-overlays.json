@@ -351,11 +351,20 @@
             ]
           },
           {
-            "id": "lenses",
-            "title": "Ways of Looking",
-            "subtitle": "Interpretive lenses · not fixed meanings",
+            "id": "jungian",
+            "title": "A Jungian View",
+            "subtitle": "One interpretive lens · not a fixed translation",
             "blocks": [
-              "lenses",
+              "lensJungian"
+            ]
+          },
+          {
+            "id": "lived",
+            "title": "Story & Life Experience",
+            "subtitle": "Two other ways of reading Water",
+            "blocks": [
+              "lensStory",
+              "lensLife",
               "boundary"
             ]
           }

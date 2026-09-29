@@ -2,6 +2,22 @@
 
 This document describes how the engine should generate a Tarot for **any future user corpus** without repeating prototype-specific mistakes.
 
+## Canonical implementation files
+
+New Tarot generation must use these files rather than copying an existing Tarot by hand:
+
+- `dreamscape-engine/schemas/tarot-analysis-v1.schema.json` — derived-analysis handoff contract;
+- `dreamscape-engine/tarot/build-card.js` — canonical v1 package builder;
+- `dreamscape-engine/tarot/companion-plan.js` — generic fixed-card page planner;
+- `dreamscape-engine/schemas/tarot-engine-card-v1.schema.json` — generated runtime-card schema;
+- `dreamscape-engine/contracts/tarot-engine-contract.v1.json` — machine-readable invariants;
+- `scripts/validate-tarot-engine.mjs` — contract validator;
+- `tests/tarot-engine-contract.test.js` — engine regression tests.
+
+The generation path is:
+
+**private corpus → theory-neutral evidence → public-safe derived analysis → `buildTarotCardV1()` → `planCompanionCards()` → validator/tests → visual QA → approved Tarot**
+
 It supplements the canonical contract in `tarot-engine-contract.md`.
 
 ## Inputs
@@ -322,6 +338,8 @@ The validator rejects:
 ## Stage O — visual QA before propagation
 
 Automated validation is necessary but not sufficient.
+
+The runtime also performs a fixed-card fit audit. If a page exceeds its available body, it sets `data-fit="overflow"` and emits `dreamscape-tarot-fit-failure`. Treat that event as a failed QA condition: repaginate the content. Never respond by shrinking the type, growing the card, or enabling article-style scrolling.
 
 For the exemplar, inspect:
 

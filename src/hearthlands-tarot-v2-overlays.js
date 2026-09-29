@@ -98,8 +98,13 @@ async function boot(){
       <div class="territory-v1-geo-row" style="--territory-share:${Math.max(4,Math.round((Number(count)||0)/max*100))}%">
         <span>${escapeHTML(titleCase(territory))}</span><i></i><b>${escapeHTML(count)}</b>
       </div>`).join('');
-    section.querySelector('.territory-v1-geo-note')?.remove();
-    if(data.geographyNote) section.insertAdjacentHTML('beforeend',`<p class="territory-v1-geo-note">${escapeHTML(data.geographyNote)}</p>`);
+    let note=section.querySelector('.territory-v1-geo-note');
+    if(!note){
+      note=document.createElement('p');
+      note.className='territory-v1-geo-note';
+      target.insertAdjacentElement('afterend',note);
+    }
+    note.textContent=data.geographyNote||'';
   }
 
   function renderRelated(reader,data){
@@ -107,19 +112,38 @@ async function boot(){
     if(!related) return;
     const items=Array.isArray(data.relatedItems)?data.relatedItems:[];
     const verified=data.relationshipStatus==='cooccurrence-verified';
-    const note=verified
+    const noteText=verified
       ?'These relationships are supported by recurring same-dream evidence.'
       :'These are related Dreamscape elements. This view does not yet claim that each one repeatedly occurs in the same dreams.';
-    const host=related.querySelector(':scope > .tarot-companion-body')||related;
-    host.innerHTML=`
-      <b>Appears alongside</b>
-      <p class="territory-v1-related-note">${escapeHTML(note)}</p>
-      <div class="territory-v1-related-buttons">${items.map(item=>{
-        const id=typeof item==='string'?item:item.id;
-        const label=typeof item==='string'?titleCase(item):(item.label||titleCase(id));
-        return `<button type="button" data-related-id="${escapeHTML(id)}"><i aria-hidden="true"></i>${escapeHTML(label)}</button>`;
-      }).join('')}</div>`;
-    host.querySelectorAll('[data-related-id]').forEach(button=>{
+
+    let heading=related.querySelector('.territory-v1-related-heading');
+    if(!heading){
+      heading=document.createElement('b');
+      heading.className='territory-v1-related-heading';
+      heading.textContent='Appears alongside';
+      related.appendChild(heading);
+    }
+    let note=related.querySelector('.territory-v1-related-note');
+    if(!note){
+      note=document.createElement('p');
+      note.className='territory-v1-related-note';
+      related.appendChild(note);
+    }
+    note.textContent=noteText;
+
+    let buttons=related.querySelector('.territory-v1-related-buttons');
+    if(!buttons){
+      buttons=document.createElement('div');
+      buttons.className='territory-v1-related-buttons';
+      related.appendChild(buttons);
+    }
+    buttons.innerHTML=items.map(item=>{
+      const id=typeof item==='string'?item:item.id;
+      const label=typeof item==='string'?titleCase(item):(item.label||titleCase(id));
+      return `<button type="button" data-related-id="${escapeHTML(id)}"><i aria-hidden="true"></i>${escapeHTML(label)}</button>`;
+    }).join('');
+
+    buttons.querySelectorAll('[data-related-id]').forEach(button=>{
       const id=button.dataset.relatedId;
       const hotspot=root.querySelector(`.territory-hotspot[data-id="${CSS.escape(id)}"]`);
       button.disabled=!hotspot;
@@ -141,7 +165,11 @@ async function boot(){
     if(!section) return;
     const id=selectedId();
     const count=data.dreamRecordCount??data.corpusOverview?.uniqueDreamCount??data.corpusOverview?.wholeSeriesCount;
-    const copy=section.querySelector('p');
+    let copy=section.querySelector('.territory-v1-records-intro');
+    if(!copy){
+      copy=section.querySelector(':scope > p')||section.querySelector('p');
+      copy?.classList.add('territory-v1-records-intro');
+    }
     const button=section.querySelector('.territory-v1-records-button');
 
     let fragments=section.querySelector('.territory-v1-source-fragments');
@@ -339,7 +367,7 @@ async function boot(){
     if(!explainer){
       explainer=document.createElement('div');
       explainer.className='tarot-territory-logic';
-      const chart=geography.querySelector('div');
+      const chart=geography.querySelector('.territory-v1-geo-list');
       chart?.insertAdjacentElement('beforebegin',explainer);
     }
     const mode=data.geographyCountMode||'overlapping-memberships';
@@ -355,8 +383,10 @@ async function boot(){
     if(!legend){
       legend=document.createElement('div');
       legend.className='tarot-confidence-legend';
-      const list=functions.querySelector(':scope > div');
-      functions.insertBefore(legend,list||null);
+      const list=functions.querySelector('.territory-v1-function-list')||
+        Array.from(functions.children).find(node=>node.tagName==='DIV'&&!node.classList.contains('tarot-companion-pager'));
+      if(list) list.insertAdjacentElement('beforebegin',legend);
+      else functions.appendChild(legend);
     }
     const scale=data.confidenceScale||{
       note:'These labels describe qualitative evidence strength in the current analysis. They are not percentages and they are not counts of dreams.',
@@ -388,33 +418,55 @@ async function boot(){
     return glyphs[motif]||glyphs.record;
   }
 
+  function companionToneLabel(config){
+    return config.tone==='interpretation'
+      ?'INTERPRETIVE CARD · NOT CORPUS FACT'
+      :config.tone==='source'
+        ?'SOURCE CARD · PRIVATE CORPUS'
+        :'CORPUS EVIDENCE CARD';
+  }
+
+  function companionBlockNode(section,block){
+    const selectors={
+      heroMetric:'.tarot-overview-lead',
+      grounding:'.territory-v1-grounding',
+      metrics:'.tarot-overview-metrics',
+      behaviour:'.tarot-behaviour-summary',
+      geographyLogic:'.tarot-territory-logic',
+      geographyRows:'.territory-v1-geo-list',
+      geographyNote:'.territory-v1-geo-note',
+      strengthLegend:'.tarot-confidence-legend',
+      functions:'.territory-v1-function-list',
+      relatedNote:'.territory-v1-related-note',
+      relatedCore:'.tarot-constellation-core',
+      relatedItems:'.territory-v1-related-buttons',
+      chronologyRiver:'.tarot-time-river',
+      chronologyText:'.tarot-chronology-copy',
+      sourceIntro:'.territory-v1-records-intro',
+      sourceButton:'.territory-v1-records-button',
+      meanings:'.territory-v1-interpretation',
+      lenses:'.territory-v1-lenses',
+      boundary:'.territory-v1-method'
+    };
+    return selectors[block]?section.querySelector(selectors[block]):null;
+  }
+
   function ensureCompanionCard(section,chapterId,data){
     if(!section) return;
     const config=data.companionCards?.[chapterId];
     if(!config) return;
+    const pages=Array.isArray(config.pages)&&config.pages.length
+      ?config.pages
+      :[{id:'main',title:config.title,subtitle:config.subtitle,blocks:[]}];
 
-    section.classList.add('tarot-companion-card',`tarot-companion-${chapterId}`,`tarot-motif-${config.motif||chapterId}`,`tarot-tone-${config.tone||'evidence'}`);
+    section.classList.add('tarot-companion-deck',`tarot-companion-${chapterId}`,`tarot-motif-${config.motif||chapterId}`,`tarot-tone-${config.tone||'evidence'}`);
+    section.classList.remove('tarot-companion-card');
     section.dataset.companionCard=chapterId;
     section.dataset.companionTone=config.tone||'evidence';
 
-    let header=section.querySelector(':scope > .tarot-companion-header');
-    if(!header){
-      header=document.createElement('header');
-      header.className='tarot-companion-header';
-      section.insertBefore(header,section.firstChild);
-    }
-    const toneLabel=config.tone==='interpretation'?'INTERPRETIVE CARD · NOT CORPUS FACT':config.tone==='source'?'SOURCE CARD · PRIVATE CORPUS':'CORPUS EVIDENCE CARD';
-    header.innerHTML=`
-      <small>${escapeHTML(toneLabel)}</small>
-      <div class="tarot-companion-glyph">${companionGlyph(config.motif)}</div>
-      <h3>${escapeHTML(config.title)}</h3>
-      <p>${escapeHTML(config.subtitle)}</p>
-      <div class="tarot-companion-rule" aria-hidden="true"><i></i><span>✦</span><i></i></div>`;
-
-    const originalHeading=Array.from(section.children).find(node=>
-      node!==header&&(node.tagName==='H3'||(chapterId==='alongside'&&node.tagName==='B'))
-    );
-    if(originalHeading) originalHeading.classList.add('tarot-companion-original-heading');
+    const semanticHeading=section.querySelector(':scope > h3')||
+      (chapterId==='alongside'?section.querySelector('.territory-v1-related-heading'):null);
+    semanticHeading?.classList.add('tarot-companion-original-heading');
 
     if(chapterId==='alongside'){
       let core=section.querySelector('.tarot-constellation-core');
@@ -428,25 +480,99 @@ async function boot(){
     }
 
     if(chapterId==='chronology'){
+      let copy=section.querySelector('.tarot-chronology-copy');
+      if(!copy){
+        copy=section.querySelector(':scope > p')||section.querySelector('p');
+        copy?.classList.add('tarot-chronology-copy');
+      }
       let river=section.querySelector('.tarot-time-river');
       if(!river){
         river=document.createElement('div');
         river.className='tarot-time-river';
         river.setAttribute('aria-hidden','true');
         river.innerHTML='<i></i><i></i><i></i>';
-        header.insertAdjacentElement('afterend',river);
+        copy?.insertAdjacentElement('beforebegin',river);
       }
     }
 
-    let body=section.querySelector(':scope > .tarot-companion-body');
-    if(!body){
-      body=document.createElement('div');
-      body.className='tarot-companion-body';
-      Array.from(section.children).forEach(node=>{
-        if(node!==header&&node!==body) body.appendChild(node);
-      });
-      section.appendChild(body);
+    const oldHeader=section.querySelector(':scope > .tarot-companion-header');
+    oldHeader?.remove();
+    const oldBody=section.querySelector(':scope > .tarot-companion-body');
+    if(oldBody){
+      while(oldBody.firstChild) section.insertBefore(oldBody.firstChild,oldBody);
+      oldBody.remove();
     }
+
+    let pager=section.querySelector(':scope > .tarot-companion-pager');
+    if(!pager){
+      pager=document.createElement('div');
+      pager.className='tarot-companion-pager';
+      section.appendChild(pager);
+    }
+
+    const validIds=new Set(pages.map(page=>page.id));
+    pager.querySelectorAll(':scope > .tarot-companion-page').forEach(page=>{
+      if(!validIds.has(page.dataset.pageId)) page.remove();
+    });
+
+    pages.forEach((pageConfig,index)=>{
+      let page=pager.querySelector(`:scope > .tarot-companion-page[data-page-id="${CSS.escape(pageConfig.id)}"]`);
+      if(!page){
+        page=document.createElement('article');
+        page.className='tarot-companion-card tarot-companion-page';
+        page.dataset.pageId=pageConfig.id;
+        page.innerHTML='<header class="tarot-companion-header"></header><div class="tarot-companion-page-body"></div><nav class="tarot-companion-page-nav" aria-label="Card pages"></nav>';
+        pager.appendChild(page);
+      }
+      page.dataset.pageIndex=String(index);
+      const header=page.querySelector('.tarot-companion-header');
+      header.innerHTML=`
+        <small>${escapeHTML(companionToneLabel(config))}</small>
+        <div class="tarot-companion-glyph">${companionGlyph(config.motif)}</div>
+        <h3>${escapeHTML(pageConfig.title||config.title)}</h3>
+        <p>${escapeHTML(pageConfig.subtitle||config.subtitle)}</p>
+        <div class="tarot-companion-rule" aria-hidden="true"><i></i><span>✦</span><i></i></div>`;
+
+      const body=page.querySelector('.tarot-companion-page-body');
+      (pageConfig.blocks||[]).forEach(block=>{
+        const node=companionBlockNode(section,block);
+        if(node&&node.parentElement!==body) body.appendChild(node);
+      });
+
+      const nav=page.querySelector('.tarot-companion-page-nav');
+      if(pages.length>1){
+        nav.innerHTML=`
+          <button type="button" data-page-step="-1" aria-label="Previous companion card" ${index===0?'disabled':''}>←</button>
+          <span class="tarot-page-dots">${pages.map((_,dotIndex)=>`<i class="${dotIndex===index?'active':''}" aria-hidden="true"></i>`).join('')}</span>
+          <small>${index+1} / ${pages.length}</small>
+          <button type="button" data-page-step="1" aria-label="Next companion card" ${index===pages.length-1?'disabled':''}>→</button>`;
+      }else nav.innerHTML='';
+    });
+
+    const library=section.querySelector('.territory-v1-private-record-browser');
+    if(library&&library.parentElement!==section) section.appendChild(library);
+
+    const setPage=pageIndex=>{
+      const safe=Math.max(0,Math.min(pages.length-1,pageIndex));
+      section.dataset.activePage=String(safe);
+      pager.querySelectorAll(':scope > .tarot-companion-page').forEach((page,index)=>{
+        page.hidden=index!==safe;
+        page.classList.toggle('is-active-page',index===safe);
+      });
+    };
+
+    if(!section.dataset.pageBound){
+      section.dataset.pageBound='true';
+      section.addEventListener('click',event=>{
+        const button=event.target.closest('[data-page-step]');
+        if(!button) return;
+        const current=Number(section.dataset.activePage||0);
+        setPage(current+Number(button.dataset.pageStep));
+      });
+    }
+
+    const current=Math.min(Number(section.dataset.activePage||0),pages.length-1);
+    setPage(Number.isFinite(current)?current:0);
   }
 
   function consolidateMeaningsCard(interpretation,lenses,method){
@@ -616,8 +742,14 @@ async function boot(){
         button.classList.toggle('active',active);
         button.setAttribute('aria-current',active?'page':'false');
       });
-      const activeCard=info.querySelector(`:scope > [data-chapter="${CSS.escape(valid)}"]`);
-      activeCard?.querySelector('.tarot-companion-body')?.scrollTo({top:0,behavior:'auto'});
+      const activeDeck=info.querySelector(`:scope > [data-chapter="${CSS.escape(valid)}"]`);
+      if(activeDeck){
+        activeDeck.dataset.activePage='0';
+        activeDeck.querySelectorAll(':scope > .tarot-companion-pager > .tarot-companion-page').forEach((page,index)=>{
+          page.hidden=index!==0;
+          page.classList.toggle('is-active-page',index===0);
+        });
+      }
       info.scrollTo({top:0,behavior:'auto'});
     };
 
@@ -645,20 +777,17 @@ async function boot(){
     }
   }
 
-  function applyPreview(){
-    const preview=root.querySelector('.territory-v1-preview.open');
-    const data=selectedData();
+  function composePreview(preview,data){
     if(!preview||!data) return;
-
     const imageLed=data.presentation?.previewMode==='image-led'||data.presentation?.mode==='docked-workspace';
     preview.classList.toggle('tarot-preview-image-led',imageLed);
-    preview.classList.add('tarot-v2-exemplar-preview');
+    preview.classList.add('tarot-v2-exemplar-preview','tarot-preview-precomposed');
 
     const image=ensurePreviewImage(preview);
     const img=image.querySelector('img');
     if(data.previewImage||data.cardImage){
       img.src=data.previewImage||data.cardImage;
-      img.alt=`Dreamscape artwork for ${data.title||preview.querySelector('h3')?.textContent||'this Tarot'}`;
+      img.alt=`Dreamscape artwork for ${data.title||'this Tarot'}`;
       applyFraming(img,data,'preview');
       image.hidden=false;
     }else image.hidden=true;
@@ -680,6 +809,13 @@ async function boot(){
       if(data.previewSummary) preview.querySelector('.territory-v1-preview-grounding').textContent=data.previewSummary;
       renderStats(preview.querySelector('.territory-v1-preview-meta'),(data.quickStats||[]).slice(0,2));
     }
+  }
+
+  function applyPreview(){
+    const preview=root.querySelector('.territory-v1-preview.open');
+    const data=selectedData();
+    if(!preview||!data) return;
+    composePreview(preview,data);
   }
 
 
@@ -768,6 +904,12 @@ async function boot(){
   const observer=new MutationObserver(refresh);
   observer.observe(root,{subtree:true,attributes:true,attributeFilter:['class']});
   window.addEventListener('dreamscape-private-profile-change',refresh);
+  window.addEventListener('dreamscape-preview-will-open',event=>{
+    const preview=event.detail?.preview||root.querySelector('.territory-v1-preview');
+    const subjectId=event.detail?.subjectId||selectedId();
+    const data=overlays[subjectId];
+    if(preview&&data) composePreview(preview,data);
+  });
   window.__hearthlandsTarotV2={
     overlays:Object.keys(overlays),
     exemplars:['family-home','water','person-11'],

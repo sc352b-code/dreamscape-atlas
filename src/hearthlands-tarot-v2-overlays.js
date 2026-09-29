@@ -602,11 +602,12 @@ async function boot(){
 
     if(!pager.dataset.controlsBound){
       pager.dataset.controlsBound='true';
-      pager.addEventListener('pointerup',event=>{
+      pager.addEventListener('click',event=>{
         const stepButton=event.target.closest('[data-page-step]');
-        if(stepButton&&!stepButton.disabled){
+        if(stepButton){
           event.preventDefault();
           event.stopPropagation();
+          if(stepButton.disabled) return;
           const current=Number(section.dataset.activePage||0);
           setPage(current+Number(stepButton.dataset.pageStep));
           return;
@@ -615,20 +616,6 @@ async function boot(){
         if(dot){
           event.preventDefault();
           event.stopPropagation();
-          setPage(Number(dot.dataset.pageIndex));
-        }
-      },true);
-      pager.addEventListener('click',event=>{
-        const control=event.target.closest('[data-page-step],[data-page-index]');
-        if(control){
-          event.preventDefault();
-          event.stopPropagation();
-        }
-      },true);
-      pager.addEventListener('keydown',event=>{
-        const dot=event.target.closest('[data-page-index]');
-        if(dot&&(event.key==='Enter'||event.key===' ')){
-          event.preventDefault();
           setPage(Number(dot.dataset.pageIndex));
         }
       },true);

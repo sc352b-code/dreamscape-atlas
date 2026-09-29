@@ -15,7 +15,12 @@ export function validateTarotCard(card,{id='unknown',contract}={}){
   }
   if(card.presentation?.previewMode!=='image-led') fail('previewMode must be image-led');
   if(card.presentation?.evidenceFirst!==true) fail('presentation.evidenceFirst must be true');
+  if(card.presentation?.fullArtworkOpening!==true) fail('presentation.fullArtworkOpening must be true');
+  if(!card.presentation?.responsiveStrategy) fail('presentation.responsiveStrategy is required');
   if(!card.cardImage) fail('cardImage is required for exact deck-frame reuse');
+  if(!card.previewImage) fail('previewImage is required');
+  if(!card.imageFraming?.preview?.objectPosition) fail('imageFraming.preview.objectPosition is required');
+  if(!card.imageFraming?.full?.objectPosition) fail('imageFraming.full.objectPosition is required');
 
   const expectedChapters=contract.chapters.map(x=>x.id);
   const companions=card.companionCards||{};
@@ -61,6 +66,12 @@ export function validateTarotCard(card,{id='unknown',contract}={}){
         const dynamicOk=dynamicPatterns.some(re=>re.test(block));
         if(!allowedBlocks.has(block)&&!dynamicOk){
           fail(`${chapter}.${page.id}: unknown block "${block}"`);
+        }
+        const ownership=block.startsWith('lens:')
+          ?contract.blockChapterOwnership?.['lens:*']
+          :contract.blockChapterOwnership?.[block];
+        if(ownership&&ownership!==chapter){
+          fail(`${chapter}.${page.id}: block "${block}" belongs to ${ownership}`);
         }
         if(seenBlocks.has(block)) fail(`${chapter}: block "${block}" assigned more than once`);
         seenBlocks.add(block);

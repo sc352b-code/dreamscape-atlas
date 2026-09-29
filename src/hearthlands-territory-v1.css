@@ -2296,7 +2296,7 @@
     height:100%;
   }
   .territory-v1-reader.tarot-docked-workspace .tarot-triptych-center .territory-v1-tarot-image{
-    width:min(100%,360px);
+    width:min(100%,390px);
   }
   .territory-v1-reader.tarot-docked-workspace .tarot-triptych-nav{
     order:1;
@@ -2748,7 +2748,7 @@
   isolation:isolate;
   display:flex;
   flex-direction:column;
-  width:min(100%,360px);
+  width:min(100%,390px);
   aspect-ratio:2/3;
   height:auto;
   box-sizing:border-box;
@@ -3379,19 +3379,25 @@
     backdrop-filter:blur(4px);
   }
   .territory-v1-reader.tarot-docked-workspace .tarot-companion-page{
-    width:min(100%,360px);
+    width:min(100%,390px);
   }
 }
 /* Wide desktop: card fits the third column while staying the same physical ratio. */
 @media(min-width:1600px){
+  .atlas.territory-v1:has(.territory-v1-reader.tarot-docked-workspace.open){
+    --tarot-dock-width:min(980px,50vw);
+  }
+  .territory-v1-reader.tarot-docked-workspace .tarot-triptych-shell{
+    grid-template-columns:120px minmax(330px,1fr) minmax(340px,1fr);
+  }
   .territory-v1-reader.tarot-docked-workspace .tarot-companion-page{
-    width:min(100%,330px);
+    width:min(100%,370px);
   }
 }
 /* Mobile: same fixed-ratio object; only the deck width changes. */
 @media(max-width:899px){
   .territory-v1-reader.tarot-docked-workspace .tarot-companion-page{
-    width:min(88vw,360px);
+    width:min(92vw,390px);
     aspect-ratio:2/3;
     padding:12.5% 9.5% 8.5%!important;
   }

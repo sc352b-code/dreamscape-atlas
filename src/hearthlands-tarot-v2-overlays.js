@@ -560,7 +560,11 @@ async function boot(){
       const body=page.querySelector('.tarot-companion-page-body');
       (pageConfig.blocks||[]).forEach(block=>{
         const node=companionBlockNode(section,block);
-        if(node&&node.parentElement!==body) body.appendChild(node);
+        if(!node) return;
+        const previous=body.querySelector(`[data-companion-block="${CSS.escape(block)}"]`);
+        if(previous&&previous!==node) previous.remove();
+        node.dataset.companionBlock=block;
+        if(node.parentElement!==body) body.appendChild(node);
       });
 
       const nav=page.querySelector('.tarot-companion-page-nav');

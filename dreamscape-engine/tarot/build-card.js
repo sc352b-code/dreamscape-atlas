@@ -29,6 +29,10 @@ export function buildTarotCardV1(input){
 
   const title=required(input.title,'title');
   const subjectId=required(input.subjectId,'subjectId');
+  const subjectType=required(input.subjectType,'subjectType');
+  if(!['place','symbol','person','animal','object','territory'].includes(subjectType)){
+    throw new Error(`Unsupported Tarot subjectType: ${subjectType}`);
+  }
   const cardImage=required(input.cardImage,'cardImage');
   const corpusOverview=required(input.corpusOverview,'corpusOverview');
   required(input.corpusGrounding,'corpusGrounding');

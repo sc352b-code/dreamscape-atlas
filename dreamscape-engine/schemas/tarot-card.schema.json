@@ -505,6 +505,38 @@
         "1.0"
       ],
       "description": "Canonical Dreamscape Tarot engine contract version for generated docked-workspace Tarots."
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "corpusVersion",
+        "sourceCorpusScope",
+        "theoryNeutralExtraction",
+        "evidenceRefsMode"
+      ],
+      "properties": {
+        "corpusVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceCorpusScope": {
+          "enum": [
+            "whole-corpus",
+            "declared-subset"
+          ]
+        },
+        "theoryNeutralExtraction": {
+          "type": "boolean"
+        },
+        "evidenceRefsMode": {
+          "enum": [
+            "private-provider",
+            "private-bundle",
+            "not-applicable"
+          ]
+        }
+      }
     }
   }
 }

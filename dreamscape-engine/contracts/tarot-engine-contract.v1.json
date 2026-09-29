@@ -115,5 +115,50 @@
     "mobile-visual-review",
     "no-private-source-dreams-in-public-repo",
     "production-not-merged-until-explicit-approval"
-  ]
+  ],
+  "requiredBlocksByChapter": {
+    "overview": [
+      "heroMetric",
+      "grounding",
+      "metrics",
+      "behaviour",
+      "behaviourPoles"
+    ],
+    "geography": [
+      "geographyLogic",
+      "geographyRows",
+      "geographyNote"
+    ],
+    "patterns": [
+      "strengthLegend",
+      "functions"
+    ],
+    "alongside": [
+      "relatedNote",
+      "relatedCore",
+      "relatedItems"
+    ],
+    "chronology": [
+      "chronologyRiver",
+      "chronologyText"
+    ],
+    "sources": [
+      "sourceIntro",
+      "sourceButton"
+    ],
+    "meanings": [
+      "meanings",
+      "boundary"
+    ]
+  },
+  "pageBudget": {
+    "maxBlocksPerPage": 3,
+    "resolutionWhenExceeded": "add-another-companion-page",
+    "neverResolveBy": [
+      "smaller-type",
+      "taller-card",
+      "vertical-card-stack",
+      "internal-article-scroll"
+    ]
+  }
 }

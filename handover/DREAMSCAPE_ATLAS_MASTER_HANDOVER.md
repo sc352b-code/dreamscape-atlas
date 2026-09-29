@@ -37,8 +37,8 @@ Previous active development branch:
 Current refinement branch:
 `tarot-v2-refinement`
 
-Latest commit at this handover update:
-`f958da351fd1a752b290174687388c4551d0e5b1`
+Latest implementation/documentation commit before this handover update:
+`70fddc75acd186443337a9491627ea2843f3afdd`
 
 No merge to production has been performed.
 
@@ -205,6 +205,37 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-29 — Tarot Engine v1.0 final hardening and reproducibility check
+
+Final engine hardening completed after the v1 contract was introduced:
+
+- canonical Tarot packages are now self-describing with `subjectId` and `subjectType`;
+- Water declares `subjectId: "water"` and `subjectType: "symbol"`;
+- the canonical builder requires a supported subject type and forces private source access to use the same subject ID;
+- runtime schema/template/validator all enforce portable subject identity;
+- the generic planner no longer contains Water-specific interpretive-lens names; it uses `lens:0`, `lens:1`, etc.;
+- caveated/heavier lenses are automatically kept on their own companion page;
+- public/private provenance is explicit and recursively checked for forbidden raw-dream payload keys;
+- chapter block ownership is machine-validated, preventing Overview/Patterns/Geography/etc. content from leaking into the wrong tab;
+- per-page maximum block budget is machine-validated;
+- exact subject artwork, image framing, evidence-first presentation, full-artwork opening and responsive strategy are validation requirements;
+- a runtime fit audit sets card fit state and emits `dreamscape-tarot-fit-failure` when content exceeds the fixed card body;
+- `dreamscape-engine/schemas/tarot-analysis-v1.schema.json` now defines the analysis-to-builder handoff;
+- `dreamscape-engine/schemas/tarot-engine-card-v1.schema.json` defines the canonical runtime package;
+- `dreamscape-engine/tarot/README.md` is the developer entry point;
+- legacy Tarot migration status is explicit and only Water may currently be used as the engine template.
+
+Verification performed:
+- relevant runtime/engine/test JavaScript syntax checks: **OK**;
+- machine-readable JSON parse checks: **OK**;
+- current Water package contract audit: **0 errors**;
+- canonical builder reconstructs Water into a contract-valid v1 package: **0 errors**;
+- generic planner reproduces Water's authored companion-page block structure exactly: **yes**;
+- Water remains 42 unique dreams, 59 recorded appearances and 69 overlapping territory memberships, with those quantities explicitly treated as different measures.
+
+The remaining Water work is visual/readability polish only. Do not change these locked architecture rules to solve visual issues; paginate/recompose within the contract instead.
+
 
 ### 2026-09-29 — Tarot Engine v1.0 institutionalised from Water lessons
 

@@ -92,5 +92,11 @@
       "tone": "interpretation",
       "pages": []
     }
+  },
+  "provenance": {
+    "corpusVersion": "<corpus version>",
+    "sourceCorpusScope": "whole-corpus",
+    "theoryNeutralExtraction": true,
+    "evidenceRefsMode": "private-provider"
   }
 }

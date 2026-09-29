@@ -371,7 +371,13 @@
         ]
       }
     },
-    "tarotEngineContractVersion": "1.0"
+    "tarotEngineContractVersion": "1.0",
+    "provenance": {
+      "corpusVersion": "v57",
+      "sourceCorpusScope": "whole-corpus",
+      "theoryNeutralExtraction": true,
+      "evidenceRefsMode": "private-provider"
+    }
   },
   "cat": {
     "previewSummary": "Cats repeatedly gather a tension between cherished vulnerability and irreducible autonomy: close enough to require care, but never wholly manageable.",

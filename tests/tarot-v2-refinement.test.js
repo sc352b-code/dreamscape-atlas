@@ -84,8 +84,10 @@ test('preview is fully composed and positioned before it becomes visible',()=>{
 
 test('preview transition is not allowed to animate dimensions or position',()=>{
   const basePreview=css.match(/\.territory-v1-preview\{[^}]+\}/)?.[0]||'';
-  assert.match(basePreview,/transition:opacity[^;]*,transform/);
-  assert.doesNotMatch(basePreview,/width|height|padding|left|top/gi);
+  const transition=basePreview.match(/transition:([^;]+)/)?.[1]||'';
+  assert.match(transition,/opacity/);
+  assert.match(transition,/transform/);
+  assert.doesNotMatch(transition,/width|height|padding|left|top/gi);
 });
 
 test('Water count semantics remain correct',()=>{

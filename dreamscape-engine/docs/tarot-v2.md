@@ -210,13 +210,13 @@ Rules:
 - source-dream browsing is a separate private library surface, not a 42-record list squeezed into a Tarot card.
 
 Water currently uses:
-- Overview: 2 cards;
+- Overview: 3 cards;
 - Where it appears: 1 card;
 - Recurring patterns: 2 cards;
-- Appears alongside: 1 card;
+- Appears alongside: 2 cards;
 - How it changes: 1 card;
 - Source dreams: 1 doorway card;
-- Possible meanings: 2 cards.
+- Possible meanings: 3 cards.
 
 ## Preview opening stability
 

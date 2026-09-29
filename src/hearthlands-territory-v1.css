@@ -3421,3 +3421,40 @@
 .territory-v1-preview.tarot-preview-precomposed .territory-v1-preview-image{
   aspect-ratio:4/5;
 }
+
+
+/* Paginated lens source stays out of the physical card; its articles are moved
+   into the authored companion pages after every data refresh. */
+.tarot-companion-deck > .territory-v1-lenses{
+  display:none!important;
+}
+.tarot-companion-meanings .tarot-lens-jungian,
+.tarot-companion-meanings .tarot-lens-story,
+.tarot-companion-meanings .tarot-lens-life{
+  margin:0 0 9px!important;
+  padding:12px!important;
+  border:1px solid rgba(231,191,117,.12)!important;
+  border-radius:9px!important;
+  background:rgba(7,12,24,.72)!important;
+}
+.tarot-companion-meanings .tarot-lens-jungian b,
+.tarot-companion-meanings .tarot-lens-story b,
+.tarot-companion-meanings .tarot-lens-life b{
+  display:block;
+  color:#f1d7aa!important;
+  font:400 12px/1.28 var(--tarot-display)!important;
+}
+.tarot-companion-meanings .tarot-lens-jungian p,
+.tarot-companion-meanings .tarot-lens-story p,
+.tarot-companion-meanings .tarot-lens-life p{
+  margin:7px 0 0!important;
+  font:11.5px/1.46 var(--tarot-text)!important;
+}
+.tarot-companion-meanings .tarot-lens-jungian small,
+.tarot-companion-meanings .tarot-lens-story small,
+.tarot-companion-meanings .tarot-lens-life small{
+  display:block;
+  margin-top:8px;
+  color:#c7bcbf!important;
+  font:italic 10.5px/1.4 var(--tarot-text)!important;
+}

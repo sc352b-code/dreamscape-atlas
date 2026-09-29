@@ -178,8 +178,8 @@ async function boot(){
 
   function positionPreview(button,allowClosed=false){
     if(!button||(!allowClosed&&!preview.classList.contains('open'))) return;
-    const r=button.getBoundingClientRect();const card=preview.getBoundingClientRect();const anchorX=r.left+r.width/2;const anchorY=r.top+r.height/2;
-    let left=anchorX-card.width/2;let top=anchorY-card.height-24;left=clamp(left,12,innerWidth-card.width-12);if(top<12) top=clamp(anchorY+24,12,innerHeight-card.height-12);
+    const r=button.getBoundingClientRect();const cardWidth=preview.offsetWidth;const cardHeight=preview.offsetHeight;const anchorX=r.left+r.width/2;const anchorY=r.top+r.height/2;
+    let left=anchorX-cardWidth/2;let top=anchorY-cardHeight-24;left=clamp(left,12,innerWidth-cardWidth-12);if(top<12) top=clamp(anchorY+24,12,innerHeight-cardHeight-12);
     preview.style.left=`${left}px`;preview.style.top=`${top}px`;preview.style.setProperty('--preview-anchor-x',`${anchorX-left}px`);
   }
   function closePreview(){preview.classList.remove('open');previewState=null;if(!reader.classList.contains('open')) selectHotspot(null);}

@@ -205,43 +205,146 @@
         "title": "The Water Record",
         "subtitle": "The waters of your dream world",
         "motif": "record",
-        "tone": "evidence"
+        "tone": "evidence",
+        "pages": [
+          {
+            "id": "record",
+            "title": "The Water Record",
+            "subtitle": "The waters of your dream world",
+            "blocks": [
+              "heroMetric",
+              "grounding",
+              "metrics"
+            ]
+          },
+          {
+            "id": "action",
+            "title": "Water in Action",
+            "subtitle": "What you tend to be doing when Water appears",
+            "blocks": [
+              "behaviour"
+            ]
+          }
+        ]
       },
       "geography": {
         "title": "The Geography of Water",
         "subtitle": "Five territories · overlapping memberships",
         "motif": "currents",
-        "tone": "evidence"
+        "tone": "evidence",
+        "pages": [
+          {
+            "id": "territories",
+            "title": "The Geography of Water",
+            "subtitle": "Five territories · overlapping memberships",
+            "blocks": [
+              "geographyLogic",
+              "geographyRows",
+              "geographyNote"
+            ]
+          }
+        ]
       },
       "patterns": {
         "title": "The Forms of Water",
         "subtitle": "Recurring functions and evidence strength",
         "motif": "forms",
-        "tone": "evidence"
+        "tone": "evidence",
+        "pages": [
+          {
+            "id": "strength",
+            "title": "Reading the Evidence",
+            "subtitle": "What High, Medium-high and Medium mean",
+            "blocks": [
+              "strengthLegend"
+            ]
+          },
+          {
+            "id": "forms",
+            "title": "The Forms of Water",
+            "subtitle": "Four recurring functions in the current analysis",
+            "blocks": [
+              "functions"
+            ]
+          }
+        ]
       },
       "alongside": {
         "title": "The Constellation of Water",
         "subtitle": "Related Dreamscape elements",
         "motif": "constellation",
-        "tone": "evidence"
+        "tone": "evidence",
+        "pages": [
+          {
+            "id": "constellation",
+            "title": "The Constellation of Water",
+            "subtitle": "Related Dreamscape elements",
+            "blocks": [
+              "relatedNote",
+              "relatedCore",
+              "relatedItems"
+            ]
+          }
+        ]
       },
       "chronology": {
         "title": "Water Through Time",
         "subtitle": "What the chronology can — and cannot — support",
         "motif": "river-time",
-        "tone": "evidence"
+        "tone": "evidence",
+        "pages": [
+          {
+            "id": "timeline",
+            "title": "Water Through Time",
+            "subtitle": "What the chronology can — and cannot — support",
+            "blocks": [
+              "chronologyRiver",
+              "chronologyText"
+            ]
+          }
+        ]
       },
       "sources": {
         "title": "The Book of Waters",
         "subtitle": "42 linked source dreams",
         "motif": "manuscript",
-        "tone": "source"
+        "tone": "source",
+        "pages": [
+          {
+            "id": "book",
+            "title": "The Book of Waters",
+            "subtitle": "42 linked source dreams",
+            "blocks": [
+              "sourceIntro",
+              "sourceButton"
+            ]
+          }
+        ]
       },
       "meanings": {
         "title": "The Mirror of Water",
         "subtitle": "Possible meanings · interpretation, not corpus fact",
         "motif": "mirror",
-        "tone": "interpretation"
+        "tone": "interpretation",
+        "pages": [
+          {
+            "id": "readings",
+            "title": "The Mirror of Water",
+            "subtitle": "Possible readings · interpretation, not corpus fact",
+            "blocks": [
+              "meanings"
+            ]
+          },
+          {
+            "id": "lenses",
+            "title": "Ways of Looking",
+            "subtitle": "Interpretive lenses · not fixed meanings",
+            "blocks": [
+              "lenses",
+              "boundary"
+            ]
+          }
+        ]
       }
     }
   },

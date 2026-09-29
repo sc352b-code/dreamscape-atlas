@@ -78,15 +78,15 @@ export function buildTarotCardV1(input){
       fullArtworkOpening:true
     },
     privateCorpusAccess:{
+      ...(input.privateCorpusAccess||{}),
       enabled:true,
       subjectId,
       expectedDreamCount:uniqueDreamCount,
-      accessMode:'authenticated-provider-or-local-private-profile',
-      ...(input.privateCorpusAccess||{}),
-      subjectId
+      accessMode:input.privateCorpusAccess?.accessMode||'authenticated-provider-or-local-private-profile'
     },
     provenance:{
       ...input.provenance,
+      sourceCorpusScope:input.provenance?.sourceCorpusScope||'whole-corpus',
       theoryNeutralExtraction:true,
       evidenceRefsMode:input.provenance?.evidenceRefsMode||'private-provider'
     }

@@ -562,6 +562,30 @@ async function boot(){
       Array.from(body.children).forEach(node=>stash.appendChild(node));
     };
 
+    const auditFit=()=>{
+      requestAnimationFrame(()=>{
+        const overflow=body.scrollHeight>body.clientHeight+2||body.scrollWidth>body.clientWidth+2;
+        card.dataset.fit=overflow?'overflow':'ok';
+        const signature=`${chapterId}:${card.dataset.pageId||''}:${Math.round(body.clientWidth)}x${Math.round(body.clientHeight)}`;
+        if(overflow&&card.dataset.lastOverflowSignature!==signature){
+          card.dataset.lastOverflowSignature=signature;
+          window.dispatchEvent(new CustomEvent('dreamscape-tarot-fit-failure',{
+            detail:{
+              subjectId:selectedId(),
+              chapterId,
+              pageId:card.dataset.pageId||null,
+              scrollHeight:body.scrollHeight,
+              clientHeight:body.clientHeight,
+              scrollWidth:body.scrollWidth,
+              clientWidth:body.clientWidth
+            }
+          }));
+          console.warn('Dreamscape Tarot page exceeds its fixed content budget.',{chapterId,pageId:card.dataset.pageId});
+        }
+        if(!overflow) delete card.dataset.lastOverflowSignature;
+      });
+    };
+
     const setPage=pageIndex=>{
       const safe=Math.max(0,Math.min(pages.length-1,Number(pageIndex)||0));
       const pageConfig=pages[safe];
@@ -596,7 +620,13 @@ async function boot(){
         dots.innerHTML='';
         count.textContent='';
       }
+      auditFit();
     };
+
+    if(!card.__dreamscapeFitObserver&&typeof ResizeObserver!=='undefined'){
+      card.__dreamscapeFitObserver=new ResizeObserver(auditFit);
+      card.__dreamscapeFitObserver.observe(card);
+    }
 
     section.__dreamscapeSetCompanionPage=setPage;
 

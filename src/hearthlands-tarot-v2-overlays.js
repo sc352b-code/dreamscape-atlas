@@ -736,6 +736,8 @@ async function boot(){
 
     const activate=id=>{
       const valid=chapters.some(ch=>ch.id===id)?id:'overview';
+      const previous=info.dataset.activeChapter||null;
+      const changed=previous!==valid;
       reader.dataset.activeChapter=valid;
       info.dataset.activeChapter=valid;
       info.querySelectorAll(':scope > [data-chapter]').forEach(node=>{
@@ -749,7 +751,7 @@ async function boot(){
         button.setAttribute('aria-current',active?'page':'false');
       });
       const activeDeck=info.querySelector(`:scope > [data-chapter="${CSS.escape(valid)}"]`);
-      if(activeDeck){
+      if(activeDeck&&changed){
         activeDeck.dataset.activePage='0';
         activeDeck.querySelectorAll(':scope > .tarot-companion-pager > .tarot-companion-page').forEach((page,index)=>{
           page.hidden=index!==0;

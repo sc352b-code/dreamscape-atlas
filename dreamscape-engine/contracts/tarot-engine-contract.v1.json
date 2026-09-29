@@ -100,7 +100,17 @@
     "publicData": "derived summaries and aggregate counts only",
     "sourceDreamAccess": "authenticated private provider or local private profile",
     "sourceDreamListInsideTarotCard": false,
-    "sourceCardRole": "doorway-to-private-library"
+    "sourceCardRole": "doorway-to-private-library",
+    "forbiddenPublicKeys": [
+      "dreamText",
+      "fullDreamText",
+      "rawDream",
+      "rawDreams",
+      "dreamRecords",
+      "sourceDreams",
+      "privateIdentityMap",
+      "privateRecordPayload"
+    ]
   },
   "responsive": {
     "desktop": "map/context + main Tarot + companion Tarot where space permits",
@@ -160,5 +170,16 @@
       "vertical-card-stack",
       "internal-article-scroll"
     ]
+  },
+  "provenance": {
+    "privateEvidenceLayerRequired": true,
+    "publicTarotPackageDerivedOnly": true,
+    "requiredPublicFields": [
+      "corpusVersion",
+      "sourceCorpusScope",
+      "theoryNeutralExtraction",
+      "evidenceRefsMode"
+    ],
+    "evidenceRefsMode": "private-provider"
   }
 }

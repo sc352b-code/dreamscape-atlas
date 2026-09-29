@@ -211,5 +211,22 @@
     "meanings": "meanings",
     "boundary": "meanings",
     "lens:*": "meanings"
+  },
+  "identity": {
+    "selfDescribingPackage": true,
+    "requiredFields": [
+      "subjectId",
+      "subjectType",
+      "title"
+    ],
+    "supportedSubjectTypes": [
+      "place",
+      "symbol",
+      "person",
+      "animal",
+      "object",
+      "territory"
+    ],
+    "privateCorpusSubjectIdMustMatch": true
   }
 }

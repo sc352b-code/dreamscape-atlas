@@ -1,0 +1,96 @@
+{
+  "tarotEngineContractVersion": "1.0",
+  "title": "<subject title>",
+  "friendlySubtitle": "<short corpus-grounded human summary>",
+  "cardImage": "<private-safe generated tarot artwork path>",
+  "previewImage": "<usually same artwork>",
+  "previewSummary": "<one sentence>",
+  "corpusOverview": {
+    "uniqueDreamCount": null,
+    "appearanceCount": null,
+    "wholeSeriesCount": null,
+    "wholeSeriesCountStatus": "pending",
+    "territoryCounts": {},
+    "totalCorpusDreams": null
+  },
+  "geographyNote": "<plain explanation of geography>",
+  "corpusGrounding": "<derived evidence summary>",
+  "recurringFunctions": [],
+  "possibleMeanings": [],
+  "interpretiveLenses": [],
+  "relatedItems": [],
+  "relationshipStatus": "pending",
+  "chronologySummary": null,
+  "geographyCountMode": "pending",
+  "behaviorSummary": null,
+  "confidenceScale": {
+    "note": "",
+    "levels": {}
+  },
+  "interpretiveBoundary": "Evidence describes corpus patterns. Interpretations are hypotheses, not fixed translations.",
+  "presentation": {
+    "mode": "docked-workspace",
+    "previewMode": "image-led",
+    "visualFamily": "celestial-oracle-dock",
+    "evidenceFirst": true,
+    "fullArtworkOpening": true,
+    "responsiveStrategy": "wide-desktop-mini-triptych; standard-desktop-artwork-first; mobile-full-height-drawer"
+  },
+  "privateCorpusAccess": {
+    "enabled": true,
+    "subjectId": "<subject id>",
+    "expectedDreamCount": null,
+    "accessMode": "authenticated-provider-or-local-private-profile"
+  },
+  "companionCards": {
+    "overview": {
+      "title": "<title>",
+      "subtitle": "<subtitle>",
+      "motif": "record",
+      "tone": "evidence",
+      "pages": []
+    },
+    "geography": {
+      "title": "<title>",
+      "subtitle": "<subtitle>",
+      "motif": "geography",
+      "tone": "evidence",
+      "pages": []
+    },
+    "patterns": {
+      "title": "<title>",
+      "subtitle": "<subtitle>",
+      "motif": "patterns",
+      "tone": "evidence",
+      "pages": []
+    },
+    "alongside": {
+      "title": "<title>",
+      "subtitle": "<subtitle>",
+      "motif": "constellation",
+      "tone": "evidence",
+      "pages": []
+    },
+    "chronology": {
+      "title": "<title>",
+      "subtitle": "<subtitle>",
+      "motif": "time",
+      "tone": "evidence",
+      "pages": []
+    },
+    "sources": {
+      "title": "<title>",
+      "subtitle": "<subtitle>",
+      "motif": "manuscript",
+      "tone": "source",
+      "pages": []
+    },
+    "meanings": {
+      "title": "<title>",
+      "subtitle": "<subtitle>",
+      "motif": "mirror",
+      "tone": "interpretation",
+      "pages": []
+    }
+  }
+}

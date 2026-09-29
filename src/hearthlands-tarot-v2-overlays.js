@@ -467,6 +467,9 @@ async function boot(){
       sourceButton:'.territory-v1-records-button',
       meanings:'.territory-v1-interpretation',
       lenses:'.territory-v1-lenses',
+      lensJungian:'.tarot-lens-jungian',
+      lensStory:'.tarot-lens-story',
+      lensLife:'.tarot-lens-life',
       boundary:'.territory-v1-method'
     };
     return selectors[block]?section.querySelector(selectors[block]):null;
@@ -743,6 +746,11 @@ async function boot(){
     ensureOverviewEnhancements(grounding,data);
     ensureGeographyExplanation(geography,data);
     ensureConfidenceLegend(functions,data);
+    const lensArticles=lenses?.querySelectorAll('.territory-v1-lens-list article')||[];
+    lensArticles.forEach((article,index)=>{
+      article.classList.remove('tarot-lens-jungian','tarot-lens-story','tarot-lens-life');
+      article.classList.add(['tarot-lens-jungian','tarot-lens-story','tarot-lens-life'][index]||'tarot-lens-extra');
+    });
 
     const companionSections={
       overview:grounding,

@@ -6,6 +6,9 @@
   "scripts": {
     "dev": "node server.js",
     "test": "node --test tests/*.test.js",
-    "world:build": "node engine/cli.js corpora/reference-corpus.json worlds/generated-world.json"
+    "world:build": "node engine/cli.js corpora/reference-corpus.json worlds/generated-world.json",
+    "tarot:validate": "node scripts/validate-tarot-engine.mjs",
+    "tarot:test": "node --test tests/tarot-engine-contract.test.js tests/tarot-v2-refinement.test.js",
+    "check": "npm run tarot:validate && npm test"
   }
 }

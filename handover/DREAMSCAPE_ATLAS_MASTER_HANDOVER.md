@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`5c56461b1383275ba2ebf0024e24548124273a95`
+`a6548c1168ee2483ac176ecd9d88dfd0c6f8e201`
 
 No merge to production has been performed.
 
@@ -174,13 +174,13 @@ User locked two new architectural rules:
 
 Implemented:
 - Water companion tabs now have explicit page plans in authored data;
-- Overview is 2 cards: The Water Record / Water in Action;
+- Overview is 3 cards: The Water Record / Water in Action / Recurring Actions;
 - Geography is 1 card;
 - Recurring Patterns is 2 cards: Reading the Evidence / The Forms of Water;
-- Appears Alongside is 1 card;
+- Appears Alongside is 2 cards: The Constellation of Water / Water's Companions;
 - Chronology is 1 card;
 - Source Dreams is 1 doorway card; the private dream library remains a separate surface;
-- Possible Meanings is 2 cards: The Mirror of Water / Ways of Looking;
+- Possible Meanings is 3 cards: The Mirror of Water / A Jungian View / Story & Life Experience;
 - every companion page uses the same fixed 2:3 Tarot geometry and exact subject-artwork deck edge;
 - page content is bounded and does not scroll or alter card height;
 - multi-page tabs get integrated previous/next arrows and celestial page dots;

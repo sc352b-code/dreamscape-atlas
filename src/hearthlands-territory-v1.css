@@ -2944,7 +2944,7 @@
   border:1px solid rgba(235,194,118,.42);
   border-radius:50%;
 }
-.tarot-page-dots i.active{
+.tarot-page-dots i[aria-current="page"]{
   background:#e8bf77;
   box-shadow:0 0 9px rgba(232,191,119,.24);
 }

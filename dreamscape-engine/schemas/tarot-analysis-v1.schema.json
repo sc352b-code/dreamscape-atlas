@@ -1,0 +1,371 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://dreamscape.local/schemas/tarot-analysis-v1.schema.json",
+  "title": "Dreamscape Tarot Derived Analysis v1",
+  "description": "Public-safe derived analysis handed from the private corpus-analysis layer to the Tarot v1 builder. Raw dream text and private record payloads are forbidden.",
+  "type": "object",
+  "additionalProperties": true,
+  "required": [
+    "subjectId",
+    "subjectType",
+    "title",
+    "cardImage",
+    "previewSummary",
+    "corpusOverview",
+    "corpusGrounding",
+    "recurringFunctions",
+    "possibleMeanings",
+    "interpretiveLenses",
+    "relatedItems",
+    "relationshipStatus",
+    "geographyCountMode",
+    "interpretiveBoundary",
+    "provenance"
+  ],
+  "properties": {
+    "subjectId": {
+      "type": "string",
+      "minLength": 1
+    },
+    "subjectType": {
+      "enum": [
+        "place",
+        "symbol",
+        "person",
+        "animal",
+        "object",
+        "territory"
+      ]
+    },
+    "title": {
+      "type": "string",
+      "minLength": 1
+    },
+    "cardImage": {
+      "type": "string",
+      "minLength": 1
+    },
+    "previewImage": {
+      "type": "string"
+    },
+    "previewSummary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "friendlySubtitle": {
+      "type": "string"
+    },
+    "provenance": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "corpusVersion",
+        "sourceCorpusScope",
+        "theoryNeutralExtraction",
+        "evidenceRefsMode"
+      ],
+      "properties": {
+        "corpusVersion": {
+          "type": "string",
+          "minLength": 1
+        },
+        "sourceCorpusScope": {
+          "enum": [
+            "whole-corpus",
+            "declared-subset"
+          ]
+        },
+        "theoryNeutralExtraction": {
+          "const": true
+        },
+        "evidenceRefsMode": {
+          "enum": [
+            "private-provider",
+            "private-bundle"
+          ]
+        }
+      }
+    },
+    "corpusOverview": {
+      "type": "object",
+      "additionalProperties": true,
+      "required": [
+        "uniqueDreamCount",
+        "appearanceCount",
+        "wholeSeriesCount",
+        "wholeSeriesCountStatus",
+        "territoryCounts",
+        "totalCorpusDreams"
+      ],
+      "properties": {
+        "uniqueDreamCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "appearanceCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "wholeSeriesCount": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        },
+        "wholeSeriesCountStatus": {
+          "enum": [
+            "known",
+            "unknown",
+            "private",
+            "pending"
+          ]
+        },
+        "territoryCounts": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "integer",
+            "minimum": 0
+          }
+        },
+        "totalCorpusDreams": {
+          "type": [
+            "integer",
+            "null"
+          ],
+          "minimum": 0
+        }
+      }
+    },
+    "geographyNote": {
+      "type": "string"
+    },
+    "corpusGrounding": {
+      "type": "string",
+      "minLength": 1
+    },
+    "recurringFunctions": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "name",
+          "summary"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "confidence": {
+            "enum": [
+              "low",
+              "medium",
+              "medium-high",
+              "high"
+            ]
+          }
+        }
+      }
+    },
+    "behaviorSummary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "confidenceScale": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "note": {
+          "type": "string"
+        },
+        "levels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relatedItems": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "id"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "minLength": 1
+          },
+          "label": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "relationshipStatus": {
+      "enum": [
+        "cooccurrence-verified",
+        "related-not-cooccurrence",
+        "pending"
+      ]
+    },
+    "chronologySummary": {
+      "type": [
+        "string",
+        "null"
+      ]
+    },
+    "geographyCountMode": {
+      "enum": [
+        "exclusive-dream-counts",
+        "overlapping-memberships",
+        "pending"
+      ]
+    },
+    "possibleMeanings": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "name",
+          "summary"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "interpretiveLenses": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "additionalProperties": true,
+        "required": [
+          "name",
+          "summary"
+        ],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "summary": {
+            "type": "string",
+            "minLength": 1
+          },
+          "caveat": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "interpretiveBoundary": {
+      "type": "string",
+      "minLength": 1
+    },
+    "imageFraming": {
+      "type": "object",
+      "additionalProperties": false,
+      "properties": {
+        "preview": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "objectPosition": {
+              "type": "string"
+            },
+            "objectFit": {
+              "enum": [
+                "cover",
+                "contain"
+              ]
+            }
+          }
+        },
+        "full": {
+          "type": "object",
+          "additionalProperties": false,
+          "properties": {
+            "objectPosition": {
+              "type": "string"
+            },
+            "objectFit": {
+              "enum": [
+                "cover",
+                "contain"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "privateCorpusAccess": {
+      "type": "object",
+      "additionalProperties": true,
+      "properties": {
+        "accessMode": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "not": {
+    "anyOf": [
+      {
+        "required": [
+          "dreamText"
+        ]
+      },
+      {
+        "required": [
+          "fullDreamText"
+        ]
+      },
+      {
+        "required": [
+          "rawDreams"
+        ]
+      },
+      {
+        "required": [
+          "dreamRecords"
+        ]
+      },
+      {
+        "required": [
+          "sourceDreams"
+        ]
+      },
+      {
+        "required": [
+          "privateIdentityMap"
+        ]
+      }
+    ]
+  }
+}

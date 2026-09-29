@@ -549,6 +549,13 @@ async function boot(){
         pager.appendChild(page);
       }
       page.dataset.pageIndex=String(index);
+      let frame=page.querySelector(':scope > .tarot-companion-frame');
+      if(!frame){
+        frame=document.createElement('div');
+        frame.className='tarot-companion-frame';
+        frame.setAttribute('aria-hidden','true');
+        page.prepend(frame);
+      }
       const header=page.querySelector('.tarot-companion-header');
       header.innerHTML=`
         <small>${escapeHTML(companionToneLabel(config))}</small>

@@ -2767,12 +2767,16 @@
   filter:none!important;
   transform:none!important;
 }
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-page::before{
-  content:"";
-  position:absolute;
-  z-index:0;
-  inset:0;
-  pointer-events:none;
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-page::before,
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-page::after{
+  content:none!important;
+  display:none!important;
+}
+.tarot-companion-frame{
+  position:absolute!important;
+  z-index:0!important;
+  inset:0!important;
+  pointer-events:none!important;
   background-image:var(--tarot-deck-image,url('/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png'))!important;
   background-position:center!important;
   background-repeat:no-repeat!important;
@@ -2782,24 +2786,22 @@
     linear-gradient(#000 0 0) top/100% 11.5% no-repeat,
     linear-gradient(#000 0 0) bottom/100% 9% no-repeat,
     linear-gradient(#000 0 0) left/9% 100% no-repeat,
-    linear-gradient(#000 0 0) right/9% 100% no-repeat;
+    linear-gradient(#000 0 0) right/9% 100% no-repeat!important;
   mask:
     linear-gradient(#000 0 0) top/100% 11.5% no-repeat,
     linear-gradient(#000 0 0) bottom/100% 9% no-repeat,
     linear-gradient(#000 0 0) left/9% 100% no-repeat,
-    linear-gradient(#000 0 0) right/9% 100% no-repeat;
+    linear-gradient(#000 0 0) right/9% 100% no-repeat!important;
 }
-.territory-v1-reader.tarot-docked-workspace .tarot-companion-page::after{
+.tarot-companion-frame::after{
   content:"";
   position:absolute;
-  z-index:1;
   left:8.9%;
   right:8.9%;
   top:11.2%;
   bottom:8.8%;
   border:1px solid rgba(225,186,113,.10);
   border-radius:9px;
-  pointer-events:none;
 }
 .territory-v1-reader.tarot-docked-workspace .tarot-companion-page > *{
   position:relative;
@@ -3457,4 +3459,23 @@
   margin-top:8px;
   color:#c7bcbf!important;
   font:italic 10.5px/1.4 var(--tarot-text)!important;
+}
+
+
+/* Page-turn controls remain above all card ornament and are explicitly clickable. */
+.tarot-companion-page-nav{
+  position:relative;
+  z-index:5!important;
+  pointer-events:auto!important;
+}
+.tarot-companion-page-nav button,
+.tarot-page-dots i{
+  pointer-events:auto!important;
+}
+.tarot-page-dots i{
+  cursor:pointer;
+}
+.tarot-page-dots i:focus-visible{
+  outline:1px solid rgba(244,208,139,.72);
+  outline-offset:3px;
 }

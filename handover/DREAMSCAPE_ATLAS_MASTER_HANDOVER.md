@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: visually validate one-tab-one-card behaviour and internal card fit before propagating the Tarot system.
+Immediate priority: visually validate fixed companion-card pagination and the no-jump compact preview before propagating the architecture.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`4a57b6f13925f5b2f547855c3848b0cb39e6faaa`
+`5c56461b1383275ba2ebf0024e24548124273a95`
 
 No merge to production has been performed.
 
@@ -164,6 +164,39 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-29 — Fixed companion-card pagination + preview jump fix
+
+User locked two new architectural rules:
+
+1. companion Tarot dimensions are fixed; content never determines card height, never gets shrunk below the chosen readable hierarchy, and never flows vertically into another card;
+2. the compact preview must be completely composed and positioned before it becomes visible, with opening animation limited to opacity/transform.
+
+Implemented:
+- Water companion tabs now have explicit page plans in authored data;
+- Overview is 2 cards: The Water Record / Water in Action;
+- Geography is 1 card;
+- Recurring Patterns is 2 cards: Reading the Evidence / The Forms of Water;
+- Appears Alongside is 1 card;
+- Chronology is 1 card;
+- Source Dreams is 1 doorway card; the private dream library remains a separate surface;
+- Possible Meanings is 2 cards: The Mirror of Water / Ways of Looking;
+- every companion page uses the same fixed 2:3 Tarot geometry and exact subject-artwork deck edge;
+- page content is bounded and does not scroll or alter card height;
+- multi-page tabs get integrated previous/next arrows and celestial page dots;
+- switching tabs starts that tab at card 1;
+- moving between cards inside a tab preserves the selected tab and no longer resets during observer refreshes;
+- the active-tab controller remains the sole owner of chapter visibility;
+- Source Dreams no longer attempts to display a 42-record list inside the Tarot card;
+- the preview now dispatches a synchronous pre-open composition hook, is positioned using final offsetWidth/offsetHeight, then revealed;
+- preview opening no longer depends on a post-open mutation pass, eliminating the width/position twitch caused by changing layout after the first paint.
+
+Acceptance test:
+- opening the small Water preview should produce one smooth reveal with no positional jump;
+- every information tab should show one fixed Tarot card at a time;
+- tabs with more content should page horizontally through additional Tarot cards;
+- no companion card should change height, shrink typography to force a fit, or continue vertically into a second card.
+
 
 ### 2026-09-24 — One-tab-one-card correction
 

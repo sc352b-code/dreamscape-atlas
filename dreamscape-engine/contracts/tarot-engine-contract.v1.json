@@ -1,0 +1,119 @@
+{
+  "contractVersion": "1.0",
+  "status": "canonical-for-new-tarots",
+  "exemplar": "water",
+  "chapters": [
+    {
+      "id": "overview",
+      "tone": "evidence"
+    },
+    {
+      "id": "geography",
+      "tone": "evidence"
+    },
+    {
+      "id": "patterns",
+      "tone": "evidence"
+    },
+    {
+      "id": "alongside",
+      "tone": "evidence"
+    },
+    {
+      "id": "chronology",
+      "tone": "evidence"
+    },
+    {
+      "id": "sources",
+      "tone": "source"
+    },
+    {
+      "id": "meanings",
+      "tone": "interpretation"
+    }
+  ],
+  "allowedBlocks": [
+    "heroMetric",
+    "grounding",
+    "metrics",
+    "behaviour",
+    "behaviourPoles",
+    "geographyLogic",
+    "geographyRows",
+    "geographyNote",
+    "strengthLegend",
+    "functions",
+    "relatedNote",
+    "relatedCore",
+    "relatedItems",
+    "chronologyRiver",
+    "chronologyText",
+    "sourceIntro",
+    "sourceButton",
+    "meanings",
+    "boundary"
+  ],
+  "dynamicBlockPatterns": [
+    "^lens:\\\\d+$"
+  ],
+  "layout": {
+    "companionAspectRatio": "2/3",
+    "paginationMode": "single-shell-content-swap",
+    "oneVisibleChapter": true,
+    "onePhysicalCompanionCardPerTab": true,
+    "contentMayDetermineCardHeight": false,
+    "internalArticleScroll": false,
+    "pageOverflow": "forbidden",
+    "overflowResolution": "paginate",
+    "pageControls": "integrated-arrows-and-dots",
+    "frameSource": "subject-card-artwork",
+    "substituteFrameAllowed": false
+  },
+  "preview": {
+    "mode": "image-led",
+    "composeBeforeReveal": true,
+    "positionBeforeReveal": true,
+    "allowedRevealAnimationProperties": [
+      "opacity",
+      "transform"
+    ],
+    "forbiddenRevealAnimationProperties": [
+      "width",
+      "height",
+      "padding",
+      "left",
+      "top",
+      "object-fit",
+      "aspect-ratio"
+    ]
+  },
+  "evidence": {
+    "uniqueDreamCountDistinctFromAppearanceCount": true,
+    "overlappingTerritoryMembershipsMustBeDeclared": true,
+    "relationshipStatusRequiredWhenRelatedItemsExist": true,
+    "chronologyMustNotBeInvented": true,
+    "confidenceScaleMustBeExplainedWhenUsed": true,
+    "interpretationMustBeVisuallyAndSemanticallyDistinct": true
+  },
+  "privacy": {
+    "rawDreamTextInPublicPackage": false,
+    "publicData": "derived summaries and aggregate counts only",
+    "sourceDreamAccess": "authenticated private provider or local private profile",
+    "sourceDreamListInsideTarotCard": false,
+    "sourceCardRole": "doorway-to-private-library"
+  },
+  "responsive": {
+    "desktop": "map/context + main Tarot + companion Tarot where space permits",
+    "compactDesktop": "main Tarot + selected companion Tarot without long-page fallback",
+    "mobile": "main Tarot -> chapter selector -> fixed companion Tarot",
+    "ordinaryArticleFallbackAllowed": false
+  },
+  "releaseGate": [
+    "contract-validator-passes",
+    "automated-tests-pass",
+    "desktop-visual-review",
+    "mobile-visual-review",
+    "no-private-source-dreams-in-public-repo",
+    "production-not-merged-until-explicit-approval"
+  ]
+}

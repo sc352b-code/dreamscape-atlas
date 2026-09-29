@@ -132,3 +132,13 @@ test('Recurring Patterns uses the same physical frame layer as every other page'
   assert.match(css,/\.tarot-companion-patterns \.territory-v1-function-list/);
   assert.match(overlay,/page\.className='tarot-companion-card tarot-companion-page'/);
 });
+
+
+test('page turns do not trigger the global class observer or get reset',()=>{
+  assert.doesNotMatch(overlay,/classList\.toggle\('is-active-page'/);
+  assert.match(overlay,/page\.hidden=!active/);
+  assert.match(overlay,/aria-hidden/);
+  assert.match(overlay,/target\.closest\('\.tarot-companion-pager'\)/);
+  assert.match(css,/\.tarot-page-dots i\[aria-current="page"\]/);
+  assert.doesNotMatch(css,/\.tarot-page-dots i\.active/);
+});

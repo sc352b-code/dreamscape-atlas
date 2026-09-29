@@ -578,7 +578,7 @@ async function boot(){
       if(pages.length>1){
         nav.innerHTML=`
           <button type="button" data-page-step="-1" aria-label="Previous companion card" ${index===0?'disabled':''}>←</button>
-          <span class="tarot-page-dots">${pages.map((_,dotIndex)=>`<i class="${dotIndex===index?'active':''}" aria-hidden="true"></i>`).join('')}</span>
+          <span class="tarot-page-dots">${pages.map(()=>'<i aria-hidden="true"></i>').join('')}</span>
           <small>${index+1} / ${pages.length}</small>
           <button type="button" data-page-step="1" aria-label="Next companion card" ${index===pages.length-1?'disabled':''}>→</button>`;
       }else nav.innerHTML='';
@@ -591,8 +591,17 @@ async function boot(){
       const safe=Math.max(0,Math.min(pages.length-1,pageIndex));
       section.dataset.activePage=String(safe);
       pager.querySelectorAll(':scope > .tarot-companion-page').forEach((page,index)=>{
-        page.hidden=index!==safe;
-        page.classList.toggle('is-active-page',index===safe);
+        const active=index===safe;
+        page.hidden=!active;
+        page.setAttribute('aria-hidden',active?'false':'true');
+      });
+      pager.querySelectorAll(':scope > .tarot-companion-page').forEach((page,index)=>{
+        page.querySelectorAll('.tarot-page-dots i').forEach((dot,dotIndex)=>{
+          if(dotIndex===safe) dot.setAttribute('aria-current','page');
+          else dot.removeAttribute('aria-current');
+        });
+        const count=page.querySelector('.tarot-companion-page-nav > small');
+        if(count) count.textContent=`${safe+1} / ${pages.length}`;
       });
     };
 
@@ -811,7 +820,11 @@ async function boot(){
         activeDeck.dataset.activePage='0';
         activeDeck.querySelectorAll(':scope > .tarot-companion-pager > .tarot-companion-page').forEach((page,index)=>{
           page.hidden=index!==0;
-          page.classList.toggle('is-active-page',index===0);
+          page.setAttribute('aria-hidden',index===0?'false':'true');
+          page.querySelectorAll('.tarot-page-dots i').forEach((dot,dotIndex)=>{
+            if(dotIndex===0) dot.setAttribute('aria-current','page');
+            else dot.removeAttribute('aria-current');
+          });
         });
       }
       info.scrollTo({top:0,behavior:'auto'});
@@ -965,7 +978,13 @@ async function boot(){
 
   const refresh=()=>requestAnimationFrame(()=>{makeLanguageFriendly();applyPreview();applyTarot();});
   refresh();
-  const observer=new MutationObserver(refresh);
+  const observer=new MutationObserver(mutations=>{
+    const external=mutations.some(mutation=>{
+      const target=mutation.target;
+      return !(target instanceof Element&&target.closest('.tarot-companion-pager'));
+    });
+    if(external) refresh();
+  });
   observer.observe(root,{subtree:true,attributes:true,attributeFilter:['class']});
   window.addEventListener('dreamscape-private-profile-change',refresh);
   window.addEventListener('dreamscape-preview-will-open',event=>{

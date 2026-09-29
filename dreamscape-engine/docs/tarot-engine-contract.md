@@ -272,3 +272,39 @@ A new Tarot cannot be considered engine-ready until:
 
 **Evidence test:** if the ornament were removed, every surviving statement should still be justified by the corpus or explicitly labelled interpretation.
 
+
+
+## 18. Self-describing subject identity
+
+Every canonical Tarot package is portable and must identify itself without relying on the surrounding JSON key or file path.
+
+Required:
+
+- `subjectId`;
+- `subjectType`;
+- `title`.
+
+Supported subject types:
+
+- place;
+- symbol;
+- person;
+- animal;
+- object;
+- territory.
+
+The private corpus access subject ID must match the Tarot package `subjectId`.
+
+## 19. Engine enforcement files
+
+The contract is enforced through:
+
+- `dreamscape-engine/schemas/tarot-analysis-v1.schema.json`;
+- `dreamscape-engine/tarot/build-card.js`;
+- `dreamscape-engine/tarot/companion-plan.js`;
+- `dreamscape-engine/schemas/tarot-engine-card-v1.schema.json`;
+- `scripts/validate-tarot-engine.mjs`;
+- `tests/tarot-engine-contract.test.js`;
+- runtime fit auditing in `src/hearthlands-tarot-v2-overlays.js`.
+
+A runtime overflow event `dreamscape-tarot-fit-failure` means the page plan failed. The remedy is to repaginate, not to shrink typography or make the card taller.

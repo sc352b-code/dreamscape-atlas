@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: visually validate the Recurring Patterns frame and page-arrow/page-dot navigation before propagating the fixed-card system.
+Immediate priority: visually validate persistent companion-page navigation across every multi-page Water tab.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`f730ac208475f23533d6a7c3365ecade95d6538c`
+`f7efd31500ca1fb3779643d4290e0e366fa0e9ad`
 
 No merge to production has been performed.
 
@@ -164,6 +164,33 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-29 — Persistent companion-page navigation fix
+
+User confirmed the compact preview twitch was resolved and reported that multi-page companion Tarot arrows still rendered but did not advance beyond card 1.
+
+Root cause:
+- page turns toggled `is-active-page` classes;
+- the global Tarot MutationObserver watches class changes anywhere in the reader;
+- the page turn therefore triggered a full Tarot refresh immediately after the click, allowing the pagination state to be rebuilt/reset.
+
+Implemented:
+- companion page turns no longer mutate page classes;
+- page visibility now uses only `hidden` and `aria-hidden`;
+- active celestial page dots use `aria-current="page"` rather than an `.active` class;
+- the global class observer explicitly ignores class mutations originating inside `.tarot-companion-pager`;
+- direct arrow click handlers and clickable/keyboard-accessible dots remain in place;
+- page count text updates with the selected companion page;
+- the selected tab/chapter does not change when turning companion pages.
+
+Acceptance test:
+- Recurring Patterns page 1 right-arrow must reveal page 2 and remain there;
+- page 2 left-arrow must return to page 1;
+- Overview must allow access to all 3 cards;
+- Appears Alongside must allow access to both cards;
+- Possible Meanings must allow access to all 3 cards;
+- page-dot selection must persist rather than immediately snapping back to page 1.
+
 
 ### 2026-09-29 — Recurring-pattern frame + companion-page controls fix
 

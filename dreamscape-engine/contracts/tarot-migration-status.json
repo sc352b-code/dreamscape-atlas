@@ -1,0 +1,31 @@
+{
+  "canonicalContractVersion": "1.0",
+  "canonicalExemplar": "water",
+  "records": {
+    "water": {
+      "status": "canonical-v1",
+      "mayBeUsedAsEngineTemplate": true
+    },
+    "house-home": {
+      "status": "legacy-pending-migration",
+      "mayBeUsedAsEngineTemplate": false
+    },
+    "cat": {
+      "status": "legacy-pending-migration",
+      "mayBeUsedAsEngineTemplate": false
+    },
+    "dog": {
+      "status": "legacy-pending-migration",
+      "mayBeUsedAsEngineTemplate": false
+    },
+    "family-home": {
+      "status": "legacy-pending-migration",
+      "mayBeUsedAsEngineTemplate": false
+    },
+    "person-11": {
+      "status": "legacy-pending-migration",
+      "mayBeUsedAsEngineTemplate": false
+    }
+  },
+  "rule": "Only canonical-v1 or later records may be used as templates for generating new Tarots. Legacy records must be migrated through the v1 planner, validator, privacy boundary and visual QA first."
+}

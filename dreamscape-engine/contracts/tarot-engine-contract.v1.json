@@ -54,7 +54,7 @@
     "boundary"
   ],
   "dynamicBlockPatterns": [
-    "^lens:\\\\d+$"
+    "^lens:\\d+$"
   ],
   "layout": {
     "companionAspectRatio": "2/3",

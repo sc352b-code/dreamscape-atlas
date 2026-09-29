@@ -94,6 +94,7 @@ export function planCompanionCards(card){
     if(
       mustStandAlone||
       !currentLensPage||
+      currentLensPage.sealed||
       currentLensPage.blocks.length>=2||
       (currentLensPage.weight+lensWeight(lens))>90
     ){
@@ -102,7 +103,8 @@ export function planCompanionCards(card){
         title:lens?.name||`Interpretive Lens ${index+1}`,
         subtitle:'One way of looking · not a fixed translation',
         blocks:[block],
-        weight:lensWeight(lens)
+        weight:lensWeight(lens),
+        sealed:mustStandAlone
       };
       meaningPages.push(currentLensPage);
     }else{
@@ -128,7 +130,7 @@ export function planCompanionCards(card){
     subtitle:'What this reading can and cannot claim',
     blocks:['boundary']
   });
-  meaningPages.forEach(page=>delete page.weight);
+  meaningPages.forEach(page=>{ delete page.weight; delete page.sealed; });
 
   return {
     overview:{

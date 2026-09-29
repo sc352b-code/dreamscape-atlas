@@ -2,6 +2,7 @@ import test from 'node:test';
 import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {validateTarotCard,validateTarotOverlayPackage} from '../scripts/validate-tarot-engine.mjs';
+import {planCompanionCards} from '../dreamscape-engine/tarot/companion-plan.js';
 
 const contract=JSON.parse(fs.readFileSync('dreamscape-engine/contracts/tarot-engine-contract.v1.json','utf8'));
 const overlays=JSON.parse(fs.readFileSync('worlds/reference-world/territories/hearthlands/tarot/tarot-v2-authored-overlays.json','utf8'));
@@ -122,4 +123,32 @@ test('raw dream payload keys are forbidden in the public Tarot package',()=>{
   const errors=validateTarotCard(card,{id:'broken',contract});
   assert.match(messages(errors),/forbidden private key "rawDreams"/);
   assert.match(messages(errors),/forbidden private key "dreamText"/);
+});
+
+
+test('generic page planner reproduces Water page structure without Water-specific logic',()=>{
+  const planned=planCompanionCards(overlays.water);
+  const actual=overlays.water.companionCards;
+  for(const chapter of Object.keys(actual)){
+    assert.deepEqual(
+      planned[chapter].pages.map(page=>page.blocks),
+      actual[chapter].pages.map(page=>page.blocks),
+      chapter
+    );
+  }
+});
+
+test('generic planner paginates dense related items and lenses instead of overpacking',()=>{
+  const card=clone(overlays.water);
+  card.title='Example';
+  card.relatedItems=Array.from({length:7},(_,index)=>({id:`item-${index}`,label:`Item ${index}`}));
+  card.interpretiveLenses=[
+    {name:'Lens A',summary:'A '.repeat(30),caveat:'Context matters.'},
+    {name:'Lens B',summary:'B '.repeat(20)},
+    {name:'Lens C',summary:'C '.repeat(20)}
+  ];
+  const planned=planCompanionCards(card);
+  assert.equal(planned.alongside.pages.length,2);
+  assert.ok(planned.meanings.pages.length>=3);
+  assert.ok(planned.meanings.pages.every(page=>page.blocks.length<=3));
 });

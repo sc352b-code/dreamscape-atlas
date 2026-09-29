@@ -2939,14 +2939,20 @@
   justify-content:center;
   gap:7px;
 }
-.tarot-page-dots i{
-  width:5px;height:5px;
-  border:1px solid rgba(235,194,118,.42);
-  border-radius:50%;
+.tarot-page-dot{
+  width:7px!important;
+  height:7px!important;
+  min-width:7px!important;
+  padding:0!important;
+  border:1px solid rgba(235,194,118,.46)!important;
+  border-radius:50%!important;
+  background:transparent!important;
+  box-shadow:none!important;
+  cursor:pointer!important;
 }
-.tarot-page-dots i[aria-current="page"]{
-  background:#e8bf77;
-  box-shadow:0 0 9px rgba(232,191,119,.24);
+.tarot-page-dot[aria-current="page"]{
+  background:#e8bf77!important;
+  box-shadow:0 0 9px rgba(232,191,119,.24)!important;
 }
 
 /* Semantic headings remain available but do not consume card space. */
@@ -3469,13 +3475,19 @@
   pointer-events:auto!important;
 }
 .tarot-companion-page-nav button,
-.tarot-page-dots i{
+.tarot-page-dot{
   pointer-events:auto!important;
 }
-.tarot-page-dots i{
-  cursor:pointer;
-}
-.tarot-page-dots i:focus-visible{
-  outline:1px solid rgba(244,208,139,.72);
+.tarot-page-dot:focus-visible{
+  outline:1px solid rgba(244,208,139,.72)!important;
   outline-offset:3px;
+}
+
+
+/* Single-shell pagination: one physical Tarot per tab, content swaps inside it. */
+.tarot-companion-stash{
+  display:none!important;
+}
+.tarot-companion-pager > .tarot-companion-page{
+  display:flex!important;
 }

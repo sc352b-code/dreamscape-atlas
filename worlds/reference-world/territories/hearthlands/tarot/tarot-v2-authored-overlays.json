@@ -377,7 +377,9 @@
       "sourceCorpusScope": "whole-corpus",
       "theoryNeutralExtraction": true,
       "evidenceRefsMode": "private-provider"
-    }
+    },
+    "subjectId": "water",
+    "subjectType": "symbol"
   },
   "cat": {
     "previewSummary": "Cats repeatedly gather a tension between cherished vulnerability and irreducible autonomy: close enough to require care, but never wholly manageable.",

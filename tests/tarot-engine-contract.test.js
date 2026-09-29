@@ -3,6 +3,7 @@ import assert from 'node:assert/strict';
 import fs from 'node:fs';
 import {validateTarotCard,validateTarotOverlayPackage} from '../scripts/validate-tarot-engine.mjs';
 import {planCompanionCards} from '../dreamscape-engine/tarot/companion-plan.js';
+import {buildTarotCardV1} from '../dreamscape-engine/tarot/build-card.js';
 
 const contract=JSON.parse(fs.readFileSync('dreamscape-engine/contracts/tarot-engine-contract.v1.json','utf8'));
 const overlays=JSON.parse(fs.readFileSync('worlds/reference-world/territories/hearthlands/tarot/tarot-v2-authored-overlays.json','utf8'));
@@ -151,4 +152,28 @@ test('generic planner paginates dense related items and lenses instead of overpa
   assert.equal(planned.alongside.pages.length,2);
   assert.ok(planned.meanings.pages.length>=3);
   assert.ok(planned.meanings.pages.every(page=>page.blocks.length<=3));
+});
+
+
+test('canonical builder turns public-safe derived analysis into a contract-valid Tarot',()=>{
+  const source=clone(overlays.water);
+  delete source.tarotEngineContractVersion;
+  delete source.companionCards;
+  const built=buildTarotCardV1({...source,subjectId:'water'});
+  const errors=validateTarotCard(built,{id:'built-water',contract});
+  assert.deepEqual(errors,[],messages(errors));
+  assert.equal(built.tarotEngineContractVersion,'1.0');
+  assert.equal(built.presentation.mode,'docked-workspace');
+  assert.equal(built.presentation.previewMode,'image-led');
+  assert.equal(built.privateCorpusAccess.expectedDreamCount,42);
+});
+
+test('canonical builder refuses raw/private dream payloads',()=>{
+  const source=clone(overlays.water);
+  delete source.tarotEngineContractVersion;
+  delete source.companionCards;
+  assert.throws(
+    ()=>buildTarotCardV1({...source,subjectId:'water',dreamRecords:[{dreamText:'private'}]}),
+    /forbidden private key/
+  );
 });

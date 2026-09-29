@@ -82,6 +82,28 @@ export function validateTarotCard(card,{id='unknown',contract}={}){
     }
   }
 
+  const provenance=card.provenance||{};
+  for(const field of contract.provenance?.requiredPublicFields||[]){
+    if(provenance[field]==null||provenance[field]==='') fail(`provenance.${field} is required`);
+  }
+  if(provenance.theoryNeutralExtraction!==true){
+    fail('provenance.theoryNeutralExtraction must be true');
+  }
+  if(contract.provenance?.evidenceRefsMode&&provenance.evidenceRefsMode!==contract.provenance.evidenceRefsMode){
+    fail(`provenance.evidenceRefsMode must be ${contract.provenance.evidenceRefsMode}`);
+  }
+
+  const forbiddenKeys=new Set(contract.privacy?.forbiddenPublicKeys||[]);
+  const scan=(value,path='card')=>{
+    if(!value||typeof value!=='object') return;
+    if(Array.isArray(value)){ value.forEach((item,index)=>scan(item,`${path}[${index}]`)); return; }
+    for(const [key,next] of Object.entries(value)){
+      if(forbiddenKeys.has(key)) fail(`public package contains forbidden private key "${key}" at ${path}`);
+      scan(next,`${path}.${key}`);
+    }
+  };
+  scan(card);
+
   const overview=card.corpusOverview||{};
   const unique=overview.uniqueDreamCount??overview.wholeSeriesCount;
   const whole=overview.wholeSeriesCount;

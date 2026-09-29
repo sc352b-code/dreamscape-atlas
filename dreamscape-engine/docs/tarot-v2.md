@@ -1,5 +1,13 @@
 # Dreamscape Tarot v2 — corpus-grounded revelation cards
 
+> **Canonical status note (Tarot Engine v1.0):** This document contains historical v2 design material as well as current concepts. For all new Tarot generation and migration work, the authoritative sources are:
+> 1. `dreamscape-engine/docs/tarot-engine-contract.md`
+> 2. `dreamscape-engine/docs/tarot-generation-pipeline.md`
+> 3. `dreamscape-engine/contracts/tarot-engine-contract.v1.json`
+> 4. `dreamscape-engine/schemas/tarot-engine-card-v1.schema.json`
+>
+> If this older document conflicts with the v1.0 engine contract, **the v1.0 contract wins**. Water is the only current canonical v1 exemplar. Other existing Tarot records are legacy/pending migration and must not be copied as templates.
+
 ## Purpose
 
 A Dreamscape tarot is not a generic dream-dictionary definition. It is an evidence-led reading of one recurring place, person, animal or symbol across the user's evolving dream corpus.

@@ -14,7 +14,7 @@ The current Tarot v2 exemplars are Family Home, Water and Natalie. Water is the 
 
 ## Current development focus
 
-Immediate priority: visually validate persistent companion-page navigation across every multi-page Water tab.
+Immediate priority: visually validate the rebuilt one-shell companion pagination once, then move on to propagating the Tarot system.
 
 This pass is focused on:
 1. per-card artwork framing rather than one universal crop;
@@ -34,7 +34,7 @@ Current refinement branch:
 `tarot-v2-refinement`
 
 Latest commit at this handover update:
-`f7efd31500ca1fb3779643d4290e0e366fa0e9ad`
+`0adc8ce423d98dca606497c2e1ecbf3fc8c58c05`
 
 No merge to production has been performed.
 
@@ -164,6 +164,33 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-09-29 — Pagination rebuilt as one permanent Tarot shell
+
+User confirmed that all companion-page arrows still appeared but did nothing.
+
+Deeper correction:
+- removed the multi-card hidden/show pager entirely;
+- every tab now owns exactly one permanent physical companion Tarot shell;
+- page turns no longer reveal a different hidden `article`;
+- page turns instead swap the authored page title/subtitle/content blocks inside the same fixed Tarot shell;
+- inactive page content is moved to a hidden stash and restored when that page is selected;
+- frame, nav and arrow elements are therefore never recreated during a page turn;
+- the tab exposes one stable `__dreamscapeSetCompanionPage(index)` setter;
+- tab switching calls that setter to reset to page 1 only when changing chapter;
+- the pager uses one capture-phase click listener, so arrow/dot clicks are handled before any lower Atlas click logic;
+- dots are real buttons rather than decorative `i` elements;
+- the selected page counter/dots are updated inside the permanent shell;
+- no class mutation is required for page turning.
+
+This supersedes all previous hidden-card pagination implementations.
+
+Acceptance test:
+- every multi-page tab must turn immediately within the same visible Tarot card;
+- the border must not move/disappear;
+- page count/title/content must update together;
+- no page turn may depend on DOM hide/show of multiple Tarot card elements.
+
 
 ### 2026-09-29 — Persistent companion-page navigation fix
 

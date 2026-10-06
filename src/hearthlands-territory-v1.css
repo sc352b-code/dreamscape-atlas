@@ -3483,3 +3483,49 @@
 .tarot-companion-pager > .tarot-companion-page{
   display:flex!important;
 }
+
+
+/* --------------------------------------------------------------------------
+   TAROT CONTENT CONTAINMENT + LITERAL CHAPTER HEADINGS
+   -------------------------------------------------------------------------- */
+
+/* Fail-safe: nothing authored for a chapter may remain as ordinary section
+   content above or below the physical Tarot. The pager owns the visible card.
+   Private record browser is the only allowed external surface. */
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-deck > :not(.tarot-companion-pager):not(.tarot-companion-stash):not(.territory-v1-private-record-browser){
+  display:none!important;
+}
+
+/* Card headings now exactly mirror the literal navigation chapter. Any
+   page-specific language is subordinate, so the user always knows where they are. */
+.tarot-companion-page-topic{
+  display:flex!important;
+  flex-direction:column;
+  align-items:center;
+  gap:3px;
+  margin:7px auto 0!important;
+  max-width:96%;
+  text-align:center!important;
+}
+.tarot-companion-page-topic b{
+  color:#ead0a0!important;
+  font:italic 400 12.5px/1.25 var(--tarot-display)!important;
+}
+.tarot-companion-page-topic span{
+  color:#d8c9ce!important;
+  font:italic 10.5px/1.32 var(--tarot-text)!important;
+}
+
+/* Geography count and percentage remain one compact reading: count first,
+   percentage of unique subject-dreams second. Percentages may overlap. */
+.territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row b{
+  display:flex;
+  flex-direction:column;
+  align-items:flex-end;
+  gap:2px;
+}
+.territory-v1-reader.tarot-docked-workspace .territory-v1-geo-row b small{
+  color:#a9c8cc!important;
+  font:700 7px/1 var(--tarot-small)!important;
+  letter-spacing:.04em;
+}

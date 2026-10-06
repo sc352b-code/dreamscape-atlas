@@ -5,31 +5,38 @@
   "chapters": [
     {
       "id": "overview",
-      "tone": "evidence"
+      "tone": "evidence",
+      "label": "Overview"
     },
     {
       "id": "geography",
-      "tone": "evidence"
+      "tone": "evidence",
+      "label": "Where it appears"
     },
     {
       "id": "patterns",
-      "tone": "evidence"
+      "tone": "evidence",
+      "label": "Recurring patterns"
     },
     {
       "id": "alongside",
-      "tone": "evidence"
+      "tone": "evidence",
+      "label": "Appears alongside"
     },
     {
       "id": "chronology",
-      "tone": "evidence"
+      "tone": "evidence",
+      "label": "How it changes"
     },
     {
       "id": "sources",
-      "tone": "source"
+      "tone": "source",
+      "label": "Source dreams"
     },
     {
       "id": "meanings",
-      "tone": "interpretation"
+      "tone": "interpretation",
+      "label": "Possible meanings"
     }
   ],
   "allowedBlocks": [
@@ -71,7 +78,8 @@
     "frameSource": "subject-card-artwork",
     "substituteFrameAllowed": false,
     "runtimeFitAuditRequired": true,
-    "fitFailurePolicy": "fail-QA-and-repaginate; never shrink or silently clip"
+    "fitFailurePolicy": "fail-QA-and-repaginate; never shrink or silently clip",
+    "cardHeadingRule": "main heading must exactly match canonical chapter label; page-specific wording is subordinate"
   },
   "preview": {
     "mode": "image-led",

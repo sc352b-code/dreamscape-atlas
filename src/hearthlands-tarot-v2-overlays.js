@@ -19,6 +19,7 @@ async function boot(){
     {id:'sources',label:'Source dreams'},
     {id:'meanings',label:'Possible meanings'}
   ];
+  const chapterLabel=id=>chapters.find(chapter=>chapter.id===id)?.label||titleCase(id);
 
   function selectedId(){return root.querySelector('.territory-hotspot.is-selected')?.dataset.id||null;}
   function selectedData(){return overlays[selectedId()]||null;}
@@ -94,10 +95,16 @@ async function boot(){
     const entries=Object.entries(data.corpusOverview?.territoryCounts||{});
     if(!section||!target||!entries.length) return;
     const max=Math.max(...entries.map(([,count])=>Number(count)||0),1);
-    target.innerHTML=entries.map(([territory,count])=>`
-      <div class="territory-v1-geo-row" style="--territory-share:${Math.max(4,Math.round((Number(count)||0)/max*100))}%">
-        <span>${escapeHTML(titleCase(territory))}</span><i></i><b>${escapeHTML(count)}</b>
-      </div>`).join('');
+    const unique=data.corpusOverview?.uniqueDreamCount??data.corpusOverview?.wholeSeriesCount;
+    target.innerHTML=entries.map(([territory,count])=>{
+      const numeric=Number(count)||0;
+      const pct=unique?Math.round(numeric/unique*100):null;
+      return `
+      <div class="territory-v1-geo-row" style="--territory-share:${Math.max(4,Math.round(numeric/max*100))}%">
+        <span>${escapeHTML(titleCase(territory))}</span><i></i>
+        <b>${escapeHTML(numeric)}${pct!=null?`<small>${escapeHTML(pct)}%</small>`:''}</b>
+      </div>`;
+    }).join('');
     let note=section.querySelector('.territory-v1-geo-note');
     if(!note){
       note=document.createElement('p');
@@ -558,6 +565,25 @@ async function boot(){
     const dots=nav.querySelector('.tarot-page-dots');
     const count=nav.querySelector('small');
 
+    const allPageBlocks=[...new Set(pages.flatMap(page=>page.blocks||[]))];
+    const blockNodes=new Map(
+      allPageBlocks
+        .map(block=>[block,companionBlockNode(section,block)])
+        .filter(([,node])=>Boolean(node))
+    );
+
+    // All authored content begins in the hidden store. Only the selected page
+    // is permitted to move content into the physical Tarot. This prevents
+    // original section content appearing above/below the card.
+    blockNodes.forEach((node,block)=>{
+      const previous=section.querySelector(`[data-companion-block="${CSS.escape(block)}"]`);
+      if(previous&&previous!==node) previous.remove();
+      node.dataset.companionBlock=block;
+    });
+    blockNodes.forEach(node=>{
+      if(!stash.contains(node)) stash.appendChild(node);
+    });
+
     const moveBodyToStash=()=>{
       Array.from(body.children).forEach(node=>stash.appendChild(node));
     };
@@ -595,15 +621,19 @@ async function boot(){
 
       moveBodyToStash();
 
+      const label=chapterLabel(chapterId);
+      const pageTopic=pageConfig.title&&pageConfig.title!==label?pageConfig.title:'';
+      const pageDetail=pageConfig.subtitle&&pageConfig.subtitle!==pageTopic?pageConfig.subtitle:'';
       header.innerHTML=`
         <small>${escapeHTML(companionToneLabel(config))}</small>
         <div class="tarot-companion-glyph">${companionGlyph(config.motif)}</div>
-        <h3>${escapeHTML(pageConfig.title||config.title)}</h3>
-        <p>${escapeHTML(pageConfig.subtitle||config.subtitle)}</p>
+        <h3>${escapeHTML(label)}</h3>
+        ${pageTopic?`<p class="tarot-companion-page-topic"><b>${escapeHTML(pageTopic)}</b>${pageDetail?`<span>${escapeHTML(pageDetail)}</span>`:''}</p>`:
+          (pageDetail?`<p class="tarot-companion-page-topic"><span>${escapeHTML(pageDetail)}</span></p>`:'')}
         <div class="tarot-companion-rule" aria-hidden="true"><i></i><span>✦</span><i></i></div>`;
 
       (pageConfig.blocks||[]).forEach(block=>{
-        const node=companionBlockNode(section,block);
+        const node=blockNodes.get(block)||companionBlockNode(section,block);
         if(!node) return;
         node.dataset.companionBlock=block;
         body.appendChild(node);

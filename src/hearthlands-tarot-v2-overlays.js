@@ -20,6 +20,18 @@ async function boot(){
     {id:'meanings',label:'Possible meanings'}
   ];
   const chapterLabel=id=>chapters.find(chapter=>chapter.id===id)?.label||titleCase(id);
+  const keepChapterTabVisible=(strip,button,behavior='smooth')=>{
+    if(!strip||!button||strip.scrollWidth<=strip.clientWidth) return;
+    const stripBox=strip.getBoundingClientRect();
+    const buttonBox=button.getBoundingClientRect();
+    const leftGap=buttonBox.left-stripBox.left;
+    const rightGap=buttonBox.right-stripBox.right;
+    let nextLeft=strip.scrollLeft;
+    if(leftGap<8) nextLeft+=leftGap-18;
+    else if(rightGap>-8) nextLeft+=rightGap+18;
+    else return;
+    strip.scrollTo({left:Math.max(0,nextLeft),behavior});
+  };
 
   function selectedId(){return root.querySelector('.territory-hotspot.is-selected')?.dataset.id||null;}
   function selectedData(){return overlays[selectedId()]||null;}
@@ -890,7 +902,7 @@ async function boot(){
         button.setAttribute('aria-current',active?'page':'false');
         if(active) activeChapterButton=button;
       });
-      activeChapterButton?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+      keepChapterTabVisible(shell.querySelector('.tarot-triptych-nav-items'),activeChapterButton,changed?'smooth':'auto');
       const chapterIndex=chapters.findIndex(chapter=>chapter.id===valid);
       const chapterPrev=shell.querySelector('[data-chapter-step="-1"]');
       const chapterNext=shell.querySelector('[data-chapter-step="1"]');
@@ -906,7 +918,7 @@ async function boot(){
       if(activeDeck&&changed&&typeof activeDeck.__dreamscapeSetCompanionPage==='function'){
         activeDeck.__dreamscapeSetCompanionPage(0);
       }
-      info.scrollTo({top:0,behavior:'auto'});
+      if(changed) info.scrollTo({top:0,behavior:'auto'});
     };
 
     if(!shell.dataset.bound){

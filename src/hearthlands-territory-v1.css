@@ -3749,3 +3749,213 @@
     height:27px;
   }
 }
+
+
+/* --------------------------------------------------------------------------
+   TAROT SCROLL STABILITY + VISIBLE ORNAMENT/TYPOGRAPHY PASS — 2026-10-06
+   -------------------------------------------------------------------------- */
+
+/* Prevent layout/scroll anchoring from fighting the user while the Tarot
+   refresh layer updates non-visual state. */
+.territory-v1-reader.tarot-docked-workspace .territory-v1-tarot-scroll,
+.territory-v1-reader.tarot-docked-workspace .tarot-triptych-info{
+  overflow-anchor:none;
+  scroll-behavior:auto;
+  overscroll-behavior:contain;
+}
+
+/* Water prototype fallback: no scenic painting in the companion border.
+   The pictorial Tarot remains the image object; the companion card gets an
+   ornament-only celestial frame until a dedicated companionFrameImage exists. */
+.territory-v1-reader.tarot-docked-workspace[data-companion-frame-source="artwork-fallback"] .tarot-companion-frame{
+  background-image:none!important;
+  -webkit-mask:none!important;
+  mask:none!important;
+  inset:0!important;
+  border-radius:15px;
+  box-shadow:
+    inset 0 0 0 1px rgba(249,219,153,.82),
+    inset 0 0 0 4px rgba(8,11,21,.95),
+    inset 0 0 0 5px rgba(188,137,62,.58),
+    inset 0 0 0 9px rgba(6,9,18,.94),
+    inset 0 0 0 10px rgba(237,196,113,.20),
+    inset 0 0 28px rgba(213,165,85,.05);
+}
+.territory-v1-reader.tarot-docked-workspace[data-companion-frame-source="dedicated-frame"] .tarot-companion-frame{
+  background-image:var(--tarot-deck-image)!important;
+  background-size:100% 100%!important;
+  background-position:center!important;
+  background-repeat:no-repeat!important;
+  -webkit-mask:none!important;
+  mask:none!important;
+}
+
+.tarot-frame-crown{
+  position:absolute;
+  z-index:3;
+  left:50%;
+  top:10px;
+  display:flex;
+  align-items:center;
+  gap:7px;
+  transform:translateX(-50%);
+  color:#f1c978;
+  text-shadow:0 0 10px rgba(239,197,118,.34);
+  font:13px/1 Georgia,serif;
+  letter-spacing:.02em;
+}
+.tarot-frame-crown span:nth-child(3){
+  color:#ffe3a5;
+  font-size:15px;
+  text-shadow:0 0 14px rgba(255,216,143,.42);
+}
+
+.tarot-frame-corner{
+  position:absolute;
+  z-index:2;
+  width:54px;
+  height:54px;
+  color:#e7bb6e;
+  opacity:.92;
+}
+.tarot-frame-corner::before,
+.tarot-frame-corner::after{
+  content:"";
+  position:absolute;
+  border-color:currentColor;
+}
+.tarot-frame-corner::before{
+  inset:0;
+  border-top:1px solid currentColor;
+  border-left:1px solid currentColor;
+  border-radius:22px 0 0 0;
+  box-shadow:inset 4px 4px 0 rgba(237,196,111,.035);
+}
+.tarot-frame-corner::after{
+  width:28px;
+  height:28px;
+  left:10px;
+  top:10px;
+  border-top:1px solid rgba(247,210,137,.62);
+  border-left:1px solid rgba(247,210,137,.62);
+  border-radius:16px 0 0 0;
+  transform:rotate(12deg);
+}
+.tarot-frame-corner-tl{left:12px;top:12px}
+.tarot-frame-corner-tr{right:12px;top:12px;transform:scaleX(-1)}
+.tarot-frame-corner-bl{left:12px;bottom:12px;transform:scaleY(-1)}
+.tarot-frame-corner-br{right:12px;bottom:12px;transform:scale(-1)}
+
+.tarot-frame-sigil{
+  position:absolute;
+  z-index:3;
+  color:#e8bb6c;
+  text-shadow:0 0 8px rgba(232,187,108,.30);
+  font:10px/1 Georgia,serif;
+}
+.tarot-frame-sigil-left{left:8px;top:50%;transform:translateY(-50%)}
+.tarot-frame-sigil-right{right:8px;top:50%;transform:translateY(-50%)}
+.tarot-frame-sigil-bottom{left:50%;bottom:7px;transform:translateX(-50%);font-size:12px}
+
+.territory-v1-reader.tarot-docked-workspace[data-companion-frame-source="artwork-fallback"] .tarot-companion-frame::before{
+  content:"";
+  position:absolute;
+  inset:17px;
+  border:1px solid rgba(233,190,108,.38);
+  border-radius:11px;
+  box-shadow:
+    inset 0 0 0 1px rgba(8,11,20,.92),
+    0 0 12px rgba(230,185,105,.04);
+}
+.territory-v1-reader.tarot-docked-workspace[data-companion-frame-source="artwork-fallback"] .tarot-companion-frame::after{
+  content:"";
+  position:absolute;
+  left:50%;
+  top:25px;
+  bottom:25px;
+  width:1px;
+  transform:translateX(-50%);
+  background:
+    linear-gradient(180deg,
+      rgba(239,199,120,.08),
+      transparent 18%,
+      transparent 82%,
+      rgba(239,199,120,.08));
+  border:0!important;
+  border-radius:0!important;
+}
+
+/* Make the typographic hierarchy visibly more manuscript-like. */
+.territory-v1-reader.tarot-docked-workspace{
+  --tarot-display:"Baskerville","Baskerville Old Face","Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+  --tarot-text:Georgia,"Times New Roman",serif;
+  --tarot-small:"Palatino Linotype","Book Antiqua",Palatino,Georgia,serif;
+}
+.tarot-companion-header h3{
+  font-family:var(--tarot-display)!important;
+  font-style:italic!important;
+  font-weight:400!important;
+  font-size:31px!important;
+  line-height:1.02!important;
+  letter-spacing:.016em!important;
+}
+.tarot-companion-page-topic b{
+  font-family:var(--tarot-display)!important;
+  font-size:13px!important;
+  line-height:1.25!important;
+  font-style:italic!important;
+}
+.tarot-companion-page-topic span{
+  margin-top:2px;
+  font-family:var(--tarot-text)!important;
+  font-size:11px!important;
+  line-height:1.4!important;
+  font-style:normal!important;
+  letter-spacing:.008em;
+}
+.tarot-companion-page p,
+.tarot-companion-page article p,
+.tarot-companion-page article span{
+  font-family:var(--tarot-text)!important;
+  font-size:12.5px!important;
+  line-height:1.56!important;
+  letter-spacing:.003em;
+}
+.tarot-companion-page b,
+.tarot-companion-page strong{
+  font-family:var(--tarot-display)!important;
+}
+.tarot-companion-header>small,
+.tarot-confidence-legend>small,
+.tarot-behaviour-summary>small{
+  font-family:var(--tarot-small)!important;
+  font-size:8px!important;
+  letter-spacing:.19em!important;
+}
+.tarot-companion-rule{
+  margin-top:11px!important;
+}
+.tarot-companion-rule span{
+  font-size:8px!important;
+}
+
+/* Reading field gains more breathing room now that the scenic frame has gone. */
+.territory-v1-reader.tarot-docked-workspace .tarot-companion-page{
+  padding:11.5% 10% 8.8%!important;
+}
+.tarot-companion-page-body{
+  padding:2px 2px 0;
+}
+
+/* Slightly larger visible card on standard desktop to preserve the chosen
+   reading hierarchy without shrinking. */
+@media(min-width:900px) and (max-width:1599px){
+  .territory-v1-reader.tarot-docked-workspace .tarot-companion-page{
+    width:min(100%,410px);
+  }
+}
+@media(min-width:1600px){
+  .territory-v1-reader.tarot-docked-workspace .tarot-companion-page{
+    width:min(100%,390px);
+  }
+}

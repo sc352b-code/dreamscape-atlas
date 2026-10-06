@@ -18,6 +18,7 @@
     <link rel="stylesheet" href="/src/buildpass.css" />
     <link rel="stylesheet" href="/src/hearthlands-symbols.css" />
     <link rel="stylesheet" href="/src/natalie-cosmos.css" />
+    <link rel="stylesheet" href="/src/natalie-living-cosmos.css" />
   </head>
   <body>
     <main id="app"><div id="boot"><div><b>Dreamscape</b><span>Entering your living dream world…</span></div></div></main>
@@ -35,7 +36,9 @@
     <script type="module">
       const corpus = new URLSearchParams(location.search).get("corpus");
       if (corpus === "natalie") {
-        await import("/src/natalie-cosmos.js");
+        const mode = new URLSearchParams(location.search).get("mode");
+        if (mode === "living") await import("/src/natalie-living-cosmos.js");
+        else await import("/src/natalie-cosmos.js");
       } else {
         await import("/src/main.js");
         await import("/src/v57-hearthlands-geography.js");

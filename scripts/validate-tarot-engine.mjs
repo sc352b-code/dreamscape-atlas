@@ -76,7 +76,11 @@ export function validateTarotCard(card,{id='unknown',contract}={}){
         }
         const ownership=block.startsWith('lens:')
           ?contract.blockChapterOwnership?.['lens:*']
-          :contract.blockChapterOwnership?.[block];
+          :block.startsWith('function:')
+            ?contract.blockChapterOwnership?.['function:*']
+            :block.startsWith('meaning:')
+              ?contract.blockChapterOwnership?.['meaning:*']
+              :contract.blockChapterOwnership?.[block];
         if(ownership&&ownership!==chapter){
           fail(`${chapter}.${page.id}: block "${block}" belongs to ${ownership}`);
         }
@@ -97,6 +101,20 @@ export function validateTarotCard(card,{id='unknown',contract}={}){
       card.interpretiveLenses.forEach((_,index)=>{
         if(!seenBlocks.has(`lens:${index}`)) fail(`meanings: interpretive lens ${index} is not paginated`);
       });
+    }
+    if(chapter==='patterns'&&Array.isArray(card.recurringFunctions)){
+      if(!seenBlocks.has('functions')){
+        card.recurringFunctions.forEach((_,index)=>{
+          if(!seenBlocks.has(`function:${index}`)) fail(`patterns: recurring function ${index} is not paginated`);
+        });
+      }
+    }
+    if(chapter==='meanings'&&Array.isArray(card.possibleMeanings)){
+      if(!seenBlocks.has('meanings')){
+        card.possibleMeanings.forEach((_,index)=>{
+          if(!seenBlocks.has(`meaning:${index}`)) fail(`meanings: possible meaning ${index} is not paginated`);
+        });
+      }
     }
   }
 

@@ -247,7 +247,14 @@
             "subtitle": "Territory memberships may overlap",
             "blocks": [
               "geographyLogic",
-              "geographyRows",
+              "geographyRows"
+            ]
+          },
+          {
+            "id": "distribution-note",
+            "title": "What the distribution shows",
+            "subtitle": "A plain-language reading of the territory pattern",
+            "blocks": [
               "geographyNote"
             ]
           }

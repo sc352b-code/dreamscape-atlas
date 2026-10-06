@@ -60,7 +60,7 @@ test('page state survives observer refreshes but a newly selected tab starts at 
 
 test('exact subject Tarot edge remains the frame source for every companion page',()=>{
   assert.match(overlay,/--tarot-deck-image/);
-  assert.match(overlay,/data\.cardImage\|\|data\.previewImage/);
+  assert.match(overlay,/data\.companionFrameImage\|\|data\.cardImage\|\|data\.previewImage/);
   assert.match(css,/var\(--tarot-deck-image/);
   assert.match(css,/water-v2\.png/);
   assert.match(css,/-webkit-mask:/);
@@ -206,4 +206,10 @@ test('geography prose has its own card page and cannot clip under the chart',()=
   assert.deepEqual(cards.water.companionCards.geography.pages[0].blocks,['geographyLogic','geographyRows']);
   assert.deepEqual(cards.water.companionCards.geography.pages[1].blocks,['geographyNote']);
   assert.match(css,/data-page-id="distribution-note"/);
+});
+
+
+test('companion frame supports a dedicated ornament-only asset with artwork fallback',()=>{
+  assert.match(overlay,/data\.companionFrameImage\|\|data\.cardImage\|\|data\.previewImage/);
+  assert.match(overlay,/companionFrameSource=data\.companionFrameImage\?'dedicated-frame':'artwork-fallback'/);
 });

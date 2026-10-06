@@ -320,3 +320,11 @@ Every Tarot must also satisfy:
 That standard defines what each chapter must reveal, reader-friendly writing rules, and how to label analytically incomplete chapters instead of filling them with generic symbolism.
 
 The visible card heading must exactly match the canonical navigation label. Page-specific titles are subordinate topics, never competing primary headings.
+
+
+## 21. Visual-quality audit
+
+Border, typography and navigation quality are governed by:
+`dreamscape-engine/docs/tarot-visual-audit.md`
+
+A masked scenic crop of the main Tarot artwork is an acceptable prototype fallback, not the final companion frame. Final-quality companion cards should use a dedicated ornament-only `companionFrameImage` derived from the approved deck artwork.

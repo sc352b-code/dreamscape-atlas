@@ -454,9 +454,17 @@ async function boot(){
   }
 
   function companionBlockNode(section,block){
-    if(/^lens:\\d+$/.test(block)){
+    if(/^lens:\d+$/.test(block)){
       const index=Number(block.split(':')[1]);
       return section.querySelectorAll('.territory-v1-lens-list article')[index]||null;
+    }
+    if(/^function:\d+$/.test(block)){
+      const index=Number(block.split(':')[1]);
+      return section.querySelectorAll('.territory-v1-function-list article')[index]||null;
+    }
+    if(/^meaning:\d+$/.test(block)){
+      const index=Number(block.split(':')[1]);
+      return section.querySelectorAll('.territory-v1-meaning-list article')[index]||null;
     }
     const selectors={
       heroMetric:'.tarot-overview-lead',

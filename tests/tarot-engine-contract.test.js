@@ -161,7 +161,7 @@ test('canonical builder turns public-safe derived analysis into a contract-valid
   delete source.tarotEngineContractVersion;
   delete source.companionCards;
   const built=buildTarotCardV1({...source,subjectId:'water'});
-  const errors=validateTarotCard(built,{id:'built-water',contract});
+  const errors=validateTarotCard(built,{id:'water',contract});
   assert.deepEqual(errors,[],messages(errors));
   assert.equal(built.tarotEngineContractVersion,'1.0');
   assert.equal(built.presentation.mode,'docked-workspace');

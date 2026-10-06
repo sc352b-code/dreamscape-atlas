@@ -158,30 +158,57 @@ function animate(t){
 }
 addEventListener("resize",resize);
 let masterFallbackTried=false;
+let sceneStarted=false;
 function startScene(){
-  if(GL) return;
+  if(sceneStarted) return;
+  sceneStarted=true;
+
+  // The painting and video are the product. Optional effects must never block them.
+  try{
+    resize();
+  }catch(err){
+    console.warn("Resize/life canvas unavailable",err);
+  }
+
+  try{
+    addMicroPlanets(art);
+  }catch(err){
+    console.warn("Microplanet effect unavailable",err);
+  }
+
+  // WebGL is purely decorative. Some browsers reject this shader; never fail the scene for it.
   try{
     GL=initWebGL(art);
-    resize();
-    addMicroPlanets(art);
-    shell.classList.add("ready");
-    if(!reduced){
-      integrationMotion.src="/api/natalie-motion?key=integration&v=6";
+  }catch(err){
+    GL=null;
+    console.warn("WebGL effects disabled",err);
+  }
+
+  shell.classList.add("ready");
+
+  if(!reduced){
+    try{
+      integrationMotion.src="/api/natalie-motion?key=integration&v=7";
       integrationMotion.play().catch(()=>{});
+    }catch(err){
+      console.warn("Living motion video unavailable",err);
     }
+  }
+
+  try{
     requestAnimationFrame(animate);
   }catch(err){
-    console.error("Scene init failed",err);
-    root.innerHTML='<div class="boot">The Dreamscape scene could not initialise. Please refresh.</div>';
+    console.warn("Ambient animation loop unavailable",err);
   }
 }
 art.addEventListener("load",startScene,{once:true});
 art.addEventListener("error",()=>{
   if(!masterFallbackTried){
     masterFallbackTried=true;
-    art.src="/api/natalie-asset?key=masterpng&v=6";
+    art.src="/api/natalie-asset?key=masterpng&v=7";
     return;
   }
-  root.innerHTML='<div class="boot">The approved master artwork could not load. Please refresh.</div>';
+  // Keep the app shell rather than replacing the whole page.
+  console.error("Master artwork failed in both formats");
 },{once:false});
 if(art.complete && art.naturalWidth>0) startScene();

@@ -13,7 +13,7 @@ const markerPts=[[18,32],[34,60],[49,40],[63,68],[77,35],[85,58]];
 root.innerHTML=`
 <main class="cosmos" data-state="home">
  <div class="viewport"><div class="stage">
-  <img id="art" alt="Natalie’s Dreamscape"/>
+  <img id="art" src="/api/natalie-asset?key=master&v=6" alt="Natalie’s Dreamscape" decoding="async" fetchpriority="high"/>
   <canvas id="fx"></canvas><div class="depth-glow"></div><canvas id="life"></canvas>
   <div class="hotspots"></div><div class="dimmer"></div>
  </div></div>
@@ -157,8 +157,31 @@ function animate(t){
  drawLife(t);requestAnimationFrame(animate)
 }
 addEventListener("resize",resize);
-(async()=>{
- try{
-  const blob=await fetchImageBlob("master");masterObjectUrl=URL.createObjectURL(blob);if(!reduced){integrationMotion.src="/api/natalie-motion?key=integration";integrationMotion.play().catch(()=>{})}art.onload=()=>{GL=initWebGL(art);resize();addMicroPlanets(art);shell.classList.add("ready");requestAnimationFrame(animate)};art.src=masterObjectUrl;
- }catch(e){root.innerHTML='<div class="boot">The approved master artwork could not load. Please refresh.</div>';console.error(e)}
-})();
+let masterFallbackTried=false;
+function startScene(){
+  if(GL) return;
+  try{
+    GL=initWebGL(art);
+    resize();
+    addMicroPlanets(art);
+    shell.classList.add("ready");
+    if(!reduced){
+      integrationMotion.src="/api/natalie-motion?key=integration&v=6";
+      integrationMotion.play().catch(()=>{});
+    }
+    requestAnimationFrame(animate);
+  }catch(err){
+    console.error("Scene init failed",err);
+    root.innerHTML='<div class="boot">The Dreamscape scene could not initialise. Please refresh.</div>';
+  }
+}
+art.addEventListener("load",startScene,{once:true});
+art.addEventListener("error",()=>{
+  if(!masterFallbackTried){
+    masterFallbackTried=true;
+    art.src="/api/natalie-asset?key=masterpng&v=6";
+    return;
+  }
+  root.innerHTML='<div class="boot">The approved master artwork could not load. Please refresh.</div>';
+},{once:false});
+if(art.complete && art.naturalWidth>0) startScene();

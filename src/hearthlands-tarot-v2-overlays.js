@@ -121,7 +121,7 @@ async function boot(){
     const verified=data.relationshipStatus==='cooccurrence-verified';
     const noteText=verified
       ?'These relationships are supported by recurring same-dream evidence.'
-      :'These are related Dreamscape elements. This view does not yet claim that each one repeatedly occurs in the same dreams.';
+      :'This is currently a navigation constellation of Water-related Dreamscape elements, not a same-dream frequency claim. Co-occurrence must be verified from the private corpus before any item is described as repeatedly appearing with this subject.';
 
     let heading=related.querySelector('.territory-v1-related-heading');
     if(!heading){

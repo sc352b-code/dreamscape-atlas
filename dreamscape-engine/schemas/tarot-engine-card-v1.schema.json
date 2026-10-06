@@ -865,6 +865,11 @@
         "object",
         "territory"
       ]
+    },
+    "companionFrameImage": {
+      "type": "string",
+      "minLength": 1,
+      "description": "Optional ornament-only frame asset derived from the approved subject/deck artwork. Falls back to cardImage during prototype stages."
     }
   }
 }

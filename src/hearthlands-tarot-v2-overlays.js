@@ -502,6 +502,21 @@ async function boot(){
     return selectors[block]?section.querySelector(selectors[block]):null;
   }
 
+  function decorateCompanionFrame(frame){
+    if(!frame||frame.querySelector('.tarot-frame-crown')) return;
+    frame.innerHTML=`
+      <div class="tarot-frame-crown" aria-hidden="true">
+        <span>☾</span><span>◐</span><span>●</span><span>◑</span><span>☽</span>
+      </div>
+      <div class="tarot-frame-corner tarot-frame-corner-tl" aria-hidden="true"></div>
+      <div class="tarot-frame-corner tarot-frame-corner-tr" aria-hidden="true"></div>
+      <div class="tarot-frame-corner tarot-frame-corner-bl" aria-hidden="true"></div>
+      <div class="tarot-frame-corner tarot-frame-corner-br" aria-hidden="true"></div>
+      <div class="tarot-frame-sigil tarot-frame-sigil-left" aria-hidden="true">✦</div>
+      <div class="tarot-frame-sigil tarot-frame-sigil-right" aria-hidden="true">✦</div>
+      <div class="tarot-frame-sigil tarot-frame-sigil-bottom" aria-hidden="true">◇</div>`;
+  }
+
   function ensureCompanionCard(section,chapterId,data){
     if(!section) return;
     const config=data.companionCards?.[chapterId];
@@ -576,6 +591,7 @@ async function boot(){
       frame.setAttribute('aria-hidden','true');
       card.prepend(frame);
     }
+    decorateCompanionFrame(frame);
 
     const header=card.querySelector('.tarot-companion-header');
     const body=card.querySelector('.tarot-companion-page-body');

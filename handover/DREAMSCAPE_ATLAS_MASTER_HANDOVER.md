@@ -37,6 +37,12 @@ Previous active development branch:
 Current refinement branch:
 `tarot-v2-refinement`
 
+Stable Tarot refinement preview:
+`https://dreamscape-atlas-git-tarot-v2-refinement-sc352b-2806.vercel.app/`
+
+Preview-link rule:
+Use the stable branch alias above for ongoing work. Do not use deployment-specific Vercel URLs as the canonical working link because individual preview deployments may later be removed.
+
 Latest implementation/documentation commit before this handover update:
 `70fddc75acd186443337a9491627ea2843f3afdd`
 
@@ -205,6 +211,18 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-10-06 — Stable preview continuity rule
+
+A previously shared deployment-specific Vercel URL for the Water Tarot stopped resolving even though the `tarot-v2-refinement` branch and its code remained intact.
+
+Correction:
+- canonical working preview is now the stable branch alias:
+  `https://dreamscape-atlas-git-tarot-v2-refinement-sc352b-2806.vercel.app/`
+- deployment-specific URLs are not to be used as the persistent project handoff link;
+- the branch alias should remain the working URL as new commits are deployed;
+- the Tarot work remains on `tarot-v2-refinement`; no rollback or production merge was performed.
+
 
 ### 2026-09-29 — Tarot Engine v1.0 final hardening and reproducibility check
 

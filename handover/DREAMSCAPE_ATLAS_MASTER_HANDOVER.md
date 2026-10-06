@@ -14,7 +14,7 @@ Water is the **only canonical Tarot Engine v1.0 exemplar**. Family Home, Natalie
 
 ## Current development focus
 
-Immediate priority: visually validate the new tab-strip navigation, reversible page arrows, two-page geography card and refined interim frame; then create the dedicated ornament-only Water companion-frame asset and continue typography/display polish.
+Immediate priority: visually verify that the Tarot can now be scrolled fully without vertical jump and that the new ornament-only fallback frame/typography are clearly visible; then continue polish or replace fallback with the dedicated companionFrameImage.
 
 This pass has now locked the reusable Tarot engine architecture:
 1. theory-neutral corpus analysis → public-safe derived analysis;
@@ -211,6 +211,42 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-10-06 — Scroll-jump correction + visibly distinct companion frame/type pass
+
+User reported three remaining defects after the navigation pass:
+1. scrolling toward the bottom of the Tarot could jump the card upward, keeping the bottom out of reach;
+2. border changes were not visibly different;
+3. font/text changes were not visibly different.
+
+Root cause of scroll jump:
+- active chapter positioning used `scrollIntoView()`, which can vertically scroll ancestor containers;
+- `activate()` reset the information pane to top on ordinary renderer refreshes, even when the user had not changed tabs.
+
+Corrections:
+- removed active-tab `scrollIntoView()` from the Tarot path;
+- added `keepChapterTabVisible()`, which changes only the horizontal tab-strip scroll position;
+- information pane now resets to top only when the selected chapter actually changes;
+- disabled browser scroll anchoring inside the Tarot reading containers and contained overscroll;
+- companion fallback frame no longer displays scenic strips from the Water painting;
+- fallback is now a visibly separate celestial ornament frame: moon-phase crown, double gold rails, corner filigree geometry and side/bottom sigils;
+- exact/dedicated `companionFrameImage` support remains for the future high-fidelity ornament-only asset;
+- typography now separates display and body roles more strongly:
+  - Baskerville/Palatino-style display hierarchy;
+  - Georgia reading text;
+  - 31px companion chapter heading;
+  - 12.5px body with increased line-height;
+  - larger small-caps evidence labels;
+- standard-desktop companion card width increased slightly to preserve readable hierarchy.
+
+Verification:
+- relevant JS/test syntax checks: OK;
+- Water engine validation: 0 errors;
+- no active-tab `scrollIntoView()` remains;
+- vertical information reset is conditional on actual tab change;
+- scenic fallback frame is explicitly disabled;
+- celestial ornament fallback and distinct font hierarchy are present.
+
 
 ### 2026-10-06 — Tarot navigation, geography pagination and visual audit pass
 

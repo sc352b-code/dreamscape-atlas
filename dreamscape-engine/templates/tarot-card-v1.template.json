@@ -44,49 +44,49 @@
   },
   "companionCards": {
     "overview": {
-      "title": "<title>",
+      "title": "Overview",
       "subtitle": "<subtitle>",
       "motif": "record",
       "tone": "evidence",
       "pages": []
     },
     "geography": {
-      "title": "<title>",
+      "title": "Where it appears",
       "subtitle": "<subtitle>",
       "motif": "geography",
       "tone": "evidence",
       "pages": []
     },
     "patterns": {
-      "title": "<title>",
+      "title": "Recurring patterns",
       "subtitle": "<subtitle>",
       "motif": "patterns",
       "tone": "evidence",
       "pages": []
     },
     "alongside": {
-      "title": "<title>",
+      "title": "Appears alongside",
       "subtitle": "<subtitle>",
       "motif": "constellation",
       "tone": "evidence",
       "pages": []
     },
     "chronology": {
-      "title": "<title>",
+      "title": "How it changes",
       "subtitle": "<subtitle>",
       "motif": "time",
       "tone": "evidence",
       "pages": []
     },
     "sources": {
-      "title": "<title>",
+      "title": "Source dreams",
       "subtitle": "<subtitle>",
       "motif": "manuscript",
       "tone": "source",
       "pages": []
     },
     "meanings": {
-      "title": "<title>",
+      "title": "Possible meanings",
       "subtitle": "<subtitle>",
       "motif": "mirror",
       "tone": "interpretation",

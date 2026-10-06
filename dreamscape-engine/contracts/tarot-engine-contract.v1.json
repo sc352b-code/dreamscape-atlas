@@ -75,7 +75,12 @@
     "pageOverflow": "forbidden",
     "overflowResolution": "paginate",
     "pageControls": "integrated-arrows-and-dots",
-    "frameSource": "subject-card-artwork",
+    "frameSource": {
+      "preferred": "dedicated ornament-only frame derived from approved subject/deck artwork",
+      "prototypeFallback": "masked edge of subject card artwork",
+      "substituteUnrelatedFrameAllowed": false,
+      "scenicCropIsFinalQuality": false
+    },
     "substituteFrameAllowed": false,
     "runtimeFitAuditRequired": true,
     "fitFailurePolicy": "fail-QA-and-repaginate; never shrink or silently clip",

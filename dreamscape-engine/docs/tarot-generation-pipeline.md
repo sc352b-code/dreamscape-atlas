@@ -11,6 +11,7 @@ New Tarot generation must use these files rather than copying an existing Tarot 
 - `dreamscape-engine/tarot/companion-plan.js` — generic fixed-card page planner;
 - `dreamscape-engine/schemas/tarot-engine-card-v1.schema.json` — generated runtime-card schema;
 - `dreamscape-engine/contracts/tarot-engine-contract.v1.json` — machine-readable invariants;
+- `dreamscape-engine/docs/tarot-content-quality.md` — chapter-by-chapter editorial/content QA standard;
 - `scripts/validate-tarot-engine.mjs` — contract validator;
 - `tests/tarot-engine-contract.test.js` — engine regression tests.
 

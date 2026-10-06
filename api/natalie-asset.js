@@ -1,7 +1,7 @@
 const API="https://api.firestorage.ai/dev/file";
 const SHARE="n6Ifd8vxttgh";
 const FILES={
-  master:"natalie_s_dreamscape_cosmic_atlas.png",
+  master:"natalie_atlas_q70.webp",
   luminous:"a_wide_panoramic_fantasy_sci_fi_landscape_scene.png",
   "direct-message":"a_wide_panoramic_fantasy_landscape_scene_ultra_de.png",
   otherworldly:"a_wide_panoramic_high_detail_fantasy_landscape_s.png",

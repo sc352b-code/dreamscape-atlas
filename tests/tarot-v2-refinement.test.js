@@ -12,16 +12,20 @@ test('Water companion tabs have explicit fixed-card pagination plans',()=>{
   const companions=cards.water.companionCards||{};
   assert.equal(companions.overview.pages.length,3);
   assert.equal(companions.geography.pages.length,1);
-  assert.equal(companions.patterns.pages.length,2);
+  assert.equal(companions.patterns.pages.length,3);
   assert.equal(companions.alongside.pages.length,2);
   assert.equal(companions.chronology.pages.length,1);
   assert.equal(companions.sources.pages.length,1);
-  assert.equal(companions.meanings.pages.length,3);
+  assert.equal(companions.meanings.pages.length,4);
   assert.deepEqual(companions.overview.pages[0].blocks,['heroMetric','grounding','metrics']);
   assert.deepEqual(companions.overview.pages[1].blocks,['behaviour']);
   assert.deepEqual(companions.overview.pages[2].blocks,['behaviourPoles']);
-  assert.deepEqual(companions.meanings.pages[1].blocks,['lens:0']);
-  assert.deepEqual(companions.meanings.pages[2].blocks,['lens:1','lens:2','boundary']);
+  assert.deepEqual(companions.patterns.pages[1].blocks,['function:0','function:1']);
+  assert.deepEqual(companions.patterns.pages[2].blocks,['function:2','function:3']);
+  assert.deepEqual(companions.meanings.pages[0].blocks,['meaning:0','meaning:1']);
+  assert.deepEqual(companions.meanings.pages[1].blocks,['meaning:2','meaning:3']);
+  assert.deepEqual(companions.meanings.pages[2].blocks,['lens:0']);
+  assert.deepEqual(companions.meanings.pages[3].blocks,['lens:1','lens:2','boundary']);
 });
 
 test('companion pages are fixed Tarot objects whose height is not content-driven',()=>{
@@ -128,9 +132,9 @@ test('every companion page owns a real frame element immune to article pseudo-el
 });
 
 test('Recurring Patterns uses the same physical frame layer as every other page',()=>{
-  assert.equal(cards.water.companionCards.patterns.pages.length,2);
-  assert.match(css,/\.tarot-companion-patterns \.territory-v1-function-list/);
-  assert.match(overlay,/page\.className='tarot-companion-card tarot-companion-page'/);
+  assert.equal(cards.water.companionCards.patterns.pages.length,3);
+  assert.match(css,/article\[data-companion-block\^="function:"\]/);
+  assert.match(overlay,/card\.className='tarot-companion-card tarot-companion-page'/);
 });
 
 
@@ -152,7 +156,29 @@ test('companion pagination uses exactly one physical page shell per tab',()=>{
 
 
 test('interpretive pagination is generic rather than Water-specific',()=>{
-  assert.match(js,/\^lens:\\\\d\+\$/);
-  assert.doesNotMatch(js,/lensJungian|lensStory|lensLife/);
+  assert.match(overlay,/\^lens:\\d\+\$/);
+  assert.doesNotMatch(overlay,/lensJungian|lensStory|lensLife/);
   assert.deepEqual(cards.water.companionCards.meanings.pages.flatMap(page=>page.blocks).filter(block=>block.startsWith('lens:')),['lens:0','lens:1','lens:2']);
+});
+
+test('pattern and meaning detail paginate by indexed block rather than overflowing one card',()=>{
+  assert.match(overlay,/\^function:\\d\+\$/);
+  assert.match(overlay,/\^meaning:\\d\+\$/);
+  assert.match(css,/article\[data-companion-block\^="function:"\]/);
+  assert.match(css,/article\[data-companion-block\^="meaning:"\]/);
+});
+
+test('all authored chapter blocks are primed into the hidden stash before rendering',()=>{
+  assert.match(overlay,/const allPageBlocks=\[\.\.\.new Set\(pages\.flatMap/);
+  assert.match(overlay,/blockNodes\.forEach\(node=>/);
+  assert.match(overlay,/stash\.appendChild\(node\)/);
+  assert.match(css,/\.tarot-companion-deck > :not\(\.tarot-companion-pager\)/);
+});
+
+test('visible card heading mirrors the literal tab label',()=>{
+  assert.match(overlay,/const label=chapterLabel\(chapterId\)/);
+  assert.match(overlay,/<h3>\$\{escapeHTML\(label\)\}<\/h3>/);
+  assert.equal(cards.water.companionCards.patterns.title,'Recurring patterns');
+  assert.equal(cards.water.companionCards.geography.title,'Where it appears');
+  assert.equal(cards.water.companionCards.meanings.title,'Possible meanings');
 });

@@ -453,7 +453,7 @@
                     "uniqueItems": true,
                     "items": {
                       "type": "string",
-                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+|function:[0-9]+|meaning:[0-9]+)$"
                     }
                   }
                 }
@@ -519,7 +519,7 @@
                     "uniqueItems": true,
                     "items": {
                       "type": "string",
-                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+|function:[0-9]+|meaning:[0-9]+)$"
                     }
                   }
                 }
@@ -585,7 +585,7 @@
                     "uniqueItems": true,
                     "items": {
                       "type": "string",
-                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+|function:[0-9]+|meaning:[0-9]+)$"
                     }
                   }
                 }
@@ -651,7 +651,7 @@
                     "uniqueItems": true,
                     "items": {
                       "type": "string",
-                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+|function:[0-9]+|meaning:[0-9]+)$"
                     }
                   }
                 }
@@ -717,7 +717,7 @@
                     "uniqueItems": true,
                     "items": {
                       "type": "string",
-                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+|function:[0-9]+|meaning:[0-9]+)$"
                     }
                   }
                 }
@@ -783,7 +783,7 @@
                     "uniqueItems": true,
                     "items": {
                       "type": "string",
-                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+|function:[0-9]+|meaning:[0-9]+)$"
                     }
                   }
                 }
@@ -849,7 +849,7 @@
                     "uniqueItems": true,
                     "items": {
                       "type": "string",
-                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+)$"
+                      "pattern": "^(heroMetric|grounding|metrics|behaviour|behaviourPoles|geographyLogic|geographyRows|geographyNote|strengthLegend|functions|relatedNote|relatedCore|relatedItems|chronologyRiver|chronologyText|sourceIntro|sourceButton|meanings|boundary|lens:[0-9]+|function:[0-9]+|meaning:[0-9]+)$"
                     }
                   }
                 }

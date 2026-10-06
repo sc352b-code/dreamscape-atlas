@@ -186,8 +186,10 @@ test('visible card heading mirrors the literal tab label',()=>{
 });
 
 
-test('chapter strip is horizontally reachable and active tabs scroll into view',()=>{
-  assert.match(overlay,/activeChapterButton\?\.scrollIntoView/);
+test('chapter strip is horizontally reachable without vertically scrolling ancestors',()=>{
+  assert.match(overlay,/keepChapterTabVisible/);
+  assert.match(overlay,/strip\.scrollTo\(\{left:/);
+  assert.doesNotMatch(overlay,/activeChapterButton\?\.scrollIntoView/);
   assert.match(overlay,/chapterStrip\?\.addEventListener\('wheel'/);
   assert.match(css,/\.tarot-triptych-nav-arrows\{[\s\S]*display:block!important/);
   assert.match(css,/touch-action:pan-x/);
@@ -212,4 +214,27 @@ test('geography prose has its own card page and cannot clip under the chart',()=
 test('companion frame supports a dedicated ornament-only asset with artwork fallback',()=>{
   assert.match(overlay,/data\.companionFrameImage\|\|data\.cardImage\|\|data\.previewImage/);
   assert.match(overlay,/companionFrameSource=data\.companionFrameImage\?'dedicated-frame':'artwork-fallback'/);
+});
+
+
+test('ordinary Tarot refresh does not reset vertical reading position',()=>{
+  assert.match(overlay,/if\(changed\) info\.scrollTo\(\{top:0,behavior:'auto'\}\)/);
+  assert.doesNotMatch(overlay,/[^)]info\.scrollTo\(\{top:0,behavior:'auto'\}\);\s*\n\s*};/);
+  assert.match(css,/overflow-anchor:none/);
+  assert.match(css,/overscroll-behavior:contain/);
+});
+
+test('prototype companion frame is ornament-only rather than scenic artwork strips',()=>{
+  assert.match(overlay,/decorateCompanionFrame/);
+  assert.match(overlay,/tarot-frame-crown/);
+  assert.match(css,/data-companion-frame-source="artwork-fallback"[\s\S]*background-image:none!important/);
+  assert.match(css,/tarot-frame-corner/);
+  assert.match(css,/tarot-frame-sigil/);
+});
+
+test('companion typography uses a visibly distinct display and reading hierarchy',()=>{
+  assert.match(css,/--tarot-display:"Baskerville"/);
+  assert.match(css,/--tarot-text:Georgia/);
+  assert.match(css,/\.tarot-companion-header h3\{[\s\S]*font-size:31px!important/);
+  assert.match(css,/\.tarot-companion-page p,[\s\S]*font-size:12\.5px!important/);
 });

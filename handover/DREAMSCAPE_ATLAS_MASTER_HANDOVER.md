@@ -14,7 +14,7 @@ Water is the **only canonical Tarot Engine v1.0 exemplar**. Family Home, Natalie
 
 ## Current development focus
 
-Immediate priority: finish visual/readability polish on Water without changing the locked engine architecture, then migrate the next Tarot through the v1 builder/planner/validator rather than copying legacy implementation.
+Immediate priority: visually validate the corrected contained-card layout and literal headings, then continue aesthetic/readability polish without weakening the locked content/evidence architecture.
 
 This pass has now locked the reusable Tarot engine architecture:
 1. theory-neutral corpus analysis → public-safe derived analysis;
@@ -211,6 +211,40 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-10-06 — Water content containment, literal headings and content audit
+
+User screenshot review showed that Recurring Patterns source content could remain visible above the physical companion Tarot.
+
+Implemented:
+- all authored blocks for a selected chapter are resolved first and moved into the hidden companion stash before page 1 renders;
+- only blocks belonging to the selected companion page may move into the visible Tarot body;
+- CSS now hides any stray direct chapter content outside the pager as a second containment safeguard;
+- visible Tarot headings now exactly mirror the seven navigation labels;
+- page-specific wording is subordinate topic text rather than a competing heading;
+- the engine contract/schema/template/validator now enforce literal chapter titles;
+- geography rows now show both counts and percentage of the 42 unique Water dreams;
+- Water geography copy explicitly explains overlapping memberships;
+- Water corpus synthesis now emphasizes the strongest cross-pattern variable: agency;
+- recurring Water functions were rewritten in more corpus-specific, reader-friendly language;
+- Possible Meanings were strengthened around transition, intensity, responsibility and renewal;
+- the chronology card now explicitly states that the current v57-derived analysis does not support a strong developmental progression;
+- related-item wording now explicitly states that same-dream co-occurrence is not yet verified;
+- Recurring Patterns now paginates the four functions in pairs rather than forcing all four detailed readings onto one card;
+- Possible Meanings now paginates individual readings in pairs before the interpretive-lens cards;
+- generic indexed blocks `function:N` and `meaning:N` were added to the engine alongside `lens:N`;
+- runtime/schema/validator/tests were extended accordingly;
+- a canonical content-quality standard was added at `dreamscape-engine/docs/tarot-content-quality.md`.
+
+Current Water content audit:
+- Overview: strong;
+- Where it appears: strong;
+- Recurring patterns: strong;
+- Appears alongside: provisional until same-dream co-occurrence is verified;
+- How it changes: provisional but honest; no strong chronology currently established;
+- Source dreams: structurally strong, depends on private provider;
+- Possible meanings: strong and corpus-specific.
+
 
 ### 2026-10-06 — Stable preview continuity rule
 

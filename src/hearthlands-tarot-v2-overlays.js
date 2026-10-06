@@ -891,6 +891,17 @@ async function boot(){
         if(active) activeChapterButton=button;
       });
       activeChapterButton?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
+      const chapterIndex=chapters.findIndex(chapter=>chapter.id===valid);
+      const chapterPrev=shell.querySelector('[data-chapter-step="-1"]');
+      const chapterNext=shell.querySelector('[data-chapter-step="1"]');
+      if(chapterPrev){
+        chapterPrev.disabled=chapterIndex<=0;
+        chapterPrev.hidden=chapterIndex<=0;
+      }
+      if(chapterNext){
+        chapterNext.disabled=chapterIndex>=chapters.length-1;
+        chapterNext.hidden=chapterIndex>=chapters.length-1;
+      }
       const activeDeck=info.querySelector(`:scope > [data-chapter="${CSS.escape(valid)}"]`);
       if(activeDeck&&changed&&typeof activeDeck.__dreamscapeSetCompanionPage==='function'){
         activeDeck.__dreamscapeSetCompanionPage(0);

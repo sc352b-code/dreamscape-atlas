@@ -50,6 +50,10 @@ export function validateTarotCard(card,{id='unknown',contract}={}){
     if(config.tone!==toneByChapter[chapter]){
       fail(`${chapter}.tone must be ${toneByChapter[chapter]}`);
     }
+    const expectedLabel=contract.chapters.find(item=>item.id===chapter)?.label;
+    if(expectedLabel&&config.title!==expectedLabel){
+      fail(`${chapter}.title must exactly match canonical chapter label "${expectedLabel}"`);
+    }
     if(!Array.isArray(config.pages)||config.pages.length===0){
       fail(`${chapter}.pages must contain at least one fixed companion page`);
       continue;

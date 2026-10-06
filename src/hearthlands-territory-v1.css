@@ -3529,3 +3529,53 @@
   font:700 7px/1 var(--tarot-small)!important;
   letter-spacing:.04em;
 }
+
+
+/* Indexed evidence/meaning blocks are moved directly into the fixed card body
+   so dense subjects can paginate without losing the established visual language. */
+.tarot-companion-patterns .tarot-companion-page-body > article[data-companion-block^="function:"]{
+  margin:0 0 10px!important;
+  padding:12px!important;
+  border:1px solid rgba(235,195,119,.14)!important;
+  border-radius:10px!important;
+  background:rgba(5,14,25,.70)!important;
+}
+.tarot-companion-patterns .tarot-companion-page-body > article[data-companion-block^="function:"] .territory-v1-article-heading{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
+}
+.tarot-companion-patterns .tarot-companion-page-body > article[data-companion-block^="function:"] .territory-v1-article-heading b{
+  color:#f0d7aa!important;
+  font:400 12px/1.28 var(--tarot-display)!important;
+}
+.tarot-companion-patterns .tarot-companion-page-body > article[data-companion-block^="function:"] .territory-v1-confidence{
+  flex:0 0 auto;
+  color:#b9d2d4!important;
+  font:700 7px/1 var(--tarot-small)!important;
+  letter-spacing:.04em;
+}
+.tarot-companion-patterns .tarot-companion-page-body > article[data-companion-block^="function:"] p{
+  margin:7px 0 0!important;
+  font:11px/1.43 var(--tarot-text)!important;
+}
+
+.tarot-companion-meanings .tarot-companion-page-body > article[data-companion-block^="meaning:"]{
+  margin:0 0 10px!important;
+  padding:12px!important;
+  border:1px solid rgba(231,191,117,.12)!important;
+  border-radius:10px!important;
+  background:rgba(7,12,24,.72)!important;
+}
+.tarot-companion-meanings .tarot-companion-page-body > article[data-companion-block^="meaning:"] b{
+  display:block;
+  color:#f1d7aa!important;
+  font:400 12px/1.3 var(--tarot-display)!important;
+}
+.tarot-companion-meanings .tarot-companion-page-body > article[data-companion-block^="meaning:"] span{
+  display:block;
+  margin-top:7px;
+  color:#eee3df!important;
+  font:11px/1.44 var(--tarot-text)!important;
+}

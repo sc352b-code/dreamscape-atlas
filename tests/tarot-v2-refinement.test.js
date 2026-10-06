@@ -11,7 +11,7 @@ const profile=fs.readFileSync('src/dreamscape-private-profile.js','utf8');
 test('Water companion tabs have explicit fixed-card pagination plans',()=>{
   const companions=cards.water.companionCards||{};
   assert.equal(companions.overview.pages.length,3);
-  assert.equal(companions.geography.pages.length,1);
+  assert.equal(companions.geography.pages.length,2);
   assert.equal(companions.patterns.pages.length,3);
   assert.equal(companions.alongside.pages.length,2);
   assert.equal(companions.chronology.pages.length,1);
@@ -20,6 +20,8 @@ test('Water companion tabs have explicit fixed-card pagination plans',()=>{
   assert.deepEqual(companions.overview.pages[0].blocks,['heroMetric','grounding','metrics']);
   assert.deepEqual(companions.overview.pages[1].blocks,['behaviour']);
   assert.deepEqual(companions.overview.pages[2].blocks,['behaviourPoles']);
+  assert.deepEqual(companions.geography.pages[0].blocks,['geographyLogic','geographyRows']);
+  assert.deepEqual(companions.geography.pages[1].blocks,['geographyNote']);
   assert.deepEqual(companions.patterns.pages[1].blocks,['function:0','function:1']);
   assert.deepEqual(companions.patterns.pages[2].blocks,['function:2','function:3']);
   assert.deepEqual(companions.meanings.pages[0].blocks,['meaning:0','meaning:1']);
@@ -181,4 +183,27 @@ test('visible card heading mirrors the literal tab label',()=>{
   assert.equal(cards.water.companionCards.patterns.title,'Recurring patterns');
   assert.equal(cards.water.companionCards.geography.title,'Where it appears');
   assert.equal(cards.water.companionCards.meanings.title,'Possible meanings');
+});
+
+
+test('chapter strip is horizontally reachable and active tabs scroll into view',()=>{
+  assert.match(overlay,/activeChapterButton\?\.scrollIntoView/);
+  assert.match(overlay,/chapterStrip\?\.addEventListener\('wheel'/);
+  assert.match(css,/\.tarot-triptych-nav-arrows\{[\s\S]*display:block!important/);
+  assert.match(css,/touch-action:pan-x/);
+});
+
+test('dead navigation arrows are hidden rather than looking broken',()=>{
+  assert.match(overlay,/prev\.hidden=atStart/);
+  assert.match(overlay,/next\.hidden=atEnd/);
+  assert.match(overlay,/chapterPrev\.hidden=chapterIndex<=0/);
+  assert.match(overlay,/chapterNext\.hidden=chapterIndex>=chapters\.length-1/);
+  assert.match(css,/\.tarot-companion-page-nav button\[hidden\]/);
+});
+
+test('geography prose has its own card page and cannot clip under the chart',()=>{
+  assert.equal(cards.water.companionCards.geography.pages.length,2);
+  assert.deepEqual(cards.water.companionCards.geography.pages[0].blocks,['geographyLogic','geographyRows']);
+  assert.deepEqual(cards.water.companionCards.geography.pages[1].blocks,['geographyNote']);
+  assert.match(css,/data-page-id="distribution-note"/);
 });

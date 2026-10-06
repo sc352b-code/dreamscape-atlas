@@ -45,10 +45,10 @@
   },
   "water": {
     "title": "Water",
-    "friendlySubtitle": "Water appears across dreams of movement, crossing, danger, care, play and renewal.",
+    "friendlySubtitle": "Water recurs as passage, force, care and renewed aliveness.",
     "cardImage": "/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png",
     "previewImage": "/worlds/reference-world/territories/hearthlands/tarot/art/water-v2.png",
-    "previewSummary": "Water appears in 42 dreams across the series, taking forms such as sea, rivers, rain, baths, pools, floods and crossings.",
+    "previewSummary": "Water appears in 42 of 362 dreams, with 59 recorded appearances ranging from seas, rivers and rain to baths, pools, floods and crossings.",
     "quickStats": [
       {
         "value": 59,
@@ -73,64 +73,64 @@
       },
       "totalCorpusDreams": 362
     },
-    "geographyNote": "Roadlands has the largest Water membership in the current territory classification, followed by Hearthlands.",
-    "corpusGrounding": "Water is a major cross-territory motif in the series: 42 unique dreams contain Water, with 59 recorded appearances. The corpus does not support one fixed Water meaning; what matters is the form Water takes and what is happening around it.",
+    "geographyNote": "Water reaches all five current territories. Roadlands contains 27 of the 42 Water dreams (64%), Hearthlands 19 (45%), Littoral 12 (29%), Institutional 6 (14%) and River 5 (12%). These percentages overlap because a single dream can belong to more than one territory.",
+    "corpusGrounding": "Water appears in 42 of 362 dreams (about 12% of the corpus), with 59 recorded appearances. Its strongest corpus-level insight is not a fixed symbolic meaning: the meaning changes with Water's form, movement, the dreamer's degree of agency, and whether other lives need care or protection.",
     "recurringFunctions": [
       {
         "name": "Crossing from one place or state to another",
-        "summary": "Rivers, seas, boats and shorelines repeatedly create a journey, boundary or decision about whether and how to cross.",
+        "summary": "Shores, rivers, boats, islands and crossings repeatedly make Water the material boundary between a present position and somewhere else. The recurring question is whether, when and how to cross.",
         "confidence": "high"
       },
       {
-        "name": "Intensity that is hard to control",
-        "summary": "Floods, storms, currents and deep water often appear when the dream world becomes harder to contain or manage.",
+        "name": "Intensity that exceeds ordinary control",
+        "summary": "Floods, storms, currents, sinking and deep Water recur when plans, routes or containers stop holding. The important distinction is whether you can still act, need rescue, or become overwhelmed.",
         "confidence": "medium-high"
       },
       {
         "name": "Care, cleansing and restoration",
-        "summary": "Baths, fresh water, swimming and caring for animals show another side of water: something that can soothe, nourish or help life recover.",
+        "summary": "Baths, fresh Water, swimming and care for vulnerable animals show Water as something that can soothe, clean, nourish and support recovery rather than simply threaten.",
         "confidence": "medium-high"
       },
       {
         "name": "Play and renewed aliveness",
-        "summary": "Some dreams enter water with curiosity, beauty or pleasure, suggesting that depth is not always a threat.",
+        "summary": "Some dreams enter Water with curiosity, beauty or pleasure. These appearances show that immersion can restore contact with play, embodiment and vitality as well as expose danger.",
         "confidence": "medium"
       }
     ],
     "possibleMeanings": [
       {
-        "name": "Change and movement",
-        "summary": "Water often appears when something is in motion and cannot simply stay fixed."
+        "name": "A transition that has to be entered",
+        "summary": "Water often marks a boundary between the present position and another place or state. The corpus suggests change here is rarely abstract: it involves crossing, entering, navigating or deciding whether to proceed."
       },
       {
-        "name": "Feeling that is larger than a plan",
-        "summary": "When water floods, deepens or becomes powerful, it may reflect experience that cannot be fully managed through control alone."
+        "name": "Intensity beyond the plan",
+        "summary": "When Water floods, deepens, sinks or becomes forceful, it may represent experience that exceeds ordinary control. The stronger question is what happens to your agency when the situation can no longer be neatly contained."
       },
       {
-        "name": "A crossing",
-        "summary": "Water can mark the space between where you are and somewhere you are trying to reach."
+        "name": "Depth joined to responsibility",
+        "summary": "Water repeatedly becomes relational when another person or animal needs care, rescue or protection. Entering uncertainty is therefore sometimes tied to responsibility for another life, not only to your own feeling state."
       },
       {
-        "name": "Renewal",
-        "summary": "When water cleans, nourishes or invites play, it may point toward recovery, release or renewed contact with life."
+        "name": "Renewal through immersion",
+        "summary": "When Water cleans, nourishes, invites swimming or restores pleasure, it may point toward renewed embodiment, receptivity and aliveness rather than danger."
       }
     ],
     "interpretiveLenses": [
       {
         "name": "A Jungian view",
-        "summary": "Water can sometimes represent the deeper parts of inner life that are moving underneath ordinary conscious control. This fits best when the dream involves depth, immersion, currents or something hidden below the surface.",
-        "caveat": "Water does not automatically mean emotion or the unconscious. The exact form of the water and your actions in the dream matter."
+        "summary": "Water can amplify psychic depth or material not fully available to conscious control, especially where dreams involve immersion, currents, unknown depth or movement beneath a surface.",
+        "caveat": "Water does not automatically mean emotion or the unconscious. Its form, movement, companions and your degree of agency decide whether that reading fits."
       },
       {
-        "name": "A story view",
-        "summary": "In many dreams water simply creates the problem or possibility that drives the story: cross it, survive it, enter it, protect someone in it, or find a route around it."
+        "name": "A story and action view",
+        "summary": "Across many dreams Water functions as the thing that makes action necessary: cross it, enter it, survive it, protect someone in it, contain it, or find a route around it."
       },
       {
         "name": "A life-experience view",
-        "summary": "Swimming, weather, coastlines, holidays, bathing and caring for animals may also draw directly on real memories and everyday concerns."
+        "summary": "Swimming, weather, coastlines, holidays, bathing, animals and remembered landscapes may draw directly on sensory memory and waking concerns. Literal experience remains a valid explanation even when symbolic amplification is useful."
       }
     ],
-    "possibleLesson": "The repeating question may be how to enter change or emotional depth without losing your ability to choose, act and care for yourself or others.",
+    "possibleLesson": "The larger recurring tension is how to enter change, depth or uncertainty without losing agency—and how to remain capable of care when the situation cannot be fully controlled.",
     "reflectionPrompt": null,
     "dreamRecordCount": 42,
     "relatedItems": [
@@ -185,7 +185,7 @@
     },
     "relationshipStatus": "related-not-cooccurrence",
     "geographyCountMode": "overlapping-memberships",
-    "behaviorSummary": "The strongest current pattern is crossing: Water repeatedly appears when you are approaching, attempting or negotiating a boundary or passage. It also recurs when conditions become harder to control, and in dreams where you are caring, cleansing or restoring. Play and renewed aliveness appear too, but with more limited support in the current analysis.",
+    "behaviorSummary": "Across the current analysis, the most revealing variable is agency. Water changes significance depending on whether you are choosing to enter or cross it, trying to contain a force that exceeds control, protecting someone within it, or allowing yourself to play and be restored.",
     "confidenceScale": {
       "note": "These are qualitative evidence-strength labels used by the current analysis. They are not percentages, probabilities or counts of dreams.",
       "levels": {
@@ -202,7 +202,7 @@
     },
     "companionCards": {
       "overview": {
-        "title": "The Water Record",
+        "title": "Overview",
         "subtitle": "The waters of your dream world",
         "motif": "record",
         "tone": "evidence",
@@ -236,7 +236,7 @@
         ]
       },
       "geography": {
-        "title": "The Geography of Water",
+        "title": "Where it appears",
         "subtitle": "Five territories · overlapping memberships",
         "motif": "currents",
         "tone": "evidence",
@@ -254,7 +254,7 @@
         ]
       },
       "patterns": {
-        "title": "The Forms of Water",
+        "title": "Recurring patterns",
         "subtitle": "Recurring functions and evidence strength",
         "motif": "forms",
         "tone": "evidence",
@@ -278,7 +278,7 @@
         ]
       },
       "alongside": {
-        "title": "The Constellation of Water",
+        "title": "Appears alongside",
         "subtitle": "Related Dreamscape elements",
         "motif": "constellation",
         "tone": "evidence",
@@ -303,7 +303,7 @@
         ]
       },
       "chronology": {
-        "title": "Water Through Time",
+        "title": "How it changes",
         "subtitle": "What the chronology can — and cannot — support",
         "motif": "river-time",
         "tone": "evidence",
@@ -320,7 +320,7 @@
         ]
       },
       "sources": {
-        "title": "The Book of Waters",
+        "title": "Source dreams",
         "subtitle": "42 linked source dreams",
         "motif": "manuscript",
         "tone": "source",
@@ -337,7 +337,7 @@
         ]
       },
       "meanings": {
-        "title": "The Mirror of Water",
+        "title": "Possible meanings",
         "subtitle": "Possible meanings · interpretation, not corpus fact",
         "motif": "mirror",
         "tone": "interpretation",
@@ -379,7 +379,8 @@
       "evidenceRefsMode": "private-provider"
     },
     "subjectId": "water",
-    "subjectType": "symbol"
+    "subjectType": "symbol",
+    "chronologySummary": "The current v57-derived Water profile does not establish a strong chronological progression across the 42 source dreams. What it supports more clearly are recurring modes—crossing, overwhelm, care/restoration and play—so the card should not invent a developmental story that the present analysis has not demonstrated."
   },
   "cat": {
     "previewSummary": "Cats repeatedly gather a tension between cherished vulnerability and irreducible autonomy: close enough to require care, but never wholly manageable.",

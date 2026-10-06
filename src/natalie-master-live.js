@@ -21,7 +21,7 @@ root.innerHTML=`
  <section class="flat"><img alt=""><div class="mapfx"></div><header class="mapbar"><button class="back">← Cosmos</button><b></b><button class="tarot">Tarot ✦</button></header><div class="markers"></div></section>
  <aside class="reader"><button class="close">×</button><div class="glyph"></div><h3></h3><p></p></aside>
 </main>`;
-const shell=document.querySelector(".cosmos"),stage=document.querySelector(".stage"),art=document.querySelector("#art"),fx=document.querySelector("#fx"),life=document.querySelector("#life"),hotspots=document.querySelector(".hotspots"),panel=document.querySelector(".panel"),cards=document.querySelector(".cards"),flat=document.querySelector(".flat"),flatImg=flat.querySelector("img"),markers=document.querySelector(".markers"),reader=document.querySelector(".reader");
+const shell=document.querySelector(".cosmos"),stage=document.querySelector(".stage"),art=document.querySelector("#art"),integrationMotion=document.querySelector("#integrationMotion"),fx=document.querySelector("#fx"),life=document.querySelector("#life"),hotspots=document.querySelector(".hotspots"),panel=document.querySelector(".panel"),cards=document.querySelector(".cards"),flat=document.querySelector(".flat"),flatImg=flat.querySelector("img"),markers=document.querySelector(".markers"),reader=document.querySelector(".reader");
 let selected=null,focusIndex=-1,masterObjectUrl=null,mapObjectUrls={},last=performance.now(),stars=[],dust=[],birds=[],shooting=null,shootingAt=performance.now()+12000;
 const lctx=life.getContext("2d");
 
@@ -36,17 +36,17 @@ for(const w of worldData){
 function selectWorld(w){
  selected=w;focusIndex=worldData.indexOf(w);const [x,y]=w.pos;
  shell.style.setProperty("--fx",x+"%");shell.style.setProperty("--fy",y+"%");stage.style.transformOrigin=x+"% "+y+"%";
- shell.dataset.state="focus";hotspots.querySelectorAll(".world").forEach(el=>el.classList.toggle("selected",el.dataset.id===w.id));
+ shell.dataset.state="focus";shell.dataset.selected=w.id;hotspots.querySelectorAll(".world").forEach(el=>el.classList.toggle("selected",el.dataset.id===w.id));
  panel.querySelector("h2").textContent=w.label;panel.querySelector("p").textContent=w.summary;cards.innerHTML="";
  w.tarot.forEach(n=>{const b=document.createElement("button");b.className="card";b.innerHTML="<i>"+(glyph[n]||"✦")+"</i><b>"+n+"</b>";b.onclick=e=>{e.stopPropagation();openTarot(n,w)};cards.appendChild(b)});
  setTimeout(()=>panel.classList.add("open"),150);
 }
-function closeFocus(){panel.classList.remove("open");shell.dataset.state="home";selected=null;focusIndex=-1;hotspots.querySelectorAll(".world").forEach(el=>el.classList.remove("selected"))}
+function closeFocus(){panel.classList.remove("open");shell.dataset.state="home";delete shell.dataset.selected;selected=null;focusIndex=-1;hotspots.querySelectorAll(".world").forEach(el=>el.classList.remove("selected"))}
 panel.querySelector(".close").onclick=closeFocus;
 panel.querySelector(".enter").onclick=async()=>{if(!selected)return;shell.dataset.state="descending";await new Promise(r=>setTimeout(r,reduced?20:950));await openMap(selected)};
 function openTarot(name,w){reader.querySelector(".glyph").textContent=glyph[name]||"✦";reader.querySelector("h3").textContent=name;reader.querySelector("p").textContent=name+" is a provisional Tarot symbol within Natalie’s "+w.label+" world. The final corpus build will attach source dreams, recurrence, chronology and evidence-led interpretation.";reader.classList.add("open")}
 reader.querySelector(".close").onclick=()=>reader.classList.remove("open");
-flat.querySelector(".back").onclick=()=>{flat.classList.remove("open");reader.classList.remove("open");shell.dataset.state="home";selected=null;focusIndex=-1};
+flat.querySelector(".back").onclick=()=>{flat.classList.remove("open");reader.classList.remove("open");shell.dataset.state="home";delete shell.dataset.selected;selected=null;focusIndex=-1};
 flat.querySelector(".tarot").onclick=()=>selected&&openTarot(selected.tarot[0],selected);
 
 async function fetchImageBlob(key){const r=await fetch("/api/natalie-asset?key="+encodeURIComponent(key),{cache:"force-cache"});if(!r.ok)throw Error("asset "+key);return await r.blob()}
@@ -83,11 +83,11 @@ function initWebGL(img){
    vec4 cloudTex=sampleShift(vUv,vec2(cloudShift.x,-cloudShift.y));
    c+=cloudTex*(cloud*.18); a+=cloud*.18;
    // water and waterfall flow
-   float water=ellipse(p,vec2(.205,.34),vec2(.10,.05),.28)+ellipse(p,vec2(.50,.36),vec2(.09,.045),.28)+ellipse(p,vec2(.175,.73),vec2(.105,.055),.28)+ellipse(p,vec2(.50,.72),vec2(.12,.065),.25);
+   float water=ellipse(p,vec2(.205,.34),vec2(.10,.05),.28)+ellipse(p,vec2(.50,.36),vec2(.09,.045),.28)+ellipse(p,vec2(.175,.73),vec2(.105,.055),.28);
    water=clamp(water,0.,1.);
    vec2 flow=vec2(sin((p.y*85.)+t*.55)*.0014,cos((p.x*74.)+t*.42)*.0012);
    vec4 waterTex=sampleShift(vUv,vec2(flow.x,-flow.y)); c+=waterTex*(water*.28); a+=water*.28;
-   float fall=ellipse(p,vec2(.817,.37),vec2(.045,.105),.35)+ellipse(p,vec2(.505,.69),vec2(.045,.11),.35)+ellipse(p,vec2(.17,.68),vec2(.035,.09),.35);
+   float fall=ellipse(p,vec2(.817,.37),vec2(.045,.105),.35)+ellipse(p,vec2(.17,.68),vec2(.035,.09),.35);
    fall=clamp(fall,0.,1.); vec2 fsh=vec2(sin(t*.9+p.y*90.)*.0008,-fract(t*.035)*.006);
    c+=sampleShift(vUv,fsh)*(fall*.22); a+=fall*.22;
    // auroral colour breathing on luminous
@@ -143,6 +143,6 @@ function animate(t){
 addEventListener("resize",resize);
 (async()=>{
  try{
-  const blob=await fetchImageBlob("master");masterObjectUrl=URL.createObjectURL(blob);art.onload=()=>{GL=initWebGL(art);resize();addMicroPlanets(art);shell.classList.add("ready");requestAnimationFrame(animate)};art.src=masterObjectUrl;
+  const blob=await fetchImageBlob("master");masterObjectUrl=URL.createObjectURL(blob);if(!reduced){integrationMotion.src="/api/natalie-motion?key=integration";integrationMotion.play().catch(()=>{})}art.onload=()=>{GL=initWebGL(art);resize();addMicroPlanets(art);shell.classList.add("ready");requestAnimationFrame(animate)};art.src=masterObjectUrl;
  }catch(e){root.innerHTML='<div class="boot">The approved master artwork could not load. Please refresh.</div>';console.error(e)}
 })();

@@ -187,14 +187,22 @@ export function planCompanionCards(card){
       subtitle:'Where this subject appears across the Dreamscape',
       motif:'currents',
       tone:'evidence',
-      pages:[{
-        id:'territories',
-        title:`The geography of ${title}`,
-        subtitle:card.geographyCountMode==='overlapping-memberships'
-          ?'Territory memberships may overlap'
-          :'Territory distribution',
-        blocks:['geographyLogic','geographyRows','geographyNote']
-      }]
+      pages:[
+        {
+          id:'territories',
+          title:`The geography of ${title}`,
+          subtitle:card.geographyCountMode==='overlapping-memberships'
+            ?'Territory memberships may overlap'
+            :'Territory distribution',
+          blocks:['geographyLogic','geographyRows']
+        },
+        {
+          id:'distribution-note',
+          title:'What the distribution shows',
+          subtitle:'A plain-language reading of the territory pattern',
+          blocks:['geographyNote']
+        }
+      ]
     },
     patterns:{
       title:'Recurring patterns',

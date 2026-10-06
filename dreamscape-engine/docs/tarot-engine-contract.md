@@ -308,3 +308,15 @@ The contract is enforced through:
 - runtime fit auditing in `src/hearthlands-tarot-v2-overlays.js`.
 
 A runtime overflow event `dreamscape-tarot-fit-failure` means the page plan failed. The remedy is to repaginate, not to shrink typography or make the card taller.
+
+
+## 20. Content-quality audit
+
+Structural validation is necessary but not sufficient.
+
+Every Tarot must also satisfy:
+`dreamscape-engine/docs/tarot-content-quality.md`
+
+That standard defines what each chapter must reveal, reader-friendly writing rules, and how to label analytically incomplete chapters instead of filling them with generic symbolism.
+
+The visible card heading must exactly match the canonical navigation label. Page-specific titles are subordinate topics, never competing primary headings.

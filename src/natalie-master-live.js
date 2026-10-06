@@ -49,7 +49,23 @@ reader.querySelector(".close").onclick=()=>reader.classList.remove("open");
 flat.querySelector(".back").onclick=()=>{flat.classList.remove("open");reader.classList.remove("open");shell.dataset.state="home";delete shell.dataset.selected;selected=null;focusIndex=-1};
 flat.querySelector(".tarot").onclick=()=>selected&&openTarot(selected.tarot[0],selected);
 
-async function fetchImageBlob(key){const r=await fetch("/api/natalie-asset?key="+encodeURIComponent(key),{cache:"force-cache"});if(!r.ok)throw Error("asset "+key);return await r.blob()}
+async function fetchImageBlob(key){
+  let lastError;
+  for(let attempt=0;attempt<4;attempt++){
+    try{
+      const url="/api/natalie-asset?key="+encodeURIComponent(key)+"&v=4&a="+attempt;
+      const r=await fetch(url,{cache:attempt===0?"force-cache":"no-store"});
+      if(!r.ok) throw Error("asset "+key+" returned "+r.status);
+      const blob=await r.blob();
+      if(blob.size<1000) throw Error("asset "+key+" was empty");
+      return blob;
+    }catch(err){
+      lastError=err;
+      await new Promise(resolve=>setTimeout(resolve,350*(attempt+1)));
+    }
+  }
+  throw lastError||Error("asset "+key);
+}
 async function openMap(w){
  let url;
  if(w.map){

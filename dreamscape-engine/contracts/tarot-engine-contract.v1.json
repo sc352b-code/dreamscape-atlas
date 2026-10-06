@@ -54,7 +54,9 @@
     "boundary"
   ],
   "dynamicBlockPatterns": [
-    "^lens:\\d+$"
+    "^lens:\\d+$",
+    "^function:\\d+$",
+    "^meaning:\\d+$"
   ],
   "layout": {
     "companionAspectRatio": "2/3",
@@ -148,8 +150,7 @@
       "geographyNote"
     ],
     "patterns": [
-      "strengthLegend",
-      "functions"
+      "strengthLegend"
     ],
     "alongside": [
       "relatedNote",
@@ -165,7 +166,6 @@
       "sourceButton"
     ],
     "meanings": [
-      "meanings",
       "boundary"
     ]
   },
@@ -210,7 +210,9 @@
     "sourceButton": "sources",
     "meanings": "meanings",
     "boundary": "meanings",
-    "lens:*": "meanings"
+    "lens:*": "meanings",
+    "function:*": "patterns",
+    "meaning:*": "meanings"
   },
   "identity": {
     "selfDescribingPackage": true,

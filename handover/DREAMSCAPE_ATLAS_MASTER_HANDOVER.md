@@ -14,7 +14,7 @@ Water is the **only canonical Tarot Engine v1.0 exemplar**. Family Home, Natalie
 
 ## Current development focus
 
-Immediate priority: visually validate the corrected contained-card layout and literal headings, then continue aesthetic/readability polish without weakening the locked content/evidence architecture.
+Immediate priority: visually validate the new tab-strip navigation, reversible page arrows, two-page geography card and refined interim frame; then create the dedicated ornament-only Water companion-frame asset and continue typography/display polish.
 
 This pass has now locked the reusable Tarot engine architecture:
 1. theory-neutral corpus analysis → public-safe derived analysis;
@@ -211,6 +211,50 @@ Before this stage is called successful:
 7. Only then propagate the architecture to more Tarot records.
 
 ## Change log
+
+### 2026-10-06 — Tarot navigation, geography pagination and visual audit pass
+
+User review identified five refinements:
+1. clipped/off-screen chapter tabs were not discoverably scrollable;
+2. Where it appears clipped explanatory prose at the bottom of the fixed card;
+3. arrows remained visible even when no page existed in that direction;
+4. previous-page navigation needed to be explicit;
+5. companion borders/fonts/display needed a visual-quality audit.
+
+Implemented:
+- chapter strip remains horizontally scrollable and now also responds to mouse-wheel movement;
+- visible previous/next chapter edge controls added;
+- selected chapter automatically scrolls into the centre of the strip;
+- impossible chapter arrows are hidden at first/last chapter;
+- impossible companion-page arrows are hidden at first/last page;
+- single-page chapters show no page arrows;
+- previous companion-page arrow appears whenever a prior card exists;
+- page navigation also supports ArrowLeft / ArrowRight keyboard operation;
+- page-arrow hit targets enlarged and protected above decorative layers;
+- Where it appears is now two physical companion cards:
+  - page 1: overlap logic + territory distribution;
+  - page 2: plain-language distribution explanation;
+- the clipped geography sentence is therefore removed from the chart card rather than shrunk;
+- current Water page counts are now Overview 3 / Geography 2 / Patterns 3 / Alongside 2 / Chronology 1 / Sources 1 / Meanings 4;
+- scenic frame strips were reduced so the fallback reads more like ornament and less like a cropped second picture;
+- gold line hierarchy and subtle celestial depth were added to the companion card field;
+- engine now supports optional `companionFrameImage` so final cards can use a dedicated ornament-only frame derived from the approved pictorial Tarot;
+- masked pictorial artwork is explicitly a prototype fallback, not final-quality frame architecture;
+- visual audit added: `dreamscape-engine/docs/tarot-visual-audit.md`.
+
+Visual audit conclusion:
+- current border is recognisably the Water deck but is still a scenic crop, so it is not final;
+- final frame should reuse Water's moons, filigree, botanical corners, gold line work and deck silhouette while removing landscape/water scene content;
+- current system-font stack is acceptable for prototype but final production should bundle a licensed display serif + readable text serif locally;
+- typography should use only four roles: literal chapter title, subordinate page topic, readable body, small-caps evidence/source/interpretation label;
+- fit problems must continue to be solved through pagination rather than smaller type.
+
+Verification:
+- current runtime/engine/test JavaScript syntax checks: OK;
+- Water engine validation: 0 errors;
+- generic planner exactly matches authored Water page structure;
+- navigation/geography/frame feature checks: all present.
+
 
 ### 2026-10-06 — Water content containment, literal headings and content audit
 

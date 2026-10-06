@@ -203,14 +203,14 @@
     "companionCards": {
       "overview": {
         "title": "Overview",
-        "subtitle": "The waters of your dream world",
+        "subtitle": "A corpus-grounded record of Water",
         "motif": "record",
         "tone": "evidence",
         "pages": [
           {
             "id": "record",
-            "title": "The Water Record",
-            "subtitle": "The waters of your dream world",
+            "title": "The Water record",
+            "subtitle": "A corpus-grounded record of Water",
             "blocks": [
               "heroMetric",
               "grounding",
@@ -219,16 +219,16 @@
           },
           {
             "id": "action",
-            "title": "Water in Action",
-            "subtitle": "What you tend to be doing when Water appears",
+            "title": "Water in action",
+            "subtitle": "What most changes the meaning when Water appears",
             "blocks": [
               "behaviour"
             ]
           },
           {
             "id": "anchors",
-            "title": "Recurring Actions",
-            "subtitle": "The strongest actions around Water",
+            "title": "Recurring actions",
+            "subtitle": "The strongest recurring modes around Water",
             "blocks": [
               "behaviourPoles"
             ]
@@ -237,14 +237,14 @@
       },
       "geography": {
         "title": "Where it appears",
-        "subtitle": "Five territories · overlapping memberships",
+        "subtitle": "Where this subject appears across the Dreamscape",
         "motif": "currents",
         "tone": "evidence",
         "pages": [
           {
             "id": "territories",
-            "title": "The Geography of Water",
-            "subtitle": "Five territories · overlapping memberships",
+            "title": "The geography of Water",
+            "subtitle": "Territory memberships may overlap",
             "blocks": [
               "geographyLogic",
               "geographyRows",
@@ -261,18 +261,28 @@
         "pages": [
           {
             "id": "strength",
-            "title": "Reading the Evidence",
-            "subtitle": "What High, Medium-high and Medium mean",
+            "title": "Reading the evidence",
+            "subtitle": "What the evidence-strength labels mean",
             "blocks": [
               "strengthLegend"
             ]
           },
           {
-            "id": "forms",
-            "title": "The Forms of Water",
-            "subtitle": "Four recurring functions in the current analysis",
+            "id": "patterns-1",
+            "title": "Patterns 1–2 of 4",
+            "subtitle": "Corpus-grounded detail at readable card scale",
             "blocks": [
-              "functions"
+              "function:0",
+              "function:1"
+            ]
+          },
+          {
+            "id": "patterns-2",
+            "title": "Patterns 3–4 of 4",
+            "subtitle": "Corpus-grounded detail at readable card scale",
+            "blocks": [
+              "function:2",
+              "function:3"
             ]
           }
         ]
@@ -285,7 +295,7 @@
         "pages": [
           {
             "id": "constellation",
-            "title": "The Constellation of Water",
+            "title": "The constellation of Water",
             "subtitle": "How related Dreamscape elements gather around Water",
             "blocks": [
               "relatedNote",
@@ -294,7 +304,7 @@
           },
           {
             "id": "related",
-            "title": "Water's Companions",
+            "title": "Water’s companions",
             "subtitle": "Related elements in the current derived model",
             "blocks": [
               "relatedItems"
@@ -310,7 +320,7 @@
         "pages": [
           {
             "id": "timeline",
-            "title": "Water Through Time",
+            "title": "Water through time",
             "subtitle": "What the chronology can — and cannot — support",
             "blocks": [
               "chronologyRiver",
@@ -327,8 +337,8 @@
         "pages": [
           {
             "id": "book",
-            "title": "The Book of Waters",
-            "subtitle": "42 linked source dreams",
+            "title": "The source-dream record",
+            "subtitle": "Open the private dream library",
             "blocks": [
               "sourceIntro",
               "sourceButton"
@@ -338,30 +348,40 @@
       },
       "meanings": {
         "title": "Possible meanings",
-        "subtitle": "Possible meanings · interpretation, not corpus fact",
+        "subtitle": "Interpretation · not corpus fact",
         "motif": "mirror",
         "tone": "interpretation",
         "pages": [
           {
-            "id": "readings",
-            "title": "The Mirror of Water",
-            "subtitle": "Possible readings · interpretation, not corpus fact",
+            "id": "readings-1",
+            "title": "Possible readings 1–2 of 4",
+            "subtitle": "Interpretation · not corpus fact",
             "blocks": [
-              "meanings"
+              "meaning:0",
+              "meaning:1"
+            ]
+          },
+          {
+            "id": "readings-2",
+            "title": "Possible readings 3–4 of 4",
+            "subtitle": "Interpretation · not corpus fact",
+            "blocks": [
+              "meaning:2",
+              "meaning:3"
             ]
           },
           {
             "id": "lens-1",
-            "title": "A Jungian View",
-            "subtitle": "One interpretive lens · not a fixed translation",
+            "title": "A Jungian view",
+            "subtitle": "One way of looking · not a fixed translation",
             "blocks": [
               "lens:0"
             ]
           },
           {
-            "id": "lenses-2-3",
-            "title": "Story & Life Experience",
-            "subtitle": "Two other ways of reading Water",
+            "id": "lens-2",
+            "title": "Other ways of looking",
+            "subtitle": "Additional interpretive lenses · not fixed meanings",
             "blocks": [
               "lens:1",
               "lens:2",

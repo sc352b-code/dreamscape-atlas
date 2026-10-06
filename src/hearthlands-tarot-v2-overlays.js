@@ -649,12 +649,18 @@ async function boot(){
 
       if(pages.length>1){
         nav.hidden=false;
-        prev.disabled=safe===0;
-        next.disabled=safe===pages.length-1;
+        const atStart=safe===0;
+        const atEnd=safe===pages.length-1;
+        prev.disabled=atStart;
+        prev.hidden=atStart;
+        next.disabled=atEnd;
+        next.hidden=atEnd;
         count.textContent=`${safe+1} / ${pages.length}`;
         dots.innerHTML=pages.map((_,index)=>`<button type="button" class="tarot-page-dot" data-page-index="${index}" aria-label="Open companion card ${index+1} of ${pages.length}" ${index===safe?'aria-current="page"':''}></button>`).join('');
       }else{
         nav.hidden=true;
+        prev.hidden=true;
+        next.hidden=true;
         dots.innerHTML='';
         count.textContent='';
       }
@@ -687,6 +693,18 @@ async function boot(){
           setPage(Number(dot.dataset.pageIndex));
         }
       },true);
+      pager.addEventListener('keydown',event=>{
+        if(event.key!=='ArrowLeft'&&event.key!=='ArrowRight') return;
+        if(event.target.matches('input,textarea,select')) return;
+        const current=Number(section.dataset.activePage||0);
+        const delta=event.key==='ArrowLeft'?-1:1;
+        const nextIndex=current+delta;
+        if(nextIndex<0||nextIndex>=pages.length) return;
+        event.preventDefault();
+        setPage(nextIndex);
+        const targetButton=delta<0?prev:next;
+        if(!targetButton.hidden) targetButton.focus({preventScroll:true});
+      });
     }
 
     const library=section.querySelector('.territory-v1-private-record-browser');
@@ -865,11 +883,14 @@ async function boot(){
         node.hidden=!active;
         node.classList.toggle('is-active-companion',active);
       });
+      let activeChapterButton=null;
       shell.querySelectorAll('[data-chapter-id]').forEach(button=>{
         const active=button.dataset.chapterId===valid;
         button.classList.toggle('active',active);
         button.setAttribute('aria-current',active?'page':'false');
+        if(active) activeChapterButton=button;
       });
+      activeChapterButton?.scrollIntoView({behavior:'smooth',block:'nearest',inline:'center'});
       const activeDeck=info.querySelector(`:scope > [data-chapter="${CSS.escape(valid)}"]`);
       if(activeDeck&&changed&&typeof activeDeck.__dreamscapeSetCompanionPage==='function'){
         activeDeck.__dreamscapeSetCompanionPage(0);
@@ -885,9 +906,16 @@ async function boot(){
         const arrow=event.target.closest('[data-chapter-step]');
         if(!arrow) return;
         const current=chapters.findIndex(ch=>ch.id===(reader.dataset.activeChapter||'overview'));
-        const next=(current+Number(arrow.dataset.chapterStep)+chapters.length)%chapters.length;
-        activate(chapters[next].id);
+        const next=Math.max(0,Math.min(chapters.length-1,current+Number(arrow.dataset.chapterStep)));
+        if(next!==current) activate(chapters[next].id);
       });
+      const chapterStrip=shell.querySelector('.tarot-triptych-nav-items');
+      chapterStrip?.addEventListener('wheel',event=>{
+        if(Math.abs(event.deltaY)<=Math.abs(event.deltaX)) return;
+        if(chapterStrip.scrollWidth<=chapterStrip.clientWidth) return;
+        event.preventDefault();
+        chapterStrip.scrollBy({left:event.deltaY,behavior:'smooth'});
+      },{passive:false});
     }
 
     activate(reader.dataset.activeChapter||'overview');

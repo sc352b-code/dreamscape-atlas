@@ -1,0 +1,63 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Natalie’s Dreamscape — Living Integration Test</title>
+<style>
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#02040b}
+body{display:grid;place-items:center}
+.stage{
+  position:relative;
+  width:min(100vw,177.68vh);
+  aspect-ratio:1672/941;
+  overflow:hidden;
+  background:#02040b;
+}
+.master{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:fill;display:block;
+}
+.integration{
+  position:absolute;
+  left:37.07%;
+  top:48.35%;
+  width:23.93%;
+  height:31.88%;
+  object-fit:fill;
+  pointer-events:none;
+  opacity:.99;
+  filter:saturate(1.015) contrast(1.01);
+  -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 0 68%,rgba(0,0,0,.98) 78%,rgba(0,0,0,.72) 87%,transparent 100%);
+  mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 0 68%,rgba(0,0,0,.98) 78%,rgba(0,0,0,.72) 87%,transparent 100%);
+}
+.integration-glow{
+  position:absolute;
+  left:37.07%;top:48.35%;width:23.93%;height:31.88%;
+  pointer-events:none;
+  border-radius:50%;
+  box-shadow:inset 0 0 34px rgba(144,214,206,.07),0 0 28px rgba(85,173,178,.05);
+}
+.status{
+  position:fixed;right:12px;bottom:10px;z-index:5;
+  font:11px/1.4 system-ui,sans-serif;color:rgba(244,230,205,.55);
+  background:rgba(3,5,12,.34);padding:5px 8px;border-radius:999px;
+  backdrop-filter:blur(8px)
+}
+@media(prefers-reduced-motion:reduce){.integration{display:none}}
+</style>
+</head>
+<body>
+<div class="stage">
+  <picture>
+    <source srcset="/api/natalie-asset?key=master&v=safe1" type="image/webp">
+    <img class="master" src="/api/natalie-asset?key=masterpng&v=safe1" alt="Natalie’s Dreamscape">
+  </picture>
+  <video class="integration" muted autoplay loop playsinline preload="auto"
+    src="/api/natalie-motion?key=integration&v=safe1"></video>
+  <div class="integration-glow"></div>
+</div>
+<div class="status">Living Integration / Healing test</div>
+</body>
+</html>

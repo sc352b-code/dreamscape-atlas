@@ -211,3 +211,26 @@ Still required for final visual quality:
 - select/bundle final production serif typography;
 - visually QA all seven chapters on laptop, wide desktop and mobile after the frame/font asset pass.
 
+
+
+## Implemented prototype correction — ornament-only fallback
+
+The interim Water fallback no longer uses scenic masked strips from the pictorial Tarot.
+
+When `companionFrameImage` is absent, the runtime now renders a CSS ornament frame with:
+- moon-phase crown;
+- layered warm-gold rails;
+- four corner filigree geometries;
+- side and lower celestial sigils;
+- dark breathing margin.
+
+This is intentionally a **visibly different fallback** from the earlier scenic crop. It remains subordinate to the future dedicated ornament-only Water frame asset.
+
+Typography has also been made visibly distinct in the prototype:
+- display: Baskerville / Palatino family;
+- reading copy: Georgia family;
+- larger chapter title;
+- larger body text and line-height;
+- more legible small-caps labels.
+
+Scroll stability is part of visual QA: no tab visibility helper may use `scrollIntoView()` because it can move the vertical reader. Horizontal tab reveal must operate directly on the tab strip's `scrollLeft`.

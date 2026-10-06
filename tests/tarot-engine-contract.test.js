@@ -198,3 +198,40 @@ test('fixed companion pages have a runtime overflow audit',()=>{
   assert.match(runtime,/ResizeObserver/);
   assert.match(runtime,/card\.dataset\.fit=/);
 });
+
+
+test('every recurring function and possible meaning is explicitly paginated',()=>{
+  const patternBlocks=overlays.water.companionCards.patterns.pages.flatMap(page=>page.blocks);
+  const meaningBlocks=overlays.water.companionCards.meanings.pages.flatMap(page=>page.blocks);
+  overlays.water.recurringFunctions.forEach((_,index)=>{
+    assert.ok(patternBlocks.includes(`function:${index}`),`function:${index}`);
+  });
+  overlays.water.possibleMeanings.forEach((_,index)=>{
+    assert.ok(meaningBlocks.includes(`meaning:${index}`),`meaning:${index}`);
+  });
+});
+
+test('validator rejects an unpaginated recurring function or possible meaning',()=>{
+  const card=clone(overlays.water);
+  card.companionCards.patterns.pages=card.companionCards.patterns.pages.map(page=>({
+    ...page,
+    blocks:page.blocks.filter(block=>block!=='function:3')
+  }));
+  card.companionCards.meanings.pages=card.companionCards.meanings.pages.map(page=>({
+    ...page,
+    blocks:page.blocks.filter(block=>block!=='meaning:3')
+  }));
+  const errors=validateTarotCard(card,{id:'water',contract});
+  assert.match(messages(errors),/recurring function 3 is not paginated/);
+  assert.match(messages(errors),/possible meaning 3 is not paginated/);
+});
+
+test('canonical chapter titles are literal navigation labels',()=>{
+  assert.equal(overlays.water.companionCards.overview.title,'Overview');
+  assert.equal(overlays.water.companionCards.geography.title,'Where it appears');
+  assert.equal(overlays.water.companionCards.patterns.title,'Recurring patterns');
+  assert.equal(overlays.water.companionCards.alongside.title,'Appears alongside');
+  assert.equal(overlays.water.companionCards.chronology.title,'How it changes');
+  assert.equal(overlays.water.companionCards.sources.title,'Source dreams');
+  assert.equal(overlays.water.companionCards.meanings.title,'Possible meanings');
+});

@@ -1,4 +1,4 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js";
+import * as THREE from "/vendor/three.module.js";
 
 const COSMIC_CHUNKS = [
   "/assets/generated/cosmic-00.b64",
@@ -591,7 +591,7 @@ addEventListener("pointermove", (event) => {
 function animate(now) {
   const dt = Math.min(0.05, (now - lastFrame) / 1000);
   lastFrame = now;
-  drawStars(now);
+  if (!document.documentElement.classList.contains("embedded-reference")) drawStars(now);
   if (state === "orbit") {
     if (!dragging) {
       rotX += velX;
@@ -612,7 +612,7 @@ function animate(now) {
     updateDescent(now);
   }
   globeGroup.rotation.set(rotX, rotY, 0);
-  renderer.render(scene, camera);
+  if (!root.classList.contains("territory-worlds-mode") && !document.hidden) renderer.render(scene, camera);
   updateTerritoryLabels(now);
   requestAnimationFrame(animate);
 }

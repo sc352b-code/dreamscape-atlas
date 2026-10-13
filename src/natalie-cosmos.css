@@ -53,23 +53,23 @@ linear-gradient(180deg,rgba(2,4,14,.18),transparent 20%,transparent 78%,rgba(0,1
 .nc-enter span{float:right}
 .nc-close{position:absolute;right:8px;top:8px;width:34px;height:34px;border-radius:50%;border:0;background:transparent;color:#cdb892;font-size:24px;cursor:pointer;opacity:.8}
 .nc-close:hover{opacity:1}
-.nc-tarots{position:absolute;inset:0;pointer-events:none}
-.nc-focus.cards-ready .nc-tarots{pointer-events:auto}
-.nc-tarot{position:absolute;left:var(--x);top:var(--y);width:102px;height:162px;border:1px solid rgba(232,194,130,.38);border-radius:9px;background:
+.nc-entities{position:absolute;inset:0;pointer-events:none}
+.nc-focus.entities-ready .nc-entities{pointer-events:auto}
+.nc-entity{position:absolute;left:var(--x);top:var(--y);width:102px;height:162px;border:1px solid rgba(232,194,130,.38);border-radius:9px;background:
 radial-gradient(circle at 50% 38%,rgba(154,117,147,.13),transparent 40%),
 linear-gradient(155deg,rgba(29,23,46,.92),rgba(7,11,24,.96));
 box-shadow:0 18px 42px rgba(0,0,0,.34),inset 0 0 0 4px rgba(211,172,108,.035),inset 0 0 24px rgba(162,111,146,.08);
 color:#f0e2d0;display:grid;place-items:center;text-align:center;padding:12px;cursor:pointer;transform:translate3d(0,24px,0) rotate(var(--r)) scale(.92);opacity:0;transition:opacity .75s ease var(--d),transform .9s cubic-bezier(.16,.82,.14,1) var(--d),border-color .25s,box-shadow .25s}
-.nc-tarot:before{content:"";position:absolute;inset:5px;border:1px solid rgba(220,184,119,.16);border-radius:6px;pointer-events:none}
-.nc-tarot:after{content:"✦";position:absolute;left:50%;bottom:8px;transform:translateX(-50%);font-size:7px;color:rgba(223,187,124,.65)}
-.nc-focus.cards-ready .nc-tarot{transform:translate3d(0,0,0) rotate(var(--r)) scale(1);opacity:1}
-.nc-tarot:hover{border-color:rgba(239,204,144,.72);box-shadow:0 23px 58px rgba(0,0,0,.42),0 0 26px rgba(204,164,111,.11),inset 0 0 0 4px rgba(211,172,108,.05)}
-.nc-tarot-inner{position:relative;z-index:1}
-.nc-tarot i{display:block;font-style:normal;font-size:30px;margin-bottom:12px;color:#d5b574;text-shadow:0 0 18px rgba(212,178,115,.23)}
-.nc-tarot b{display:block;font-weight:400;font-size:15px;line-height:1.08}
-.nc-tarot small{display:block;margin-top:7px;font:600 6.5px/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:#9d91a6}
-.nc-tarot .corner{position:absolute;font-size:6px;color:rgba(222,188,129,.58)}
-.nc-tarot .c1{left:9px;top:8px}.nc-tarot .c2{right:9px;top:8px}
+.nc-entity:before{content:"";position:absolute;inset:5px;border:1px solid rgba(220,184,119,.16);border-radius:6px;pointer-events:none}
+.nc-entity:after{content:"✦";position:absolute;left:50%;bottom:8px;transform:translateX(-50%);font-size:7px;color:rgba(223,187,124,.65)}
+.nc-focus.entities-ready .nc-entity{transform:translate3d(0,0,0) rotate(var(--r)) scale(1);opacity:1}
+.nc-entity:hover{border-color:rgba(239,204,144,.72);box-shadow:0 23px 58px rgba(0,0,0,.42),0 0 26px rgba(204,164,111,.11),inset 0 0 0 4px rgba(211,172,108,.05)}
+.nc-entity-inner{position:relative;z-index:1}
+.nc-entity i{display:block;font-style:normal;font-size:30px;margin-bottom:12px;color:#d5b574;text-shadow:0 0 18px rgba(212,178,115,.23)}
+.nc-entity b{display:block;font-weight:400;font-size:15px;line-height:1.08}
+.nc-entity small{display:block;margin-top:7px;font:600 6.5px/1.2 ui-sans-serif,system-ui,sans-serif;letter-spacing:.13em;text-transform:uppercase;color:#9d91a6}
+.nc-entity .corner{position:absolute;font-size:6px;color:rgba(222,188,129,.58)}
+.nc-entity .c1{left:9px;top:8px}.nc-entity .c2{right:9px;top:8px}
 .nc-reader{position:absolute;z-index:50;left:50%;top:50%;transform:translate(-50%,-47%) scale(.96);width:min(420px,90vw);min-height:570px;padding:46px 48px 42px;border:1px solid rgba(233,197,136,.5);border-radius:18px;background:
 radial-gradient(circle at 50% 27%,rgba(126,86,135,.15),transparent 38%),
 linear-gradient(160deg,rgba(27,20,44,.985),rgba(7,10,23,.99));
@@ -90,7 +90,7 @@ opacity:0;pointer-events:none;transition:.4s cubic-bezier(.2,.8,.2,1)}
 .nc-entering small{display:block;color:#c4a875;font:600 8px/1 ui-sans-serif,system-ui,sans-serif;letter-spacing:.34em}
 .nc-entering b{display:block;margin-top:10px;color:#f2e6d8;font:400 34px/1 Georgia,serif}
 .nc-entering em{display:block;margin-top:12px;color:#b8adbd;font:italic 13px/1.4 Georgia,serif}
-.natalie-cosmos[data-mode=entering] .nc-focus-card,.natalie-cosmos[data-mode=entering] .nc-tarots{opacity:0;transition:opacity .45s}
+.natalie-cosmos[data-mode=entering] .nc-focus-card,.natalie-cosmos[data-mode=entering] .nc-entities{opacity:0;transition:opacity .45s}
 .natalie-cosmos[data-mode=entering] .nc-head,.natalie-cosmos[data-mode=focus] .nc-head{opacity:.4;transition:.6s}
 @keyframes nebulaOne{from{transform:translate3d(0,0,0) rotate(-11deg) scale(1)}to{transform:translate3d(3vw,1.5vh,0) rotate(-8deg) scale(1.05)}}
 @keyframes nebulaTwo{from{transform:translate3d(0,0,0) rotate(14deg) scale(1)}to{transform:translate3d(-2.5vw,-1vh,0) rotate(17deg) scale(1.04)}}
@@ -106,18 +106,20 @@ opacity:0;pointer-events:none;transition:.4s cubic-bezier(.2,.8,.2,1)}
 .nc-focus-card{left:5vw;right:5vw;top:auto;bottom:3vh;width:auto;padding:22px 24px}
 .nc-focus-card h2{font-size:31px}
 .nc-motif-line{display:none}
-.nc-tarot{width:78px;height:122px}
-.nc-tarot b{font-size:12px}.nc-tarot i{font-size:22px;margin-bottom:8px}
-.nc-tarot:nth-child(1){left:4vw!important;top:20vh!important}
-.nc-tarot:nth-child(2){left:28vw!important;top:16vh!important}
-.nc-tarot:nth-child(3){left:52vw!important;top:19vh!important}
-.nc-tarot:nth-child(4){left:8vw!important;top:37vh!important}
-.nc-tarot:nth-child(5){left:33vw!important;top:34vh!important}
-.nc-tarot:nth-child(6){left:58vw!important;top:38vh!important}
+.nc-entity{width:78px;height:122px}
+.nc-entity b{font-size:12px}.nc-entity i{font-size:22px;margin-bottom:8px}
+.nc-entity:nth-child(1){left:4vw!important;top:20vh!important}
+.nc-entity:nth-child(2){left:28vw!important;top:16vh!important}
+.nc-entity:nth-child(3){left:52vw!important;top:19vh!important}
+.nc-entity:nth-child(4){left:8vw!important;top:37vh!important}
+.nc-entity:nth-child(5){left:33vw!important;top:34vh!important}
+.nc-entity:nth-child(6){left:58vw!important;top:38vh!important}
 .nc-reader{min-height:520px;padding:42px 34px 36px}
 .nc-reader h3{font-size:36px}
 }
 @media(prefers-reduced-motion:reduce){
 .nc-nebula{animation:none!important}
-.nc-tarot,.nc-focus-card,.nc-reader,.nc-entering{transition-duration:.01ms!important}
+.nc-entity,.nc-focus-card,.nc-reader,.nc-entering{transition-duration:.01ms!important}
 }
+/* Dream World entities are discovery points, never a second card-reading room. */
+.nc-entity{width:100px;height:100px;border-radius:50%;transform:rotate(0)!important;background:radial-gradient(circle,#24283de6,#080d20cc);border:1px solid #d3b47e80;box-shadow:0 0 20px #d1b37918}.nc-entity .corner{display:none}.nc-entity-inner{padding:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;height:100%}.nc-entity i{font-size:23px;margin:0 0 5px}.nc-entity b{font-size:12px}.nc-entity small{display:none}

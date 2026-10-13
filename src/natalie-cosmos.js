@@ -1,4 +1,4 @@
-import * as THREE from "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.js";
+import * as THREE from "/vendor/three.module.js";
 
 const root = document.querySelector("#app");
 const response = await fetch("/worlds/natalie-world.json", { cache: "no-store" });
@@ -10,7 +10,7 @@ root.innerHTML = [
   '<main class="natalie-cosmos" data-mode="orbit">',
   '<div class="nc-bg"><div class="nc-nebula n1"></div><div class="nc-nebula n2"></div><div class="nc-nebula n3"></div></div>',
   '<canvas class="nc-stars"></canvas><div class="nc-veil"></div>',
-  '<button class="nc-back">← Sam’s Dreamscape</button>',
+  '<button class="nc-back">← Sam reference</button>',
   '<header class="nc-head"><div class="nc-kicker">DREAMSCAPE · A WORLD MADE FROM DREAMS</div><h1>' + blueprint.title + '</h1><p>Six dream territories crystallised into one living cosmos.</p></header>',
   '<div class="nc-badge">Prototype corpus sample · final counts pending</div>',
   '<div class="nc-stage"><canvas id="natalie-gl"></canvas><div class="nc-labels"></div></div>',
@@ -18,7 +18,7 @@ root.innerHTML = [
   '<div class="nc-tooltip"></div>',
   '<div class="nc-entering"><small>APPROACHING</small><b></b><em>The illustrated flat-map layer will open here.</em></div>',
   '<section class="nc-focus">',
-    '<div class="nc-tarots"></div>',
+    '<div class="nc-entities"></div>',
     '<aside class="nc-focus-card">',
       '<button class="nc-close" aria-label="Close world">×</button>',
       '<div class="provisional">Prototype corpus sample · final count pending</div>',
@@ -28,23 +28,23 @@ root.innerHTML = [
     '</aside>',
   '</section>',
   '<aside class="nc-reader">',
-    '<button class="nc-close" aria-label="Close Tarot">×</button>',
+    '<button class="nc-close" aria-label="Close detail">×</button>',
     '<div class="nc-reader-ornament">☾ ✦ ☽</div>',
-    '<div class="provisional">DREAMSCAPE TAROT · PROVISIONAL SYMBOL</div>',
+    '<div class="provisional">DREAM WORLD · REFERENCE ENTITY</div>',
     '<h3></h3><div class="rule"></div><p></p>',
-    '<div class="nc-reader-foot">This card will inherit the full evidence-led Dreamscape Tarot architecture when Natalie’s complete corpus is processed.</div>',
+    '<div class="nc-reader-foot">Reference detail only. Original source dreams are not available in this exemplar.</div>',
   '</aside>',
   '</main>'
 ].join("");
 
-document.querySelector(".nc-back").addEventListener("click", function () { location.href = "/"; });
+document.querySelector(".nc-back").addEventListener("click", function () { location.href = "/dream-world-reference?embedded=1"; });
 
 const shell = document.querySelector(".natalie-cosmos");
 const canvas = document.querySelector("#natalie-gl");
 const labels = document.querySelector(".nc-labels");
 const tooltip = document.querySelector(".nc-tooltip");
 const focus = document.querySelector(".nc-focus");
-const tarots = document.querySelector(".nc-tarots");
+const entities = document.querySelector(".nc-entities");
 const reader = document.querySelector(".nc-reader");
 const entering = document.querySelector(".nc-entering");
 
@@ -756,7 +756,7 @@ let hovered = null;
 let selected = null;
 let mouse = { x: 0, y: 0 };
 let last = performance.now();
-let cardsTimer = null;
+let entitiesTimer = null;
 let enterTimer = null;
 
 function screenPos(v) {
@@ -820,7 +820,7 @@ planets.forEach(function (p) {
   });
 });
 
-function tarotGlyph(name) {
+function entityGlyph(name) {
   const map = {
     "Train":"⌁","Bridge":"⌒","Bus":"◇","Road":"↝","Motorhome":"⌂","Home":"⌂",
     "Bee":"✣","Water":"≋","Spa":"◌","Cleansing":"✧","Dance":"⌁","Body":"◯",
@@ -832,43 +832,43 @@ function tarotGlyph(name) {
   return map[name] || "✦";
 }
 
-const tarotPositions = [
+const entityPositions = [
   [7,18,-5],[24,10,3],[7,57,4],[25,67,-3],[43,16,4],[45,58,-4]
 ];
 
 function openWorld(p) {
   selected = p;
   hovered = null;
-  clearTimeout(cardsTimer);
+  clearTimeout(entitiesTimer);
   tooltip.classList.remove("show");
   shell.dataset.mode = "focus";
   focus.classList.add("open");
-  focus.classList.remove("cards-ready");
+  focus.classList.remove("entities-ready");
   focus.querySelector("h2").textContent = p.w.label;
   focus.querySelector(".nc-summary").textContent = p.w.summary;
   focus.querySelector(".nc-motif-line").textContent = p.w.artSpec.terrainCharacter + " · " + p.w.artSpec.atmosphere;
-  tarots.innerHTML = "";
+  entities.innerHTML = "";
 
-  p.w.tarotCandidates.forEach(function (name, i) {
-    const pos = tarotPositions[i];
+  p.w.entityCandidates.forEach(function (name, i) {
+    const pos = entityPositions[i];
     const b = document.createElement("button");
-    b.className = "nc-tarot";
+    b.className = "nc-entity";
     b.style.setProperty("--x", pos[0] + "vw");
     b.style.setProperty("--y", pos[1] + "vh");
     b.style.setProperty("--r", pos[2] + "deg");
     b.style.setProperty("--d", (i * 0.08) + "s");
-    b.innerHTML = '<span class="corner c1">✦</span><span class="corner c2">☾</span><div class="nc-tarot-inner"><i>' + tarotGlyph(name) + '</i><b>' + name + '</b><small>' + p.w.label + '</small></div>';
-    b.addEventListener("click", function () { openTarot(name, p.w); });
-    tarots.appendChild(b);
+    b.innerHTML = '<span class="corner c1">✦</span><span class="corner c2">☾</span><div class="nc-entity-inner"><i>' + entityGlyph(name) + '</i><b>' + name + '</b><small>' + p.w.label + '</small></div>';
+    b.addEventListener("click", function () { openEntity(name, p.w); });
+    entities.appendChild(b);
   });
 
-  cardsTimer = setTimeout(function () { focus.classList.add("cards-ready"); }, reduced ? 50 : 950);
+  entitiesTimer = setTimeout(function () { focus.classList.add("entities-ready"); }, reduced ? 50 : 950);
 }
 
 function closeWorld() {
-  clearTimeout(cardsTimer);
+  clearTimeout(entitiesTimer);
   clearTimeout(enterTimer);
-  focus.classList.remove("cards-ready");
+  focus.classList.remove("entities-ready");
   focus.classList.remove("open");
   reader.classList.remove("open");
   entering.classList.remove("show");
@@ -890,7 +890,7 @@ focus.querySelector(".nc-enter").addEventListener("click", function () {
   }, reduced ? 50 : 1100);
 });
 
-function openTarot(name, w) {
+function openEntity(name, w) {
   reader.querySelector("h3").textContent = name;
   reader.querySelector("p").textContent = name + " belongs to the provisional " + w.label + " symbol constellation. In the completed corpus model this opens recurrence, source dreams, associations, chronology and interpretation while preserving the same ornate Dreamscape card architecture.";
   reader.classList.add("open");

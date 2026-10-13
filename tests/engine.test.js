@@ -16,7 +16,8 @@ test("motifs retain corpus evidence", () => {
 test("world generation is stable for identity fields", () => {
   const a = buildWorld(corpus);
   const b = buildWorld(corpus);
-  assert.equal(a.id, b.id);
-  assert.equal(a.seed, b.seed);
+  assert.ok(a.territories[0].id);
+  assert.equal(a.corpusSummary.dreamCount, corpus.dreams.length);
+  assert.deepEqual(a, b);
   assert.equal(a.territories[0].id, b.territories[0].id);
 });

@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#050614" />
+    <title>Dream World — preserved reference</title>
+    <style>
+      html,body{margin:0;width:100%;height:100%;background:#030611;color:#f7ead8;overflow:hidden}
+      #app{width:100%;height:100%}
+      #boot{position:fixed;inset:0;display:grid;place-items:center;background:radial-gradient(circle at 50% 45%,#111b43 0,#070b1d 42%,#02040b 78%);font-family:Georgia,serif;letter-spacing:.08em;text-align:center}
+      #boot div{padding:28px}
+      #boot b{display:block;font-size:38px;font-weight:400;color:#f7e5c4;text-shadow:0 0 26px rgba(247,218,167,.22)}
+      #boot span{display:block;margin-top:12px;font:12px system-ui,sans-serif;letter-spacing:.18em;color:#b8adc5;text-transform:uppercase}
+      #boot.error b{font-size:24px}
+    </style>
+    <link rel="stylesheet" href="/src/styles.css" />
+    <link rel="stylesheet" href="/src/territory-cosmos.css" />
+    <link rel="stylesheet" href="/src/buildpass.css" />
+    <link rel="stylesheet" href="/src/hearthlands-symbols.css" />
+    <link rel="stylesheet" href="/src/natalie-cosmos.css" />
+  </head>
+  <body>
+    <main id="app"><div id="boot"><div><b>Dreamscape</b><span>Entering your living dream world…</span></div></div></main>
+    <script>
+      const bootError = () => {
+        const boot = document.querySelector('#boot');
+        if (!boot) return;
+        boot.classList.add('error');
+        boot.innerHTML = '<div><b>The Dream Atlas could not start.</b><span>Please refresh once. If this remains, the deployment needs repair.</span></div>';
+      };
+      window.addEventListener('error', bootError);
+      window.addEventListener('unhandledrejection', bootError);
+    </script>
+    <script src="/src/buildpass-prelude.js"></script>
+    <script>if(new URLSearchParams(location.search).has('embedded'))document.documentElement.classList.add('embedded-reference');</script>
+    <style>.embedded-reference,.embedded-reference body,.embedded-reference #app,.embedded-reference .atlas,.embedded-reference .natalie-cosmos{background:transparent!important}.embedded-reference .cosmic-art,.embedded-reference .starscape,.embedded-reference .cosmic-veil,.embedded-reference .vignette,.embedded-reference .topbar,.embedded-reference .nc-bg,.embedded-reference .nc-stars,.embedded-reference .nc-veil,.embedded-reference .nc-topbar,.embedded-reference .cosmic-spark-layer,.embedded-reference .cosmic-sound-toggle{display:none!important}</style>
+    <script type="module">
+      const corpus = new URLSearchParams(location.search).get("corpus");
+      if (corpus === "natalie") {
+        await import("/src/natalie-cosmos.js");
+      } else {
+        await import("/src/main.js");
+        await import("/src/v57-hearthlands-geography.js");
+        await import("/src/territory-cosmos.js");
+        if (!new URLSearchParams(location.search).has("embedded")) await import("/src/cosmos-ambience.js");
+      }
+    </script>
+  </body>
+</html>

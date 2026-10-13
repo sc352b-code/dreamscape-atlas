@@ -6,6 +6,13 @@
   "scripts": {
     "dev": "node server.js",
     "test": "node --test tests/*.test.js",
-    "world:build": "node engine/cli.js corpora/reference-corpus.json worlds/generated-world.json"
+    "world:build": "node engine/cli.js corpora/reference-corpus.json worlds/generated-world.json",
+    "test:browser": "python tools/browser-smoke.py"
+  },
+  "dependencies": {
+    "three": "0.180.0"
+  },
+  "engines": {
+    "node": ">=24"
   }
 }

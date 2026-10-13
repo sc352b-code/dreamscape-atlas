@@ -87,6 +87,9 @@ with tempfile.TemporaryDirectory(prefix='dreamscape-browser-') as temp:
             for route in ['home','oracle','dream-journal','statistics','collections','dream-world','account']:
                 page.goto('http://localhost:4181/#'+route);expect(page.locator('h1')).to_be_visible()
                 if route=='oracle':page.locator('.reading-history button[data-action=reading]').last.click()
+                if route=='dream-world':
+                    page.get_by_role('button',name='Explore the Sam reference').click();page.locator('iframe').scroll_into_view_if_needed();expect(page.frame_locator('iframe').locator('.territory-world')).to_have_count(5,timeout=30000);page.wait_for_timeout(1800)
+                page.locator('h1').click()
                 assert not page.evaluate('document.documentElement.scrollWidth > innerWidth'),route
                 page.screenshot(path=str(ARTIFACTS/(route+'-mobile.png')),full_page=True)
             page.emulate_media(reduced_motion='reduce');page.goto('http://localhost:4181/#home')

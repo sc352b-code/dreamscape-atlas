@@ -2,7 +2,7 @@
 
 ## Branch and delivery
 
-Development branch: `codex/dreamscape-foundations`, based on main `f62ca7407b8f194cfb7b1ba0667d5e573c351be4`. Use `git log -1` for the implementation checkpoint. No production branch changes, remote pushes, merges or deployments were performed. Existing `family-home-pilot` at `b3af00d22dd0a2cd4d8688efbf44b121a5aba305` is preserved.
+Development branch: `codex/dreamscape-foundations`, based on main `f62ca7407b8f194cfb7b1ba0667d5e573c351be4`. Use `git log -1` for the implementation checkpoint. No production branch changes or merges were performed. No manual deployment was requested. Development-branch publication and any automatic preview build are separate from production deployment. Existing `family-home-pilot` at `b3af00d22dd0a2cd4d8688efbf44b121a5aba305` is preserved.
 
 The full roadmap and factual baseline are in IMPLEMENTATION_PLAN.md. The four supplied PDFs were read in full before application changes. The exact historical master-handover filename is absent; the pilot's handover/ folder was inspected. Historical production/preview URLs must not be represented as current previews of this stage.
 
@@ -42,7 +42,7 @@ Accounts lack email verification, recovery, MFA and launch-grade operational mon
 
 ## Preview and verification
 
-The stage runs inside the cloud workspace. No public preview URL exists for these changes. A Node host with HTTPS and persistent storage is needed for a shareable account-backed preview; existing static Vercel deployment details do not establish that hosting capability.
+The stage runs inside the cloud workspace. No working public preview has been verified for these changes. A Node host with HTTPS and persistent storage is needed for a shareable account-backed preview; existing static Vercel deployment details do not establish that hosting capability.
 
 Run `npm ci --cache /tmp/dreamscape-npm-cache`, then `npm run dev` (port 4173), or set PORT and matching DREAMSCAPE_ORIGIN. Store the private DB outside the checkout using DREAMSCAPE_DB. Setup and service restart instructions are saved separately in the environment draft.
 

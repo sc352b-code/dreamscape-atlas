@@ -1,0 +1,13 @@
+{
+  "source": "assets/generated/cosmic-00.b64 through cosmic-03.b64",
+  "sameOnBranches": [
+    "main",
+    "family-home-pilot"
+  ],
+  "sha256": "fe6c6e3ea08a4fea7e31fd8ecbaa09e303d2474620e6f7b6bc1af3354439b537",
+  "dimensions": [
+    1672,
+    941
+  ],
+  "transformation": "Base64 decode only; original AVIF bytes unchanged."
+}

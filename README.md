@@ -1,5 +1,26 @@
 # Dreamscape Atlas â€” Enchanted Vertical Slice v1
 
+## Current development: Dreamscape shared application
+
+The `codex/dreamscape-foundations` branch adds the Home Hub, exact nine-room navigation,
+the original shared living cosmos, encrypted local dream/waking journals, evidence-grounded
+Oracle studies, saved history, favourites and the preserved five rotating planets.
+It is a development stage, not a production release or completed nine-room product.
+
+Run `npm run dev` (Node 24; no npm dependencies). The built-in server listens on port 4173;
+use `PORT=4174 npm run dev` when that port is occupied. Begin with the labelled reference
+reading, or create a passphrase-protected journal to record your own dreams. Local journals
+are not cloud accounts and have no remote backup. Export regular backups.
+
+Run `npm test` for the domain/encryption/asset tests. For browser integration checks with
+Playwright Python installed, start `PORT=4174 npm run dev`, then run
+`python tests/browser_foundations.py`. No certificate verification bypass is permitted;
+Chromium must be able to use the environment's installed proxy trust database.
+
+See [the complete implementation plan](docs/IMPLEMENTATION_PLAN.md) and
+[current handover](docs/CURRENT_HANDOVER.md). The historical prototype description below
+is retained for continuity; the current room name is DREAM WORLD.
+
 This repository is the source of truth for the Dream Atlas vertical slice and the reusable corpus-to-world engine beneath it.
 
 ## Current slice
@@ -17,11 +38,10 @@ Nothing in the rendering layer should need to know that a territory is called â€
 ## Run locally
 
 ```bash
-npm install
 npm run dev
 ```
 
-Then open the local Vite URL.
+The application uses the built-in Node static server, not Vite.
 
 ## Generate a world model from a corpus
 

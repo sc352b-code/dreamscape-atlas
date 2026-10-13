@@ -1,0 +1,44 @@
+[
+  {
+    "file": "assets/territory-planets/hearthlands-final.png",
+    "source": "assets/territory-planets/hearthlands-final.png",
+    "sourceCommit": "b3af00d22dd0a2cd4d8688efbf44b121a5aba305",
+    "sha256": "f82fa882827a2313df3c65960634d94d9dce2490a34926e9ddbd67d1a2f204e6",
+    "purpose": "Preserved reference artwork; not generated for the local user."
+  },
+  {
+    "file": "assets/territory-planets/roadlands-final.png",
+    "source": "assets/territory-planets/roadlands-final.png",
+    "sourceCommit": "b3af00d22dd0a2cd4d8688efbf44b121a5aba305",
+    "sha256": "15fba2314fe53f12ed3078b24163ad5be3b0398cb811b1fd3f560ceafb39abb0",
+    "purpose": "Preserved reference artwork; not generated for the local user."
+  },
+  {
+    "file": "assets/territory-planets/littoral-final.png",
+    "source": "assets/territory-planets/littoral-final.png",
+    "sourceCommit": "b3af00d22dd0a2cd4d8688efbf44b121a5aba305",
+    "sha256": "a43e24323ed7cd949f080648868c9dfa5934a3ba81b8f5e374e628bb94d91021",
+    "purpose": "Preserved reference artwork; not generated for the local user."
+  },
+  {
+    "file": "assets/territory-planets/institutional-final.png",
+    "source": "assets/territory-planets/institutional-final.png",
+    "sourceCommit": "b3af00d22dd0a2cd4d8688efbf44b121a5aba305",
+    "sha256": "3e1d4577ec4b42d678d9fdc1846cd365cfabb875a32945043842d7707f53d4e8",
+    "purpose": "Preserved reference artwork; not generated for the local user."
+  },
+  {
+    "file": "assets/territory-planets/river-final.png",
+    "source": "assets/territory-planets/river-final.png",
+    "sourceCommit": "b3af00d22dd0a2cd4d8688efbf44b121a5aba305",
+    "sha256": "337636d9da2bc8f13e1d0489aac62335e9fb3112d844994b1508e385a49f18bc",
+    "purpose": "Preserved reference artwork; not generated for the local user."
+  },
+  {
+    "file": "assets/reference/illuminated-figure.png",
+    "source": "worlds/reference-world/territories/hearthlands/tarot/art/natalie-v2.png",
+    "sourceCommit": "b3af00d22dd0a2cd4d8688efbf44b121a5aba305",
+    "sha256": "2db55419f67290583c2401675c8152ccf5769e6be8d04262f60b82356eda5fea",
+    "purpose": "Preserved reference artwork; not generated for the local user."
+  }
+]

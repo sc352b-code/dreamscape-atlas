@@ -51,3 +51,7 @@ Run `npm test` for ownership/date/evidence/session/import/artwork tests. Run `py
 ## Next inputs and stage
 
 Next priority: real Oracle intelligence and person-centred art, with explicit provider-processing consent, evidence validation, job history and cost ceilings. Actual April 2025 narratives are absent. No text/image provider credentials are configured. Collect these through secure environment configuration, never chat or Git. Complete available foundation work while these are unavailable. Never hard-code the example message or invent thirteen source dreams.
+
+## Public demonstration preview — now deployed
+
+A separate Vercel Preview is verified at https://dreamscape-natalie-living-preview-npbwldxzl-sc352b-2806.vercel.app. It opens anonymously and exposes the full nine-room shell with fictional sample records. It uses the existing dedicated preview project and the same development branch; main and the live production app are unchanged. Test edits persist only in each visitor's browser, independently. The private Node account-backed application is not deployed as a public database. See PREVIEW_DEPLOYMENT.md for commit, artifact/privacy checks and hosted browser-test evidence. This supersedes the earlier 'no working public preview verified' observation above.

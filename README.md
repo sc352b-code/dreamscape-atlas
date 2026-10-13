@@ -41,3 +41,16 @@ The browser script requires Python Playwright and system Chromium. It starts a t
 See [implementation plan](docs/IMPLEMENTATION_PLAN.md) and [current handover](docs/CURRENT_HANDOVER.md). This is not the finished application or a production deployment. AI interpretation and illustration, audio/transcription, PDF/photo import, user-derived planets, named collections, complete reports/conversation, subscriptions, managed backup and account recovery remain unfinished.
 
 Development account storage is local SQLite, without a managed encrypted backup service. Deployment requires a Node host with a persistent disk, HTTPS, an exact configured origin, secure database storage and the launch controls documented in the plan. The historical static Vercel URLs do not host this new account-backed application.
+
+## Separate public demonstration preview
+
+The development branch has a Vercel static-preview build:
+
+```sh
+npm run preview:build
+npm run test:preview
+```
+
+Only the explicit public `dist/` artifact is deployed. It starts with fictional sample dreams and all nine rooms unlocked. Preview test edits stay in the current browser; they do not reach the private Node account database or an AI provider. The banner, sample labels and Preview settings explain this distinction. The normal `npm run dev` account-backed application is retained.
+
+Deployment uses the branch's `vercel.json` with the existing Vercel Git integration when available. Do not deploy with `--prod` or merge into main. See [preview deployment handover](docs/PREVIEW_DEPLOYMENT.md) for verification and the current cloud-network prerequisite.

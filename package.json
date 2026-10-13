@@ -7,12 +7,18 @@
     "dev": "node server.js",
     "test": "node --test tests/*.test.js",
     "world:build": "node engine/cli.js corpora/reference-corpus.json worlds/generated-world.json",
-    "test:browser": "python tools/browser-smoke.py"
+    "test:browser": "python tools/browser-smoke.py",
+    "preview:build": "node tools/build-preview.mjs",
+    "test:preview": "python tools/preview-smoke.py"
   },
   "dependencies": {
     "three": "0.180.0"
   },
   "engines": {
     "node": ">=24"
+  },
+  "devDependencies": {
+    "@noble/hashes": "2.4.0",
+    "esbuild": "0.28.2"
   }
 }

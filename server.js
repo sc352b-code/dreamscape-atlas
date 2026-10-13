@@ -13,7 +13,7 @@ http.createServer((req, res) => {
   try { clean = decodeURIComponent((req.url || "/").split("?")[0]); }
   catch { res.writeHead(400); res.end("Invalid path"); return; }
   const publicRootFiles = new Set(["/index.html", "/sw.js", "/manifest.webmanifest"]);
-  if (clean.split("/").some(segment => segment.startsWith(".") || segment.includes("\\")) || !(clean === "/" || clean === "/sample-corpus.json" || publicRootFiles.has(clean) || ["/src/", "/assets/", "/worlds/"].some(prefix => clean.startsWith(prefix)))) { res.writeHead(404); res.end("Not found"); return; }
+  if (clean.split("/").some(segment => segment.startsWith(".") || segment.includes("\\")) || !(clean === "/" || clean === "/sample-corpus.json" || clean === "/corpora/reference-corpus.json" || publicRootFiles.has(clean) || ["/src/", "/assets/", "/worlds/"].some(prefix => clean.startsWith(prefix)))) { res.writeHead(404); res.end("Not found"); return; }
   const relative = clean === "/" ? "index.html" : clean === "/sample-corpus.json" ? "corpora/reference-corpus.json" : clean.replace(/^\/+/, "");
   const target = path.resolve(root, relative);
   if (!target.startsWith(root + path.sep)) { res.writeHead(403); res.end("Forbidden"); return; }

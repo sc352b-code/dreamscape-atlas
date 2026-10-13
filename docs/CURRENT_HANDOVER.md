@@ -42,7 +42,7 @@ The supplied cosmic image visually matches the recovered AVIF. The supplied Orac
 
 ## Preview and deployment
 
-The tested instance runs in this workspace on port 4174 (`PORT=4174 npm run dev`), since an earlier server occupies 4173. No public preview or production deployment is claimed until an external deployment has been confirmed. Screenshot artifacts are saved outside the repository. The historical Vercel URLs are previews of other branches, not this change.
+The development branch has been pushed to GitHub. The tested instance runs in this workspace on port 4174 (`PORT=4174 npm run dev`), since an earlier server occupies 4173. No public preview or production deployment is claimed until an external deployment has been confirmed. Screenshot artifacts are saved outside the repository. The historical Vercel URLs are previews of other branches, not this change. The app uses the canonical static sample path `/corpora/reference-corpus.json`, so the browser does not depend on a custom server rewrite for sample loading.
 
 For a fresh workspace, run `npm test` and `npm run dev`; there are no package dependencies to install. Use the existing checkout, with no worktree unless explicitly requested. Processes must restart after environment restoration.
 

@@ -45,7 +45,7 @@ function download(value, filename) {
   const a = document.createElement('a'); a.href = url; a.download = filename; a.click(); setTimeout(() => URL.revokeObjectURL(url), 1000);
 }
 async function loadSample() {
-  if (!samplePromise) samplePromise = fetch('/sample-corpus.json').then(r => { if (!r.ok) throw new Error('The reference sample could not load.'); return r.json(); }).catch(e => { samplePromise = null; throw e; });
+  if (!samplePromise) samplePromise = fetch('/corpora/reference-corpus.json').then(r => { if (!r.ok) throw new Error('The reference sample could not load.'); return r.json(); }).catch(e => { samplePromise = null; throw e; });
   const corpus = await samplePromise;
   let cached; try { cached = JSON.parse(localStorage.getItem('dreamscape-public-sample-v1') || 'null'); } catch { /* Restore the public sample if cache is damaged. */ }
   data = cached?.schema === 1 ? cached : blankData(); data.dreams = corpus.dreams.map(d => validateRecord(d));

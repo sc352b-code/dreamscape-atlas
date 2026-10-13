@@ -42,6 +42,12 @@ The supplied cosmic image visually matches the recovered AVIF. The supplied Orac
 
 ## Preview and deployment
 
+Update: a live, publicly accessible development preview is now verified at
+https://dreamscape-natalie-living-preview-5xbkgtq2s-sc352b-2806.vercel.app/
+It serves `codex/dreamscape-foundations` commit `fa12166c5ab5a11890c1139acab908b5c006b0d8` through the existing secondary Vercel preview project. Despite the historical project name in the hostname, this is the shared Dreamscape application. GitHub deployment status is successful, HTTP returns the application shell without login, and an actual Chromium session verified the nine-room Home Hub, sample Oracle reading, original source navigation and saved history with no uncaught browser errors. The primary project's preview requires Vercel authentication; its protection was not changed. Production remains untouched.
+
+This is the first local-storage application stage. The live preview does not add cloud journal storage, private accounts or paid providers. The static Vercel deployment does not run `server.js`; Node-server path restrictions tested locally must not be described as deployed Vercel access controls.
+
 The development branch has been pushed to GitHub. The runtime implementation commit is `92eab0a182e22b270e416a12b3ab6e0889672093`. The tested instance runs in this workspace on port 4174 (`PORT=4174 npm run dev`), since an earlier server occupies 4173. No public preview or production deployment is claimed until an external deployment has been confirmed. Screenshot artifacts are saved outside the repository at `/workspace/dreamscape-review`. The historical Vercel URLs are previews of other branches, not this change. The app uses the canonical static sample path `/corpora/reference-corpus.json`, so the browser does not depend on a custom server rewrite for sample loading.
 
 Runtime HTTPS requests to the GitHub API and Vercel were blocked by the environment's egress proxy (CONNECT 403). Native Git read and push work with the existing platform authentication. Required domains `api.github.com` and `*.vercel.app` were added to the environment configuration draft, preserving presets and existing custom domains. Saving this draft does not apply runtime networking or verify a deployment. The startup instructions were also updated in the draft (977 characters). Review/save these settings and publish the prepared cloud environment; then retry preview discovery/verification. No extra credential is declared based merely on these network denials.

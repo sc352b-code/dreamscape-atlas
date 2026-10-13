@@ -2,7 +2,7 @@
 
 ## Branch and delivery
 
-Development branch: `codex/dreamscape-foundations`, based on main `f62ca7407b8f194cfb7b1ba0667d5e573c351be4`. Use `git log -1` for the implementation checkpoint. No production branch changes or merges were performed. No manual deployment was requested. Development-branch publication and any automatic preview build are separate from production deployment. Existing `family-home-pilot` at `b3af00d22dd0a2cd4d8688efbf44b121a5aba305` is preserved.
+Development branch: `codex/dreamscape-foundations-20261013`, based on main `f62ca7407b8f194cfb7b1ba0667d5e573c351be4`. Use `git log -1` for the implementation checkpoint. No production branch changes or merges were performed. No manual deployment was requested. Development-branch publication and any automatic preview build are separate from production deployment. Existing `family-home-pilot` at `b3af00d22dd0a2cd4d8688efbf44b121a5aba305` is preserved.
 
 The full roadmap and factual baseline are in IMPLEMENTATION_PLAN.md. The four supplied PDFs were read in full before application changes. The exact historical master-handover filename is absent; the pilot's handover/ folder was inspected. Historical production/preview URLs must not be represented as current previews of this stage.
 
